@@ -1,3 +1,6 @@
+@import url(./components/Navbar/Navbar.css);
+@import url(./components//Home/Home.css);
+
 :root {
     --dark-pink: #f08a9d;
     --light-pink: #f5e3e6;

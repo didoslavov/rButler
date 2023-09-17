@@ -1,12 +1,11 @@
 import React from 'react';
-import './Navbar.css';
 
 const Navbar = () => {
     return (
         <nav className="navbar">
             <div>
-                <a href="https://freecodecamp.org" className="logo">
-                    <img src="../../../public/Forest-House-Logo-For-Download.jpg" alt="home logo" />
+                <a href="/" className="logo">
+                    <img src="../../../public/nav-logo.jpg" alt="home logo" />
                 </a>
                 <input type="search" name="search" id="search" placeholder="Search" />
             </div>
