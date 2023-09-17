@@ -1,0 +1,10 @@
+:root {
+    --dark-pink: #f08a9d;
+    --light-pink: #f5e3e6;
+    --light-grey: #ecebe9;
+    --dark-blue: #2d475a;
+}
+
+body {
+    background-color: var(--light-grey);
+}
