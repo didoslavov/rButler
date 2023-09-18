@@ -1,5 +1,6 @@
 @import url(./components/Navbar/Navbar.css);
 @import url(./components//Home/Home.css);
+@import url(./components/Auth/Auth.css);
 
 :root {
     --dark-pink: #f08a9d;
