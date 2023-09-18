@@ -5,11 +5,14 @@ const Home = () => {
         <div className="landing-container">
             <img src="../../../public/landing-page.avif" alt="" className="landing-image" />
             <div className="landing-content">
-                <h1 className="landing-title">Welcome to our page!</h1>
+                <h1 className="landing-title">Welcome to our app!</h1>
                 <p className="landing-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos sequi, magni modi consectetur aspernatur a dicta
-                    error dolorem soluta earum beatae natus hic incidunt consequatur nihil? Consequuntur, consectetur corrupti
-                    autem incidunt veritatis deleniti.
+                    Allow me to introduce myself: I am Alfred, your dedicated <span className="prefix">react</span>
+                    <span className="suffix">butler</span> for all things home-related. With a touch of elegance and efficiency, I
+                    am here to simplify your household management. Within these digital walls, you shall find the means to keep a
+                    meticulous inventory of your treasures, recording their expiration dates and quantities with the utmost
+                    precision. Should you wish to embark upon household endeavors, I offer an integrated to-do list, ready to
+                    assist in your noble quests.
                 </p>
                 <button className="landing-button">Learn More</button>
                 <div className="air air1"></div>

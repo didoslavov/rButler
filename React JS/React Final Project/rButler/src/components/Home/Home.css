@@ -97,6 +97,20 @@
     font-size: 18px;
     max-width: 600px;
     margin-bottom: 20px;
+
+    .prefix {
+        background-color: var(--dark-blue);
+        color: #61dbfb;
+        padding: 1px 3px 1px 3px;
+        border-radius: 4px 0 0 4px;
+    }
+
+    .suffix {
+        background-color: var(--dark-blue);
+        color: var(--dark-pink);
+        padding: 1px 3px 1px 0;
+        border-radius: 0 4px 4px 0;
+    }
 }
 
 .landing-button {
