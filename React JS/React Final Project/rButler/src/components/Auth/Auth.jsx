@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Login = () => {
+const Auth = () => {
     const [login, setLogin] = useState(true);
 
     const isLoginClicked = () => {
@@ -12,7 +12,7 @@ const Login = () => {
         <>
             <div className={`cont ${login ? '' : 's--signup'}`}>
                 <div className="form sign-in">
-                    <h2>Welcome back,</h2>
+                    <h2 className="welcome-sign-in">Your return is a delight!</h2>
                     <label>
                         <span>Email</span>
                         <input type="email" className="input" />
@@ -32,12 +32,15 @@ const Login = () => {
                 <div className="sub-cont">
                     <div className="img">
                         <div className="img__text m--up">
-                            <h2>New here?</h2>
-                            <p>Sign up and discover great amount of new opportunities!</p>
+                            <h2>Are you a newcomer to these premises?</h2>
+                            <p>Enroll now and unlock a wealth of fresh possibilities!</p>
                         </div>
                         <div className="img__text m--in">
-                            <h2>One of us?</h2>
-                            <p>If you already has an account, just sign in. We've missed you!</p>
+                            <h2>Ah, might you be a part of our distinguished company?</h2>
+                            <p>
+                                Should you be a prior member, a mere sign-in shall suffice. Your presence has been sorely missed,
+                                and we extend a warm welcome back to you.
+                            </p>
                         </div>
                         <div className="img__btn" onClick={isLoginClicked}>
                             <span className="m--up">Sign Up</span>
@@ -45,7 +48,7 @@ const Login = () => {
                         </div>
                     </div>
                     <div className="form sign-up">
-                        <h2>Time to feel like home,</h2>
+                        <h2 className="welcome-sign-up">Step inside, dear newcomer!</h2>
                         <label>
                             <span>Name</span>
                             <input type="text" className="input" />
@@ -71,4 +74,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Auth;

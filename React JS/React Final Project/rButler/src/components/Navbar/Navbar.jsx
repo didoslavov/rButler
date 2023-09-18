@@ -1,29 +1,27 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return (
         <nav className="navbar">
             <div>
-                <a href="/" className="logo">
-                    <img src="../../../public/nav-logo.jpg" alt="home logo" />
-                </a>
+                <Link to="/" className="logo">
+                    <img src="/nav-logo.jpg" alt="home logo" />
+                </Link>
                 <input type="search" name="search" id="search" placeholder="Search" />
             </div>
             <ul className="nav-links">
                 <li className="nav-item">
-                    <a href="#">All Products</a>
+                    <Link to="#">All Products</Link>
                 </li>
                 <li className="nav-item">
-                    <a href="#">Create Product</a>
+                    <Link to="#">Create Product</Link>
                 </li>
                 <li className="nav-item">
-                    <a href="#">Sign up</a>
+                    <Link to="/auth">Profile</Link>
                 </li>
                 <li className="nav-item">
-                    <a href="#">Sign in</a>
-                </li>
-                <li className="nav-item">
-                    <a href="#">Logout</a>
+                    <Link to="#">Logout</Link>
                 </li>
             </ul>
         </nav>
