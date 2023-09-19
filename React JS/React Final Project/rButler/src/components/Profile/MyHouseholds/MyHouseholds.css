@@ -4,6 +4,10 @@
     height: 91.7vh;
 }
 
+a {
+    color: var(--dark-blue);
+}
+
 .households {
     display: flex;
     flex-direction: column;
@@ -20,6 +24,10 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
+
+    h4 {
+        border-bottom: 1px solid var(--dark-pink);
+    }
 }
 
 .household {

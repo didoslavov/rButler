@@ -1,8 +1,10 @@
 import { Pagination } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const MyHouseholds = () => {
     const [currentPage, setCurrentPage] = useState(1);
+
     const itemsPerPage = 3;
     const items = [
         { name: 'Household1', presentation: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt, nostrum?' },
@@ -21,24 +23,25 @@ const MyHouseholds = () => {
 
     const itemsForDisplay = items.slice(startIndex, endIndex);
 
-    const paginationHandler = (val) => {
-        setCurrentPage(val);
+    const paginationHandler = (page) => {
+        setCurrentPage(page);
     };
-
     return (
         <div className="my-households-container">
             <img src="/my-households.jpg" alt="my-households" />
             <div className="households">
                 <ul className="households-list">
                     {itemsForDisplay.map((item, index) => (
-                        <li key={index} className="household">
-                            <h4>{item.name}</h4>
-                            <p>{item.presentation}</p>
-                        </li>
+                        <Link key={index} to={'/households/' + index}>
+                            <li className="household">
+                                <h4>{item.name}</h4>
+                                <p>{item.presentation}</p>
+                            </li>
+                        </Link>
                     ))}
                 </ul>
                 <div>
-                    <Pagination count={totalPages} onChange={(e, val) => paginationHandler(val)} />
+                    <Pagination count={totalPages} onChange={(e, page) => paginationHandler(page)} />
                 </div>
             </div>
         </div>
