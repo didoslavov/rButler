@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 
 const Auth = () => {
-    const [login, setLogin] = useState(true);
+    const [showLogin, setShowLogin] = useState(true);
 
-    const isLoginClicked = () => {
-        setLogin(!login);
+    const toggleFormsHandler = () => {
+        setShowLogin(!showLogin);
     };
 
     return (
         <>
-            <div className={`cont ${login ? '' : 's--signup'}`}>
+            <div className={`cont ${showLogin ? '' : 's--signup'}`}>
                 <div className="form sign-in">
                     <h2 className="welcome-sign-in">Your return is a delight!</h2>
                     <label>
@@ -41,7 +41,7 @@ const Auth = () => {
                                 and we extend a warm welcome back to you.
                             </p>
                         </div>
-                        <div className="img__btn" onClick={isLoginClicked}>
+                        <div className="img__btn" onClick={toggleFormsHandler}>
                             <span className="m--up">Sign Up</span>
                             <span className="m--in">Sign In</span>
                         </div>
