@@ -1,0 +1,35 @@
+.household-container {
+    display: flex;
+    align-items: stretch;
+    height: 91.7vh;
+}
+
+.household-image {
+    flex: 1;
+    max-height: 100%;
+    width: 80%;
+    object-fit: cover;
+    position: relative;
+}
+
+.create-household-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.welcome-household {
+    color: var(--dark-blue);
+    font-size: 36px;
+    margin-bottom: 150px;
+    text-transform: uppercase;
+}
+
+.form-household {
+    border: 1px solid var(--dark-blue);
+    padding: 20px 100px;
+}

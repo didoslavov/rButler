@@ -39,11 +39,7 @@ button {
     transition: transform 1.2s ease-in-out;
     padding: 50px 30px 0;
 }
-.welcome-sign-in {
-    color: var(--dark-blue);
-    text-transform: uppercase;
-}
-.welcome-sign-up {
+.welcome {
     color: var(--dark-blue);
     text-transform: uppercase;
 }

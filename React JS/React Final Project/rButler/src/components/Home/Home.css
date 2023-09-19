@@ -82,7 +82,6 @@
     width: 80%;
     object-fit: cover;
     position: relative;
-    clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 25%, 50% 0);
 }
 
 .landing-title {
