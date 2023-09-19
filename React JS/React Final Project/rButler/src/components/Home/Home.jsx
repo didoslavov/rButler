@@ -5,7 +5,7 @@ const Home = () => {
         <div className="landing-container">
             <img src="/landing-page.avif" alt="" className="landing-image" />
             <div className="landing-content">
-                <h1 className="landing-title">Welcome to our app!</h1>
+                <h1 className="landing-title">Welcome home!</h1>
                 <p className="landing-text">
                     Allow me to introduce myself: I am Alfred, your dedicated <span className="prefix">react</span>
                     <span className="suffix">butler</span> for all things home-related. With a touch of elegance and efficiency, I

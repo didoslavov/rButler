@@ -28,7 +28,7 @@ button {
     position: relative;
     width: 900px;
     height: 550px;
-    margin: 150px auto 100px;
+    margin: 100px auto 100px;
     background: var(--light-grey);
 }
 .form {
@@ -66,8 +66,8 @@ button {
     margin: 0 auto;
     width: 260px;
     height: 36px;
-    border-radius: 30px;
-    color: #fff;
+    border-radius: 4px;
+    color: var(--light-grey);
     font-size: 15px;
     cursor: pointer;
 }
@@ -156,6 +156,7 @@ button {
     border: 2px solid #fff;
     border-radius: 30px;
 }
+
 .img__btn span {
     position: absolute;
     left: 0;
