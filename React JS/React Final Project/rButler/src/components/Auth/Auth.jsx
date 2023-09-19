@@ -5,7 +5,6 @@ const Auth = () => {
 
     const isLoginClicked = () => {
         setLogin(!login);
-        console.log(login);
     };
 
     return (

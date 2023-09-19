@@ -160,6 +160,11 @@ a {
         width: 600px;
         text-align: center;
     }
+
+    span {
+        color: var(--dark-pink);
+        font-weight: bold;
+    }
 }
 
 .button-404 {

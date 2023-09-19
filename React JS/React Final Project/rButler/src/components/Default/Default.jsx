@@ -29,9 +29,9 @@ const Default = () => {
                 <div className="text">
                     <h4>Ah, it appears you've taken a detour into uncharted territory.</h4>
                     <p>
-                        Fear not, dear guest, for even in the land of '404,' your digital butler shall guide you with utmost
-                        decorum and wit. Please pardon the interruption, as we prepare a suitable diversion for your journey back
-                        home.
+                        Fear not, dear guest, for even in the land of <span>404</span> your digital butler shall guide you with
+                        utmost decorum and wit. Please pardon the interruption, as we prepare a suitable diversion for your
+                        journey back home.
                     </p>
                 </div>
                 <Link className="button-404" to="/">
