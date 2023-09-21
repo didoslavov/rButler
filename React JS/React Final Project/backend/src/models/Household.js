@@ -23,6 +23,6 @@ const householdSchema = new Schema({
     ],
 });
 
-const Households = model('Household', householdSchema);
+const Household = model('Household', householdSchema);
 
-module.exports = Households;
+module.exports = Household;

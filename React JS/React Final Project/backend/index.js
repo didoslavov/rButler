@@ -12,5 +12,6 @@ const PORT = process.env.PORT || 5000;
 connectDB();
 
 app.use('/users', require('./src/routes/usersRoutes'));
+app.use('/households', require('./src/routes/householdsRoutes'));
 
 app.listen(PORT, () => console.log(`Server Running on port: ${PORT}`));
