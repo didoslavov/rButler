@@ -2,10 +2,9 @@
     "name": "rbutlerapi",
     "version": "1.0.0",
     "description": "API to be consumed by rButler frontend project.",
-    "main": "index.js",
+    "main": "src/index.js",
     "scripts": {
-        "start": "nodemon index.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "nodemon index.js"
     },
     "keywords": [
         "rbutler"

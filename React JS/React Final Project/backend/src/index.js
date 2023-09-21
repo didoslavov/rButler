@@ -1,6 +1,6 @@
 require('dotenv').config();
 const exrpress = require('express');
-const connectDB = require('./src/config/database');
+const connectDB = require('./config/database');
 
 const app = exrpress();
 
@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000;
 
 connectDB();
 
-app.use('/users', require('./src/routes/usersRoutes'));
-app.use('/households', require('./src/routes/householdsRoutes'));
+app.use('/users', require('./routes/usersRoutes'));
+app.use('/households', require('./routes/householdsRoutes'));
 
 app.listen(PORT, () => console.log(`Server Running on port: ${PORT}`));
