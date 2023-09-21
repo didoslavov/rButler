@@ -5,11 +5,24 @@ const {
 } = require('mongoose');
 
 const householdSchema = new Schema({
-    user: {
+    master: {
         type: ObjectId,
         required: true,
         ref: 'User',
     },
     name: { type: String, minLength: 3 },
     presentation: { type: String, required: true },
+    users: [
+        {
+            user: {
+                type: ObjectId,
+                ref: 'User',
+            },
+            role: { type: String, default: 'Resident' },
+        },
+    ],
 });
+
+const Households = model('Household', householdSchema);
+
+module.exports = Households;
