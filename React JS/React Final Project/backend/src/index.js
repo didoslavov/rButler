@@ -1,17 +1,10 @@
-require('dotenv').config();
-const exrpress = require('express');
+const express = require('express');
+const connectServer = require('./config/express');
 const connectDB = require('./config/database');
+const routesConfig = require('./config/routes');
 
-const app = exrpress();
-
-app.use(exrpress.urlencoded({ extended: true }));
-app.use(exrpress.json({ extended: true }));
-
-const PORT = process.env.PORT || 5000;
+const app = express();
 
 connectDB();
-
-app.use('/users', require('./routes/usersRoutes'));
-app.use('/households', require('./routes/householdsRoutes'));
-
-app.listen(PORT, () => console.log(`Server Running on port: ${PORT}`));
+connectServer(app);
+routesConfig(app);
