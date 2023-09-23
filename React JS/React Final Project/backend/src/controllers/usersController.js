@@ -3,6 +3,7 @@ const Household = require('../models/Household.js');
 
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcrypt');
+const { createToken, verifyToken } = require('../../utils/cookies.js');
 
 const getAllUsers = asyncHandler(async (req, res) => {
     const users = await User.find().select('-password');
@@ -14,7 +15,33 @@ const getAllUsers = asyncHandler(async (req, res) => {
     res.json(users);
 });
 
-const createUser = asyncHandler(async (req, res) => {
+const login = asyncHandler(async (req, res) => {
+    const { username, password } = req.body;
+
+    if (!username || !password) {
+        return res.status(400).json({ message: 'All fields are required!' });
+    }
+
+    const user = await User.findOne({ username }).lean();
+
+    if (!user) {
+        return res.status(409).json({ message: 'No such user!' });
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+        res.status(401).json({ message: 'Authorization failed!' });
+    }
+
+    const token = createToken(user);
+
+    res.cookie('token', token, { httpOnly: true, secure: false });
+
+    res.json({ message: 'Logged in successfully' });
+});
+
+const register = asyncHandler(async (req, res) => {
     const { username, email, password } = req.body;
 
     if (!username || !email || !password) {
@@ -29,15 +56,19 @@ const createUser = asyncHandler(async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const userObject = { username, password: hashedPassword };
+    const userObject = { username, email, password: hashedPassword };
 
-    const user = User.create(userObject);
+    const user = await User.create(userObject);
 
-    if (user) {
-        res.status(201).json({ message: `New user ${username} created!` });
-    } else {
-        res.status(400).json({ message: 'Invalid user data recieved!' });
+    if (!user) {
+        return res.status(400).json({ message: 'Invalid user data recieved!' });
     }
+
+    const token = createToken(user);
+
+    res.cookie('token', token, { httpOnly: true, secure: false });
+
+    res.status(201).json({ message: `New user ${username} created!` });
 });
 
 const updateUser = asyncHandler(async (req, res) => {
@@ -96,7 +127,8 @@ const deleteUser = asyncHandler(async (req, res) => {
 
 module.exports = {
     getAllUsers,
-    createUser,
+    login,
+    register,
     updateUser,
     deleteUser,
 };
