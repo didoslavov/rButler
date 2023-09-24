@@ -17,7 +17,7 @@ const CreateHouseholdForm = () => {
                     <input type="submit" className="submit button" value={'Create Household'} />
                 </form>
             </div>
-            <img src="/create-household.avif" alt="landing image" className="household-image" />
+            <img src="/create-household.jpg" alt="landing image" className="household-image" />
         </div>
     );
 };
