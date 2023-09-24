@@ -36,7 +36,7 @@ const login = asyncHandler(async (req, res) => {
 
     const token = createToken(user);
 
-    res.cookie('Auth', token, { httpOnly: true, secure: false, sameSite: 'lax' });
+    // res.cookie('Auth', token, { httpOnly: false, secure: false, sameSite: 'lax' });
 
     res.status(200).json({ message: 'Logged in successfully', token });
 });
@@ -66,10 +66,16 @@ const register = asyncHandler(async (req, res) => {
 
     const token = createToken(user);
 
-    res.cookie('token', token, { httpOnly: true, secure: false });
+    // res.cookie('token', token, { httpOnly: true, secure: false });
 
-    res.status(201).json({ message: `New user ${username} created!` });
+    res.status(201).json({ message: `New user ${username} created!`, token });
 });
+
+const logout = (req, res) => {
+    // res.clearCookie('Auth', { sameSite: 'lax' });
+
+    res.status(200).json({ message: 'Logged out successfully!' });
+};
 
 const updateUser = asyncHandler(async (req, res) => {
     const { id, username, email } = req.body;
@@ -129,6 +135,7 @@ module.exports = {
     getAllUsers,
     login,
     register,
+    logout,
     updateUser,
     deleteUser,
 };

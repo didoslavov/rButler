@@ -238,6 +238,7 @@ label span {
     transform: translate3d(640px, 0, 0);
 }
 .sign-up {
+    padding-top: 20px;
     transform: translate3d(-900px, 0, 0);
 }
 .cont.s--signup .sign-up {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ onLogout, token }) => {
     return (
         <nav className="navbar">
             <div>
@@ -17,17 +17,23 @@ const Navbar = () => {
                     <Link to="catalog">All Products</Link>
                 </li>
                 <li className="nav-item">
-                    <Link to="create">Create Product</Link>
-                </li>
-                <li className="nav-item">
-                    <Link to="/create-household">Create Household</Link>
-                </li>
-                <li className="nav-item">
                     <Link to="/profile">Profile</Link>
                 </li>
-                <li className="nav-item">
-                    <Link to="#">Logout</Link>
-                </li>
+                {token && (
+                    <>
+                        <li className="nav-item">
+                            <Link to="create">Create Product</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/create-household">Create Household</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/" onClick={onLogout}>
+                                Logout
+                            </Link>
+                        </li>
+                    </>
+                )}
             </ul>
         </nav>
     );

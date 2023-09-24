@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-const Home = () => {
+const Home = ({ token, setToken }) => {
+    useEffect(() => {
+        const localStorageToken = localStorage.getItem('authToken');
+
+        if (localStorageToken) {
+            setToken(localStorageToken);
+        } else {
+            setToken('');
+        }
+    }, [token]);
+
     return (
         <div className="landing-container">
             <img src="/landing-page.avif" alt="landing image" className="landing-image" />
