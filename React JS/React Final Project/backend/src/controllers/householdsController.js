@@ -4,7 +4,7 @@ const User = require('../models/User.js');
 const asyncHandler = require('express-async-handler');
 
 const getAllHouseholds = asyncHandler(async (req, res) => {
-    const households = await Household.find().lean();
+    const households = await Household.find().populate('users').lean();
 
     if (!households?.length) {
         return res.status(400).json({ message: 'No households found!' });
@@ -24,6 +24,17 @@ const getAllHouseholds = asyncHandler(async (req, res) => {
     res.json(householdWithMasterAdded);
 });
 
+const getUserHouseholds = asyncHandler(async (req, res) => {
+    const { userId } = req.params;
+    const user = await User.findById(userId).lean().exec();
+
+    const userHouseholds = await Household.find({
+        'users.user': userId,
+    });
+    console.log(userHouseholds);
+    // res.json(user.households);
+});
+
 const createHouseholds = asyncHandler(async (req, res) => {
     const { master, name, presentation } = req.body;
 
@@ -31,16 +42,25 @@ const createHouseholds = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'All fields are required!' });
     }
 
-    const duplicatedHousehold = await User.findOne({ name }).lean().exec();
+    const duplicatedHousehold = await Household.findOne({ name }).lean().exec();
 
     if (duplicatedHousehold) {
         return res.status(400).json({ message: 'Duplicated household name!' });
     }
 
     const householdObject = { master, name, presentation };
-    const household = Household.create(householdObject);
+    const household = await Household.create(householdObject);
 
     if (household) {
+        const user = await User.findById(master).exec();
+
+        if (user) {
+            user.households.push({ household: household._id, role: 'Master' });
+            household.users.push({ user: user._id, role: user.households.role });
+            await household.save();
+            await user.save();
+        }
+
         res.status(201).json({ message: `New household ${name} created!` });
     } else {
         res.status(400).json({ message: 'Invalid household data!' });
@@ -96,6 +116,7 @@ const deleteHouseholds = asyncHandler(async (req, res) => {
 
 module.exports = {
     getAllHouseholds,
+    getUserHouseholds,
     createHouseholds,
     updateHouseholds,
     deleteHouseholds,
