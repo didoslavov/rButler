@@ -22,7 +22,12 @@ const login = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'All fields are required!' });
     }
 
-    const user = await User.findOne({ username }).lean();
+    const user = await User.findOne({ username })
+        .populate({
+            path: 'households.household',
+            model: 'Household',
+        })
+        .lean();
 
     if (!user) {
         return res.status(409).json({ message: 'No such user!' });
