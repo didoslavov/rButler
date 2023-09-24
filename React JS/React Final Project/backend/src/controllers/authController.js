@@ -3,7 +3,7 @@ const Household = require('../models/Household.js');
 
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcrypt');
-const { createToken, verifyToken } = require('../../utils/cookies.js');
+const createToken = require('../../utils/cookies.js');
 
 const getAllUsers = asyncHandler(async (req, res) => {
     const users = await User.find().select('-password');
@@ -36,9 +36,9 @@ const login = asyncHandler(async (req, res) => {
 
     const token = createToken(user);
 
-    res.cookie('token', token, { httpOnly: true, secure: false });
+    res.cookie('Auth', token, { httpOnly: true, secure: false, sameSite: 'lax' });
 
-    res.json({ message: 'Logged in successfully' });
+    res.status(200).json({ message: 'Logged in successfully', token });
 });
 
 const register = asyncHandler(async (req, res) => {

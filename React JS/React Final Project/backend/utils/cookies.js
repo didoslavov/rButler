@@ -8,7 +8,9 @@ module.exports = (user) => {
         roles: user.roles,
     };
 
-    const options = { expiresIn: '1h' };
+    const options = { expiresIn: '24h' };
 
-    return jwt.sign(payload, secret, options);
+    const token = jwt.sign(payload, secret, options);
+
+    return token;
 };
