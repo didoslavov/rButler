@@ -35,9 +35,9 @@ const MyHouseholds = ({ user }) => {
                     <>
                         <ul className="households-list">
                             {itemsForDisplay.map((household) => (
-                                <Link key={household._id} to={'/households/' + household._id}>
+                                <Link key={household._id} to={'/households/' + household._id} className="my-household-link">
                                     <li className="household">
-                                        <h4>{household.name}</h4>
+                                        <h4 className="household-header">{household.name}</h4>
                                         <p>{household.presentation}</p>
                                     </li>
                                 </Link>

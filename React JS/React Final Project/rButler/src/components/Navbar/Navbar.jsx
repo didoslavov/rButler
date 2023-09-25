@@ -7,9 +7,9 @@ const Navbar = ({ onLogout, token, user }) => {
 
     return (
         <nav className="navbar">
-            <div>
+            <div className="image-search-container">
                 <Link to="/" className="logo">
-                    <img src="/nav-logo.jpg" alt="home logo" />
+                    <img src="/nav-logo.jpg" alt="home logo" className="nav-logo" />
                 </Link>
                 <form action="post">
                     <input type="search" name="search" id="search" placeholder="Search" />

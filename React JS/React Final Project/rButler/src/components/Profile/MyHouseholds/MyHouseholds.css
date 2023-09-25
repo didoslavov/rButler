@@ -9,7 +9,7 @@
     border-bottom: 1px solid var(--dark-pink);
 }
 
-a {
+.my-household-link {
     color: var(--dark-blue);
 }
 
@@ -31,10 +31,10 @@ a {
     flex-direction: column;
     gap: 30px;
     width: 70%;
+}
 
-    h4 {
-        border-bottom: 1px solid var(--dark-pink);
-    }
+.household-header {
+    border-bottom: 1px solid var(--dark-pink);
 }
 
 .household {

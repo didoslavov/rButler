@@ -26,15 +26,15 @@ const Default = () => {
                     <div className="number">4</div>
                 </div>
 
-                <div className="text">
-                    <h4>Ah, it appears you've taken a detour into uncharted territory.</h4>
-                    <p>
-                        Fear not, dear guest, for even in the land of <span>404</span> your digital butler shall guide you with
-                        utmost decorum and wit. Please pardon the interruption, as we prepare a suitable diversion for your
-                        journey back home.
+                <div className="default-text">
+                    <h4 className="default-text-header">Ah, it appears you've taken a detour into uncharted territory.</h4>
+                    <p className="default-text-message">
+                        Fear not, dear guest, for even in the land of <span className="default-text-404">404</span> your digital
+                        butler shall guide you with utmost decorum and wit. Please pardon the interruption, as we prepare a
+                        suitable diversion for your journey back home.
                     </p>
                 </div>
-                <Link className="button-404" to="/">
+                <Link className="button-action default-button" to="/">
                     Back Home
                 </Link>
             </div>

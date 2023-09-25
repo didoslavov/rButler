@@ -8,7 +8,7 @@ const MissingHouseholds = () => {
                 Regrettably, it appears that no households have been created under your esteemed account. Shall I assist you in
                 the initiation of this noble endeavor, kindly select below?
             </p>
-            <Link to="/create-household" className="landing-button">
+            <Link to="/create-household" className="button-action">
                 Create household
             </Link>
         </div>

@@ -31,6 +31,7 @@
     background: url(/wave.png);
     background-size: 1000px 100px;
 }
+
 .landing-content .air.air1 {
     animation: wave 30s linear infinite;
     z-index: 1000;
@@ -38,6 +39,7 @@
     animation-delay: 0s;
     bottom: 0;
 }
+
 .landing-content .air.air2 {
     animation: wave2 15s linear infinite;
     z-index: 999;
@@ -45,6 +47,7 @@
     animation-delay: -5s;
     bottom: 10px;
 }
+
 .landing-content .air.air3 {
     animation: wave 30s linear infinite;
     z-index: 998;
@@ -52,6 +55,7 @@
     animation-delay: -2s;
     bottom: 15px;
 }
+
 .landing-content .air.air4 {
     animation: wave2 5s linear infinite;
     z-index: 997;
@@ -59,18 +63,22 @@
     animation-delay: -5s;
     bottom: 20px;
 }
+
 @keyframes wave {
     0% {
         background-position-x: 0px;
     }
+
     100% {
         background-position-x: 1000px;
     }
 }
+
 @keyframes wave2 {
     0% {
         background-position-x: 0px;
     }
+
     100% {
         background-position-x: -1000px;
     }
@@ -79,7 +87,7 @@
 .landing-image {
     flex: 1;
     max-height: 100%;
-    width: 80%;
+    width: 60%;
     object-fit: cover;
     position: relative;
 }
@@ -96,38 +104,23 @@
     font-size: 18px;
     max-width: 600px;
     margin-bottom: 20px;
+}
 
-    .prefix {
-        background-color: var(--dark-blue);
-        color: #61dbfb;
-        padding: 1px 3px 1px 3px;
-        border-radius: 4px 0 0 4px;
-    }
+.landing-text-prefix {
+    background-color: var(--dark-blue);
+    color: #61dbfb;
+    padding: 1px 3px 1px 3px;
+    border-radius: 4px 0 0 4px;
+}
 
-    .suffix {
-        background-color: var(--dark-blue);
-        color: var(--dark-pink);
-        padding: 1px 3px 1px 0;
-        border-radius: 0 4px 4px 0;
-    }
+.landing-text-suffix {
+    background-color: var(--dark-blue);
+    color: var(--dark-pink);
+    padding: 1px 3px 1px 0;
+    border-radius: 0 4px 4px 0;
 }
 
 .landing-buttons {
     display: flex;
     gap: 20px;
-}
-
-.landing-button {
-    background-color: var(--dark-blue);
-    color: white;
-    padding: 10px 20px;
-    font-size: 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.landing-button:hover {
-    background-color: var(--dark-pink);
-    color: var(--dark-blue);
 }

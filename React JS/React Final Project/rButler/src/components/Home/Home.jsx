@@ -26,19 +26,19 @@ const Home = ({ token, setToken, user }) => {
             <div className="landing-content">
                 <h1 className="landing-title">Welcome home!</h1>
                 <p className="landing-text">
-                    Allow me to introduce myself: I am Alfred, your dedicated <span className="prefix">react</span>
-                    <span className="suffix">butler</span> for all things home-related. With a touch of elegance and efficiency, I
-                    am here to simplify your household management. Within these digital walls, you shall find the means to keep a
-                    meticulous inventory of your treasures, recording their expiration dates and quantities with the utmost
-                    precision. Should you wish to embark upon household endeavors, I offer an integrated to-do list, ready to
-                    assist in your noble quests.
+                    Allow me to introduce myself: I am Alfred, your dedicated <span className="landing-text-prefix">react</span>
+                    <span className="landing-text-suffix">butler</span> for all things home-related. With a touch of elegance and
+                    efficiency, I am here to simplify your household management. Within these digital walls, you shall find the
+                    means to keep a meticulous inventory of your treasures, recording their expiration dates and quantities with
+                    the utmost precision. Should you wish to embark upon household endeavors, I offer an integrated to-do list,
+                    ready to assist in your noble quests.
                 </p>
                 <div className="landing-buttons">
-                    <button className="landing-button" onClick={handleInfoNavigate}>
+                    <button className="button-action" onClick={handleInfoNavigate}>
                         Learn More
                     </button>
                     {token && (
-                        <button className="landing-button" onClick={handleMyHouseholdsNavigate}>
+                        <button className="button-action" onClick={handleMyHouseholdsNavigate}>
                             My households
                         </button>
                     )}

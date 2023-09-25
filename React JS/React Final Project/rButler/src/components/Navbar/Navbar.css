@@ -9,23 +9,22 @@ nav {
     position: sticky;
     top: 0;
     z-index: 100;
+}
 
-    div {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+.image-search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .logo {
     display: inline-block;
+}
 
-    img {
-        width: 175px;
-        vertical-align: middle;
-        width: 150px;
-        height: 75px;
-    }
+.nav-logo {
+    vertical-align: middle;
+    width: 150px;
+    height: 75px;
 }
 
 #search {
