@@ -29,7 +29,7 @@ function App() {
         <>
             <Navbar onLogout={onLogout} token={token} profileLink={profileLink} />
             <Routes>
-                <Route path="/" element={<Home token={token} setToken={setToken} />} />
+                <Route path="/" element={<Home token={token} setToken={setToken} user={user} />} />
                 {token ? (
                     <Route path={profileLink} element={<Profile setUser={setUser} />} />
                 ) : (

@@ -1,6 +1,15 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Home = ({ token, setToken }) => {
+const Home = ({ token, setToken, user }) => {
+    const navigate = useNavigate();
+
+    const handleInfoNavigate = () => {
+        navigate('/more-info');
+    };
+
+    const handleMyHouseholdsNavigate = () => (token ? navigate('/profile/' + user.id) : navigate('/profile/auth'));
+
     useEffect(() => {
         const localStorageToken = localStorage.getItem('authToken');
 
@@ -24,7 +33,16 @@ const Home = ({ token, setToken }) => {
                     precision. Should you wish to embark upon household endeavors, I offer an integrated to-do list, ready to
                     assist in your noble quests.
                 </p>
-                <button className="landing-button">Learn More</button>
+                <div className="landing-buttons">
+                    <button className="landing-button" onClick={handleInfoNavigate}>
+                        Learn More
+                    </button>
+                    {token && (
+                        <button className="landing-button" onClick={handleMyHouseholdsNavigate}>
+                            My households
+                        </button>
+                    )}
+                </div>
                 <div className="air air1"></div>
                 <div className="air air2"></div>
                 <div className="air air3"></div>

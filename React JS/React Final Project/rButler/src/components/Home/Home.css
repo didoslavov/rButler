@@ -112,6 +112,11 @@
     }
 }
 
+.landing-buttons {
+    display: flex;
+    gap: 20px;
+}
+
 .landing-button {
     background-color: var(--dark-blue);
     color: white;
