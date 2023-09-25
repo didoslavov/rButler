@@ -32,7 +32,7 @@ const getUserHouseholds = asyncHandler(async (req, res) => {
         'users.user': userId,
     });
 
-    res.json(user.households);
+    res.json(userHouseholds);
 });
 
 const createHouseholds = asyncHandler(async (req, res) => {
