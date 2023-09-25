@@ -26,7 +26,6 @@ const getAllHouseholds = asyncHandler(async (req, res) => {
 
 const getUserHouseholds = asyncHandler(async (req, res) => {
     const { userId } = req.params;
-    const user = await User.findById(userId).lean().exec();
 
     const userHouseholds = await Household.find({
         'users.user': userId,
