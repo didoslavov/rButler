@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ onLogout, token, profileLink }) => {
+const Navbar = ({ onLogout, token, user }) => {
+    const userId = user?.id;
+    const profileLink = token ? `/profile/${userId}` : '/profile/auth';
+
     return (
         <nav className="navbar">
             <div>

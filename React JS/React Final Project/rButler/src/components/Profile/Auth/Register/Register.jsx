@@ -14,7 +14,8 @@ const Register = ({ setToken, setUser }) => {
             }
             const res = await userRegister({ username, email, password });
 
-            localStorage.setItem('authToken', res.token);
+            localStorage.setItem('authToken', res.userInfo.token);
+            localStorage.setItem('userInfo', res.userInfo);
 
             setToken(res.userInfo.token);
             setUser(res.userInfo);
