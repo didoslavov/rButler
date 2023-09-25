@@ -40,10 +40,11 @@ const login = asyncHandler(async (req, res) => {
     }
 
     const token = createToken(user);
+    const userInfo = { username: user.username, email: user.email, id: user._id, token };
 
     // res.cookie('Auth', token, { httpOnly: false, secure: false, sameSite: 'lax' });
 
-    res.status(200).json({ message: 'Logged in successfully', token });
+    res.status(200).json({ message: 'Logged in successfully', userInfo });
 });
 
 const register = asyncHandler(async (req, res) => {

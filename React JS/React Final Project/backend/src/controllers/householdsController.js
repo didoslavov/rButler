@@ -31,8 +31,8 @@ const getUserHouseholds = asyncHandler(async (req, res) => {
     const userHouseholds = await Household.find({
         'users.user': userId,
     });
-    console.log(userHouseholds);
-    // res.json(user.households);
+
+    res.json(user.households);
 });
 
 const createHouseholds = asyncHandler(async (req, res) => {
