@@ -46,6 +46,10 @@
     padding: 30px;
 }
 
+.household:hover {
+    background-color: var(--light-pink);
+}
+
 .my-missing-household {
     display: flex;
     flex-wrap: wrap;
