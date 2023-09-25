@@ -1,27 +1,29 @@
 import { Pagination } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { getUserHouseholds } from '../../../services/householdsService.js';
+import MissingHouseholds from './MissingHouseholds.jsx';
 
-const MyHouseholds = () => {
+const MyHouseholds = ({ user }) => {
     const [currentPage, setCurrentPage] = useState(1);
+    const [households, setHouseholds] = useState([]);
+    const userId = user?.id;
+
+    useEffect(() => {
+        getUserHouseholds(userId).then((h) => {
+            setHouseholds(h);
+        });
+    }, [userId]);
+
+    console.log(households);
 
     const itemsPerPage = 3;
-    const items = [
-        { name: 'Household1', presentation: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt, nostrum?' },
-        { name: 'Household2', presentation: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt, nostrum?' },
-        { name: 'Household3', presentation: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt, nostrum?' },
-        { name: 'Household4', presentation: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt, nostrum?' },
-        { name: 'Household5', presentation: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt, nostrum?' },
-        { name: 'Household6', presentation: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt, nostrum?' },
-        { name: 'Household7', presentation: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt, nostrum?' },
-        { name: 'Household8', presentation: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt, nostrum?' },
-    ];
-    const totalPages = Math.ceil(items.length / itemsPerPage);
+    const totalPages = Math.ceil(households.length / itemsPerPage);
 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
 
-    const itemsForDisplay = items.slice(startIndex, endIndex);
+    const itemsForDisplay = households.slice(startIndex, endIndex);
 
     const paginationHandler = (page) => {
         setCurrentPage(page);
@@ -30,19 +32,26 @@ const MyHouseholds = () => {
         <div className="my-households-container">
             <img src="/my-households.jpg" alt="my-households" />
             <div className="households">
-                <ul className="households-list">
-                    {itemsForDisplay.map((item, index) => (
-                        <Link key={index} to={'/households/' + index}>
-                            <li className="household">
-                                <h4>{item.name}</h4>
-                                <p>{item.presentation}</p>
-                            </li>
-                        </Link>
-                    ))}
-                </ul>
-                <div>
-                    <Pagination count={totalPages} onChange={(e, page) => paginationHandler(page)} />
-                </div>
+                <h3 className="my-households-header">My Households</h3>
+                {households.length ? (
+                    <>
+                        <ul className="households-list">
+                            {itemsForDisplay.map((household) => (
+                                <Link key={household._id} to={'/households/' + household._id}>
+                                    <li className="household">
+                                        <h4>{household.name}</h4>
+                                        <p>{household.presentation}</p>
+                                    </li>
+                                </Link>
+                            ))}
+                        </ul>
+                        <div>
+                            <Pagination count={totalPages} onChange={(e, page) => paginationHandler(page)} />
+                        </div>
+                    </>
+                ) : (
+                    <MissingHouseholds />
+                )}
             </div>
         </div>
     );

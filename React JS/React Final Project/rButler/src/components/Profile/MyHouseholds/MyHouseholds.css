@@ -4,6 +4,11 @@
     height: 91.7vh;
 }
 
+.my-households-header {
+    color: var(--dark-blue);
+    border-bottom: 1px solid var(--dark-pink);
+}
+
 a {
     color: var(--dark-blue);
 }
@@ -18,12 +23,14 @@ a {
     padding: 20px;
     list-style: none;
     overflow: auto;
+    width: 100%;
 }
 
 .households-list {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    width: 70%;
 
     h4 {
         border-bottom: 1px solid var(--dark-pink);
@@ -37,4 +44,18 @@ a {
     gap: 20px;
     border: 1px solid var(--dark-blue);
     padding: 30px;
+}
+
+.my-missing-household {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+.my-missing-household p {
+    color: var(--dark-blue);
+    width: 500px;
+    text-align: center;
 }
