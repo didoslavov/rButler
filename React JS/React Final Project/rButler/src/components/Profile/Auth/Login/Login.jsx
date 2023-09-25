@@ -14,8 +14,7 @@ const Login = ({ setToken, setUser }) => {
             }
             const res = await login({ username, password });
 
-            localStorage.setItem('authToken', res.userInfo.token);
-            localStorage.setItem('userInfo', JSON.stringify(res.userInfo));
+            localStorage.setItem('authToken', res.token);
 
             setToken(res.userInfo.token);
             setUser(res.userInfo);

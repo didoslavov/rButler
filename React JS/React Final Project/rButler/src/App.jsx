@@ -10,31 +10,28 @@ import { useEffect, useState } from 'react';
 
 function App() {
     const [token, setToken] = useState(localStorage.getItem('authToken'));
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('userInfo')));
+    const [user, setUser] = useState({});
 
-    const profileLink = token ? `/profile/:userId` : '/profile/auth';
+    const profileLink = token ? `/profile/${user.id}` : '/profile/auth';
 
     useEffect(() => {
         const localStorageToken = localStorage.getItem('authToken');
-        const localStorageUser = JSON.parse(localStorage.getItem('userInfo'));
 
         setToken(localStorageToken);
-        setUser(localStorageUser);
-    }, []);
+    }, [token]);
 
     const onLogout = () => {
         logout();
         setToken('');
-        setUser('');
     };
 
     return (
         <>
-            <Navbar onLogout={onLogout} token={token} profileLink={profileLink} user={user} />
+            <Navbar onLogout={onLogout} token={token} profileLink={profileLink} />
             <Routes>
                 <Route path="/" element={<Home token={token} setToken={setToken} user={user} />} />
                 {token ? (
-                    <Route path={profileLink} element={<Profile setUser={setUser} user={user} />} />
+                    <Route path={profileLink} element={<Profile setUser={setUser} />} />
                 ) : (
                     <Route path={profileLink} element={<Profile setUser={setUser} />} />
                 )}
