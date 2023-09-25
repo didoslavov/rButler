@@ -4,10 +4,7 @@ const CONNECTION_PORT = process.env.DB_URI;
 
 module.exports = async () => {
     try {
-        await mongoose.connect(CONNECTION_PORT, {
-            useUnifiedTopology: true,
-            useNewUrlParser: true,
-        });
+        await mongoose.connect(CONNECTION_PORT);
 
         console.log('Database connected successfully...');
     } catch (err) {
