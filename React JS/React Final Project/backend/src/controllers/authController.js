@@ -1,9 +1,9 @@
 const User = require('../models/User.js');
-const Household = require('../models/Household.js');
+const Household = require('../models/Household');
 
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcrypt');
-const createToken = require('../../utils/cookies.js');
+const createToken = require('../utils/createToken');
 
 const getAllUsers = asyncHandler(async (req, res) => {
     const users = await User.find().select('-password');
