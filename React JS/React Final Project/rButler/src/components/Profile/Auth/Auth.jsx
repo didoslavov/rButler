@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Login from './Login/Login.jsx';
 import Register from './Register/Register.jsx';
 
-const Auth = ({ setToken }) => {
+const Auth = ({ setToken, setUser }) => {
     const [showLogin, setShowLogin] = useState(true);
 
     const toggleFormsHandler = () => {
@@ -11,7 +11,7 @@ const Auth = ({ setToken }) => {
 
     return (
         <div className={`cont ${showLogin ? '' : 's--signup'}`}>
-            <Login setToken={setToken} />
+            <Login setToken={setToken} setUser={setUser} />
 
             <div className="sub-cont">
                 <div className="img">
@@ -32,7 +32,7 @@ const Auth = ({ setToken }) => {
                     </div>
                 </div>
 
-                <Register setToken={setToken} />
+                <Register setToken={setToken} setUser={setUser} />
             </div>
         </div>
     );

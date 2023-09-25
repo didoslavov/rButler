@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { userRegister } from '../../../../services/authService.js';
 
-const Register = ({ setToken }) => {
+const Register = ({ setToken, setUser }) => {
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
 
@@ -16,7 +16,8 @@ const Register = ({ setToken }) => {
 
             localStorage.setItem('authToken', res.token);
 
-            setToken(res.token);
+            setToken(res.userInfo.token);
+            setUser(res.userInfo);
             navigate('/');
         } catch (error) {
             console.error(error);

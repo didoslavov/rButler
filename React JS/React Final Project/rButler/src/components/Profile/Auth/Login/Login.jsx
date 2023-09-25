@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../../../services/authService.js';
 import { useForm } from 'react-hook-form';
 
-const Login = ({ setToken }) => {
+const Login = ({ setToken, setUser }) => {
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
 
@@ -16,7 +16,8 @@ const Login = ({ setToken }) => {
 
             localStorage.setItem('authToken', res.token);
 
-            setToken(res.token);
+            setToken(res.userInfo.token);
+            setUser(res.userInfo);
             navigate('/');
         } catch (error) {
             console.error(error);
