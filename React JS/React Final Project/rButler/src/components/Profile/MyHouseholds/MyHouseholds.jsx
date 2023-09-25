@@ -15,8 +15,6 @@ const MyHouseholds = ({ user }) => {
         });
     }, [userId]);
 
-    console.log(households);
-
     const itemsPerPage = 3;
     const totalPages = Math.ceil(households.length / itemsPerPage);
 
