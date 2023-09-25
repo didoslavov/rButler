@@ -71,10 +71,11 @@ const register = asyncHandler(async (req, res) => {
     }
 
     const token = createToken(user);
+    const userInfo = { username: user.username, email: user.email, id: user._id, token };
 
     // res.cookie('token', token, { httpOnly: true, secure: false });
 
-    res.status(201).json({ message: `New user ${username} created!`, token });
+    res.status(201).json({ message: `New user ${username} created!`, userInfo });
 });
 
 const logout = (req, res) => {

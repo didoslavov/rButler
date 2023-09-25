@@ -31,10 +31,9 @@ export const userRegister = async (credentials) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(credentials),
-            // credentials: 'include',
+            credentials: 'include',
         });
 
-        console.log(response);
         if (!response.ok) {
             throw new Error('Register failed!');
         }
