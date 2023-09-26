@@ -11,7 +11,6 @@ module.exports = (app) => {
     app.use(express.json({ extended: true }));
     app.use(cors());
     app.use(cookieParser());
-    app.use(auth());
 
     app.listen(PORT, () => console.log(`Server Running on port: ${PORT}`));
 };
