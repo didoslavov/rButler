@@ -1,8 +1,10 @@
 const jwt = require('jsonwebtoken');
 
+//! Don't forget to implement cookies in some point!
+
 module.exports = () => (req, res, next) => {
     // const token = req.cookies.token;
-    const token = req.token;
+    const token = req.headers.auth;
 
     if (token) {
         try {
@@ -15,6 +17,5 @@ module.exports = () => (req, res, next) => {
             return res.json({ message: 'Invalid token!' });
         }
     }
-
     next();
 };
