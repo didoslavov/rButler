@@ -7,6 +7,7 @@ import CreateHouseholdForm from './components/CreateHouseholdForm/CreateHousehol
 import Profile from './components/Profile/Profile.jsx';
 import { logout } from './services/authService.js';
 import { useEffect, useState } from 'react';
+import Details from './components/Details/Details.jsx';
 
 function App() {
     const [token, setToken] = useState(localStorage.getItem('authToken'));
@@ -38,7 +39,8 @@ function App() {
                 ) : (
                     <Route path={profileLink} element={<Profile setUser={setUser} />} />
                 )}
-                <Route path="/create-household" element={<CreateHouseholdForm />} />
+                <Route path="/households/create" element={<CreateHouseholdForm />} />
+                <Route path="/household/details/:householdId" element={<Details />} />
                 <Route path="*" element={<Default />}></Route>
             </Routes>
         </>

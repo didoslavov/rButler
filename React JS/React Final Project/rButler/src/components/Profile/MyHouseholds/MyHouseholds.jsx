@@ -30,14 +30,17 @@ const MyHouseholds = ({ user, token }) => {
         <div className="my-households-container">
             <img src="/my-households.jpg" alt="my-households" />
             <div className="households">
-                <h3 className="my-households-header">My Households</h3>
+                <h3 className="my-households-header border-bottom">My Households</h3>
                 {households.length ? (
                     <>
                         <ul className="households-list">
                             {itemsForDisplay.map((household) => (
-                                <Link key={household._id} to={'/households/' + household._id} className="my-household-link">
+                                <Link
+                                    key={household._id}
+                                    to={'/household/details/' + household._id}
+                                    className="my-household-link">
                                     <li className="household">
-                                        <h4 className="household-header">{household.name}</h4>
+                                        <h4 className="household-header border-bottom">{household.name}</h4>
                                         <p>{household.presentation}</p>
                                     </li>
                                 </Link>

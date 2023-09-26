@@ -93,14 +93,12 @@
 }
 
 .landing-title {
-    color: var(--dark-blue);
     font-size: 36px;
     margin-bottom: 40px;
     text-transform: uppercase;
 }
 
 .landing-text {
-    color: var(--dark-blue);
     font-size: 18px;
     max-width: 600px;
     margin-bottom: 20px;

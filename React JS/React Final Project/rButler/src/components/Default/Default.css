@@ -154,7 +154,6 @@ a {
     align-items: center;
     margin-top: 5rem;
     font-weight: 300;
-    color: var(--dark-blue);
 }
 
 .default-text-header {
@@ -167,15 +166,9 @@ a {
 }
 
 .default-text-404 {
-    color: var(--dark-pink);
     font-weight: bold;
 }
 
 .default-button {
     margin-top: 50px;
-}
-
-.default-button:hover {
-    background-color: var(--dark-pink);
-    color: var(--dark-blue);
 }

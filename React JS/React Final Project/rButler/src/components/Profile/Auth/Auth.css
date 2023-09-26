@@ -40,7 +40,6 @@ button {
     padding: 50px 30px 0;
 }
 .welcome {
-    color: var(--dark-blue);
     text-transform: uppercase;
 }
 .sub-cont {
@@ -186,7 +185,6 @@ label {
 }
 label span {
     font-size: 12px;
-    color: var(--dark-blue);
     text-transform: uppercase;
 }
 .input {
@@ -227,7 +225,6 @@ label span {
 }
 .fb-btn span {
     font-weight: bold;
-    color: var(--dark-blue);
 }
 .sign-in {
     transition-timing-function: ease-out;

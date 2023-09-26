@@ -4,15 +4,6 @@
     height: 90vh;
 }
 
-.my-households-header {
-    color: var(--dark-blue);
-    border-bottom: 1px solid var(--dark-pink);
-}
-
-.my-household-link {
-    color: var(--dark-blue);
-}
-
 .households {
     display: flex;
     flex-direction: column;
@@ -30,10 +21,6 @@
     flex-direction: column;
     gap: 30px;
     width: 70%;
-}
-
-.household-header {
-    border-bottom: 1px solid var(--dark-pink);
 }
 
 .household {
@@ -58,7 +45,6 @@
 }
 
 .my-missing-household p {
-    color: var(--dark-blue);
     width: 500px;
     text-align: center;
 }

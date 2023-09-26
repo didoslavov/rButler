@@ -1,0 +1,22 @@
+.details-container {
+    display: flex;
+    align-items: stretch;
+    height: 90vh;
+}
+
+.details-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.details-image {
+    max-height: 100%;
+    width: 50%;
+    object-fit: fill;
+    position: relative;
+}

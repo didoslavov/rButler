@@ -28,7 +28,7 @@ const Navbar = ({ onLogout, token, user }) => {
                             <Link to="create">Create Product</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/create-household">Create Household</Link>
+                            <Link to="/households/create">Create Household</Link>
                         </li>
                         <li className="nav-item">
                             <Link to="/" onClick={onLogout}>
