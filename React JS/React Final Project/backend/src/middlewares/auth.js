@@ -6,16 +6,14 @@ module.exports = () => (req, res, next) => {
     // const token = req.cookies.token;
     const token = req.headers.auth;
 
-    if (token) {
-        try {
-            const data = jwt.verify(token, process.env.JWT_SECRET);
+    try {
+        const data = jwt.verify(token, process.env.JWT_SECRET);
 
-            req.user = data;
-        } catch (err) {
-            // res.clearCookie(token);
+        req.user = data;
+    } catch (err) {
+        // res.clearCookie(token);
 
-            return res.json({ message: 'Invalid token!' });
-        }
+        return res.status(401).json({ message: 'Invalid token!' });
     }
     next();
 };
