@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import MyHouseholds from './MyHouseholds/MyHouseholds.jsx';
 import Auth from './Auth/Auth.jsx';
 
-const Profile = ({ setUser, user }) => {
+const Profile = ({ setUser, user, setLoading }) => {
     const [token, setToken] = useState('');
 
     useEffect(() => {
@@ -12,7 +12,15 @@ const Profile = ({ setUser, user }) => {
         }
     }, []);
 
-    return <>{token ? <MyHouseholds user={user} token={token} /> : <Auth setToken={setToken} setUser={setUser} />}</>;
+    return (
+        <>
+            {token ? (
+                <MyHouseholds user={user} token={token} setLoading={setLoading} />
+            ) : (
+                <Auth setToken={setToken} setUser={setUser} />
+            )}
+        </>
+    );
 };
 
 export default Profile;

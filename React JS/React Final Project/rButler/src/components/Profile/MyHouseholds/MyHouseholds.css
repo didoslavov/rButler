@@ -30,10 +30,12 @@
     gap: 20px;
     border: 1px solid var(--dark-blue);
     padding: 30px;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color 550ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
 .household:hover {
-    background-color: var(--light-pink);
+    background-color: var(--dark-blue);
+    color: var(--light-grey);
 }
 
 .my-missing-household {

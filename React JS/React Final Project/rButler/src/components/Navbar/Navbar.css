@@ -51,4 +51,5 @@ nav {
 
 .nav-item:hover {
     border-bottom: 1px solid var(--dark-pink);
+    margin-bottom: -1px;
 }

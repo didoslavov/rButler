@@ -5,6 +5,7 @@ import { getUserHouseholds } from '../../../services/householdsService.js';
 import MissingHouseholds from './MissingHouseholds.jsx';
 
 const MyHouseholds = ({ user, token }) => {
+    const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [households, setHouseholds] = useState([]);
     const userId = user?.id;
@@ -12,9 +13,9 @@ const MyHouseholds = ({ user, token }) => {
     useEffect(() => {
         getUserHouseholds(userId, token).then((h) => {
             setHouseholds(h);
+            setLoading(false);
         });
-    }, [userId]);
-
+    }, [userId, token]);
     const itemsPerPage = 3;
     const totalPages = Math.ceil(households.length / itemsPerPage);
 
@@ -47,7 +48,32 @@ const MyHouseholds = ({ user, token }) => {
                             ))}
                         </ul>
                         <div>
-                            <Pagination count={totalPages} onChange={(e, page) => paginationHandler(page)} />
+                            <Pagination
+                                shape="rounded"
+                                sx={{
+                                    pb: 1,
+                                    pr: 0,
+                                    '& .MuiPaginationItem-root': {
+                                        border: '1px solid var(--dark-blue)',
+                                        color: 'var(--light-grey)',
+                                        backgroundColor: 'var(--dark-blue)',
+                                        '&:hover': {
+                                            backgroundColor: 'var(--dark-pink)',
+                                            color: 'var(--dark-blue)',
+                                        },
+                                    },
+                                    '&& .Mui-selected': {
+                                        backgroundColor: 'var(--light-grey)',
+                                        color: 'var(--dark-blue)',
+                                        '&:hover': {
+                                            backgroundColor: 'var(--light-pink)',
+                                            color: 'var(--dark-blue)',
+                                        },
+                                    },
+                                }}
+                                count={totalPages}
+                                onChange={(e, page) => paginationHandler(page)}
+                            />
                         </div>
                     </>
                 ) : (
