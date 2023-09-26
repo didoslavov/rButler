@@ -47,3 +47,21 @@ export const createHousehold = async (household) => {
         console.error(error);
     }
 };
+
+export const getUserHouseholdById = async (id, token) => {
+    try {
+        const res = await fetch(BASE_URL + '/' + id, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                auth: token,
+            },
+        });
+
+        const data = await res.json();
+
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+};
