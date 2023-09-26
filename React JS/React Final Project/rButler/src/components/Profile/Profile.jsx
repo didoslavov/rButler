@@ -12,7 +12,7 @@ const Profile = ({ setUser, user }) => {
         }
     }, []);
 
-    return <>{token ? <MyHouseholds user={user} /> : <Auth setToken={setToken} setUser={setUser} />}</>;
+    return <>{token ? <MyHouseholds user={user} token={token} /> : <Auth setToken={setToken} setUser={setUser} />}</>;
 };
 
 export default Profile;

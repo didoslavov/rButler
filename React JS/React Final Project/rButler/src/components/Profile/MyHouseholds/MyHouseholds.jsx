@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import { getUserHouseholds } from '../../../services/householdsService.js';
 import MissingHouseholds from './MissingHouseholds.jsx';
 
-const MyHouseholds = ({ user }) => {
+const MyHouseholds = ({ user, token }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [households, setHouseholds] = useState([]);
     const userId = user?.id;
 
     useEffect(() => {
-        getUserHouseholds(userId).then((h) => {
+        getUserHouseholds(userId, token).then((h) => {
             setHouseholds(h);
         });
     }, [userId]);
