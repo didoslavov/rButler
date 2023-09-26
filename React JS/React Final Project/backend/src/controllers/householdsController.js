@@ -21,7 +21,19 @@ const getAllHouseholds = asyncHandler(async (req, res) => {
         })
     );
 
-    res.json(householdWithMasterAdded);
+    res.status(200).json(householdWithMasterAdded);
+});
+
+const getHouseholdById = asyncHandler(async (req, res) => {
+    const { householdId } = req.params;
+
+    const household = await Household.findById(householdId);
+
+    if (!household) {
+        return res.status(400).json({ message: 'No household found!' });
+    }
+
+    res.status(200).json(household);
 });
 
 const getUserHouseholds = asyncHandler(async (req, res) => {
@@ -31,7 +43,7 @@ const getUserHouseholds = asyncHandler(async (req, res) => {
         'users.user': userId,
     });
 
-    res.json(userHouseholds);
+    res.status(200).json(userHouseholds);
 });
 
 const createHouseholds = asyncHandler(async (req, res) => {
@@ -116,6 +128,7 @@ const deleteHouseholds = asyncHandler(async (req, res) => {
 module.exports = {
     getAllHouseholds,
     getUserHouseholds,
+    getHouseholdById,
     createHouseholds,
     updateHouseholds,
     deleteHouseholds,

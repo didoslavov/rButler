@@ -3,6 +3,7 @@ const householdController = require('../controllers/householdsController.js');
 const auth = require('../middlewares/auth.js');
 
 router.route('/').get(householdController.getAllHouseholds);
+router.route('/:householdId').get(auth(), householdController.getHouseholdById);
 router.route('/user-households/:userId').get(auth(), householdController.getUserHouseholds);
 router.route('/create').post(auth(), householdController.createHouseholds);
 router.route('/update').patch(auth(), householdController.updateHouseholds);
