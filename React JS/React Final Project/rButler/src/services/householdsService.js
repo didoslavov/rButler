@@ -11,14 +11,22 @@ export const getUserHouseholds = async (userId, token) => {
         });
 
         if (!res.ok) {
-            throw new Error('Failed to fetch households!');
+            if (res.status == 401) {
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('userInfo');
+                return res.statusText;
+            }
+
+            const error = res.json();
+
+            throw new Error(error);
         }
 
         const data = res.json();
 
         return data;
     } catch (error) {
-        console.error(error);
+        console.error(error.message);
     }
 };
 

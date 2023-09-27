@@ -1,10 +1,11 @@
 import { Pagination } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getUserHouseholds } from '../../../services/householdsService.js';
 import MissingHouseholds from './MissingHouseholds.jsx';
 
 const MyHouseholds = ({ user, token }) => {
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [households, setHouseholds] = useState([]);
@@ -12,6 +13,9 @@ const MyHouseholds = ({ user, token }) => {
 
     useEffect(() => {
         getUserHouseholds(userId, token).then((h) => {
+            if (h === 'Unauthorized') {
+                navigate('/profile/auth');
+            }
             setHouseholds(h);
             setLoading(false);
         });
