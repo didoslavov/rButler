@@ -5,6 +5,7 @@
 @import url(./components/CreateHouseholdForm/CreateHouseholdForm.css);
 @import url(./components/Profile/MyHouseholds/MyHouseholds.css);
 @import url(./components/Details/Details.css);
+@import url(./components/CreateListForm/CreateListForm.css);
 
 :root {
     --dark-pink: #f08a9d;
@@ -54,4 +55,14 @@ a {
 .button-action:hover {
     background-color: var(--dark-pink);
     color: var(--dark-blue);
+}
+
+.create-button {
+    padding: 4px 24px;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+.form-label {
+    margin-top: 10px;
 }
