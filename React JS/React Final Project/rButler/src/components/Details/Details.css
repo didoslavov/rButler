@@ -42,3 +42,8 @@
     color: var(--dark-blue);
     border-radius: 100%;
 }
+
+.MuiList-root {
+    background-color: var(--light-grey);
+    color: var(--dark-blue);
+}
