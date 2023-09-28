@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { getUserHouseholdById } from '../../services/householdsService.js';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { addUserToHousehold, getUserHouseholdById } from '../../services/householdsService.js';
 import { IconButton, InputLabel, MenuItem, Paper, Popover, Select, SpeedDial, SpeedDialAction } from '@mui/material';
 import { AddHomeSharp, Close, ExtensionSharp, HomeSharp, ModeEditSharp, ShareRounded } from '@mui/icons-material';
 import { useForm } from 'react-hook-form';
@@ -14,9 +14,10 @@ import {
 } from '../../../public/styles/muiStyles/details.js';
 
 const Details = () => {
+    const navigate = useNavigate();
     const token = localStorage.getItem('authToken');
     const { householdId } = useParams();
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
     const [household, setHousehold] = useState({});
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
@@ -40,8 +41,11 @@ const Details = () => {
         setRole(e.target.value);
     };
 
-    const onAddUserToHousehold = ({ username, role }) => {
-        console.log(username, role);
+    const onAddUserToHousehold = async ({ username, role }) => {
+        await addUserToHousehold(username, role, householdId, token);
+        setIsPopupOpen(false);
+        reset();
+        navigate('/household/details/' + householdId);
     };
 
     return (

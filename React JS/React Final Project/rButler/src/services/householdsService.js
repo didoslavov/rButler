@@ -73,3 +73,27 @@ export const getUserHouseholdById = async (id, token) => {
         console.error(error);
     }
 };
+
+export const addUserToHousehold = async (username, role, householdId, token) => {
+    try {
+        const res = await fetch(BASE_URL + '/add-member', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                auth: token,
+            },
+            body: JSON.stringify({ username, role, householdId, token }),
+        });
+
+        if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.message);
+        }
+
+        const data = await res.json();
+
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+};
