@@ -17,7 +17,7 @@ export const selectStyles = {
     border: '1px solid var(--dark-blue)',
     borderRadius: '0',
     '& #role-select': {
-        padding: '5px 25px',
+        padding: '4px 24px',
         fontSize: '12px',
         marginRight: '10px',
         animationName: 'none',
