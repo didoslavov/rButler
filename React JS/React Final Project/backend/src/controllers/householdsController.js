@@ -67,7 +67,7 @@ const createHouseholds = asyncHandler(async (req, res) => {
 
         if (user) {
             user.households.push({ household: household._id, role: 'Master' });
-            household.users.push({ user: user._id, role: user.households.role });
+            household.users.push({ user: user._id, role: 'Master' });
             await household.save();
             await user.save();
         }
@@ -76,6 +76,34 @@ const createHouseholds = asyncHandler(async (req, res) => {
     } else {
         res.status(400).json({ message: 'Invalid household data!' });
     }
+});
+
+const addHouseholdMember = asyncHandler(async (req, res) => {
+    const { username, role, householdId } = req.body;
+
+    if (!username || !role) {
+        return res.status(400).json({ message: 'All fields are required!' });
+    }
+
+    const household = await Household.findById(householdId);
+
+    if (!household) {
+        return res.status(400).json({ message: 'Household not found!' });
+    }
+
+    const user = await User.findOne({ username });
+
+    if (!user) {
+        return res.status(400).json({ message: 'User not found!' });
+    }
+
+    household.users.push({ user: user._id, role });
+    user.households.push({ household: household._id, role });
+
+    const householdWithAddedUser = await household.save();
+    await user.save();
+
+    res.status(200).json(householdWithAddedUser);
 });
 
 const updateHouseholds = asyncHandler(async (req, res) => {
@@ -130,6 +158,7 @@ module.exports = {
     getUserHouseholds,
     getHouseholdById,
     createHouseholds,
+    addHouseholdMember,
     updateHouseholds,
     deleteHouseholds,
 };
