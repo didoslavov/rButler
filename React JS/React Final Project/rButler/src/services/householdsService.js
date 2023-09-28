@@ -66,6 +66,18 @@ export const getUserHouseholdById = async (id, token) => {
             },
         });
 
+        if (!res.ok) {
+            if (res.status == 401) {
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('userInfo');
+                return res.statusText;
+            }
+
+            const error = res.json();
+
+            throw new Error(error);
+        }
+
         const data = await res.json();
 
         return data;
