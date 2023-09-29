@@ -53,12 +53,6 @@ const createHouseholds = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'All fields are required!' });
     }
 
-    const duplicatedHousehold = await Household.findOne({ name }).lean().exec();
-
-    if (duplicatedHousehold) {
-        return res.status(400).json({ message: 'Duplicated household name!' });
-    }
-
     const householdObject = { master, name, presentation };
     const household = await Household.create(householdObject);
 
@@ -107,29 +101,14 @@ const addHouseholdMember = asyncHandler(async (req, res) => {
 });
 
 const updateHouseholds = asyncHandler(async (req, res) => {
-    const { id, master, name, presentation } = req.body;
+    const { name, presentation } = req.body;
+    const { householdId } = req.params;
 
-    if (!id || !name || !presentation) {
+    if (!name || !presentation) {
         return res.status(400).json({ message: 'All fields are required!' });
     }
 
-    const household = await Household.findById(id).exec();
-
-    if (!household) {
-        return res.status(400).json({ message: 'Household not found!' });
-    }
-
-    const duplicatedHousehold = await User.findOne({ name }).lean().exec();
-
-    if (duplicatedHousehold && duplicatedHousehold?._id.toString() !== id) {
-        return res.status(409).json({ message: 'Duplicate household!' });
-    }
-
-    household.master = master;
-    household.name = name;
-    household.presentation = presentation;
-
-    const updatedHousehold = await household.save();
+    const updatedHousehold = await Household.findByIdAndUpdate(householdId, { name, presentation }).lean();
 
     res.json({ message: updatedHousehold.name + ' updated successfully!' });
 });
@@ -152,6 +131,7 @@ module.exports = {
     getUserHouseholds,
     getHouseholdById,
     createHouseholds,
+    updateHouseholds,
     addHouseholdMember,
     updateHouseholds,
     deleteHouseholds,

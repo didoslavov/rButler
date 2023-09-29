@@ -7,7 +7,7 @@ router.route('/:householdId').get(authMiddleware(), householdController.getHouse
 router.route('/user-households/:userId').get(authMiddleware(), householdController.getUserHouseholds);
 router.route('/add-member').post(authMiddleware(), householdController.addHouseholdMember);
 router.route('/create').post(authMiddleware(), householdController.createHouseholds);
-router.route('/update').patch(authMiddleware(), householdController.updateHouseholds);
+router.route('/update/:householdId').patch(authMiddleware(), householdController.updateHouseholds);
 router.route('/delete/:householdId').delete(authMiddleware(), householdController.deleteHouseholds);
 
 module.exports = router;
