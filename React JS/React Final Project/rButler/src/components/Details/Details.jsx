@@ -11,7 +11,7 @@ import {
     selectStyles,
     speedDialActionStyles,
     speedDialStyles,
-} from '../../../public/styles/muiStyles/details.js';
+} from '../../styles/muiStyles/muiStyles.js';
 import CreateListForm from '../CreateListForm/CreateListForm.jsx';
 import AddUserForm from '../AddUserForm/AddUserForm.jsx';
 import EditHousehold from '../EditHousehold/EditHousehold.jsx';

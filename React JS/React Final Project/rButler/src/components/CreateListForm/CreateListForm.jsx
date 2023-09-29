@@ -1,7 +1,7 @@
 import { InputLabel, MenuItem, Select } from '@mui/material';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { menuItemStyles, selectStyles } from '../../../public/styles/muiStyles/details.js';
+import { menuItemStyles, selectStyles } from '../../styles/muiStyles/muiStyles.js';
 
 const CreateListForm = () => {
     const [listType, setListType] = useState('Shopping List');

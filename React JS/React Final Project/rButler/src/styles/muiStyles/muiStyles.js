@@ -86,3 +86,20 @@ export const speedDialStyles = {
         },
     },
 };
+
+export const confirmDialogStyles = {
+    '& .MuiDialog-paper': {
+        padding: '20px 20px',
+        backgroundColor: 'var(--light-grey)',
+        borderRadius: '0',
+        color: 'var(--dark-blue)',
+        border: '1px solid var(--dark-blue)',
+        '& p': { color: 'var(--dark-blue)' },
+        '& .MuiDialogActions-root': { gap: '20px' },
+        '& button': {
+            color: 'var(--light-grey)',
+            backgroundColor: 'var(--dark-blue)',
+            '&:hover': { backgroundColor: 'var(--dark-pink)', color: 'var(--dark-blue)' },
+        },
+    },
+};
