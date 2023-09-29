@@ -1,10 +1,13 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
 
 const EditHousehold = ({ household }) => {
+    const { register, handleSubmit } = useForm();
     return (
         <>
             <div className="edit-household-container">
-                <form className="form-household">
+                <form className="form-household edit-form">
+                    <h5 className="edit-form-header border-bottom">Edit Household</h5>
                     <label>
                         <span>Household name</span>
                     </label>

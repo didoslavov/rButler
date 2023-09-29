@@ -1,4 +1,11 @@
 .buttons-form {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 10px;
+}
+
+.edit-form-header {
+    margin: 0% auto;
+    width: 140px;
 }

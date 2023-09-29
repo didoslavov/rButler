@@ -56,7 +56,8 @@ const Details = () => {
                     may we serve you today?
                 </p>
                 <div className="listings-container">
-                    {listings.length !== 0 ? <CreateListForm /> : null} {isEditOpen && <EditHousehold household={household} />}
+                    {listings.length <= 0 && !isEditOpen ? <CreateListForm /> : null}{' '}
+                    {isEditOpen && <EditHousehold household={household} />}
                 </div>
                 <div className="details-speed-dial">
                     <SpeedDial sx={speedDialStyles} ariaLabel="Household Controls" direction="right" icon={<HomeSharp />}>
