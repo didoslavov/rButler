@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 const Navbar = ({ onLogout, token, user }) => {
     const userId = user?.id;
-    const profileLink = token ? `/profile/${userId}` : '/profile/auth';
 
     return (
         <>
@@ -17,16 +16,10 @@ const Navbar = ({ onLogout, token, user }) => {
                     </form>
                 </div>
                 <ul className="nav-links">
-                    <li className="nav-item">
-                        <Link to="catalog">All Products</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to={profileLink}>Profile</Link>
-                    </li>
-                    {token && (
+                    {token ? (
                         <>
                             <li className="nav-item">
-                                <Link to="create">Create Product</Link>
+                                <Link to={`/profile/${userId}`}>Profile</Link>
                             </li>
                             <li className="nav-item">
                                 <Link to="/households/create">Create Household</Link>
@@ -37,6 +30,10 @@ const Navbar = ({ onLogout, token, user }) => {
                                 </Link>
                             </li>
                         </>
+                    ) : (
+                        <li className="nav-item">
+                            <Link to="/profile/auth">Sign</Link>
+                        </li>
                     )}
                 </ul>
             </nav>
