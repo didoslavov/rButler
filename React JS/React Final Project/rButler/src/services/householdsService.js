@@ -98,8 +98,46 @@ export const addUserToHousehold = async (username, role, householdId, token) => 
         });
 
         if (!res.ok) {
-            const err = await res.json();
-            throw new Error(err.message);
+            if (res.status == 401) {
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('userInfo');
+                return res.statusText;
+            }
+
+            const error = res.json();
+
+            throw new Error(error);
+        }
+
+        const data = await res.json();
+
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const deleteHousehold = async (householdId, token) => {
+    //TODO: Implement Redis DB. You can get deleted household in the request and store it in Redis DB for if user decides to undo deletion
+    try {
+        const res = await fetch(BASE_URL + '/delete/' + householdId, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                auth: token,
+            },
+        });
+
+        if (!res.ok) {
+            if (res.status == 401) {
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('userInfo');
+                return res.statusText;
+            }
+
+            const error = res.json();
+
+            throw new Error(error);
         }
 
         const data = await res.json();

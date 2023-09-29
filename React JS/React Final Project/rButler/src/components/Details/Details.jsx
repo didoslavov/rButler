@@ -41,7 +41,7 @@ const Details = () => {
         setIsPopupOpen(true);
     };
 
-    const handleEdit = () => {
+    const handleShowEditForm = () => {
         setIsEditOpen(!isEditOpen);
     };
 
@@ -57,7 +57,7 @@ const Details = () => {
                 </p>
                 <div className="listings-container">
                     {listings.length <= 0 && !isEditOpen ? <CreateListForm /> : null}{' '}
-                    {isEditOpen && <EditHousehold household={household} />}
+                    {isEditOpen && <EditHousehold household={household} token={token} />}
                 </div>
                 <div className="details-speed-dial">
                     <SpeedDial sx={speedDialStyles} ariaLabel="Household Controls" direction="right" icon={<HomeSharp />}>
@@ -73,7 +73,7 @@ const Details = () => {
                                 tooltipTitle={'Add Household Member'}
                             />,
                             <SpeedDialAction
-                                onClick={handleEdit}
+                                onClick={handleShowEditForm}
                                 sx={speedDialActionStyles}
                                 key={'Edit Household'}
                                 icon={
