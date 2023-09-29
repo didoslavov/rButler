@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { deleteHousehold } from '../../services/householdsService.js';
+import { deleteHousehold, updateHousehold } from '../../services/householdsService.js';
 import { useNavigate } from 'react-router-dom';
 import AlertDialog from '../ConfirmModal/AlertDialog.jsx';
 
@@ -24,20 +24,34 @@ const EditHousehold = ({ household, token }) => {
         navigate('/profile/' + household.master);
     };
 
+    const handleUpdate = async ({ name, presentation }) => {
+        try {
+            if (!name || !presentation) {
+                throw new Error('All fields are required!');
+            }
+
+            await updateHousehold({ name, presentation }, household._id, token);
+
+            navigate('/profile/' + household.master);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <>
             {open && <AlertDialog open={open} handleClose={handleClose} handleDelete={handleDelete} />}
             <div className="edit-household-container">
-                <form className="form-household edit-form">
+                <form className="form-household edit-form" onSubmit={handleSubmit(handleUpdate)}>
                     <h5 className="edit-form-header border-bottom">Edit Household</h5>
                     <label>
                         <span>Household name</span>
                     </label>
-                    <input type="text" className="input" defaultValue={household.name} />
+                    <input type="text" className="input" defaultValue={household.name} {...register('name')} />
                     <label>
                         <span>Presentation</span>
                     </label>
-                    <input type="text" className="input" defaultValue={household.presentation} />
+                    <input type="text" className="input" defaultValue={household.presentation} {...register('presentation')} />
                     <div className="buttons-form">
                         <input type="submit" className="button-action edit-button" value={'Edit Household'} />
                         <button type="button" className="button-action delete-button" onClick={handleClickOpen}>
