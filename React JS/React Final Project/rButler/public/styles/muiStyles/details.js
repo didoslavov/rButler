@@ -1,5 +1,4 @@
 export const menuItemStyles = {
-    border: '1px solid var(--dark-blue)',
     backgroundColor: 'var(--light-grey)',
     color: 'var(--dark-blue)',
     '&:hover': { color: 'var(--light-grey)', backgroundColor: 'var(--dark-blue)' },

@@ -13,7 +13,8 @@ import {
     speedDialStyles,
 } from '../../../public/styles/muiStyles/details.js';
 import CreateListForm from '../CreateListForm/CreateListForm.jsx';
-import AddUserForm from '../PopupForms/AddUserForm.jsx';
+import AddUserForm from '../AddUserForm/AddUserForm.jsx';
+import EditHousehold from '../EditHousehold/EditHousehold.jsx';
 
 const Details = () => {
     const navigate = useNavigate();
@@ -22,6 +23,7 @@ const Details = () => {
     const [household, setHousehold] = useState({});
     const [listings, setListings] = useState([]);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [isEditOpen, setIsEditOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
 
     useEffect(() => {
@@ -38,6 +40,10 @@ const Details = () => {
         setIsPopupOpen(true);
     };
 
+    const handleEdit = () => {
+        setIsEditOpen(!isEditOpen);
+    };
+
     return (
         <div className="details-container">
             <img className="details-image" src="/details-household.jpg" alt="detail-household" />
@@ -48,7 +54,9 @@ const Details = () => {
                     Please allow us to attend to your every need and make your stay as comfortable as a well-tailored suit. How
                     may we serve you today?
                 </p>
-                <div className="listings-container">{listings.length !== 0 ? <CreateListForm /> : null}</div>
+                <div className="listings-container">
+                    {listings.length !== 0 ? <CreateListForm /> : null} {isEditOpen && <EditHousehold />}
+                </div>
                 <div className="details-speed-dial">
                     <SpeedDial sx={speedDialStyles} ariaLabel="Household Controls" direction="right" icon={<HomeSharp />}>
                         <SpeedDialAction
@@ -62,6 +70,7 @@ const Details = () => {
                             tooltipTitle={'Add Household Member'}
                         />
                         <SpeedDialAction
+                            onClick={handleEdit}
                             sx={speedDialActionStyles}
                             key={'Edit Household'}
                             icon={

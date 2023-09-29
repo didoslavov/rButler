@@ -6,6 +6,7 @@
 @import url(./components/Profile/MyHouseholds/MyHouseholds.css);
 @import url(./components/Details/Details.css);
 @import url(./components/CreateListForm/CreateListForm.css);
+@import url(./components/EditHousehold/EditHousehold.css);
 
 :root {
     --dark-pink: #f08a9d;
@@ -55,6 +56,25 @@ a {
 .button-action:hover {
     background-color: var(--dark-pink);
     color: var(--dark-blue);
+}
+
+.delete-button {
+    margin-top: 20px;
+    text-transform: uppercase;
+    font-size: 14px;
+    background-color: var(--dark-pink);
+    color: var(--dark-blue);
+    padding: 6px 14px;
+}
+
+.delete-button:hover {
+    background-color: var(--dark-blue);
+    color: var(--light-grey);
+}
+
+.edit-button {
+    margin-top: 20px;
+    font-size: 14px;
 }
 
 .create-button {
