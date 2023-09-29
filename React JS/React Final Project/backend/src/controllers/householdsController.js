@@ -135,22 +135,16 @@ const updateHouseholds = asyncHandler(async (req, res) => {
 });
 
 const deleteHouseholds = asyncHandler(async (req, res) => {
-    const { id } = req.body;
+    const { householdId } = req.params;
 
-    if (!id) {
+    if (!householdId) {
         res.status(400).json({ message: 'Household ID is required!' });
     }
 
-    const household = await Household.findById(id).exec();
+    const result = await Household.findByIdAndDelete(householdId);
 
-    if (!household) {
-        return res.status(400).json({ message: 'Household not found!' });
-    }
-
-    const result = await household.deleteOne();
-    const reply = `Household ${result.name} with ID: ${result._id} deleted!`;
-
-    res.json(reply);
+    //TODO: Implement Redis DB. You can return deleted household and store it in Redis DB for if user decides to undo deletion
+    res.status(200).json({ message: `Household ${result.name} with ID: ${result._id} deleted!` });
 });
 
 module.exports = {
