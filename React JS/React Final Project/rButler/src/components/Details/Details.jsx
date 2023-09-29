@@ -19,6 +19,7 @@ import EditHousehold from '../EditHousehold/EditHousehold.jsx';
 const Details = () => {
     const navigate = useNavigate();
     const token = localStorage.getItem('authToken');
+    const userId = JSON.parse(localStorage.getItem('userInfo')).id;
     const { householdId } = useParams();
     const [household, setHousehold] = useState({});
     const [listings, setListings] = useState([]);
@@ -55,31 +56,33 @@ const Details = () => {
                     may we serve you today?
                 </p>
                 <div className="listings-container">
-                    {listings.length !== 0 ? <CreateListForm /> : null} {isEditOpen && <EditHousehold />}
+                    {listings.length !== 0 ? <CreateListForm /> : null} {isEditOpen && <EditHousehold household={household} />}
                 </div>
                 <div className="details-speed-dial">
                     <SpeedDial sx={speedDialStyles} ariaLabel="Household Controls" direction="right" icon={<HomeSharp />}>
-                        <SpeedDialAction
-                            sx={speedDialActionStyles}
-                            key={'Add Household Member'}
-                            icon={
-                                <Link className="details-speed-dial-link" onClick={(event) => handlePopupOpen(event)}>
-                                    <AddHomeSharp />
-                                </Link>
-                            }
-                            tooltipTitle={'Add Household Member'}
-                        />
-                        <SpeedDialAction
-                            onClick={handleEdit}
-                            sx={speedDialActionStyles}
-                            key={'Edit Household'}
-                            icon={
-                                <Link className="details-speed-dial-link">
-                                    <ModeEditSharp />
-                                </Link>
-                            }
-                            tooltipTitle={'Edit Household'}
-                        />
+                        {userId === household.master && [
+                            <SpeedDialAction
+                                sx={speedDialActionStyles}
+                                key={'Add Household Member'}
+                                icon={
+                                    <Link className="details-speed-dial-link" onClick={(event) => handlePopupOpen(event)}>
+                                        <AddHomeSharp />
+                                    </Link>
+                                }
+                                tooltipTitle={'Add Household Member'}
+                            />,
+                            <SpeedDialAction
+                                onClick={handleEdit}
+                                sx={speedDialActionStyles}
+                                key={'Edit Household'}
+                                icon={
+                                    <Link className="details-speed-dial-link">
+                                        <ModeEditSharp />
+                                    </Link>
+                                }
+                                tooltipTitle={'Edit Household'}
+                            />,
+                        ]}
                         <SpeedDialAction
                             sx={speedDialActionStyles}
                             key={'Household Extras'}
