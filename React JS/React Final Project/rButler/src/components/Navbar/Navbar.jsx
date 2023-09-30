@@ -19,7 +19,7 @@ const Navbar = ({ onLogout, token, user }) => {
                     {token ? (
                         <>
                             <li className="nav-item">
-                                <Link to={`/profile/${userId}`}>Profile</Link>
+                                <Link to={`/profile/${userId}`}>My Households</Link>
                             </li>
                             <li className="nav-item">
                                 <Link to="/households/create">Create Household</Link>
