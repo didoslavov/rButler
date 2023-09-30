@@ -79,25 +79,12 @@ const addHouseholdMember = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'All fields are required!' });
     }
 
-    const household = await Household.findById(householdId);
+    const userId = await User.findOne({ username }).select('_id');
+    const household = await Household.findByIdAndUpdate(householdId, { $push: { users: { user: userId, role: role } } });
 
-    if (!household) {
-        return res.status(400).json({ message: 'Household not found!' });
-    }
+    console.log(household);
 
-    const user = await User.findOne({ username });
-
-    if (!user) {
-        return res.status(400).json({ message: 'User not found!' });
-    }
-
-    household.users.push({ user: user._id, role });
-    user.households.push({ household: household._id, role });
-
-    const householdWithAddedUser = await household.save();
-    await user.save();
-
-    res.status(200).json(householdWithAddedUser);
+    res.status(200).json(household);
 });
 
 const updateHouseholds = asyncHandler(async (req, res) => {
