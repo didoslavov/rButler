@@ -120,10 +120,18 @@ const deleteHouseholds = asyncHandler(async (req, res) => {
         res.status(400).json({ message: 'Household ID is required!' });
     }
 
-    const result = await Household.findByIdAndDelete(householdId);
+    const deletedHousehold = await Household.findByIdAndDelete(householdId).lean();
+
+    if (!deletedHousehold) {
+        return res.status(400).json({ message: 'Household not found!' });
+    }
+
+    const userIds = deletedHousehold.users.map((user) => user.user);
+
+    await User.updateMany({ _id: { $in: userIds } }, { $pull: { households: { household: householdId } } });
 
     //TODO: Implement Redis DB. You can return deleted household and store it in Redis DB for if user decides to undo deletion
-    res.status(200).json({ message: `Household ${result.name} with ID: ${result._id} deleted!` });
+    res.status(200).json({ message: `Household ${deletedHousehold.name} with ID: ${deletedHousehold._id} deleted!` });
 });
 
 module.exports = {
