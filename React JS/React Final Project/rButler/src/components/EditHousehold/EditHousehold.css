@@ -1,3 +1,7 @@
+.edit-form {
+    padding: 40px 60px;
+}
+
 .buttons-form {
     display: flex;
     flex-direction: column;

@@ -16,6 +16,7 @@ import CreateListForm from '../CreateListForm/CreateListForm.jsx';
 import AddUserForm from '../AddUserForm/AddUserForm.jsx';
 import EditHousehold from '../EditHousehold/EditHousehold.jsx';
 import Spinner from '../LoadingSpinner/Spinner.jsx';
+import Listings from '../Listings/Listings.jsx';
 
 const Details = () => {
     const navigate = useNavigate();
@@ -26,6 +27,8 @@ const Details = () => {
     const [listings, setListings] = useState([]);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [isEditOpen, setIsEditOpen] = useState(false);
+    const [isCreateOpen, setIsCreateOpen] = useState(false);
+    const [isAddMemberOpen, setIsAddMemberOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -46,6 +49,20 @@ const Details = () => {
 
     const handleShowEditForm = () => {
         setIsEditOpen(!isEditOpen);
+        setIsCreateOpen(false);
+        setIsAddMemberOpen(false);
+    };
+
+    const handleShowCreateForm = () => {
+        setIsCreateOpen(!isCreateOpen);
+        setIsEditOpen(false);
+        setIsAddMemberOpen(false);
+    };
+
+    const handleShowAddMemberForm = () => {
+        setIsAddMemberOpen(!isAddMemberOpen);
+        setIsCreateOpen(false);
+        setIsEditOpen(false);
     };
 
     return (
@@ -62,9 +79,14 @@ const Details = () => {
                             harmony. Please allow us to attend to your every need and make your stay as comfortable as a
                             well-tailored suit. How may we serve you today?
                         </p>
+
                         <div className="listings-container">
-                            {listings.length <= 0 && !isEditOpen ? <CreateListForm /> : null}{' '}
-                            {isEditOpen && <EditHousehold household={household} token={token} />}
+                            {!isEditOpen && !isCreateOpen && !isAddMemberOpen ? <Listings /> : null}
+                            {!isEditOpen && !isAddMemberOpen && isCreateOpen ? <CreateListForm /> : null}
+                            {!isEditOpen && !isCreateOpen && isAddMemberOpen ? <AddUserForm /> : null}
+                            {!isCreateOpen && !isAddMemberOpen && isEditOpen ? (
+                                <EditHousehold household={household} token={token} />
+                            ) : null}
                         </div>
                     </>
                 )}
@@ -75,7 +97,7 @@ const Details = () => {
                                 sx={speedDialActionStyles}
                                 key={'Add Household Member'}
                                 icon={
-                                    <Link className="details-speed-dial-link" onClick={(event) => handlePopupOpen(event)}>
+                                    <Link className="details-speed-dial-link" onClick={handleShowAddMemberForm}>
                                         <AddHomeSharp />
                                     </Link>
                                 }
@@ -94,14 +116,15 @@ const Details = () => {
                             />,
                         ]}
                         <SpeedDialAction
+                            onClick={handleShowCreateForm}
                             sx={speedDialActionStyles}
-                            key={'Household Extras'}
+                            key={'Create List'}
                             icon={
                                 <Link className="details-speed-dial-link">
                                     <ExtensionSharp />
                                 </Link>
                             }
-                            tooltipTitle={'Household Extras'}
+                            tooltipTitle={'Create Household'}
                         />
                         <SpeedDialAction
                             sx={speedDialActionStyles}
@@ -115,14 +138,6 @@ const Details = () => {
                         />
                     </SpeedDial>
                 </div>
-                <AddUserForm
-                    anchorEl={anchorEl}
-                    setIsPopupOpen={setIsPopupOpen}
-                    isPopupOpen={isPopupOpen}
-                    setAnchorEl={setAnchorEl}
-                    householdId={householdId}
-                    token={token}
-                />
             </div>
         </div>
     );

@@ -1,0 +1,32 @@
+.add-member-form-container {
+    border: 1px solid var(--dark-blue);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 40px 60px;
+}
+
+.add-member-label {
+    margin-bottom: 6px;
+}
+
+.add-member-input {
+    border: 1px solid var(--dark-blue);
+    padding: 5px;
+    color: var(--dark-blue);
+    text-align: center;
+}
+
+.add-member-input:focus {
+    border: 1px solid var(--dark-pink);
+}
+
+.add-member--input::placeholder {
+    text-align: center;
+}
+
+.add-member-button {
+    margin-left: 10px;
+}

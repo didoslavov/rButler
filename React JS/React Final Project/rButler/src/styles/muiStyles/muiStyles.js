@@ -18,7 +18,6 @@ export const selectStyles = {
     '& #role-select': {
         padding: '4px 24px',
         fontSize: '12px',
-        marginRight: '10px',
         animationName: 'none',
     },
     '& .MuiOutlinedInput-notchedOutline': { border: '0' },

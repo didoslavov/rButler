@@ -1,0 +1,26 @@
+.details-lists-container {
+    border: 1px solid var(--dark-blue);
+    height: 90%;
+    width: auto;
+    overflow: scroll;
+    padding: 20px 0 20px 0;
+}
+
+.details-lists {
+    list-style: none;
+}
+
+.details-lists-item {
+    margin-bottom: 20px;
+}
+
+.details-lists-text {
+    border-bottom: 1px solid var(--dark-pink);
+    padding: 10px;
+}
+
+.details-lists-header {
+    margin: 10px auto;
+    padding: 4px;
+    width: 100px;
+}

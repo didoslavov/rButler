@@ -8,6 +8,8 @@
 @import url(./components/CreateListForm/CreateListForm.css);
 @import url(./components/EditHousehold/EditHousehold.css);
 @import url(./components/LoadingSpinner/Spinner.css);
+@import url(./components/Listings/Listings.css);
+@import url(./components/AddUserForm/AddUserForm.css);
 
 :root {
     --dark-pink: #f08a9d;
