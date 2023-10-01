@@ -109,7 +109,7 @@ const Details = () => {
                                     <ExtensionSharp />
                                 </Link>
                             }
-                            tooltipTitle={'Create Household'}
+                            tooltipTitle={'Create List'}
                         />
                         <SpeedDialAction
                             sx={speedDialActionStyles}
