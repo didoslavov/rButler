@@ -15,6 +15,7 @@ import {
 import CreateListForm from '../CreateListForm/CreateListForm.jsx';
 import AddUserForm from '../AddUserForm/AddUserForm.jsx';
 import EditHousehold from '../EditHousehold/EditHousehold.jsx';
+import Spinner from '../LoadingSpinner/Spinner.jsx';
 
 const Details = () => {
     const navigate = useNavigate();
@@ -26,6 +27,7 @@ const Details = () => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [isEditOpen, setIsEditOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         getUserHouseholdById(householdId, token).then((h) => {
@@ -33,6 +35,7 @@ const Details = () => {
                 navigate('/profile/auth');
             }
             setHousehold(h);
+            setIsLoading(false);
         });
     }, [token, householdId]);
 
@@ -49,16 +52,22 @@ const Details = () => {
         <div className="details-container">
             <img className="details-image" src="/details-household.jpg" alt="detail-household" />
             <div className="details-content">
-                <h4 className="details-header border-bottom">{household.name}</h4>
-                <p className="details-text">
-                    Welcome back to the sanctuary of your residence. Your return graces us with an air of refinement and harmony.
-                    Please allow us to attend to your every need and make your stay as comfortable as a well-tailored suit. How
-                    may we serve you today?
-                </p>
-                <div className="listings-container">
-                    {listings.length <= 0 && !isEditOpen ? <CreateListForm /> : null}{' '}
-                    {isEditOpen && <EditHousehold household={household} token={token} />}
-                </div>
+                {isLoading ? (
+                    <Spinner />
+                ) : (
+                    <>
+                        <h4 className="details-header border-bottom">{household.name}</h4>
+                        <p className="details-text">
+                            Welcome back to the sanctuary of your residence. Your return graces us with an air of refinement and
+                            harmony. Please allow us to attend to your every need and make your stay as comfortable as a
+                            well-tailored suit. How may we serve you today?
+                        </p>
+                        <div className="listings-container">
+                            {listings.length <= 0 && !isEditOpen ? <CreateListForm /> : null}{' '}
+                            {isEditOpen && <EditHousehold household={household} token={token} />}
+                        </div>
+                    </>
+                )}
                 <div className="details-speed-dial">
                     <SpeedDial sx={speedDialStyles} ariaLabel="Household Controls" direction="right" icon={<HomeSharp />}>
                         {userId === household.master && [

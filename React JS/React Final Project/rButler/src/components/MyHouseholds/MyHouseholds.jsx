@@ -7,7 +7,7 @@ import Spinner from '../LoadingSpinner/Spinner.jsx';
 
 const MyHouseholds = ({ user, token }) => {
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [households, setHouseholds] = useState([]);
     const userId = user?.id;
@@ -19,17 +19,17 @@ const MyHouseholds = ({ user, token }) => {
             }
 
             setHouseholds(h);
-            setLoading(false);
+            setIsLoading(false);
         });
     }, [userId, token]);
 
     const itemsPerPage = 3;
-    const totalPages = Math.ceil(households.length / itemsPerPage);
+    const totalPages = Math.ceil(households?.length / itemsPerPage);
 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
 
-    const itemsForDisplay = households.slice(startIndex, endIndex);
+    const itemsForDisplay = households?.slice(startIndex, endIndex);
 
     const paginationHandler = (page) => {
         setCurrentPage(page);
@@ -39,9 +39,9 @@ const MyHouseholds = ({ user, token }) => {
             <img src="/my-households.jpg" alt="my-households" />
             <div className="households">
                 <h3 className="my-households-header border-bottom">My Households</h3>
-                {loading ? (
+                {isLoading ? (
                     <Spinner />
-                ) : households.length ? (
+                ) : households?.length ? (
                     <>
                         <ul className="households-list">
                             {itemsForDisplay.map((household) => (
