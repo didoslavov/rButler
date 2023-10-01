@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { addUserToHousehold, getUserHouseholdById } from '../../services/householdsService.js';
-import { IconButton, InputLabel, MenuItem, Paper, Popover, Select, SpeedDial, SpeedDialAction } from '@mui/material';
-import { AddHomeSharp, Close, ExtensionSharp, HomeSharp, ModeEditSharp, ShareRounded } from '@mui/icons-material';
-import { useForm } from 'react-hook-form';
-import {
-    iconButtonStyles,
-    menuItemStyles,
-    paperStyles,
-    selectStyles,
-    speedDialActionStyles,
-    speedDialStyles,
-} from '../../styles/muiStyles/muiStyles.js';
+import { getUserHouseholdById } from '../../services/householdsService.js';
+import { SpeedDial, SpeedDialAction } from '@mui/material';
+import { AddHomeSharp, ExtensionSharp, HomeSharp, ModeEditSharp, ShareRounded } from '@mui/icons-material';
+import { speedDialActionStyles, speedDialStyles } from '../../styles/muiStyles/muiStyles.js';
 import CreateListForm from '../CreateListForm/CreateListForm.jsx';
 import AddUserForm from '../AddUserForm/AddUserForm.jsx';
 import EditHousehold from '../EditHousehold/EditHousehold.jsx';
@@ -25,11 +17,9 @@ const Details = () => {
     const { householdId } = useParams();
     const [household, setHousehold] = useState({});
     const [listings, setListings] = useState([]);
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [isEditOpen, setIsEditOpen] = useState(false);
     const [isCreateOpen, setIsCreateOpen] = useState(false);
     const [isAddMemberOpen, setIsAddMemberOpen] = useState(false);
-    const [anchorEl, setAnchorEl] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -41,11 +31,6 @@ const Details = () => {
             setIsLoading(false);
         });
     }, [token, householdId]);
-
-    const handlePopupOpen = (event) => {
-        setAnchorEl(event.currentTarget);
-        setIsPopupOpen(true);
-    };
 
     const handleShowEditForm = () => {
         setIsEditOpen(!isEditOpen);

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { addUserToHousehold } from '../../services/householdsService.js';
-import { iconButtonStyles, menuItemStyles, paperStyles, selectStyles } from '../../styles/muiStyles/muiStyles.js';
-import { IconButton, InputLabel, MenuItem, Paper, Popover, Select } from '@mui/material';
-import { Close } from '@mui/icons-material';
+import { menuItemStyles, selectStyles } from '../../styles/muiStyles/muiStyles.js';
+import { MenuItem, Select } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
