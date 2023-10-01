@@ -22,7 +22,7 @@ export const getUserHouseholds = async (userId, token) => {
             throw new Error(error);
         }
 
-        const data = res.json();
+        const data = await res.json();
 
         return data;
     } catch (error) {
@@ -45,10 +45,17 @@ export const createHousehold = async (household) => {
         });
 
         if (!res.ok) {
-            throw new Error('Failed to create household!');
-        }
+            if (res.status == 401) {
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('userInfo');
+                return res.statusText;
+            }
 
-        const data = res.json();
+            const error = res.json();
+
+            throw new Error(error);
+        }
+        const data = await res.json();
 
         return data;
     } catch (error) {
