@@ -56,20 +56,14 @@ const createHouseholds = asyncHandler(async (req, res) => {
     const householdObject = { master, name, presentation };
     const household = await Household.create(householdObject);
 
-    if (household) {
-        const user = await User.findById(master).exec();
+    const user = await User.findOneAndUpdate(
+        { _id: master },
+        { $push: { households: { household: household._id, role: 'Master' } } }
+    );
 
-        if (user) {
-            user.households.push({ household: household._id, role: 'Master' });
-            household.users.push({ user: user._id, role: 'Master' });
-            await household.save();
-            await user.save();
-        }
+    await Household.findByIdAndUpdate({ _id: household._id }, { $push: { users: { user: user._id, role: 'Master' } } });
 
-        res.status(201).json({ message: `New household ${name} created!` });
-    } else {
-        res.status(400).json({ message: 'Invalid household data!' });
-    }
+    res.status(201).json({ message: `New household ${name} created!` });
 });
 
 const addHouseholdMember = asyncHandler(async (req, res) => {
@@ -79,10 +73,18 @@ const addHouseholdMember = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'All fields are required!' });
     }
 
-    const userId = await User.findOne({ username }).select('_id');
-    const household = await Household.findByIdAndUpdate(householdId, { $push: { users: { user: userId, role: role } } });
-
-    console.log(household);
+    const user = await User.findOneAndUpdate(
+        { username: username, 'households.household': { $ne: householdId } },
+        { $push: { households: { household: householdId, role: role } } }
+    ).select('_id');
+    const household = await Household.findOneAndUpdate(
+        {
+            _id: householdId,
+            'users.user': { $ne: user._id },
+        },
+        { $push: { users: { user: user._id, role: role } } },
+        { new: true }
+    );
 
     res.status(200).json(household);
 });
