@@ -1,4 +1,4 @@
-import { Pagination } from '@mui/material';
+import { Chip, Pagination } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getUserHouseholds } from '../../../services/householdsService.js';
@@ -16,6 +16,7 @@ const MyHouseholds = ({ user, token }) => {
             if (h === 'Unauthorized') {
                 navigate('/profile/auth');
             }
+
             setHouseholds(h);
             setLoading(false);
         });
@@ -46,6 +47,17 @@ const MyHouseholds = ({ user, token }) => {
                                     to={'/households/details/' + household._id}
                                     className="my-household-link">
                                     <li className="household">
+                                        <div className="chip-container">
+                                            <Chip
+                                                sx={{
+                                                    backgroundColor: 'var(--light-grey)',
+                                                    color: 'var(--dark-blue)',
+                                                    border: '1px solid var(--dark-blue)',
+                                                    padding: '0',
+                                                }}
+                                                label={userId === household.master ? 'master' : 'resident'}
+                                            />
+                                        </div>
                                         <h4 className="household-header border-bottom">{household.name}</h4>
                                         <p>{household.presentation}</p>
                                     </li>
