@@ -44,11 +44,11 @@ const EditHousehold = ({ household, token }) => {
             <div className="edit-household-container">
                 <form className="form-household edit-form" onSubmit={handleSubmit(handleUpdate)}>
                     <h5 className="edit-form-header border-bottom">Edit Household</h5>
-                    <label>
+                    <label className="edit-household-form-label">
                         <span>Household name</span>
                     </label>
                     <input type="text" className="edit-input" defaultValue={household.name} {...register('name')} />
-                    <label>
+                    <label className="edit-household-form-label">
                         <span>Presentation</span>
                     </label>
                     <input

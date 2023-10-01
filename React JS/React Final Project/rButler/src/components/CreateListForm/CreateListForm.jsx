@@ -14,12 +14,12 @@ const CreateListForm = () => {
     return (
         <form className="create-list-form" onSubmit={handleSubmit}>
             <h5 className="create-form-header border-bottom">Create List</h5>
-            <label htmlFor="listName" className="form-label">
-                List Name
+            <label htmlFor="listName" className="create-list-form-label">
+                <span>List Name</span>
             </label>
             <input className="create-list-input" type="text" placeholder="List name to add?" {...register('name')} />
             <label htmlFor="type" className="form-label">
-                List Type
+                <span>List Type</span>
             </label>
             <Select
                 MenuProps={{ MenuListProps: { disablePadding: true } }}

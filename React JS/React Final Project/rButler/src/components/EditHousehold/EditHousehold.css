@@ -14,6 +14,10 @@
     width: 140px;
 }
 
+.edit-household-form-label {
+    margin-bottom: 6px;
+}
+
 .edit-input {
     border: 1px solid var(--dark-blue);
     color: var(--dark-blue);
