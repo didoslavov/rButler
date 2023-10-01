@@ -1,4 +1,4 @@
-nav {
+.navbar {
     width: 100%;
     background-color: var(--light-grey);
     border-bottom: 1px solid var(--dark-blue);
@@ -41,6 +41,7 @@ nav {
 .nav-links {
     list-style: none;
     display: flex;
+    align-items: center;
 }
 
 .nav-item a {

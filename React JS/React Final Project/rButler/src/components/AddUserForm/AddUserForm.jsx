@@ -24,7 +24,7 @@ const AddUserForm = ({ anchorEl, setAnchorEl, setIsPopupOpen, isPopupOpen, house
         await addUserToHousehold(username, role, householdId, token);
         setIsPopupOpen(false);
         reset();
-        navigate('/household/details/' + householdId);
+        navigate('/households/details/' + householdId);
     };
     return (
         <>

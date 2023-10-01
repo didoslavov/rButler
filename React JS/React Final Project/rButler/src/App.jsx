@@ -13,7 +13,7 @@ function App() {
     const [token, setToken] = useState(localStorage.getItem('authToken'));
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('userInfo')));
 
-    const profileLink = token ? `/profile/:userId` : '/profile/auth';
+    const profileLink = token ? `/households/:userId` : '/profile/auth';
 
     useEffect(() => {
         const localStorageToken = localStorage.getItem('authToken');
@@ -40,7 +40,7 @@ function App() {
                     <Route path={profileLink} element={<Profile setUser={setUser} />} />
                 )}
                 <Route path="/households/create" element={<CreateHouseholdForm />} />
-                <Route path="/household/details/:householdId" element={<Details />} />
+                <Route path="/households/details/:householdId" element={<Details />} />
                 <Route path="*" element={<Default />}></Route>
             </Routes>
         </>

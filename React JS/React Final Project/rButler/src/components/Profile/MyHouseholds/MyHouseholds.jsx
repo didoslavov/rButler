@@ -20,6 +20,7 @@ const MyHouseholds = ({ user, token }) => {
             setLoading(false);
         });
     }, [userId, token]);
+
     const itemsPerPage = 3;
     const totalPages = Math.ceil(households.length / itemsPerPage);
 
@@ -42,7 +43,7 @@ const MyHouseholds = ({ user, token }) => {
                             {itemsForDisplay.map((household) => (
                                 <Link
                                     key={household._id}
-                                    to={'/household/details/' + household._id}
+                                    to={'/households/details/' + household._id}
                                     className="my-household-link">
                                     <li className="household">
                                         <h4 className="household-header border-bottom">{household.name}</h4>

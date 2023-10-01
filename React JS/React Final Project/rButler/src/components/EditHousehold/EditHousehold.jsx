@@ -21,7 +21,7 @@ const EditHousehold = ({ household, token }) => {
         e.preventDefault();
 
         await deleteHousehold(household._id, token);
-        navigate('/profile/' + household.master);
+        navigate('/households/' + household.master);
     };
 
     const handleUpdate = async ({ name, presentation }) => {
@@ -32,7 +32,7 @@ const EditHousehold = ({ household, token }) => {
 
             await updateHousehold({ name, presentation }, household._id, token);
 
-            navigate('/profile/' + household.master);
+            navigate('/households/details' + household._id);
         } catch (error) {
             console.error(error);
         }

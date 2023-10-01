@@ -17,7 +17,7 @@ const CreateHouseholdForm = () => {
 
             await createHousehold({ name, presentation, token, master });
 
-            navigate('/profile/' + master);
+            navigate('/households/' + master);
         } catch (error) {
             console.error(error);
         }

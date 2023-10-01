@@ -1,3 +1,4 @@
+import { Avatar } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -19,7 +20,7 @@ const Navbar = ({ onLogout, token, user }) => {
                     {token ? (
                         <>
                             <li className="nav-item">
-                                <Link to={`/profile/${userId}`}>My Households</Link>
+                                <Link to={`/households/${userId}`}>My Households</Link>
                             </li>
                             <li className="nav-item">
                                 <Link to="/households/create">Create Household</Link>
@@ -27,6 +28,11 @@ const Navbar = ({ onLogout, token, user }) => {
                             <li className="nav-item">
                                 <Link to="/" onClick={onLogout}>
                                     Logout
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to={`/households/${userId}`}>
+                                    <Avatar alt="user avatar" src="/nav-user-avatar.jpg" />
                                 </Link>
                             </li>
                         </>

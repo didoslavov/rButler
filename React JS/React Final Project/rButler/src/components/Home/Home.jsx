@@ -8,7 +8,7 @@ const Home = ({ token, setToken, user }) => {
         navigate('/more-info');
     };
 
-    const handleMyHouseholdsNavigate = () => (token ? navigate('/profile/' + user.id) : navigate('/profile/auth'));
+    const handleMyHouseholdsNavigate = () => (token ? navigate('/households/' + user.id) : navigate('/profile/auth'));
 
     useEffect(() => {
         const localStorageToken = localStorage.getItem('authToken');
