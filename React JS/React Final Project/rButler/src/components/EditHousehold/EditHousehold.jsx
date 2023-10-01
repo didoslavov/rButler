@@ -47,11 +47,16 @@ const EditHousehold = ({ household, token }) => {
                     <label>
                         <span>Household name</span>
                     </label>
-                    <input type="text" className="input" defaultValue={household.name} {...register('name')} />
+                    <input type="text" className="edit-input" defaultValue={household.name} {...register('name')} />
                     <label>
                         <span>Presentation</span>
                     </label>
-                    <input type="text" className="input" defaultValue={household.presentation} {...register('presentation')} />
+                    <input
+                        type="text"
+                        className="edit-input"
+                        defaultValue={household.presentation}
+                        {...register('presentation')}
+                    />
                     <div className="buttons-form">
                         <input type="submit" className="button-action edit-button" value={'Edit Household'} />
                         <button type="button" className="button-action delete-button" onClick={handleClickOpen}>

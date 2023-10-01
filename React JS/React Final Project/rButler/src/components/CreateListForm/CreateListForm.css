@@ -12,6 +12,11 @@
     border: 1px solid var(--dark-blue);
     padding: 5px;
     color: var(--dark-blue);
+    text-align: center;
+}
+
+.create-list-input:focus {
+    border: 1px solid var(--dark-pink);
 }
 
 .create-list-input::placeholder {

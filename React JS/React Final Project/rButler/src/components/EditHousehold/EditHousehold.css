@@ -9,3 +9,14 @@
     margin: 0% auto;
     width: 140px;
 }
+
+.edit-input {
+    border: 1px solid var(--dark-blue);
+    color: var(--dark-blue);
+    padding: 5px;
+    text-align: center;
+}
+
+.edit-input:focus {
+    border: 1px solid var(--dark-pink);
+}
