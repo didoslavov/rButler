@@ -31,9 +31,12 @@ const Navbar = ({ onLogout, token, user }) => {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to={`/households/${userId}`}>
-                                    <Avatar alt="user avatar" src="/nav-user-avatar.jpg" />
-                                </Link>
+                                <div className="avatar-container">
+                                    <Link to={`/households/${userId}`}>
+                                        <Avatar alt="user avatar" src="/nav-user-avatar.jpg" />
+                                    </Link>
+                                    <span className="navbar-username">{user.username}</span>
+                                </div>
                             </li>
                         </>
                     ) : (
