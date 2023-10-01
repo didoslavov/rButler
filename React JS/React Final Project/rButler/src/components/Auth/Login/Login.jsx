@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { login } from '../../../../services/authService.js';
+import { login } from '../../../services/authService.js';
 import { useForm } from 'react-hook-form';
 
 const Login = ({ setToken, setUser }) => {

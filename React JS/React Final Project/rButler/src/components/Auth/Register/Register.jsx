@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { userRegister } from '../../../../services/authService.js';
+import { userRegister } from '../../../services/authService.js';
 
 const Register = ({ setToken, setUser }) => {
     const { register, handleSubmit } = useForm();

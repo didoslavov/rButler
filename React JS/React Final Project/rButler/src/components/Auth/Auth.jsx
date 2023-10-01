@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Login from './Login/Login.jsx';
 import Register from './Register/Register.jsx';
 
@@ -8,6 +8,13 @@ const Auth = ({ setToken, setUser }) => {
     const toggleFormsHandler = () => {
         setShowLogin(!showLogin);
     };
+
+    useEffect(() => {
+        const storedToken = localStorage.getItem('authToken');
+        if (storedToken) {
+            setToken(storedToken);
+        }
+    }, []);
 
     return (
         <div className={`cont ${showLogin ? '' : 's--signup'}`}>

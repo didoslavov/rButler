@@ -1,8 +1,9 @@
 import { Chip, Pagination } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { getUserHouseholds } from '../../../services/householdsService.js';
+import { getUserHouseholds } from '../../services/householdsService.js';
 import MissingHouseholds from './MissingHouseholds.jsx';
+import Spinner from '../LoadingSpinner/Spinner.jsx';
 
 const MyHouseholds = ({ user, token }) => {
     const navigate = useNavigate();
@@ -38,7 +39,9 @@ const MyHouseholds = ({ user, token }) => {
             <img src="/my-households.jpg" alt="my-households" />
             <div className="households">
                 <h3 className="my-households-header border-bottom">My Households</h3>
-                {households.length ? (
+                {loading ? (
+                    <Spinner />
+                ) : households.length ? (
                     <>
                         <ul className="households-list">
                             {itemsForDisplay.map((household) => (

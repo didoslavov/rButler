@@ -1,12 +1,13 @@
 @import url(./components/Navbar/Navbar.css);
 @import url(./components//Home/Home.css);
-@import url(./components/Profile/Auth/Auth.css);
+@import url(./components/Auth/Auth.css);
 @import url(./components/Default/Default.css);
 @import url(./components/CreateHouseholdForm/CreateHouseholdForm.css);
-@import url(./components/Profile/MyHouseholds/MyHouseholds.css);
+@import url(./components/MyHouseholds/MyHouseholds.css);
 @import url(./components/Details/Details.css);
 @import url(./components/CreateListForm/CreateListForm.css);
 @import url(./components/EditHousehold/EditHousehold.css);
+@import url(./components/LoadingSpinner/Spinner.css);
 
 :root {
     --dark-pink: #f08a9d;
