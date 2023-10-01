@@ -1,7 +1,7 @@
 .details-lists-container {
     border: 1px solid var(--dark-blue);
     height: 90%;
-    width: auto;
+    width: 500px;
     overflow: scroll;
     padding: 20px 0 20px 0;
 }
@@ -20,7 +20,8 @@
 }
 
 .details-lists-header {
-    margin: 10px auto;
+    margin: 0px auto 40px auto;
     padding: 4px;
     width: 100px;
+    font-size: large;
 }
