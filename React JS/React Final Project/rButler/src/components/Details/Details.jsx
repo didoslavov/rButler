@@ -68,7 +68,9 @@ const Details = () => {
                         <div className="listings-container">
                             {!isEditOpen && !isCreateOpen && !isAddMemberOpen ? <Listings /> : null}
                             {!isEditOpen && !isAddMemberOpen && isCreateOpen ? <CreateListForm /> : null}
-                            {!isEditOpen && !isCreateOpen && isAddMemberOpen ? <AddUserForm /> : null}
+                            {!isEditOpen && !isCreateOpen && isAddMemberOpen ? (
+                                <AddUserForm token={token} householdId={householdId} />
+                            ) : null}
                             {!isCreateOpen && !isAddMemberOpen && isEditOpen ? (
                                 <EditHousehold household={household} token={token} />
                             ) : null}
