@@ -5,11 +5,13 @@
     margin: 0;
     padding: 0;
 }
+
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
         'Helvetica Neue', sans-serif;
     background: var(--light-grey);
 }
+
 input,
 button {
     border: none;
@@ -18,11 +20,13 @@ button {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
         'Helvetica Neue', sans-serif;
 }
+
 .tip {
     font-size: 20px;
     margin: 40px auto 50px;
     text-align: center;
 }
+
 .cont {
     overflow: hidden;
     position: relative;
@@ -31,6 +35,7 @@ button {
     margin: 100px auto 100px;
     background: var(--light-grey);
 }
+
 .form {
     position: relative;
     border: 1px solid var(--dark-blue);
@@ -39,9 +44,11 @@ button {
     transition: transform 1.2s ease-in-out;
     padding: 50px 30px 0;
 }
+
 .welcome {
     text-transform: uppercase;
 }
+
 .sub-cont {
     overflow: hidden;
     position: absolute;
@@ -53,9 +60,11 @@ button {
     background: var(--light-grey);
     transition: transform 1.2s ease-in-out;
 }
+
 .cont.s--signup .sub-cont {
     transform: translate3d(-640px, 0, 0);
 }
+
 .button {
     display: block;
     margin: 0 auto;
@@ -66,6 +75,7 @@ button {
     font-size: 15px;
     cursor: pointer;
 }
+
 .img {
     overflow: hidden;
     z-index: 2;
@@ -76,6 +86,7 @@ button {
     height: 100%;
     padding-top: 360px;
 }
+
 .img:before {
     content: '';
     position: absolute;
@@ -87,6 +98,7 @@ button {
     background-size: cover;
     transition: transform 1.2s ease-in-out;
 }
+
 .img:after {
     content: '';
     position: absolute;
@@ -96,9 +108,11 @@ button {
     height: 100%;
     background: rgba(0, 0, 0, 0.6);
 }
+
 .cont.s--signup .img:before {
     transform: translate3d(640px, 0, 0);
 }
+
 .img__text {
     z-index: 2;
     position: absolute;
@@ -110,23 +124,29 @@ button {
     color: #fff;
     transition: transform 1.2s ease-in-out;
 }
+
 .img__text h2 {
     margin-bottom: 10px;
     font-weight: normal;
 }
+
 .img__text p {
     font-size: 14px;
     line-height: 1.5;
 }
+
 .cont.s--signup .img__text.m--up {
     transform: translateX(520px);
 }
+
 .img__text.m--in {
     transform: translateX(-520px);
 }
+
 .cont.s--signup .img__text.m--in {
     transform: translateX(0);
 }
+
 .img__btn {
     overflow: hidden;
     z-index: 2;
@@ -140,6 +160,7 @@ button {
     font-size: 15px;
     cursor: pointer;
 }
+
 .img__btn:after {
     content: '';
     z-index: 2;
@@ -163,30 +184,37 @@ button {
     height: 100%;
     transition: transform 1.2s;
 }
+
 .img__btn span.m--in {
     transform: translateY(-72px);
 }
+
 .cont.s--signup .img__btn span.m--in {
     transform: translateY(0);
 }
+
 .cont.s--signup .img__btn span.m--up {
     transform: translateY(72px);
 }
+
 h2 {
     width: 100%;
     font-size: 26px;
     text-align: center;
 }
+
 label {
     display: block;
     width: 260px;
     margin: 25px auto 0;
     text-align: center;
 }
+
 label span {
     font-size: 12px;
     text-transform: uppercase;
 }
+
 .input {
     display: block;
     width: 100%;
@@ -194,70 +222,90 @@ label span {
     padding-bottom: 5px;
     font-size: 16px;
     border-bottom: 1px solid var(--dark-blue);
+    color: var(--dark-blue);
     text-align: center;
     text-align: center;
 }
+
+.input::selection {
+    background-color: var(--light-pink);
+}
+
 .input:focus {
     border-bottom: 1px solid var(--dark-pink);
     color: var(--dark-blue);
     text-align: center;
 }
+
 .forgot-pass {
     margin-top: 15px;
     text-align: center;
     font-size: 12px;
     color: var(--dark-blue);
 }
+
 .submit {
     margin-top: 40px;
     margin-bottom: 20px;
     background: var(--dark-blue);
     text-transform: uppercase;
 }
+
 .submit:hover {
     background: var(--dark-pink);
     color: var(--dark-blue);
 }
+
 .fb-btn {
     border: 2px solid var(--dark-blue);
     color: var(--dark-blue);
 }
+
 .fb-btn:hover {
     border: 2px solid var(--dark-pink);
     color: var(--dark-blue);
 }
+
 .fb-btn span {
     font-weight: bold;
 }
+
 .sign-in {
     transition-timing-function: ease-out;
 }
+
 .cont.s--signup .sign-in {
     transition-timing-function: ease-in-out;
     transition-duration: 1.2s;
     transform: translate3d(640px, 0, 0);
 }
+
 .sign-up {
     padding-top: 20px;
     transform: translate3d(-900px, 0, 0);
 }
+
 .cont.s--signup .sign-up {
     transform: translate3d(0, 0, 0);
 }
+
 .icon-link {
     position: absolute;
     left: 5px;
     bottom: 5px;
     width: 32px;
 }
+
 .icon-link img {
     width: 100%;
     vertical-align: top;
 }
+
 .icon-link--twitter {
     left: auto;
     right: 5px;
 }
+
 .link-footer {
     position: absolute;
     left: 50%;

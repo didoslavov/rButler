@@ -13,7 +13,7 @@ const Navbar = ({ onLogout, token, user }) => {
                         <img src="/nav-logo.jpg" alt="home logo" className="nav-logo" />
                     </Link>
                     <form action="post">
-                        <input type="search" name="search" id="search" placeholder="Search" />
+                        <input type="text" name="search" id="search" placeholder="Search" />
                     </form>
                 </div>
                 <ul className="nav-links">

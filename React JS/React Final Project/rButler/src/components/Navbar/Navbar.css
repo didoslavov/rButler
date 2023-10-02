@@ -35,6 +35,10 @@
     color: var(--dark-blue);
 }
 
+#searc:focus:selection {
+    background-color: var(--light-pink);
+}
+
 #search:focus {
     outline: none;
     border: 1px solid var(--dark-pink);

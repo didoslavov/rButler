@@ -25,6 +25,10 @@
     text-align: center;
 }
 
+.edit-input::selection {
+    background-color: var(--light-pink);
+}
+
 .edit-input:focus {
     border: 1px solid var(--dark-pink);
 }

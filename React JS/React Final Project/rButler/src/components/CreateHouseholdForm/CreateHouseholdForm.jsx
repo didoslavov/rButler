@@ -15,7 +15,11 @@ const CreateHouseholdForm = () => {
                 throw new Error('All fields are required!');
             }
 
-            await createHousehold({ name, presentation, token, master });
+            const res = await createHousehold({ name, presentation, token, master });
+
+            if (res === 'Unauthorized') {
+                navigate('/profile/auth');
+            }
 
             navigate('/households/' + master);
         } catch (error) {

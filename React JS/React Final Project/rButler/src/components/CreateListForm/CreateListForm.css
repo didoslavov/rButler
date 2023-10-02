@@ -15,6 +15,10 @@
     text-align: center;
 }
 
+.create-list-input::selection {
+    background-color: var(--light-pink);
+}
+
 .create-list-input:focus {
     border: 1px solid var(--dark-pink);
 }
