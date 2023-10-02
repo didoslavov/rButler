@@ -103,3 +103,32 @@ export const confirmDialogStyles = {
         },
     },
 };
+
+export const paginationStyles = {
+    pb: 1,
+    pr: 0,
+    '& .MuiPaginationItem-root': {
+        border: '1px solid var(--dark-blue)',
+        color: 'var(--light-grey)',
+        backgroundColor: 'var(--dark-blue)',
+        '&:hover': {
+            backgroundColor: 'var(--dark-pink)',
+            color: 'var(--dark-blue)',
+        },
+    },
+    '&& .Mui-selected': {
+        backgroundColor: 'var(--light-grey)',
+        color: 'var(--dark-blue)',
+        '&:hover': {
+            backgroundColor: 'var(--light-pink)',
+            color: 'var(--dark-blue)',
+        },
+    },
+};
+
+export const chipStyles = {
+    backgroundColor: 'var(--light-grey)',
+    color: 'var(--dark-blue)',
+    border: '1px solid var(--dark-blue)',
+    padding: '0',
+};
