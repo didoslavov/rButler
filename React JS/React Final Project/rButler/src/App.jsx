@@ -14,7 +14,6 @@ function App() {
     const [token, setToken] = useState(localStorage.getItem('authToken'));
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('userInfo')));
 
-    const profileLink = token ? `/households/:userId` : '/profile/auth';
     useEffect(() => {
         const localStorageToken = localStorage.getItem('authToken');
         const localStorageUser = JSON.parse(localStorage.getItem('userInfo'));
@@ -31,7 +30,7 @@ function App() {
 
     return (
         <>
-            <Navbar onLogout={onLogout} token={token} profileLink={profileLink} user={user} />
+            <Navbar onLogout={onLogout} token={token} user={user} />
             <Routes>
                 <Route path="/" element={<Home token={token} setToken={setToken} user={user} />} />
                 <Route path="/profile/auth" element={<Auth setUser={setUser} setToken={setToken} />} />
