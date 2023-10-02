@@ -16,7 +16,6 @@ const AddUserForm = ({ householdId, token }) => {
 
     const onAddUserToHousehold = async ({ username, role }) => {
         await addUserToHousehold(username, role, householdId, token);
-        setIsPopupOpen(false);
         reset();
         navigate('/households/details/' + householdId);
     };
