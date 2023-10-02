@@ -67,7 +67,8 @@ const createHouseholds = asyncHandler(async (req, res) => {
 });
 
 const addHouseholdMember = asyncHandler(async (req, res) => {
-    const { username, role, householdId } = req.body;
+    const { username, role } = req.body;
+    const { householdId } = req.params;
 
     if (!username || !role) {
         return res.status(400).json({ message: 'All fields are required!' });
@@ -76,7 +77,12 @@ const addHouseholdMember = asyncHandler(async (req, res) => {
     const user = await User.findOneAndUpdate(
         { username: username, 'households.household': { $ne: householdId } },
         { $push: { households: { household: householdId, role: role } } }
-    ).select('_id');
+    );
+
+    if (!user) {
+        return res.status(400).json({ message: "User already added to the household or doesn't exist in DB! " });
+    }
+
     const household = await Household.findOneAndUpdate(
         {
             _id: householdId,
