@@ -94,8 +94,9 @@ export const getUserHouseholdById = async (id, token) => {
 };
 
 export const addUserToHousehold = async (username, role, householdId, token) => {
+    console.log('hoseholdService>>> ', householdId);
     try {
-        const res = await fetch(BASE_URL + '/add-member', {
+        const res = await fetch(BASE_URL + '/' + householdId + '/add-member', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

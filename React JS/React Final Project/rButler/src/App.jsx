@@ -35,8 +35,8 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home token={token} setToken={setToken} user={user} />} />
                 <Route path="/profile/auth" element={<Auth setUser={setUser} setToken={setToken} />} />
-                <Route path="/households/create" element={<CreateHouseholdForm />} />
                 <Route path="/households/details/:householdId" element={<Details />} />
+                <Route path="/households/create" element={<CreateHouseholdForm />} />
                 <Route path="/households/:userId" element={<MyHouseholds token={token} user={user} />} />
                 <Route path="*" element={<Default />}></Route>
             </Routes>
