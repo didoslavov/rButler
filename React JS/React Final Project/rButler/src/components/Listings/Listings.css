@@ -1,6 +1,6 @@
 .details-lists-container {
     border: 1px solid var(--dark-blue);
-    height: 90%;
+    height: 500px;
     width: 500px;
     overflow: scroll;
     padding: 20px 0 20px 0;
@@ -24,4 +24,13 @@
     padding: 4px;
     width: 100px;
     font-size: large;
+}
+
+.no-lists {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+    margin-top: 150px;
+    font-size: 32px;
 }
