@@ -23,15 +23,20 @@ const createList = asyncHandler(async (req, res) => {
     if (!title || !household || !createdBy || !type) {
         return res.status(400).json({ message: 'All fields are required!' });
     }
-    console.log(household);
+
+    const duplicate = await List.findOne({ title });
+
+    if (duplicate) {
+        return res.status(409).json({ message: 'Duplicate list title!' });
+    }
 
     const listObject = { title, items, household, createdBy, type };
     const list = await List.create(listObject);
 
-    const h = await Household.findOneAndUpdate({ _id: household }, { $push: { lists: list._id } });
-    console.log(h);
+    await Household.findOneAndUpdate({ _id: household }, { $push: { lists: list._id } });
+    await User.findOneAndUpdate({ _id: createdBy }, { $push: { createdLists: list._id } });
 
-    res.status(201).json({ message: `New list ${title} created!`, list });
+    res.status(201).json(list);
 });
 
 module.exports = {
