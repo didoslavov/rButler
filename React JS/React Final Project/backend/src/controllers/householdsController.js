@@ -27,7 +27,7 @@ const getAllHouseholds = asyncHandler(async (req, res) => {
 const getHouseholdById = asyncHandler(async (req, res) => {
     const { householdId } = req.params;
 
-    const household = await Household.findById(householdId);
+    const household = await Household.findById(householdId).populate('lists');
 
     if (!household) {
         return res.status(400).json({ message: 'No household found!' });

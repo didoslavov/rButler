@@ -15,6 +15,7 @@ const userSchema = new Schema({
             household: {
                 type: ObjectId,
                 ref: 'Household',
+                required: true,
             },
             role: { type: String, default: 'Resident' },
         },

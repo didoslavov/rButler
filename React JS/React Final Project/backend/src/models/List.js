@@ -6,7 +6,7 @@ const {
 
 const listSchema = new Schema({
     title: {
-        String,
+        type: String,
         required: true,
     },
     items: [
