@@ -16,7 +16,6 @@ const Details = () => {
     const userId = JSON.parse(localStorage.getItem('userInfo')).id;
     const { householdId } = useParams();
     const [household, setHousehold] = useState({});
-    const [listings, setListings] = useState([]);
     const [isEditOpen, setIsEditOpen] = useState(false);
     const [isCreateOpen, setIsCreateOpen] = useState(false);
     const [isAddMemberOpen, setIsAddMemberOpen] = useState(false);
@@ -30,7 +29,7 @@ const Details = () => {
             setHousehold(h);
             setIsLoading(false);
         });
-    }, [token, householdId]);
+    }, [token, householdId, household.lists]);
 
     const handleShowEditForm = () => {
         setIsEditOpen(!isEditOpen);
@@ -69,7 +68,14 @@ const Details = () => {
                             {!isEditOpen && !isCreateOpen && !isAddMemberOpen ? (
                                 <Listings handleShowCreateForm={handleShowCreateForm} lists={household.lists} />
                             ) : null}
-                            {!isEditOpen && !isAddMemberOpen && isCreateOpen ? <CreateListForm /> : null}
+                            {!isEditOpen && !isAddMemberOpen && isCreateOpen ? (
+                                <CreateListForm
+                                    userId={userId}
+                                    householdId={householdId}
+                                    token={token}
+                                    setIsCreateOpen={setIsCreateOpen}
+                                />
+                            ) : null}
                             {!isEditOpen && !isCreateOpen && isAddMemberOpen ? (
                                 <AddUserForm token={token} householdId={householdId} />
                             ) : null}

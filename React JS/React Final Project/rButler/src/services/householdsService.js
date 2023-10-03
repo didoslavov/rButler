@@ -51,7 +51,7 @@ export const createHousehold = async (household) => {
                 return res.statusText;
             }
 
-            const error = res.json();
+            const error = await res.json();
 
             throw new Error(error);
         }
