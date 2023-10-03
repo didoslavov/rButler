@@ -19,6 +19,12 @@ const userSchema = new Schema({
             role: { type: String, default: 'Resident' },
         },
     ],
+    createdLists: [
+        {
+            type: ObjectId,
+            ref: 'List',
+        },
+    ],
 });
 
 const User = model('User', userSchema);

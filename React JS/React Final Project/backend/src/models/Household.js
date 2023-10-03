@@ -21,6 +21,12 @@ const householdSchema = new Schema({
             role: { type: String, default: 'Resident' },
         },
     ],
+    lists: [
+        {
+            type: ObjectId,
+            ref: 'List',
+        },
+    ],
 });
 
 const Household = model('Household', householdSchema);
