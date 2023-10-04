@@ -7,7 +7,7 @@ export const menuItemStyles = {
         color: 'var(--light-grey)',
         '&:hover': { backgroundColor: 'var(--dark-blue)', color: 'var(--light-grey)' },
     },
-    padding: '4px',
+    padding: '10px',
 };
 
 export const selectStyles = {
@@ -131,4 +131,15 @@ export const chipStyles = {
     color: 'var(--dark-blue)',
     border: '1px solid var(--dark-blue)',
     padding: '0',
+};
+
+export const snackbarStyles = {
+    width: 'auto',
+    height: 'auto',
+    textAlign: 'center',
+    alignItems: 'center',
+    textTransform: 'uppercase',
+    backgroundColor: 'var(--dark-pink-opacity)',
+    backdropFilter: 'blur(5px)',
+    color: 'var(--dark-blue)',
 };

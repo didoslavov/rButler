@@ -9,10 +9,11 @@
 @import url(./components/EditHousehold/EditHousehold.css);
 @import url(./components/LoadingSpinner/Spinner.css);
 @import url(./components/Listings/Listings.css);
-@import url(./components/AddUserForm/AddUserForm.css);
+@import url(./components/HouseholdUserForm/HouseholdUserForm.css);
 
 :root {
     --dark-pink: #f08a9d;
+    --dark-pink-opacity: #f08a9d55;
     --light-pink: #f5e3e6;
     --light-grey: #ecebe9;
     --dark-blue: #2d475a;
