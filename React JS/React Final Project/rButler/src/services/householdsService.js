@@ -80,7 +80,7 @@ export const getUserHouseholdById = async (id, token) => {
                 return res.statusText;
             }
 
-            const error = res.json();
+            const error = await res.json();
 
             throw new Error(error);
         }
@@ -94,7 +94,10 @@ export const getUserHouseholdById = async (id, token) => {
 };
 
 export const addUserToHousehold = async (username, role, householdId, token) => {
-    console.log('hoseholdService>>> ', householdId);
+    if (!username || !role) {
+        return 'All fields are required!';
+    }
+
     try {
         const res = await fetch(BASE_URL + '/' + householdId + '/add-member', {
             method: 'POST',
@@ -112,7 +115,49 @@ export const addUserToHousehold = async (username, role, householdId, token) => 
                 return res.statusText;
             }
 
+            if (res.status == 409) {
+                const error = await res.json();
+                return error.message;
+            }
+
             const error = res.json();
+
+            throw new Error(error);
+        }
+
+        const data = await res.json();
+
+        return data;
+    } catch (error) {
+        console.error(error);
+        return error.message;
+    }
+};
+
+export const removeUserFromHousehold = async (username, householdId, token) => {
+    try {
+        const res = await fetch(BASE_URL + '/' + householdId + '/remove-member', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                auth: token,
+            },
+            body: JSON.stringify({ username, householdId, token }),
+        });
+
+        if (!res.ok) {
+            if (res.status == 401) {
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('userInfo');
+                return res.statusText;
+            }
+
+            if (res.status == 409) {
+                const error = await res.json();
+                return error.message;
+            }
+
+            const error = await res.json();
 
             throw new Error(error);
         }

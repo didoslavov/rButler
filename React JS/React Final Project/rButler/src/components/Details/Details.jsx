@@ -5,7 +5,7 @@ import { SpeedDial, SpeedDialAction } from '@mui/material';
 import { AddHomeSharp, ChecklistSharp, HomeSharp, ModeEditSharp, ShareRounded } from '@mui/icons-material';
 import { speedDialActionStyles, speedDialStyles } from '../../styles/muiStyles/muiStyles.js';
 import CreateListForm from '../CreateListForm/CreateListForm.jsx';
-import AddUserForm from '../AddUserForm/AddUserForm.jsx';
+import HouseholdUserForm from '../HouseholdUserForm/HouseholdUserForm.jsx';
 import EditHousehold from '../EditHousehold/EditHousehold.jsx';
 import Spinner from '../LoadingSpinner/Spinner.jsx';
 import Listings from '../Listings/Listings.jsx';
@@ -21,6 +21,7 @@ const Details = () => {
     const [isAddMemberOpen, setIsAddMemberOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [lists, setLists] = useState(household.lists || []);
+    const [users, setUsers] = useState(household.users || []);
 
     useEffect(() => {
         getUserHouseholdById(householdId, token).then((h) => {
@@ -29,6 +30,7 @@ const Details = () => {
             }
             setHousehold(h);
             setLists(h.lists);
+            setUsers(h.users);
             setIsLoading(false);
         });
     }, [token, householdId]);
@@ -82,9 +84,12 @@ const Details = () => {
                                 />
                             ) : null}
                             {!isEditOpen && !isCreateOpen && isAddMemberOpen ? (
-                                <AddUserForm
+                                <HouseholdUserForm
                                     token={token}
                                     householdId={householdId}
+                                    setUsers={setUsers}
+                                    setHousehold={setHousehold}
+                                    users={users}
                                     handleShowAddMemberForm={handleShowAddMemberForm}
                                 />
                             ) : null}
