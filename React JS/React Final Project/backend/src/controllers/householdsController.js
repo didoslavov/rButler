@@ -79,11 +79,12 @@ const addHouseholdMember = asyncHandler(async (req, res) => {
 
     const user = await User.findOneAndUpdate(
         { username: username, 'households.household': { $ne: householdId } },
-        { $push: { households: { household: householdId, role: role } } }
+        { $push: { households: { household: householdId, role: role } } },
+        { new: true }
     );
 
     if (!user) {
-        return res.status(400).json({ message: "User already added to the household or doesn't exist in DB! " });
+        return res.status(409).json({ message: `${username} cannot be added!` });
     }
 
     const household = await Household.findOneAndUpdate(
@@ -92,6 +93,35 @@ const addHouseholdMember = asyncHandler(async (req, res) => {
             'users.user': { $ne: user._id },
         },
         { $push: { users: { user: user._id, role: role } } },
+        { new: true }
+    ).populate({ path: 'users.user', select: ['username', '_id', 'role'] });
+
+    res.status(200).json(household);
+});
+
+const removeHouseholdMember = asyncHandler(async (req, res) => {
+    const { username } = req.body;
+    const { householdId } = req.params;
+
+    if (!username) {
+        return res.status(400).json({ message: 'All fields are required!' });
+    }
+
+    const user = await User.findOneAndUpdate(
+        { username: username },
+        { $pull: { households: { household: householdId } } },
+        { new: true }
+    );
+
+    if (!user) {
+        return res.status(409).json({ message: `${username} cannot be removed!` });
+    }
+
+    const household = await Household.findOneAndUpdate(
+        {
+            _id: householdId,
+        },
+        { $pull: { users: { user: user._id } } },
         { new: true }
     );
 
@@ -139,6 +169,7 @@ module.exports = {
     createHouseholds,
     updateHouseholds,
     addHouseholdMember,
+    removeHouseholdMember,
     updateHouseholds,
     deleteHouseholds,
 };
