@@ -29,7 +29,7 @@ const listSchema = new Schema({
     },
     type: {
         type: String,
-        enum: ['Shopping List', 'TODO List'],
+        enum: ['shopping', 'todo'],
         required: true,
     },
     createdAt: {

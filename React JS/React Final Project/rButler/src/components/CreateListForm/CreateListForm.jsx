@@ -57,10 +57,10 @@ const CreateListForm = ({ userId, householdId, token, setIsCreateOpen, handleSho
                 id="type-select"
                 value={listType}
                 label="type">
-                <MenuItem sx={menuItemStyles} value={'Shopping List'}>
+                <MenuItem sx={menuItemStyles} value={'shopping'}>
                     Shopping List
                 </MenuItem>
-                <MenuItem sx={menuItemStyles} value={'TODO List'}>
+                <MenuItem sx={menuItemStyles} value={'todo'}>
                     TODO List
                 </MenuItem>
             </Select>
