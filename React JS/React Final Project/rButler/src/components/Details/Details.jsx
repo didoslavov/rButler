@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { getUserHouseholdById } from '../../services/householdsService.js';
 import { SpeedDial, SpeedDialAction } from '@mui/material';
-import { AddHomeSharp, ExtensionSharp, HomeSharp, ModeEditSharp, ShareRounded } from '@mui/icons-material';
+import { AddHomeSharp, ChecklistSharp, HomeSharp, ModeEditSharp, ShareRounded } from '@mui/icons-material';
 import { speedDialActionStyles, speedDialStyles } from '../../styles/muiStyles/muiStyles.js';
 import CreateListForm from '../CreateListForm/CreateListForm.jsx';
 import AddUserForm from '../AddUserForm/AddUserForm.jsx';
@@ -20,6 +20,7 @@ const Details = () => {
     const [isCreateOpen, setIsCreateOpen] = useState(false);
     const [isAddMemberOpen, setIsAddMemberOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [lists, setLists] = useState(household.lists || []);
 
     useEffect(() => {
         getUserHouseholdById(householdId, token).then((h) => {
@@ -27,9 +28,10 @@ const Details = () => {
                 navigate('/profile/auth');
             }
             setHousehold(h);
+            setLists(h.lists);
             setIsLoading(false);
         });
-    }, [token, householdId, household.lists]);
+    }, [token, householdId]);
 
     const handleShowEditForm = () => {
         setIsEditOpen(!isEditOpen);
@@ -66,21 +68,28 @@ const Details = () => {
 
                         <div className="listings-container">
                             {!isEditOpen && !isCreateOpen && !isAddMemberOpen ? (
-                                <Listings handleShowCreateForm={handleShowCreateForm} lists={household.lists} />
+                                <Listings handleShowCreateForm={handleShowCreateForm} lists={lists} />
                             ) : null}
                             {!isEditOpen && !isAddMemberOpen && isCreateOpen ? (
                                 <CreateListForm
                                     userId={userId}
                                     householdId={householdId}
                                     token={token}
+                                    lists={lists}
+                                    setLists={setLists}
                                     setIsCreateOpen={setIsCreateOpen}
+                                    handleShowCreateForm={handleShowCreateForm}
                                 />
                             ) : null}
                             {!isEditOpen && !isCreateOpen && isAddMemberOpen ? (
-                                <AddUserForm token={token} householdId={householdId} />
+                                <AddUserForm
+                                    token={token}
+                                    householdId={householdId}
+                                    handleShowAddMemberForm={handleShowAddMemberForm}
+                                />
                             ) : null}
                             {!isCreateOpen && !isAddMemberOpen && isEditOpen ? (
-                                <EditHousehold household={household} token={token} />
+                                <EditHousehold household={household} token={token} handleShowEditForm={handleShowEditForm} />
                             ) : null}
                         </div>
                     </>
@@ -116,7 +125,7 @@ const Details = () => {
                             key={'Create List'}
                             icon={
                                 <Link className="details-speed-dial-link">
-                                    <ExtensionSharp />
+                                    <ChecklistSharp />
                                 </Link>
                             }
                             tooltipTitle={'Create List'}
