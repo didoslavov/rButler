@@ -1,4 +1,4 @@
-.add-member-form-container {
+.member-form-container {
     position: relative;
     border: 1px solid var(--dark-blue);
     display: flex;
@@ -7,38 +7,43 @@
     justify-content: center;
     gap: 10px;
     padding: 40px 60px;
+    width: 500px;
 }
 
-.add-member-form-container .MuiIconButton-root {
+.member-form-container .MuiIconButton-root {
     position: absolute;
     top: 10px;
     right: 10px;
     color: var(--dark-blue);
 }
 
-.add-member-label {
+.member-label {
     margin-bottom: 6px;
 }
 
-.add-member-input {
+.member-input {
     border: 1px solid var(--dark-blue);
     padding: 5px;
     color: var(--dark-blue);
     text-align: center;
 }
 
-.add-member-input::selection {
+.member-input::selection {
     background-color: var(--light-pink);
 }
 
-.add-member-input:focus {
+.member-input:focus {
     border: 1px solid var(--dark-pink);
 }
 
-.add-member--input::placeholder {
+.member--input::placeholder {
     text-align: center;
 }
 
-.add-member-button {
+.member-button {
     margin-left: 10px;
+}
+
+.remove-header {
+    margin-top: 80px;
 }
