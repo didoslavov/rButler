@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { addUserToHousehold, removeUserFromHousehold } from '../../services/householdsService.js';
-import { menuItemStyles, selectStyles } from '../../styles/muiStyles/muiStyles.js';
-import { IconButton, MenuItem, Select } from '@mui/material';
+import { chipStyles, menuItemStyles, selectStyles } from '../../styles/muiStyles/muiStyles.js';
+import { Chip, IconButton, MenuItem, Select } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from 'react-hook-form';
 import Notification from '../Notification/Notification.jsx';
@@ -107,7 +107,7 @@ const AddUserForm = ({ setHousehold, householdId, users, setUsers, token, handle
                         {users.map((u) => {
                             return (
                                 <MenuItem key={u.user._id} sx={menuItemStyles} value={u.user.username}>
-                                    {u.user.username} - {u.role}
+                                    {u.user.username} <Chip sx={chipStyles} label={u.role} />
                                 </MenuItem>
                             );
                         })}

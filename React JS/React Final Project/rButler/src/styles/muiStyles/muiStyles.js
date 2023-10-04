@@ -1,4 +1,7 @@
 export const menuItemStyles = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    gap: '10px',
     backgroundColor: 'var(--light-grey)',
     color: 'var(--dark-blue)',
     '&:hover': { color: 'var(--light-grey)', backgroundColor: 'var(--dark-blue)' },
@@ -127,6 +130,8 @@ export const paginationStyles = {
 };
 
 export const chipStyles = {
+    width: 'auto',
+    height: 'auto',
     backgroundColor: 'var(--light-grey)',
     color: 'var(--dark-blue)',
     border: '1px solid var(--dark-blue)',
