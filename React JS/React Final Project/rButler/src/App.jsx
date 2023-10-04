@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import Details from './components/Details/Details.jsx';
 import MyHouseholds from './components/MyHouseholds/MyHouseholds.jsx';
 import Auth from './components/Auth/Auth.jsx';
+import ShoppingList from './components/ShoppingList/ShoppingList.jsx';
 
 function App() {
     const [token, setToken] = useState(localStorage.getItem('authToken'));
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/households/details/:householdId" element={<Details />} />
                 <Route path="/households/create" element={<CreateHouseholdForm />} />
                 <Route path="/households/:userId" element={<MyHouseholds token={token} user={user} />} />
+                <Route path="/lists/:listId" element={<ShoppingList />} />
                 <Route path="*" element={<Default />}></Route>
             </Routes>
         </>
