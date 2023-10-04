@@ -3,8 +3,10 @@ import { useForm } from 'react-hook-form';
 import { deleteHousehold, updateHousehold } from '../../services/householdsService.js';
 import { useNavigate } from 'react-router-dom';
 import AlertDialog from '../ConfirmModal/AlertDialog.jsx';
+import { IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
-const EditHousehold = ({ household, token }) => {
+const EditHousehold = ({ household, token, handleShowEditForm }) => {
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
     const [open, setOpenDialog] = useState(false);
@@ -42,6 +44,9 @@ const EditHousehold = ({ household, token }) => {
         <>
             {open && <AlertDialog open={open} handleClose={handleClose} handleDelete={handleDelete} />}
             <div className="edit-household-container">
+                <IconButton aria-label="close" onClick={handleShowEditForm}>
+                    <CloseIcon />
+                </IconButton>
                 <form className="form-household edit-form" onSubmit={handleSubmit(handleUpdate)}>
                     <h5 className="edit-form-header border-bottom">Edit Household</h5>
                     <label className="edit-household-form-label">

@@ -1,11 +1,12 @@
-import { MenuItem, Select } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import { IconButton, MenuItem, Select } from '@mui/material';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { menuItemStyles, selectStyles } from '../../styles/muiStyles/muiStyles.js';
 import { createList } from '../../services/listsService.js';
 import { useNavigate } from 'react-router-dom';
 
-const CreateListForm = ({ userId, householdId, token, setIsCreateOpen }) => {
+const CreateListForm = ({ userId, householdId, token, setIsCreateOpen, handleShowCreateForm, setLists, lists }) => {
     const [listType, setListType] = useState('Shopping List');
     const navigate = useNavigate();
     const { register, handleSubmit } = useForm();
@@ -26,6 +27,8 @@ const CreateListForm = ({ userId, householdId, token, setIsCreateOpen }) => {
                 navigate('/profile/auth');
             }
 
+            setLists([...lists, res]);
+
             setIsCreateOpen(false);
         } catch (error) {
             console.error(error);
@@ -34,6 +37,9 @@ const CreateListForm = ({ userId, householdId, token, setIsCreateOpen }) => {
 
     return (
         <form className="create-list-form" onSubmit={handleSubmit(onCreateList)}>
+            <IconButton aria-label="close" onClick={handleShowCreateForm}>
+                <CloseIcon />
+            </IconButton>
             <h5 className="create-form-header border-bottom">Create List</h5>
             <label htmlFor="listName" className="create-list-form-label">
                 <span>List Name</span>

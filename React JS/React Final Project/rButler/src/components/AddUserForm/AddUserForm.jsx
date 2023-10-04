@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { addUserToHousehold } from '../../services/householdsService.js';
 import { menuItemStyles, selectStyles } from '../../styles/muiStyles/muiStyles.js';
-import { MenuItem, Select } from '@mui/material';
+import { IconButton, MenuItem, Select } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-const AddUserForm = ({ householdId, token }) => {
+const AddUserForm = ({ householdId, token, handleShowAddMemberForm }) => {
     const navigate = useNavigate();
     const { register, handleSubmit, reset } = useForm();
     const [role, setRole] = useState('Resident');
@@ -21,6 +22,9 @@ const AddUserForm = ({ householdId, token }) => {
     };
     return (
         <div className="add-member-form-container">
+            <IconButton aria-label="close" onClick={handleShowAddMemberForm}>
+                <CloseIcon />
+            </IconButton>
             <h4 className="border-bottom">Add household member</h4>
             <form className="popup-form" onSubmit={handleSubmit(onAddUserToHousehold)}>
                 <label className="add-member-label">
