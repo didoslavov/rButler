@@ -196,7 +196,7 @@ const ShoppingList = () => {
                         </IconButton>
                     </Tooltip>
                 </div>
-                <img src="/list.jpg" alt="list image" className="list-image" />
+                <img src="/shopping-list.jpg" alt="list image" className="list-image" />
             </div>
         </>
     );
