@@ -11,6 +11,7 @@ import MyHouseholds from './components/MyHouseholds/MyHouseholds.jsx';
 import Auth from './components/Auth/Auth.jsx';
 import ShoppingList from './components/ShoppingList/ShoppingList.jsx';
 import TodoList from './components/TodoList/TodoList.jsx';
+import AllHouseholds from './components/AllHouseholds/AllHouseholds.jsx';
 
 function App() {
     const [token, setToken] = useState(localStorage.getItem('authToken'));
@@ -36,6 +37,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home token={token} setToken={setToken} user={user} />} />
                 <Route path="/profile/auth" element={<Auth setUser={setUser} setToken={setToken} />} />
+                <Route path="/households" element={<AllHouseholds token={token} />} />
                 <Route path="/households/details/:householdId" element={<Details />} />
                 <Route path="/households/create" element={<CreateHouseholdForm />} />
                 <Route path="/households/:userId" element={<MyHouseholds token={token} user={user} />} />

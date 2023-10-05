@@ -1,5 +1,28 @@
 const BASE_URL = import.meta.env.VITE_BASE_URL + '/households';
 
+export const getAllHouseholds = async () => {
+    try {
+        const res = await fetch(BASE_URL, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application.json',
+            },
+        });
+
+        if (!res.ok) {
+            const error = res.json();
+
+            throw new Error(error);
+        }
+
+        const data = await res.json();
+
+        return data;
+    } catch (error) {
+        console.error(error.message);
+    }
+};
+
 export const getUserHouseholds = async (userId, token) => {
     try {
         const res = await fetch(BASE_URL + '/user-households/' + userId, {

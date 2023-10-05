@@ -20,6 +20,9 @@ const Navbar = ({ onLogout, token, user }) => {
                     {token ? (
                         <>
                             <li className="nav-item">
+                                <Link to="/households">Households</Link>
+                            </li>
+                            <li className="nav-item">
                                 <Link to={`/households/${userId}`}>My Households</Link>
                             </li>
                             <li className="nav-item">
@@ -38,9 +41,14 @@ const Navbar = ({ onLogout, token, user }) => {
                             </div>
                         </>
                     ) : (
-                        <li className="nav-item">
-                            <Link to="/profile/auth">Sign</Link>
-                        </li>
+                        <>
+                            <li className="nav-item">
+                                <Link to="/households">Households</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="/profile/auth">Sign</Link>
+                            </li>
+                        </>
                     )}
                 </ul>
             </nav>
