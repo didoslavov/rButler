@@ -3,7 +3,7 @@ import { Alert, IconButton, Snackbar } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { snackbarStyles } from '../../styles/muiStyles/muiStyles.js';
 
-const Notification = ({ open, setOpen, message }) => {
+const Notification = ({ open, setOpen, message, severity }) => {
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
@@ -23,12 +23,13 @@ const Notification = ({ open, setOpen, message }) => {
     return (
         <div>
             <Snackbar
+                sx={snackbarStyles}
                 open={open}
                 autoHideDuration={6000}
                 onClose={handleClose}
                 action={action}
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-                <Alert onClose={handleClose} severity="error" sx={snackbarStyles}>
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+                <Alert onClose={handleClose} severity={severity}>
                     {message}
                 </Alert>
             </Snackbar>

@@ -10,7 +10,8 @@ const AddUserForm = ({ setHousehold, householdId, users, setUsers, token, handle
     const { register, handleSubmit, reset } = useForm();
     const [role, setRole] = useState('Resident');
     const [userListName, setUserListName] = useState('');
-    const [error, setError] = useState('');
+    const [notification, setNotification] = useState('');
+    const [severity, setSeverity] = useState('');
     const [notify, setNotify] = useState(false);
     const [open, setOpen] = useState(false);
 
@@ -30,11 +31,15 @@ const AddUserForm = ({ setHousehold, householdId, users, setUsers, token, handle
         const data = await addUserToHousehold(user, role, householdId, token);
 
         if (typeof data === 'string') {
-            setError(data);
+            setSeverity('error');
+            setNotification(data);
             return setNotify(true);
         }
 
         reset();
+        setSeverity('success');
+        setNotification(user + ' added successfully to ' + data?.name);
+        setNotify(true);
         setUsers(data.users);
         setHousehold(data);
     };
@@ -43,10 +48,14 @@ const AddUserForm = ({ setHousehold, householdId, users, setUsers, token, handle
         const data = await removeUserFromHousehold(username, householdId, token);
 
         if (typeof data === 'string') {
-            setError(data);
+            setSeverity('error');
+            setNotification(data);
             return setNotify(true);
         }
 
+        setSeverity('success');
+        setNotification(username + ' removed successfully from ' + data?.name);
+        setNotify(true);
         setUsers(users.filter((u) => u.user.username !== username));
         setUserListName('');
     };
@@ -121,7 +130,7 @@ const AddUserForm = ({ setHousehold, householdId, users, setUsers, token, handle
                     />
                 </form>
             </div>
-            {notify && <Notification open={open} setOpen={setOpen} message={error} />}
+            {notify && <Notification open={open} setOpen={setOpen} message={notification} severity={severity} />}
         </>
     );
 };

@@ -139,12 +139,5 @@ export const chipStyles = {
 };
 
 export const snackbarStyles = {
-    width: 'auto',
-    height: 'auto',
-    textAlign: 'center',
-    alignItems: 'center',
     textTransform: 'uppercase',
-    backgroundColor: 'var(--dark-pink-opacity)',
-    backdropFilter: 'blur(5px)',
-    color: 'var(--dark-blue)',
 };
