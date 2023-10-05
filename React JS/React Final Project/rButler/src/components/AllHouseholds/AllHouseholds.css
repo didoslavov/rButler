@@ -1,0 +1,52 @@
+.my-households-container {
+    display: flex;
+    align-items: stretch;
+    height: 91.7vh;
+}
+
+.households {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    gap: 50px;
+    padding: 20px;
+    list-style: none;
+    overflow: auto;
+    width: 100%;
+}
+
+.households-list {
+    display: flex;
+    list-style: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    width: 70%;
+}
+
+.household {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 600px;
+    gap: 20px;
+    border: 1px solid var(--dark-blue);
+    padding: 30px;
+    position: relative;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color 550ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.household:hover {
+    background-color: var(--dark-blue);
+    color: var(--light-grey);
+}
+
+.chip-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+}

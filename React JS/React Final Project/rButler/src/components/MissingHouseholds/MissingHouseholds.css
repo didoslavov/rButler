@@ -1,0 +1,12 @@
+.missing-household {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+.missing-household p {
+    width: 500px;
+    text-align: center;
+}

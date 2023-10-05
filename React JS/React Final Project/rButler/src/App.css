@@ -4,6 +4,8 @@
 @import url(./components/Default/Default.css);
 @import url(./components/CreateHouseholdForm/CreateHouseholdForm.css);
 @import url(./components/MyHouseholds/MyHouseholds.css);
+@import url(./components/AllHouseholds/AllHouseholds.css);
+@import url(./components/MissingHouseholds/MissingHouseholds.css);
 @import url(./components/Details/Details.css);
 @import url(./components/CreateListForm/CreateListForm.css);
 @import url(./components/EditHousehold/EditHousehold.css);
