@@ -10,18 +10,7 @@ const getAllHouseholds = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'No households found!' });
     }
 
-    const householdWithMasterAdded = await Promise.all(
-        households.map(async (household) => {
-            const user = await User.findById(household.master).lean().exec();
-
-            return {
-                ...household,
-                master: user._id,
-            };
-        })
-    );
-
-    res.status(200).json(householdWithMasterAdded);
+    res.status(200).json(households);
 });
 
 const getHouseholdById = asyncHandler(async (req, res) => {
