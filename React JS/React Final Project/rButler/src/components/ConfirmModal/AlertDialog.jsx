@@ -8,7 +8,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { confirmDialogStyles } from '../../styles/muiStyles/muiStyles.js';
 
-const AlertDialog = ({ open, handleClose, handleDelete }) => {
+const AlertDialog = ({ open, handleClose, handleDelete, message }) => {
     return (
         <Dialog
             sx={confirmDialogStyles}
@@ -16,11 +16,9 @@ const AlertDialog = ({ open, handleClose, handleDelete }) => {
             onClose={handleClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description">
-            <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{message}</DialogTitle>
             <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                    Are you sure you want to delete this household ?
-                </DialogContentText>
+                <DialogContentText id="alert-dialog-description">Are you sure you want to do this ?</DialogContentText>
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose}>Disagree</Button>

@@ -11,7 +11,7 @@ const EditHousehold = ({ household, token, handleShowEditForm }) => {
     const navigate = useNavigate();
     const [open, setOpenDialog] = useState(false);
 
-    const handleClickOpen = () => {
+    const handleClickDelete = () => {
         setOpenDialog(true);
     };
 
@@ -42,7 +42,14 @@ const EditHousehold = ({ household, token, handleShowEditForm }) => {
 
     return (
         <>
-            {open && <AlertDialog open={open} handleClose={handleClose} handleDelete={handleDelete} />}
+            {open && (
+                <AlertDialog
+                    open={open}
+                    handleClose={handleClose}
+                    handleDelete={handleDelete}
+                    message={'You are about to delete a household.'}
+                />
+            )}
             <div className="edit-household-container">
                 <IconButton aria-label="close" onClick={handleShowEditForm}>
                     <CloseIcon />
@@ -64,7 +71,7 @@ const EditHousehold = ({ household, token, handleShowEditForm }) => {
                     />
                     <div className="buttons-form">
                         <input type="submit" className="button-action edit-button" value={'Edit Household'} />
-                        <button type="button" className="button-action delete-button" onClick={handleClickOpen}>
+                        <button type="button" className="button-action delete-button" onClick={handleClickDelete}>
                             Delete
                         </button>
                     </div>
