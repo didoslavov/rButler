@@ -9,6 +9,6 @@ householdsRouter.route('/update/:householdId').patch(authMiddleware(), household
 householdsRouter.route('/delete/:householdId').delete(authMiddleware(), householdController.deleteHouseholds);
 householdsRouter.route('/:householdId/add-member').post(authMiddleware(), householdController.addHouseholdMember);
 householdsRouter.route('/:householdId/remove-member').post(authMiddleware(), householdController.removeHouseholdMember);
-householdsRouter.route('/:householdId').get(authMiddleware(), householdController.getHouseholdById);
+householdsRouter.route('/:householdId').get(householdController.getHouseholdById);
 
 module.exports = householdsRouter;
