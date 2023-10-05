@@ -1,6 +1,6 @@
-import { Chip, Pagination } from '@mui/material';
+import { Pagination } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { getAllHouseholds } from '../../services/householdsService.js';
 import MissingHouseholds from '../MissingHouseholds/MissingHouseholds.jsx';
 import Spinner from '../LoadingSpinner/Spinner.jsx';
@@ -10,13 +10,16 @@ const AllHouseholds = ({ token }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [households, setHouseholds] = useState([]);
+    const [query] = useSearchParams();
+
+    const search = query.get('query') || '';
 
     useEffect(() => {
-        getAllHouseholds().then((h) => {
+        getAllHouseholds(search).then((h) => {
             setHouseholds(h);
             setIsLoading(false);
         });
-    }, []);
+    }, [search]);
 
     const itemsPerPage = 4;
     const totalPages = Math.ceil(households?.length / itemsPerPage);

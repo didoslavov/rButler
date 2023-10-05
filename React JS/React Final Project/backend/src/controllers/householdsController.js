@@ -4,7 +4,15 @@ const User = require('../models/User.js');
 const asyncHandler = require('express-async-handler');
 
 const getAllHouseholds = asyncHandler(async (req, res) => {
-    const households = await Household.find().populate('users').lean();
+    const { search } = req.query;
+    const households = await Household.find({
+        name: {
+            $regex: new RegExp(search),
+            $options: 'i',
+        },
+    })
+        .populate('users')
+        .lean();
 
     if (!households?.length) {
         return res.status(400).json({ message: 'No households found!' });

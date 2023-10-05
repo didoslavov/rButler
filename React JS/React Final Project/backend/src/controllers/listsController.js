@@ -13,8 +13,6 @@ const getAllLists = asyncHandler(async (req, res) => {
             },
         })
         .exec();
-
-    console.log(lists);
 });
 
 const createList = asyncHandler(async (req, res) => {

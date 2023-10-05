@@ -1,0 +1,17 @@
+.search-form {
+    border-radius: 4px;
+    padding: 8px;
+    border: 1px solid var(--dark-blue);
+    text-align: center;
+    color: var(--dark-blue);
+}
+
+#searc:focus:selection {
+    background-color: var(--light-pink);
+}
+
+#search:focus {
+    outline: none;
+    border: 1px solid var(--dark-pink);
+    text-align: center;
+}

@@ -1,6 +1,7 @@
 import { Avatar } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Search from '../Search/Search.jsx';
 
 const Navbar = ({ onLogout, token, user }) => {
     const userId = user?.id;
@@ -12,9 +13,7 @@ const Navbar = ({ onLogout, token, user }) => {
                     <Link to="/" className="logo">
                         <img src="/nav-logo.jpg" alt="home logo" className="nav-logo" />
                     </Link>
-                    <form action="post">
-                        <input type="text" name="search" id="search" placeholder="Search" />
-                    </form>
+                    <Search />
                 </div>
                 <ul className="nav-links">
                     {token ? (
