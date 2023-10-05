@@ -13,7 +13,7 @@ import Listings from '../Listings/Listings.jsx';
 const Details = () => {
     const navigate = useNavigate();
     const token = localStorage.getItem('authToken');
-    const userId = JSON.parse(localStorage.getItem('userInfo')).id;
+    const userId = JSON.parse(localStorage.getItem('userInfo'))?.id;
     const { householdId } = useParams();
     const [household, setHousehold] = useState({});
     const [isEditOpen, setIsEditOpen] = useState(false);
@@ -70,7 +70,7 @@ const Details = () => {
 
                         <div className="listings-container">
                             {!isEditOpen && !isCreateOpen && !isAddMemberOpen ? (
-                                <Listings handleShowCreateForm={handleShowCreateForm} lists={lists} />
+                                <Listings handleShowCreateForm={handleShowCreateForm} lists={lists} token={token} />
                             ) : null}
                             {!isEditOpen && !isAddMemberOpen && isCreateOpen ? (
                                 <CreateListForm
@@ -100,52 +100,54 @@ const Details = () => {
                     </>
                 )}
                 <div className="details-speed-dial">
-                    <SpeedDial sx={speedDialStyles} ariaLabel="Household Controls" direction="right" icon={<HomeSharp />}>
-                        {userId === household.master && [
+                    {token && (
+                        <SpeedDial sx={speedDialStyles} ariaLabel="Household Controls" direction="right" icon={<HomeSharp />}>
+                            {userId === household.master && [
+                                <SpeedDialAction
+                                    sx={speedDialActionStyles}
+                                    key={'Add Household Member'}
+                                    icon={
+                                        <Link className="details-speed-dial-link" onClick={handleShowAddMemberForm}>
+                                            <AddHomeSharp />
+                                        </Link>
+                                    }
+                                    tooltipTitle={'Add Household Member'}
+                                />,
+                                <SpeedDialAction
+                                    onClick={handleShowEditForm}
+                                    sx={speedDialActionStyles}
+                                    key={'Edit Household'}
+                                    icon={
+                                        <Link className="details-speed-dial-link">
+                                            <ModeEditSharp />
+                                        </Link>
+                                    }
+                                    tooltipTitle={'Edit Household'}
+                                />,
+                            ]}
                             <SpeedDialAction
+                                onClick={handleShowCreateForm}
                                 sx={speedDialActionStyles}
-                                key={'Add Household Member'}
-                                icon={
-                                    <Link className="details-speed-dial-link" onClick={handleShowAddMemberForm}>
-                                        <AddHomeSharp />
-                                    </Link>
-                                }
-                                tooltipTitle={'Add Household Member'}
-                            />,
-                            <SpeedDialAction
-                                onClick={handleShowEditForm}
-                                sx={speedDialActionStyles}
-                                key={'Edit Household'}
+                                key={'Create List'}
                                 icon={
                                     <Link className="details-speed-dial-link">
-                                        <ModeEditSharp />
+                                        <ChecklistSharp />
                                     </Link>
                                 }
-                                tooltipTitle={'Edit Household'}
-                            />,
-                        ]}
-                        <SpeedDialAction
-                            onClick={handleShowCreateForm}
-                            sx={speedDialActionStyles}
-                            key={'Create List'}
-                            icon={
-                                <Link className="details-speed-dial-link">
-                                    <ChecklistSharp />
-                                </Link>
-                            }
-                            tooltipTitle={'Create List'}
-                        />
-                        <SpeedDialAction
-                            sx={speedDialActionStyles}
-                            key={'Share Household'}
-                            icon={
-                                <Link className="details-speed-dial-link">
-                                    <ShareRounded />
-                                </Link>
-                            }
-                            tooltipTitle={'Share Household'}
-                        />
-                    </SpeedDial>
+                                tooltipTitle={'Create List'}
+                            />
+                            <SpeedDialAction
+                                sx={speedDialActionStyles}
+                                key={'Share Household'}
+                                icon={
+                                    <Link className="details-speed-dial-link">
+                                        <ShareRounded />
+                                    </Link>
+                                }
+                                tooltipTitle={'Share Household'}
+                            />
+                        </SpeedDial>
+                    )}
                 </div>
             </div>
         </div>
