@@ -93,4 +93,5 @@
     position: relative;
     right: 10px;
     top: 760px;
+    max-height: 50px;
 }

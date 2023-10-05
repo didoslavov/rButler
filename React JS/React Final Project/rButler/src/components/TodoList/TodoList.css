@@ -1,0 +1,12 @@
+.todo-list-container {
+    display: flex;
+    align-items: stretch;
+    height: 91.7vh;
+}
+
+.todo-form-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

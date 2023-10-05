@@ -11,6 +11,7 @@
 @import url(./components/Listings/Listings.css);
 @import url(./components/HouseholdUserForm/HouseholdUserForm.css);
 @import url(./components/ShoppingList/ShoppingList.css);
+@import url(./components/TodoList/TodoList.css);
 
 :root {
     --dark-pink: #f08a9d;
