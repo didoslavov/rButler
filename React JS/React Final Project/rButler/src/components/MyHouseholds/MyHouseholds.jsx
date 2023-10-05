@@ -2,7 +2,7 @@ import { Chip, Pagination } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getUserHouseholds } from '../../services/householdsService.js';
-import MissingHouseholds from './MissingHouseholds.jsx';
+import MissingHouseholds from '../MissingHouseholds/MissingHouseholds.jsx';
 import Spinner from '../LoadingSpinner/Spinner.jsx';
 import { chipStyles, paginationStyles } from '../../styles/muiStyles/muiStyles.js';
 
@@ -70,7 +70,7 @@ const MyHouseholds = ({ user, token }) => {
                         </div>
                     </>
                 ) : (
-                    <MissingHouseholds />
+                    <MissingHouseholds token={token} />
                 )}
             </div>
         </div>
