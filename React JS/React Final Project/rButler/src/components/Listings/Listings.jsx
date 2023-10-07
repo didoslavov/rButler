@@ -8,7 +8,7 @@ const Listings = ({ lists, handleShowCreateForm, token }) => {
                 {lists.length ? (
                     lists.map((list) => (
                         <li key={list._id} className="details-lists-item">
-                            <Link to={list.type === 'shopping' ? '/lists/shopping/' + list._id : '/lists/todo/' + list._id}>
+                            <Link to={`/lists/${list.type}/${list._id}`}>
                                 <span className="details-lists-text">{list.title}</span>
                             </Link>
                         </li>
