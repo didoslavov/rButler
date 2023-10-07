@@ -13,6 +13,15 @@ const getAllLists = asyncHandler(async (req, res) => {
             },
         })
         .exec();
+
+    res.status(200).json(lists);
+});
+
+const getListById = asyncHandler(async (req, res) => {
+    const { listId } = req.params;
+    const list = await List.findById(listId);
+
+    res.status(200).json(list);
 });
 
 const createList = asyncHandler(async (req, res) => {
@@ -37,7 +46,40 @@ const createList = asyncHandler(async (req, res) => {
     res.status(201).json(list);
 });
 
+const addItem = asyncHandler(async (req, res) => {
+    const { listId } = req.params;
+    const { text, qty } = req.body;
+
+    const list = await List.findById(listId);
+
+    if (!list) {
+        return res.status(400).json({ message: 'List not found!' });
+    }
+
+    if (list.type === 'shopping') {
+        if (!text || !qty) {
+            return res.status(400).json({ message: 'All fields are required!' });
+        }
+
+        list.items.push({ text, qty: Number(qty) });
+    } else if (list.type === 'todo') {
+        if (!text) {
+            return res.status(400).json({ message: 'All fields are required!' });
+        }
+
+        list.items.push({ text });
+    } else {
+        return res.status(400).json({ message: 'Invalid list type!' });
+    }
+
+    const updatedList = await list.save();
+
+    res.status(201).json(updatedList);
+});
+
 module.exports = {
     getAllLists,
+    getListById,
+    addItem,
     createList,
 };

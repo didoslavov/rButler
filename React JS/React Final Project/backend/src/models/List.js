@@ -15,6 +15,9 @@ const listSchema = new Schema({
                 type: String,
                 required: true,
             },
+            qty: {
+                type: Number,
+            },
         },
     ],
     household: {
