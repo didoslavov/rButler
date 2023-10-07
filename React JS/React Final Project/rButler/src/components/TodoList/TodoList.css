@@ -10,3 +10,7 @@
     justify-content: center;
     align-items: center;
 }
+
+.todo-item-input {
+    width: 240px;
+}
