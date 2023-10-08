@@ -7,7 +7,7 @@ import { createList } from '../../services/listsService.js';
 import { useNavigate } from 'react-router-dom';
 
 const CreateListForm = ({ userId, householdId, token, setIsCreateOpen, handleShowCreateForm, setLists, lists }) => {
-    const [listType, setListType] = useState('Shopping List');
+    const [listType, setListType] = useState('shopping');
     const navigate = useNavigate();
     const { register, handleSubmit } = useForm();
 
