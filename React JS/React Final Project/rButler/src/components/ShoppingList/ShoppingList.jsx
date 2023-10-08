@@ -4,11 +4,11 @@ import CheckIcon from '@mui/icons-material/Check';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AlertDialog from '../ConfirmModal/AlertDialog.jsx';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { addListItem, getListById } from '../../services/listsService.js';
+import { addListItem, getListById, removeList, removeListItem } from '../../services/listsService.js';
 
-const ShoppingList = () => {
+const ShoppingList = ({ token }) => {
     const { listId } = useParams();
     const navigate = useNavigate();
     const [open, setOpenDialog] = useState(false);
@@ -24,9 +24,19 @@ const ShoppingList = () => {
     };
 
     const onAddItem = async ({ text, qty }) => {
-        const list = await addListItem(listId, { text, qty });
+        const list = await addListItem(listId, { text, qty, token });
         reset();
         setItems(list.items);
+    };
+
+    const handleCheckItem = async (itemId) => {
+        const list = await removeListItem(itemId, listId, token);
+        setItems(list.items);
+    };
+
+    const handleDelete = async () => {
+        await removeList(listId, token);
+        navigate(-1);
     };
 
     const handleGoBack = () => {
@@ -39,7 +49,14 @@ const ShoppingList = () => {
 
     return (
         <>
-            {open && <AlertDialog handleClose={handleClose} open={open} message={'You are about to delete the list.'} />}
+            {open && (
+                <AlertDialog
+                    handleClose={handleClose}
+                    handleDelete={handleDelete}
+                    open={open}
+                    message={'You are about to delete the list.'}
+                />
+            )}
             <div className="shopping-list-container">
                 <div className="list-container">
                     <h2 className="welcome-list">Shopping List</h2>
@@ -67,7 +84,7 @@ const ShoppingList = () => {
                                             flexItem
                                             sx={{ backgroundColor: 'var(--dark-pink)', margin: '6px 0 0 8px' }}
                                         />
-                                        <IconButton aria-label="delete" size="medium">
+                                        <IconButton aria-label="delete" size="medium" onClick={() => handleCheckItem(item._id)}>
                                             <CheckIcon sx={{ color: 'var(--dark-blue)' }} fontSize="inherit" />
                                         </IconButton>
                                     </li>

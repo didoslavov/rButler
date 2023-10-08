@@ -6,9 +6,9 @@ import AlertDialog from '../ConfirmModal/AlertDialog.jsx';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { addListItem, getListById } from '../../services/listsService.js';
+import { addListItem, getListById, removeList, removeListItem } from '../../services/listsService.js';
 
-const TodoList = () => {
+const TodoList = ({ token }) => {
     const { listId } = useParams();
     const navigate = useNavigate();
     const [open, setOpenDialog] = useState(false);
@@ -24,9 +24,19 @@ const TodoList = () => {
     };
 
     const onAddItem = async ({ text }) => {
-        const list = await addListItem(listId, { text });
+        const list = await addListItem(listId, { text, token });
         reset();
         setItems(list.items);
+    };
+
+    const handleCheckItem = async (itemId) => {
+        const list = await removeListItem(itemId, listId, token);
+        setItems(list.items);
+    };
+
+    const handleDelete = async () => {
+        await removeList(listId, token);
+        navigate(-1);
     };
 
     const handleGoBack = () => {
@@ -39,7 +49,14 @@ const TodoList = () => {
 
     return (
         <>
-            {open && <AlertDialog handleClose={handleClose} open={open} message={'You are about to delete the list.'} />}
+            {open && (
+                <AlertDialog
+                    handleClose={handleClose}
+                    handleDelete={handleDelete}
+                    open={open}
+                    message={'You are about to delete the list.'}
+                />
+            )}
             <div className="todo-list-container">
                 <img src="/todo-list.jpg" alt="list image" className="list-image" />
                 <div className="list-container">
@@ -63,7 +80,7 @@ const TodoList = () => {
                                             flexItem
                                             sx={{ backgroundColor: 'var(--dark-pink)', margin: '6px 0 0 8px' }}
                                         />
-                                        <IconButton aria-label="delete" size="medium">
+                                        <IconButton aria-label="delete" size="medium" onClick={() => handleCheckItem(item._id)}>
                                             <CheckIcon sx={{ color: 'var(--dark-blue)' }} fontSize="inherit" />
                                         </IconButton>
                                     </li>
