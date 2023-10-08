@@ -41,8 +41,8 @@ function App() {
                 <Route path="/households/details/:householdId" element={<Details />} />
                 <Route path="/households/create" element={<CreateHouseholdForm />} />
                 <Route path="/households/:userId" element={<MyHouseholds token={token} user={user} />} />
-                <Route path="/lists/shopping/:listId" element={<ShoppingList />} />
-                <Route path="/lists/todo/:listId" element={<TodoList />} />
+                <Route path="/lists/shopping/:listId" element={<ShoppingList token={token} />} />
+                <Route path="/lists/todo/:listId" element={<TodoList token={token} />} />
                 <Route path="*" element={<Default />}></Route>
             </Routes>
         </>
