@@ -62,27 +62,36 @@ const TodoList = ({ token }) => {
                 <div className="list-container">
                     <h2 className="welcome-list">TODO List</h2>
                     <div className="form-container">
-                        <form className="todo-form-list" onSubmit={handleSubmit(onAddItem)}>
-                            <label className="list-form-label">
-                                <span>Todo</span>
-                            </label>
-                            <input type="text" className="input todo-item-input" {...register('text')} />
-                            <input type="submit" className="submit button list-submit" value={'Add todo'} />
-                        </form>
+                        {token && (
+                            <form className="todo-form-list" onSubmit={handleSubmit(onAddItem)}>
+                                <label className="list-form-label">
+                                    <span>Todo</span>
+                                </label>
+                                <input type="text" className="input todo-item-input" {...register('text')} />
+                                <input type="submit" className="submit button list-submit" value={'Add todo'} />
+                            </form>
+                        )}
                         <h4>Items</h4>
                         <ul className="lists">
                             {items.length ? (
                                 items.map((item) => (
                                     <li className="list" key={item._id}>
                                         <span className="list-span-name">{item.text}</span>
-                                        <Divider
-                                            orientation="vertical"
-                                            flexItem
-                                            sx={{ backgroundColor: 'var(--dark-pink)', margin: '6px 0 0 8px' }}
-                                        />
-                                        <IconButton aria-label="delete" size="medium" onClick={() => handleCheckItem(item._id)}>
-                                            <CheckIcon sx={{ color: 'var(--dark-blue)' }} fontSize="inherit" />
-                                        </IconButton>
+                                        {token && (
+                                            <>
+                                                <Divider
+                                                    orientation="vertical"
+                                                    flexItem
+                                                    sx={{ backgroundColor: 'var(--dark-pink)', margin: '6px 0 0 8px' }}
+                                                />
+                                                <IconButton
+                                                    aria-label="delete"
+                                                    size="medium"
+                                                    onClick={() => handleCheckItem(item._id)}>
+                                                    <CheckIcon sx={{ color: 'var(--dark-blue)' }} fontSize="inherit" />
+                                                </IconButton>
+                                            </>
+                                        )}
                                     </li>
                                 ))
                             ) : (
@@ -100,18 +109,22 @@ const TodoList = ({ token }) => {
                             <ArrowBackIcon fontSize="inherit" />
                         </IconButton>
                     </Tooltip>
-                    <Tooltip
-                        title="Delete List"
-                        placement="top"
-                        sx={{ color: 'var(--dark-blue)', backgroundColor: 'var(--light-grey)' }}>
-                        <IconButton
-                            aria-label="delete"
-                            size="large"
-                            sx={{ color: 'var(--dark-pink)' }}
-                            onClick={handleClickDelete}>
-                            <DeleteIcon fontSize="inherit" />
-                        </IconButton>
-                    </Tooltip>
+                    {token && (
+                        <>
+                            <Tooltip
+                                title="Delete List"
+                                placement="top"
+                                sx={{ color: 'var(--dark-blue)', backgroundColor: 'var(--light-grey)' }}>
+                                <IconButton
+                                    aria-label="delete"
+                                    size="large"
+                                    sx={{ color: 'var(--dark-pink)' }}
+                                    onClick={handleClickDelete}>
+                                    <DeleteIcon fontSize="inherit" />
+                                </IconButton>
+                            </Tooltip>
+                        </>
+                    )}
                 </div>
             </div>
         </>

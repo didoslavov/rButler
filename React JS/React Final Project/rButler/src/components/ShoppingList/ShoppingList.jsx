@@ -44,7 +44,9 @@ const ShoppingList = ({ token }) => {
     };
 
     useEffect(() => {
-        getListById(listId).then((list) => setItems(list?.items));
+        getListById(listId).then((list) => {
+            setItems(list?.items);
+        });
     }, []);
 
     return (
@@ -61,17 +63,19 @@ const ShoppingList = ({ token }) => {
                 <div className="list-container">
                     <h2 className="welcome-list">Shopping List</h2>
                     <div className="form-container">
-                        <form className="form-list" onSubmit={handleSubmit(onAddItem)}>
-                            <label className="list-form-label">
-                                <span>Item</span>
-                            </label>
-                            <input type="text" className="input item-input" {...register('text')} />
-                            <label className="list-form-label">
-                                <span>Qty.</span>
-                            </label>
-                            <input type="number" className="input qty-input" {...register('qty')} />
-                            <input type="submit" className="submit button list-submit" value={'Add item'} />
-                        </form>
+                        {token && (
+                            <form className="form-list" onSubmit={handleSubmit(onAddItem)}>
+                                <label className="list-form-label">
+                                    <span>Item</span>
+                                </label>
+                                <input type="text" className="input item-input" {...register('text')} />
+                                <label className="list-form-label">
+                                    <span>Qty.</span>
+                                </label>
+                                <input type="number" className="input qty-input" {...register('qty')} />
+                                <input type="submit" className="submit button list-submit" value={'Add item'} />
+                            </form>
+                        )}
                         <h4>Items</h4>
                         <ul className="lists">
                             {items.length ? (
@@ -79,14 +83,21 @@ const ShoppingList = ({ token }) => {
                                     <li className="list" key={item._id}>
                                         <span className="list-span-name">{item.text}</span>
                                         <span className="list-span-qty">{item.qty}</span>
-                                        <Divider
-                                            orientation="vertical"
-                                            flexItem
-                                            sx={{ backgroundColor: 'var(--dark-pink)', margin: '6px 0 0 8px' }}
-                                        />
-                                        <IconButton aria-label="delete" size="medium" onClick={() => handleCheckItem(item._id)}>
-                                            <CheckIcon sx={{ color: 'var(--dark-blue)' }} fontSize="inherit" />
-                                        </IconButton>
+                                        {token && (
+                                            <>
+                                                <Divider
+                                                    orientation="vertical"
+                                                    flexItem
+                                                    sx={{ backgroundColor: 'var(--dark-pink)', margin: '6px 0 0 8px' }}
+                                                />
+                                                <IconButton
+                                                    aria-label="delete"
+                                                    size="medium"
+                                                    onClick={() => handleCheckItem(item._id)}>
+                                                    <CheckIcon sx={{ color: 'var(--dark-blue)' }} fontSize="inherit" />
+                                                </IconButton>
+                                            </>
+                                        )}
                                     </li>
                                 ))
                             ) : (
@@ -104,18 +115,22 @@ const ShoppingList = ({ token }) => {
                             <ArrowBackIcon fontSize="inherit" />
                         </IconButton>
                     </Tooltip>
-                    <Tooltip
-                        title="Delete List"
-                        placement="top"
-                        sx={{ color: 'var(--dark-blue)', backgroundColor: 'var(--light-grey)' }}>
-                        <IconButton
-                            aria-label="delete"
-                            size="large"
-                            sx={{ color: 'var(--dark-pink)' }}
-                            onClick={handleClickDelete}>
-                            <DeleteIcon fontSize="inherit" />
-                        </IconButton>
-                    </Tooltip>
+                    {token && (
+                        <>
+                            <Tooltip
+                                title="Delete List"
+                                placement="top"
+                                sx={{ color: 'var(--dark-blue)', backgroundColor: 'var(--light-grey)' }}>
+                                <IconButton
+                                    aria-label="delete"
+                                    size="large"
+                                    sx={{ color: 'var(--dark-pink)' }}
+                                    onClick={handleClickDelete}>
+                                    <DeleteIcon fontSize="inherit" />
+                                </IconButton>
+                            </Tooltip>
+                        </>
+                    )}
                 </div>
                 <img src="/shopping-list.jpg" alt="list image" className="list-image" />
             </div>
