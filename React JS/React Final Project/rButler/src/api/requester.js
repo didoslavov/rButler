@@ -22,15 +22,15 @@ async function request(method, url, data) {
     try {
         const response = await fetch(BASE_URL + url, options);
 
-        if (response.status === 403) {
-            clearUserData();
-        }
-
         if (response.status === 204) {
             return { error: 'No content' };
         }
 
         if (!response.ok) {
+            if (response.status === 403) {
+                clearUserData();
+            }
+
             const error = await response.json();
             return error;
         }
