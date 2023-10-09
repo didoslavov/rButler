@@ -12,20 +12,23 @@ const Register = ({ setToken, setUser, setNotification, setSeverity, setOpen, se
             if (!username || !email || !password || !repass) {
                 throw ['All fields are required!'];
             }
+
+            if (password !== repass) {
+                throw ["Passwords don't match!"];
+            }
+
             const res = await userRegister({ username, email, password });
 
             if (res.errors) {
                 throw res.errors;
             }
 
-            localStorage.setItem('userData', JSON.stringify(res.userData));
-
             setToken(res.userData?.token);
             setUser(res.userData);
             navigate('/');
         } catch (error) {
             setSeverity('error');
-            setNotification(error.join('\n'));
+            setNotification(error);
             setOpen(true);
             setNotify(true);
         }
