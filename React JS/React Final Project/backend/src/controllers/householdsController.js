@@ -14,8 +14,8 @@ const getAllHouseholds = asyncHandler(async (req, res) => {
         .populate('users')
         .lean();
 
-    if (!households?.length) {
-        return res.status(400).json({ message: 'No households found!' });
+    if (!households.length) {
+        return res.status(204).json();
     }
 
     res.status(200).json(households);
