@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import Login from './Login/Login.jsx';
 import Register from './Register/Register.jsx';
+import Notification from '../Notification/Notification.jsx';
 
 const Auth = ({ setToken, setUser }) => {
     const [showLogin, setShowLogin] = useState(true);
+    const [notification, setNotification] = useState('');
+    const [severity, setSeverity] = useState('');
+    const [notify, setNotify] = useState(false);
+    const [open, setOpen] = useState(false);
 
     const toggleFormsHandler = () => {
         setShowLogin(!showLogin);
     };
 
     useEffect(() => {
-        const storedToken = localStorage.getItem('authToken');
+        const storedToken = localStorage.getItem('userData')?.token;
         if (storedToken) {
             setToken(storedToken);
         }
@@ -18,7 +23,14 @@ const Auth = ({ setToken, setUser }) => {
 
     return (
         <div className={`cont ${showLogin ? '' : 's--signup'}`}>
-            <Login setToken={setToken} setUser={setUser} />
+            <Login
+                setToken={setToken}
+                setUser={setUser}
+                setNotification={setNotification}
+                setSeverity={setSeverity}
+                setNotify={setNotify}
+                setOpen={setOpen}
+            />
 
             <div className="sub-cont">
                 <div className="img">
@@ -39,8 +51,16 @@ const Auth = ({ setToken, setUser }) => {
                     </div>
                 </div>
 
-                <Register setToken={setToken} setUser={setUser} />
+                <Register
+                    setToken={setToken}
+                    setUser={setUser}
+                    setNotification={setNotification}
+                    setSeverity={setSeverity}
+                    setNotify={setNotify}
+                    setOpen={setOpen}
+                />
             </div>
+            {notify && <Notification open={open} setOpen={setOpen} message={notification} severity={severity} />}
         </div>
     );
 };

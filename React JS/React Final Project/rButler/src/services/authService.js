@@ -12,14 +12,15 @@ export const login = async (credentials) => {
         });
 
         if (!response.ok) {
-            throw new Error('Login failed!');
+            const error = await response.json();
+            return error;
         }
 
         const data = await response.json();
 
         return data;
     } catch (error) {
-        throw new Error('Login failed!');
+        console.error(error);
     }
 };
 
@@ -35,22 +36,24 @@ export const userRegister = async (credentials) => {
         });
 
         if (!response.ok) {
-            throw new Error('Register failed!');
+            const error = await response.json();
+
+            return error;
         }
 
         const data = await response.json();
 
         return data;
     } catch (error) {
-        throw new Error('Register failed!');
+        console.error(error);
     }
 };
 
 export const logout = async () => {
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem('userData')?.token;
 
     if (token) {
-        localStorage.removeItem('authToken');
+        localStorage.removeItem('userData');
     }
 
     await fetch(BASE_URL + '/users/logout', {

@@ -3,25 +3,31 @@ import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../../services/authService.js';
 import { useForm } from 'react-hook-form';
 
-const Login = ({ setToken, setUser }) => {
+const Login = ({ setToken, setUser, setNotification, setSeverity, setOpen, setNotify }) => {
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
 
     const onLogin = async ({ username, password }) => {
         try {
             if (!username || !password) {
-                throw new Error('All fields are required!');
+                throw ['All fields are required!'];
             }
             const res = await login({ username, password });
 
-            localStorage.setItem('authToken', res.userInfo.token);
-            localStorage.setItem('userInfo', JSON.stringify(res.userInfo));
+            if (res.errors) {
+                throw res.errors;
+            }
 
-            setToken(res.userInfo.token);
-            setUser(res.userInfo);
+            localStorage.setItem('userData', JSON.stringify(res.userData));
+
+            setToken(res.userData?.token);
+            setUser(res.userData);
             navigate('/');
         } catch (error) {
-            console.error(error);
+            setSeverity('error');
+            setNotification(error.join('\n'));
+            setOpen(true);
+            setNotify(true);
         }
     };
 
