@@ -30,7 +30,9 @@ const Notification = ({ open, setOpen, message, severity }) => {
                 action={action}
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
                 <Alert onClose={handleClose} severity={severity}>
-                    {message}
+                    {message.map((m, i) => (
+                        <p key={i}>{m}</p>
+                    ))}
                 </Alert>
             </Snackbar>
         </div>
