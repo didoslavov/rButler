@@ -1,24 +1,14 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Home = ({ token, setToken, user }) => {
+const Home = ({ user }) => {
     const navigate = useNavigate();
 
     const handleInfoNavigate = () => {
         navigate('/more-info');
     };
 
-    const handleMyHouseholdsNavigate = () => (token ? navigate('/households/' + user.id) : navigate('/profile/auth'));
-
-    useEffect(() => {
-        const localStorageToken = localStorage.getItem('userData')?.token;
-
-        if (localStorageToken) {
-            setToken(localStorageToken);
-        } else {
-            setToken('');
-        }
-    }, [token]);
+    const handleMyHouseholdsNavigate = () => (user ? navigate('/households/' + user.id) : navigate('/profile/auth'));
 
     return (
         <div className="landing-container">
@@ -37,7 +27,7 @@ const Home = ({ token, setToken, user }) => {
                     <button className="button-action" onClick={handleInfoNavigate}>
                         Learn More
                     </button>
-                    {token && (
+                    {user && (
                         <button className="button-action" onClick={handleMyHouseholdsNavigate}>
                             My households
                         </button>
