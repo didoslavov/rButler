@@ -6,7 +6,7 @@ import MissingHouseholds from '../MissingHouseholds/MissingHouseholds.jsx';
 import Spinner from '../LoadingSpinner/Spinner.jsx';
 import { paginationStyles } from '../../styles/muiStyles/muiStyles.js';
 
-const AllHouseholds = ({ token }) => {
+const AllHouseholds = ({ user }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [households, setHouseholds] = useState([]);
@@ -15,8 +15,12 @@ const AllHouseholds = ({ token }) => {
     const search = query.get('query') || '';
 
     useEffect(() => {
-        getAllHouseholds(search).then((h) => {
-            setHouseholds(h);
+        getAllHouseholds(search).then((res) => {
+            if (res.error) {
+                return setHouseholds([{ _id: 1, name: 'Sorry', presentation: 'No households found!' }]);
+            }
+
+            setHouseholds(res);
             setIsLoading(false);
         });
     }, [search]);
@@ -32,10 +36,11 @@ const AllHouseholds = ({ token }) => {
     const paginationHandler = (page) => {
         setCurrentPage(page);
     };
+
     return (
         <div className="my-households-container">
             <div className="households">
-                <h3 className="my-households-header border-bottom">All Households</h3>
+                <h3 className="my-households-header border-bottom">{!search ? 'All Households' : 'Search households'}</h3>
                 {isLoading ? (
                     <Spinner />
                 ) : households?.length ? (
@@ -63,7 +68,7 @@ const AllHouseholds = ({ token }) => {
                         </div>
                     </>
                 ) : (
-                    <MissingHouseholds token={token} />
+                    <MissingHouseholds user={user} />
                 )}
             </div>
         </div>
