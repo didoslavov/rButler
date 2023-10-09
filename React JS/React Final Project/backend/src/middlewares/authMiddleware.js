@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
     } catch (err) {
         // res.clearCookie(token);
 
-        return res.status(401).json({ message: 'Invalid token!' });
+        return res.status(403).json({ message: 'Invalid token!' });
     }
     next();
 };
