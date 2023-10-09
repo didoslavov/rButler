@@ -1,63 +1,30 @@
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+import { post } from '../api/requester.js';
+import { clearUserData, setUserData } from '../utils/userData.js';
 
-export const login = async (credentials) => {
-    try {
-        const response = await fetch(BASE_URL + '/users/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(credentials),
-            credentials: 'include',
-        });
+export async function login(credentials) {
+    const userData = await post('/users/login', credentials);
 
-        if (!response.ok) {
-            const error = await response.json();
-            return error;
-        }
-
-        const data = await response.json();
-
-        return data;
-    } catch (error) {
-        console.error(error);
+    if (userData.success) {
+        setUserData(userData.userData);
     }
-};
+
+    return userData;
+}
 
 export const userRegister = async (credentials) => {
-    try {
-        const response = await fetch(BASE_URL + '/users/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(credentials),
-            credentials: 'include',
-        });
+    const userData = await post('/users/register', credentials);
 
-        if (!response.ok) {
-            const error = await response.json();
-
-            return error;
-        }
-
-        const data = await response.json();
-
-        return data;
-    } catch (error) {
-        console.error(error);
+    if (userData.success) {
+        setUserData(userData.userData);
     }
+
+    return userData;
 };
 
 export const logout = async () => {
-    const token = localStorage.getItem('userData')?.token;
+    const data = await post('/users/logout');
 
-    if (token) {
-        localStorage.removeItem('userData');
+    if (data.success) {
+        clearUserData();
     }
-
-    await fetch(BASE_URL + '/users/logout', {
-        method: 'POST',
-        credentials: 'include',
-    });
 };
