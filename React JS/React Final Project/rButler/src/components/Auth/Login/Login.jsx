@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../../services/authService.js';
 import { useForm } from 'react-hook-form';
 
-const Login = ({ setToken, setUser, setNotification, setSeverity, setOpen, setNotify }) => {
+const Login = ({ setUser, setNotification, setSeverity, setOpen, setNotify }) => {
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
 
@@ -18,7 +18,6 @@ const Login = ({ setToken, setUser, setNotification, setSeverity, setOpen, setNo
                 throw res.errors;
             }
 
-            setToken(res.userData?.token);
             setUser(res.userData);
             navigate('/');
         } catch (error) {

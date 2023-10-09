@@ -6,20 +6,21 @@ import MissingHouseholds from '../MissingHouseholds/MissingHouseholds.jsx';
 import Spinner from '../LoadingSpinner/Spinner.jsx';
 import { chipStyles, paginationStyles } from '../../styles/muiStyles/muiStyles.js';
 
-const MyHouseholds = ({ user, token }) => {
+const MyHouseholds = ({ user }) => {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [households, setHouseholds] = useState([]);
     const userId = user?.id;
+    const token = user?.token;
 
     useEffect(() => {
-        getUserHouseholds(userId, token).then((h) => {
-            if (h === 'Unauthorized') {
+        getUserHouseholds(userId, token).then((res) => {
+            if (res.error) {
                 navigate('/profile/auth');
             }
 
-            setHouseholds(h);
+            setHouseholds(res);
             setIsLoading(false);
         });
     }, [userId, token]);
@@ -70,7 +71,7 @@ const MyHouseholds = ({ user, token }) => {
                         </div>
                     </>
                 ) : (
-                    <MissingHouseholds token={token} />
+                    <MissingHouseholds user={user} />
                 )}
             </div>
         </div>

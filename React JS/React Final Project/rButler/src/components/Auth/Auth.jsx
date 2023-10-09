@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Login from './Login/Login.jsx';
 import Register from './Register/Register.jsx';
 import Notification from '../Notification/Notification.jsx';
 
-const Auth = ({ setToken, setUser }) => {
+const Auth = ({ setUser }) => {
     const [showLogin, setShowLogin] = useState(true);
     const [notification, setNotification] = useState('');
     const [severity, setSeverity] = useState('');
@@ -14,17 +14,9 @@ const Auth = ({ setToken, setUser }) => {
         setShowLogin(!showLogin);
     };
 
-    useEffect(() => {
-        const storedToken = localStorage.getItem('userData')?.token;
-        if (storedToken) {
-            setToken(storedToken);
-        }
-    }, []);
-
     return (
         <div className={`cont ${showLogin ? '' : 's--signup'}`}>
             <Login
-                setToken={setToken}
                 setUser={setUser}
                 setNotification={setNotification}
                 setSeverity={setSeverity}
@@ -52,7 +44,6 @@ const Auth = ({ setToken, setUser }) => {
                 </div>
 
                 <Register
-                    setToken={setToken}
                     setUser={setUser}
                     setNotification={setNotification}
                     setSeverity={setSeverity}

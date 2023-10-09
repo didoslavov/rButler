@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const Listings = ({ lists, handleShowCreateForm, token }) => {
+const Listings = ({ lists, handleShowCreateForm, user }) => {
     return (
         <div className="details-lists-container">
             <h5 className="details-lists-header border-bottom">Lists</h5>
@@ -16,7 +16,7 @@ const Listings = ({ lists, handleShowCreateForm, token }) => {
                 ) : (
                     <div className="no-lists">
                         No new lists
-                        {token ? (
+                        {user ? (
                             <button className="button-action" onClick={handleShowCreateForm}>
                                 Create List
                             </button>

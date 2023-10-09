@@ -6,7 +6,7 @@ import AlertDialog from '../ConfirmModal/AlertDialog.jsx';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
-const EditHousehold = ({ household, token, handleShowEditForm }) => {
+const EditHousehold = ({ household, handleShowEditForm }) => {
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
     const [open, setOpenDialog] = useState(false);
@@ -22,7 +22,7 @@ const EditHousehold = ({ household, token, handleShowEditForm }) => {
     const handleDelete = async (e) => {
         e.preventDefault();
 
-        await deleteHousehold(household._id, token);
+        await deleteHousehold(household._id);
         navigate('/households/' + household.master);
     };
 
@@ -32,7 +32,7 @@ const EditHousehold = ({ household, token, handleShowEditForm }) => {
                 throw new Error('All fields are required!');
             }
 
-            await updateHousehold({ name, presentation }, household._id, token);
+            await updateHousehold({ name, presentation }, household._id);
 
             navigate('/households/details' + household._id);
         } catch (error) {
