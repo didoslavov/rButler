@@ -1,181 +1,27 @@
-import { get } from '../api/requester.js';
-import { clearUserData } from '../utils/userData.js';
-
-const BASE_URL = import.meta.env.VITE_BASE_URL + '/households';
+import { get, post } from '../api/requester.js';
 
 export const getAllHouseholds = async (query = '') => {
-    const data = await get(`/households?search=${query}`);
-
-    return data;
+    return await get(`/households?search=${query}`);
 };
 
-export const getUserHouseholds = async (userId, token) => {
-    try {
-        const res = await fetch(BASE_URL + '/user-households/' + userId, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application.json',
-                auth: token,
-            },
-        });
-
-        if (!res.ok) {
-            if (res.status == 403) {
-                clearUserData();
-                throw 'Unauthorized';
-            }
-
-            const error = res.json();
-
-            throw new Error(error);
-        }
-
-        const data = await res.json();
-
-        return data;
-    } catch (error) {
-        console.error(error.message);
-    }
+export const getUserHouseholds = async (userId) => {
+    return await get('/households/user-households/' + userId);
 };
 
 export const createHousehold = async (household) => {
-    const token = household.token;
-    delete household.token;
-
-    try {
-        const res = await fetch(BASE_URL + '/create', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Auth: token,
-            },
-            body: JSON.stringify(household),
-        });
-
-        if (!res.ok) {
-            if (res.status == 401) {
-                localStorage.removeItem('authToken');
-                localStorage.removeItem('userData');
-                return res.statusText;
-            }
-
-            const error = await res.json();
-
-            throw new Error(error);
-        }
-        const data = await res.json();
-
-        return data;
-    } catch (error) {
-        console.error(error);
-    }
+    return await post('/households/create', household);
 };
 
-export const getUserHouseholdById = async (id, token) => {
-    try {
-        const res = await fetch(BASE_URL + '/' + id, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                auth: token,
-            },
-        });
-
-        if (!res.ok) {
-            if (res.status == 401) {
-                localStorage.removeItem('authToken');
-                localStorage.removeItem('userData');
-                return res.statusText;
-            }
-
-            const error = await res.json();
-
-            throw new Error(error);
-        }
-
-        const data = await res.json();
-
-        return data;
-    } catch (error) {
-        console.error(error);
-    }
+export const getUserHouseholdById = async (id) => {
+    return await get('/households/' + id);
 };
 
-export const addUserToHousehold = async (username, role, householdId, token) => {
-    if (!username || !role) {
-        return 'All fields are required!';
-    }
-
-    try {
-        const res = await fetch(BASE_URL + '/' + householdId + '/add-member', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                auth: token,
-            },
-            body: JSON.stringify({ username, role, householdId, token }),
-        });
-
-        if (!res.ok) {
-            if (res.status == 401) {
-                localStorage.removeItem('authToken');
-                localStorage.removeItem('userData');
-                return res.statusText;
-            }
-
-            if (res.status == 409) {
-                const error = await res.json();
-                return error.message;
-            }
-
-            const error = res.json();
-
-            throw new Error(error);
-        }
-
-        const data = await res.json();
-
-        return data;
-    } catch (error) {
-        console.error(error);
-        return error.message;
-    }
+export const addUserToHousehold = async (user, householdId) => {
+    return await post('/households/' + householdId + '/add-member', user);
 };
 
-export const removeUserFromHousehold = async (username, householdId, token) => {
-    try {
-        const res = await fetch(BASE_URL + '/' + householdId + '/remove-member', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                auth: token,
-            },
-            body: JSON.stringify({ username, householdId, token }),
-        });
-
-        if (!res.ok) {
-            if (res.status == 401) {
-                localStorage.removeItem('authToken');
-                localStorage.removeItem('userData');
-                return res.statusText;
-            }
-
-            if (res.status == 409) {
-                const error = await res.json();
-                return error.message;
-            }
-
-            const error = await res.json();
-
-            throw new Error(error);
-        }
-
-        const data = await res.json();
-
-        return data;
-    } catch (error) {
-        console.error(error);
-    }
+export const removeUserFromHousehold = async (user, householdId) => {
+    return await post('/households/' + householdId + '/remove-member', user);
 };
 
 export const deleteHousehold = async (householdId, token) => {
