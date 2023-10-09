@@ -18,14 +18,12 @@ const Login = ({ setToken, setUser, setNotification, setSeverity, setOpen, setNo
                 throw res.errors;
             }
 
-            localStorage.setItem('userData', JSON.stringify(res.userData));
-
             setToken(res.userData?.token);
             setUser(res.userData);
             navigate('/');
         } catch (error) {
             setSeverity('error');
-            setNotification(error.join('\n'));
+            setNotification(error);
             setOpen(true);
             setNotify(true);
         }
