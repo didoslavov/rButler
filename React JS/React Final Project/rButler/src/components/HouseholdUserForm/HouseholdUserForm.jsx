@@ -6,7 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from 'react-hook-form';
 import Notification from '../Notification/Notification.jsx';
 
-const AddUserForm = ({ setHousehold, householdId, users, setUsers, token, handleShowAddMemberForm }) => {
+const AddUserForm = ({ setHousehold, householdId, users, setUsers, handleShowAddMemberForm }) => {
     const { register, handleSubmit, reset } = useForm();
     const [role, setRole] = useState('Resident');
     const [userListName, setUserListName] = useState('');
@@ -27,34 +27,38 @@ const AddUserForm = ({ setHousehold, householdId, users, setUsers, token, handle
         setUserListName(e.target.value);
     };
 
-    const onAddUser = async ({ user, role }) => {
-        const data = await addUserToHousehold(user, role, householdId, token);
+    const onAddUser = async ({ user: username, role }) => {
+        try {
+            if (!username || !role) {
+                throw ['All fields are required!'];
+            }
 
-        if (typeof data === 'string') {
+            const res = await addUserToHousehold({ username, role }, householdId);
+
+            reset();
+            setSeverity('success');
+            setNotification(username + ' added successfully to ' + res?.username);
+            setNotify(true);
+            setUsers(res.users);
+            setHousehold(res);
+        } catch (error) {
             setSeverity('error');
-            setNotification(data);
+            setNotification(error);
             return setNotify(true);
         }
-
-        reset();
-        setSeverity('success');
-        setNotification(user + ' added successfully to ' + data?.name);
-        setNotify(true);
-        setUsers(data.users);
-        setHousehold(data);
     };
 
     const onRemoveUser = async ({ username }) => {
-        const data = await removeUserFromHousehold(username, householdId, token);
+        const res = await removeUserFromHousehold({ username }, householdId);
 
-        if (typeof data === 'string') {
+        if (res.error) {
             setSeverity('error');
-            setNotification(data);
+            setNotification(res.error);
             return setNotify(true);
         }
 
         setSeverity('success');
-        setNotification(username + ' removed successfully from ' + data?.name);
+        setNotification(username + ' removed successfully from ' + res?.name);
         setNotify(true);
         setUsers(users.filter((u) => u.user.username !== username));
         setUserListName('');

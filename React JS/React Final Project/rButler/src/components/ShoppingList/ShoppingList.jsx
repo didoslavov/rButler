@@ -7,13 +7,18 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { addListItem, getListById, removeList, removeListItem } from '../../services/listsService.js';
+import Notification from '../Notification/Notification.jsx';
 
-const ShoppingList = ({ token }) => {
+const ShoppingList = ({ user }) => {
     const { listId } = useParams();
     const navigate = useNavigate();
     const [open, setOpenDialog] = useState(false);
     const [items, setItems] = useState([]);
     const { register, handleSubmit, reset } = useForm();
+    const [notification, setNotification] = useState('');
+    const [severity, setSeverity] = useState('');
+    const [notify, setNotify] = useState(false);
+    const [openNotify, setOpenNotify] = useState(false);
 
     const handleClickDelete = () => {
         setOpenDialog(true);
@@ -24,18 +29,29 @@ const ShoppingList = ({ token }) => {
     };
 
     const onAddItem = async ({ text, qty }) => {
-        const list = await addListItem(listId, { text, qty, token });
-        reset();
-        setItems(list.items);
+        try {
+            if (!text || !qty) {
+                throw ['All fields are required!'];
+            }
+
+            const list = await addListItem(listId, { text, qty });
+            reset();
+            setItems(list.items);
+        } catch (error) {
+            setSeverity('error');
+            setNotification(error);
+            setOpenNotify(true);
+            setNotify(true);
+        }
     };
 
     const handleCheckItem = async (itemId) => {
-        const list = await removeListItem(itemId, listId, token);
+        const list = await removeListItem(itemId, listId);
         setItems(list.items);
     };
 
     const handleDelete = async () => {
-        await removeList(listId, token);
+        await removeList(listId);
         navigate(-1);
     };
 
@@ -47,7 +63,7 @@ const ShoppingList = ({ token }) => {
         getListById(listId).then((list) => {
             setItems(list?.items);
         });
-    }, []);
+    }, [listId]);
 
     return (
         <>
@@ -63,7 +79,7 @@ const ShoppingList = ({ token }) => {
                 <div className="list-container">
                     <h2 className="welcome-list">Shopping List</h2>
                     <div className="form-container">
-                        {token && (
+                        {user && (
                             <form className="form-list" onSubmit={handleSubmit(onAddItem)}>
                                 <label className="list-form-label">
                                     <span>Item</span>
@@ -83,7 +99,7 @@ const ShoppingList = ({ token }) => {
                                     <li className="list" key={item._id}>
                                         <span className="list-span-name">{item.text}</span>
                                         <span className="list-span-qty">{item.qty}</span>
-                                        {token && (
+                                        {user && (
                                             <>
                                                 <Divider
                                                     orientation="vertical"
@@ -115,7 +131,7 @@ const ShoppingList = ({ token }) => {
                             <ArrowBackIcon fontSize="inherit" />
                         </IconButton>
                     </Tooltip>
-                    {token && (
+                    {user && (
                         <>
                             <Tooltip
                                 title="Delete List"
@@ -134,6 +150,7 @@ const ShoppingList = ({ token }) => {
                 </div>
                 <img src="/shopping-list.jpg" alt="list image" className="list-image" />
             </div>
+            {notify && <Notification open={openNotify} setOpen={setOpenNotify} message={notification} severity={severity} />}
         </>
     );
 };

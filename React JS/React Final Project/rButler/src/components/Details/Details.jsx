@@ -10,10 +10,8 @@ import EditHousehold from '../EditHousehold/EditHousehold.jsx';
 import Spinner from '../LoadingSpinner/Spinner.jsx';
 import Listings from '../Listings/Listings.jsx';
 
-const Details = () => {
+const Details = ({ user }) => {
     const navigate = useNavigate();
-    const token = localStorage.getItem('userData')?.token;
-    const userId = JSON.parse(localStorage.getItem('userData'))?.id;
     const { householdId } = useParams();
     const [household, setHousehold] = useState({});
     const [isEditOpen, setIsEditOpen] = useState(false);
@@ -24,16 +22,17 @@ const Details = () => {
     const [users, setUsers] = useState(household.users || []);
 
     useEffect(() => {
-        getUserHouseholdById(householdId, token).then((h) => {
-            if (h === 'Unauthorized') {
+        getUserHouseholdById(householdId).then((res) => {
+            if (res.error) {
                 navigate('/profile/auth');
             }
-            setHousehold(h);
-            setLists(h.lists);
-            setUsers(h.users);
+
+            setHousehold(res);
+            setLists(res.lists);
+            setUsers(res.users);
             setIsLoading(false);
         });
-    }, [token, householdId]);
+    }, [householdId]);
 
     const handleShowEditForm = () => {
         setIsEditOpen(!isEditOpen);
@@ -70,13 +69,12 @@ const Details = () => {
 
                         <div className="listings-container">
                             {!isEditOpen && !isCreateOpen && !isAddMemberOpen ? (
-                                <Listings handleShowCreateForm={handleShowCreateForm} lists={lists} token={token} />
+                                <Listings handleShowCreateForm={handleShowCreateForm} lists={lists} user={user} />
                             ) : null}
                             {!isEditOpen && !isAddMemberOpen && isCreateOpen ? (
                                 <CreateListForm
-                                    userId={userId}
+                                    user={user}
                                     householdId={householdId}
-                                    token={token}
                                     lists={lists}
                                     setLists={setLists}
                                     setIsCreateOpen={setIsCreateOpen}
@@ -85,7 +83,6 @@ const Details = () => {
                             ) : null}
                             {!isEditOpen && !isCreateOpen && isAddMemberOpen ? (
                                 <HouseholdUserForm
-                                    token={token}
                                     householdId={householdId}
                                     setUsers={setUsers}
                                     setHousehold={setHousehold}
@@ -94,15 +91,15 @@ const Details = () => {
                                 />
                             ) : null}
                             {!isCreateOpen && !isAddMemberOpen && isEditOpen ? (
-                                <EditHousehold household={household} token={token} handleShowEditForm={handleShowEditForm} />
+                                <EditHousehold household={household} handleShowEditForm={handleShowEditForm} />
                             ) : null}
                         </div>
                     </>
                 )}
                 <div className="details-speed-dial">
-                    {token && (
+                    {user && (
                         <SpeedDial sx={speedDialStyles} ariaLabel="Household Controls" direction="right" icon={<HomeSharp />}>
-                            {userId === household.master && [
+                            {user.id === household.master && [
                                 <SpeedDialAction
                                     sx={speedDialActionStyles}
                                     key={'Add Household Member'}

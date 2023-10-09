@@ -4,16 +4,21 @@ import CheckIcon from '@mui/icons-material/Check';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AlertDialog from '../ConfirmModal/AlertDialog.jsx';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { addListItem, getListById, removeList, removeListItem } from '../../services/listsService.js';
+import Notification from '../Notification/Notification.jsx';
 
-const TodoList = ({ token }) => {
+const TodoList = ({ user }) => {
     const { listId } = useParams();
     const navigate = useNavigate();
     const [open, setOpenDialog] = useState(false);
     const [items, setItems] = useState([]);
     const { register, handleSubmit, reset } = useForm();
+    const [notification, setNotification] = useState('');
+    const [severity, setSeverity] = useState('');
+    const [notify, setNotify] = useState(false);
+    const [openNotify, setOpenNotify] = useState(false);
 
     const handleClickDelete = () => {
         setOpenDialog(true);
@@ -24,18 +29,29 @@ const TodoList = ({ token }) => {
     };
 
     const onAddItem = async ({ text }) => {
-        const list = await addListItem(listId, { text, token });
-        reset();
-        setItems(list.items);
+        try {
+            if (!text) {
+                throw ['All fields are required!'];
+            }
+
+            const list = await addListItem(listId, { text });
+            reset();
+            setItems(list.items);
+        } catch (error) {
+            setSeverity('error');
+            setNotification(error);
+            setOpenNotify(true);
+            setNotify(true);
+        }
     };
 
     const handleCheckItem = async (itemId) => {
-        const list = await removeListItem(itemId, listId, token);
+        const list = await removeListItem(itemId, listId);
         setItems(list.items);
     };
 
     const handleDelete = async () => {
-        await removeList(listId, token);
+        await removeList(listId);
         navigate(-1);
     };
 
@@ -62,7 +78,7 @@ const TodoList = ({ token }) => {
                 <div className="list-container">
                     <h2 className="welcome-list">TODO List</h2>
                     <div className="form-container">
-                        {token && (
+                        {user && (
                             <form className="todo-form-list" onSubmit={handleSubmit(onAddItem)}>
                                 <label className="list-form-label">
                                     <span>Todo</span>
@@ -77,7 +93,7 @@ const TodoList = ({ token }) => {
                                 items.map((item) => (
                                     <li className="list" key={item._id}>
                                         <span className="list-span-name">{item.text}</span>
-                                        {token && (
+                                        {user && (
                                             <>
                                                 <Divider
                                                     orientation="vertical"
@@ -109,7 +125,7 @@ const TodoList = ({ token }) => {
                             <ArrowBackIcon fontSize="inherit" />
                         </IconButton>
                     </Tooltip>
-                    {token && (
+                    {user && (
                         <>
                             <Tooltip
                                 title="Delete List"
@@ -127,6 +143,7 @@ const TodoList = ({ token }) => {
                     )}
                 </div>
             </div>
+            {notify && <Notification open={openNotify} setOpen={setOpenNotify} message={notification} severity={severity} />}
         </>
     );
 };
