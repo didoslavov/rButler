@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Search from '../Search/Search.jsx';
 
-const Navbar = ({ onLogout, token, user }) => {
+const Navbar = ({ onLogout, user }) => {
     const userId = user?.id;
 
     return (
@@ -16,7 +16,7 @@ const Navbar = ({ onLogout, token, user }) => {
                     <Search />
                 </div>
                 <ul className="nav-links">
-                    {token ? (
+                    {user ? (
                         <>
                             <li className="nav-item">
                                 <Link to="/households">Households</Link>

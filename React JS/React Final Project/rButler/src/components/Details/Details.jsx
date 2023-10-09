@@ -12,8 +12,8 @@ import Listings from '../Listings/Listings.jsx';
 
 const Details = () => {
     const navigate = useNavigate();
-    const token = localStorage.getItem('authToken');
-    const userId = JSON.parse(localStorage.getItem('userInfo'))?.id;
+    const token = localStorage.getItem('userData')?.token;
+    const userId = JSON.parse(localStorage.getItem('userData'))?.id;
     const { householdId } = useParams();
     const [household, setHousehold] = useState({});
     const [isEditOpen, setIsEditOpen] = useState(false);

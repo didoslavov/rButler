@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 const CreateHouseholdForm = () => {
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
-    const token = localStorage.getItem('authToken');
-    const master = JSON.parse(localStorage.getItem('userInfo')).id;
+    const token = localStorage.getItem('userData').token;
+    const master = JSON.parse(localStorage.getItem('userData')).id;
 
     const onCreateHousehold = async ({ name, presentation }) => {
         try {

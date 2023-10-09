@@ -36,7 +36,7 @@ export const getUserHouseholds = async (userId, token) => {
         if (!res.ok) {
             if (res.status == 401) {
                 localStorage.removeItem('authToken');
-                localStorage.removeItem('userInfo');
+                localStorage.removeItem('userData');
                 return res.statusText;
             }
 
@@ -70,7 +70,7 @@ export const createHousehold = async (household) => {
         if (!res.ok) {
             if (res.status == 401) {
                 localStorage.removeItem('authToken');
-                localStorage.removeItem('userInfo');
+                localStorage.removeItem('userData');
                 return res.statusText;
             }
 
@@ -99,7 +99,7 @@ export const getUserHouseholdById = async (id, token) => {
         if (!res.ok) {
             if (res.status == 401) {
                 localStorage.removeItem('authToken');
-                localStorage.removeItem('userInfo');
+                localStorage.removeItem('userData');
                 return res.statusText;
             }
 
@@ -134,7 +134,7 @@ export const addUserToHousehold = async (username, role, householdId, token) => 
         if (!res.ok) {
             if (res.status == 401) {
                 localStorage.removeItem('authToken');
-                localStorage.removeItem('userInfo');
+                localStorage.removeItem('userData');
                 return res.statusText;
             }
 
@@ -171,7 +171,7 @@ export const removeUserFromHousehold = async (username, householdId, token) => {
         if (!res.ok) {
             if (res.status == 401) {
                 localStorage.removeItem('authToken');
-                localStorage.removeItem('userInfo');
+                localStorage.removeItem('userData');
                 return res.statusText;
             }
 
@@ -207,7 +207,7 @@ export const deleteHousehold = async (householdId, token) => {
         if (!res.ok) {
             if (res.status == 401) {
                 localStorage.removeItem('authToken');
-                localStorage.removeItem('userInfo');
+                localStorage.removeItem('userData');
                 return res.statusText;
             }
 
@@ -238,7 +238,7 @@ export const updateHousehold = async (household, householdId, token) => {
         if (!res.ok) {
             if (res.status == 401) {
                 localStorage.removeItem('authToken');
-                localStorage.removeItem('userInfo');
+                localStorage.removeItem('userData');
                 return res.statusText;
             }
 

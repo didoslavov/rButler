@@ -14,12 +14,12 @@ import TodoList from './components/TodoList/TodoList.jsx';
 import AllHouseholds from './components/AllHouseholds/AllHouseholds.jsx';
 
 function App() {
-    const [token, setToken] = useState(localStorage.getItem('authToken'));
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('userInfo')));
+    const [token, setToken] = useState(localStorage.getItem('userData')?.token);
+    const [user, setUser] = useState(localStorage.getItem('userData'));
 
     useEffect(() => {
-        const localStorageToken = localStorage.getItem('authToken');
-        const localStorageUser = JSON.parse(localStorage.getItem('userInfo'));
+        const localStorageToken = localStorage.getItem('userData')?.token;
+        const localStorageUser = localStorage.getItem('userData');
 
         setToken(localStorageToken);
         setUser(localStorageUser);

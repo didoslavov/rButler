@@ -11,7 +11,7 @@ const Home = ({ token, setToken, user }) => {
     const handleMyHouseholdsNavigate = () => (token ? navigate('/households/' + user.id) : navigate('/profile/auth'));
 
     useEffect(() => {
-        const localStorageToken = localStorage.getItem('authToken');
+        const localStorageToken = localStorage.getItem('userData')?.token;
 
         if (localStorageToken) {
             setToken(localStorageToken);

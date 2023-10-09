@@ -34,7 +34,7 @@ export const createList = async (list) => {
         if (!res.ok) {
             if (res.status == 401) {
                 localStorage.removeItem('authToken');
-                localStorage.removeItem('userInfo');
+                localStorage.removeItem('userData');
                 return res.statusText;
             }
 
@@ -63,7 +63,7 @@ export const removeList = async (id, token) => {
         if (!res.ok) {
             if (res.status == 401) {
                 localStorage.removeItem('authToken');
-                localStorage.removeItem('userInfo');
+                localStorage.removeItem('userData');
                 return res.statusText;
             }
 
@@ -96,7 +96,7 @@ export const addListItem = async (id, listItem) => {
         if (!res.ok) {
             if (res.status == 401) {
                 localStorage.removeItem('authToken');
-                localStorage.removeItem('userInfo');
+                localStorage.removeItem('userData');
                 return res.statusText;
             }
 
@@ -125,7 +125,7 @@ export const removeListItem = async (itemId, listId, token) => {
         if (!res.ok) {
             if (res.status == 401) {
                 localStorage.removeItem('authToken');
-                localStorage.removeItem('userInfo');
+                localStorage.removeItem('userData');
                 return res.statusText;
             }
 
