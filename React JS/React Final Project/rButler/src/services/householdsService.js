@@ -1,26 +1,12 @@
+import { get } from '../api/requester.js';
+import { clearUserData } from '../utils/userData.js';
+
 const BASE_URL = import.meta.env.VITE_BASE_URL + '/households';
 
 export const getAllHouseholds = async (query = '') => {
-    try {
-        const res = await fetch(BASE_URL + `?search=${query}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application.json',
-            },
-        });
+    const data = await get(`/households?search=${query}`);
 
-        if (!res.ok) {
-            const error = res.json();
-
-            throw new Error(error);
-        }
-
-        const data = await res.json();
-
-        return data;
-    } catch (error) {
-        console.error(error.message);
-    }
+    return data;
 };
 
 export const getUserHouseholds = async (userId, token) => {
@@ -34,10 +20,9 @@ export const getUserHouseholds = async (userId, token) => {
         });
 
         if (!res.ok) {
-            if (res.status == 401) {
-                localStorage.removeItem('authToken');
-                localStorage.removeItem('userData');
-                return res.statusText;
+            if (res.status == 403) {
+                clearUserData();
+                throw 'Unauthorized';
             }
 
             const error = res.json();
