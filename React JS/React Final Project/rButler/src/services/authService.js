@@ -22,9 +22,9 @@ export const userRegister = async (credentials) => {
 };
 
 export const logout = async () => {
-    const data = await post('/users/logout');
+    const userData = await post('/users/logout');
 
-    if (data.success) {
+    if (userData.success) {
         clearUserData();
     }
 };
