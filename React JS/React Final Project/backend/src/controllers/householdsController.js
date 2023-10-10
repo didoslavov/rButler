@@ -71,7 +71,7 @@ const addHouseholdMember = asyncHandler(async (req, res) => {
     const { householdId } = req.params;
 
     if (!username || !role) {
-        return res.status(400).json({ message: 'All fields are required!' });
+        return res.status(400).json({ error: 'All fields are required!' });
     }
 
     const user = await User.findOneAndUpdate(
@@ -81,7 +81,7 @@ const addHouseholdMember = asyncHandler(async (req, res) => {
     );
 
     if (!user) {
-        return res.status(409).json({ message: `${username} cannot be added!` });
+        return res.status(409).json({ error: `${username} cannot be added!` });
     }
 
     const household = await Household.findOneAndUpdate(
@@ -130,12 +130,12 @@ const updateHouseholds = asyncHandler(async (req, res) => {
     const { householdId } = req.params;
 
     if (!name || !presentation) {
-        return res.status(400).json({ message: 'All fields are required!' });
+        return res.status(400).json({ error: 'All fields are required!' });
     }
 
-    const updatedHousehold = await Household.findByIdAndUpdate(householdId, { name, presentation }).lean();
+    const updatedHousehold = await Household.findByIdAndUpdate(householdId, { name, presentation });
 
-    res.json({ message: updatedHousehold.name + ' updated successfully!' });
+    res.json({ success: updatedHousehold.name + ' updated successfully!' });
 });
 
 const deleteHouseholds = asyncHandler(async (req, res) => {
