@@ -4,7 +4,6 @@ import { chipStyles, menuItemStyles, selectStyles } from '../../styles/muiStyles
 import { Chip, IconButton, MenuItem, Select } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from 'react-hook-form';
-import Notification from '../Notification/Notification.jsx';
 
 const AddUserForm = ({
     setHousehold,

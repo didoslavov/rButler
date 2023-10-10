@@ -1,6 +1,7 @@
 .member-form-container {
     position: relative;
     border: 1px solid var(--dark-blue);
+    border-radius: 4px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,6 +24,7 @@
 
 .member-input {
     border: 1px solid var(--dark-blue);
+    border-radius: 4px;
     padding: 5px;
     color: var(--dark-blue);
     text-align: center;
@@ -34,6 +36,7 @@
 
 .member-input:focus {
     border: 1px solid var(--dark-pink);
+    border-radius: 4px;
 }
 
 .member--input::placeholder {

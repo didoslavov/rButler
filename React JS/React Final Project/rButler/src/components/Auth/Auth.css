@@ -39,6 +39,7 @@ button {
 .form {
     position: relative;
     border: 1px solid var(--dark-blue);
+    border-radius: 4px;
     width: 640px;
     height: 100%;
     transition: transform 1.2s ease-in-out;

@@ -4,6 +4,8 @@ export const menuItemStyles = {
     gap: '10px',
     backgroundColor: 'var(--light-grey)',
     color: 'var(--dark-blue)',
+    borderRadius: '4px',
+    margin: '2px 6px',
     '&:hover': { color: 'var(--light-grey)', backgroundColor: 'var(--dark-blue)' },
     '&.Mui-selected': {
         backgroundColor: 'var(--light-blue)',
@@ -17,7 +19,7 @@ export const selectStyles = {
     color: 'var(--dark-blue)',
     bgcolor: 'var(--light-grey)',
     border: '1px solid var(--dark-blue)',
-    borderRadius: '0',
+    borderRadius: '4px',
     '& #role-select': {
         padding: '4px 24px',
         marginRight: '12px',
@@ -41,6 +43,7 @@ export const iconButtonStyles = {
 export const paperStyles = {
     padding: '20px',
     border: '1px solid var(--dark-blue)',
+    borderRadius: '4px',
     backgroundColor: 'var(--light-grey)',
     color: 'var(--dark-blue)',
     '& form': {

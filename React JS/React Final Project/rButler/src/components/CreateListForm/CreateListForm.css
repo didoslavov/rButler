@@ -1,6 +1,7 @@
 .create-list-form {
     position: relative;
     border: 1px solid var(--dark-blue);
+    border-radius: 4px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,6 +19,7 @@
 
 .create-list-input {
     border: 1px solid var(--dark-blue);
+    border-radius: 4px;
     padding: 5px;
     color: var(--dark-blue);
     text-align: center;
@@ -29,6 +31,7 @@
 
 .create-list-input:focus {
     border: 1px solid var(--dark-pink);
+    border-radius: 4px;
 }
 
 .create-list-input::placeholder {

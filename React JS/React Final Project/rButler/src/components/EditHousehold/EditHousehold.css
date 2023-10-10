@@ -30,6 +30,7 @@
 
 .edit-input {
     border: 1px solid var(--dark-blue);
+    border-radius: 4px;
     color: var(--dark-blue);
     padding: 5px;
     text-align: center;
