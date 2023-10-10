@@ -1,4 +1,4 @@
-import { get, patch, post } from '../api/requester.js';
+import { del, get, patch, post } from '../api/requester.js';
 
 export const getAllHouseholds = async (query = '') => {
     return await get(`/households?search=${query}`);
@@ -25,34 +25,9 @@ export const removeUserFromHousehold = async (user, householdId) => {
 };
 
 export const deleteHousehold = async (householdId, token) => {
-    //TODO: Implement Redis DB. You can get deleted household in the request and store it in Redis DB for if user decides to undo deletion
-    try {
-        const res = await fetch(BASE_URL + '/delete/' + householdId, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                auth: token,
-            },
-        });
+    //TODO: You can try implement Redis DB. You can get deleted household in the request and store it in Redis DB for if user decides to undo deletion
 
-        if (!res.ok) {
-            if (res.status == 401) {
-                localStorage.removeItem('authToken');
-                localStorage.removeItem('userData');
-                return res.statusText;
-            }
-
-            const error = res.json();
-
-            throw new Error(error);
-        }
-
-        const data = await res.json();
-
-        return data;
-    } catch (error) {
-        console.error(error);
-    }
+    return await del('/households/' + householdId + '/delete');
 };
 
 export const updateHousehold = async (household, householdId) => {
