@@ -6,17 +6,23 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from 'react-hook-form';
 import Notification from '../Notification/Notification.jsx';
 
-const AddUserForm = ({ setHousehold, householdId, users, setUsers, handleShowAddMemberForm }) => {
+const AddUserForm = ({
+    setHousehold,
+    householdId,
+    users,
+    setUsers,
+    handleShowAddMemberForm,
+    setNotification,
+    setSeverity,
+    setNotify,
+    setOpenNotify,
+}) => {
     const { register, handleSubmit, reset } = useForm();
     const [role, setRole] = useState('Resident');
     const [userListName, setUserListName] = useState('');
-    const [notification, setNotification] = useState('');
-    const [severity, setSeverity] = useState('');
-    const [notify, setNotify] = useState(false);
-    const [open, setOpen] = useState(false);
 
     const handleClick = () => {
-        setOpen(true);
+        setOpenNotify(true);
     };
 
     const onSelectRole = (e) => {
@@ -35,33 +41,45 @@ const AddUserForm = ({ setHousehold, householdId, users, setUsers, handleShowAdd
 
             const res = await addUserToHousehold({ username, role }, householdId);
 
+            if (res.error) {
+                throw [res.error];
+            }
+
             reset();
             setSeverity('success');
-            setNotification(username + ' added successfully to ' + res?.username);
+            setNotification([username + ' added successfully to ' + res?.username]);
             setNotify(true);
             setUsers(res.users);
             setHousehold(res);
         } catch (error) {
             setSeverity('error');
             setNotification(error);
-            return setNotify(true);
+            setNotify(true);
         }
     };
 
     const onRemoveUser = async ({ username }) => {
-        const res = await removeUserFromHousehold({ username }, householdId);
+        try {
+            if (!username) {
+                throw ['All fields are required!'];
+            }
 
-        if (res.error) {
+            const res = await removeUserFromHousehold({ username }, householdId);
+
+            if (res.error) {
+                throw [res.error];
+            }
+
+            setSeverity('success');
+            setNotification([username + ' removed successfully from ' + res?.name]);
+            setNotify(true);
+            setUsers(users.filter((u) => u.user.username !== username));
+            setUserListName('');
+        } catch (error) {
             setSeverity('error');
-            setNotification(res.error);
-            return setNotify(true);
+            setNotification(error);
+            setNotify(true);
         }
-
-        setSeverity('success');
-        setNotification(username + ' removed successfully from ' + res?.name);
-        setNotify(true);
-        setUsers(users.filter((u) => u.user.username !== username));
-        setUserListName('');
     };
 
     return (
@@ -134,7 +152,6 @@ const AddUserForm = ({ setHousehold, householdId, users, setUsers, handleShowAdd
                     />
                 </form>
             </div>
-            {notify && <Notification open={open} setOpen={setOpen} message={notification} severity={severity} />}
         </>
     );
 };

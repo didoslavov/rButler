@@ -9,6 +9,7 @@ import HouseholdUserForm from '../HouseholdUserForm/HouseholdUserForm.jsx';
 import EditHousehold from '../EditHousehold/EditHousehold.jsx';
 import Spinner from '../LoadingSpinner/Spinner.jsx';
 import Listings from '../Listings/Listings.jsx';
+import Notification from '../Notification/Notification.jsx';
 
 const Details = ({ user }) => {
     const navigate = useNavigate();
@@ -20,6 +21,10 @@ const Details = ({ user }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [lists, setLists] = useState(household.lists || []);
     const [users, setUsers] = useState(household.users || []);
+    const [notification, setNotification] = useState('');
+    const [severity, setSeverity] = useState('');
+    const [notify, setNotify] = useState(false);
+    const [openNotify, setOpenNotify] = useState(false);
 
     useEffect(() => {
         getUserHouseholdById(householdId).then((res) => {
@@ -52,6 +57,18 @@ const Details = ({ user }) => {
         setIsEditOpen(false);
     };
 
+    const handleUpdateHousehold = async () => {
+        const updatedHousehold = await getUserHouseholdById(householdId);
+
+        if (updatedHousehold.error) {
+            navigate('/profile/auth');
+        } else {
+            setHousehold(updatedHousehold);
+            setLists(updatedHousehold.lists);
+            setUsers(updatedHousehold.users);
+        }
+    };
+
     return (
         <div className="details-container">
             <img className="details-image" src="/details-household.jpg" alt="detail-household" />
@@ -79,6 +96,10 @@ const Details = ({ user }) => {
                                     setLists={setLists}
                                     setIsCreateOpen={setIsCreateOpen}
                                     handleShowCreateForm={handleShowCreateForm}
+                                    setNotification={setNotification}
+                                    setSeverity={setSeverity}
+                                    setNotify={setNotify}
+                                    setOpenNotify={setOpenNotify}
                                 />
                             ) : null}
                             {!isEditOpen && !isCreateOpen && isAddMemberOpen ? (
@@ -88,12 +109,27 @@ const Details = ({ user }) => {
                                     setHousehold={setHousehold}
                                     users={users}
                                     handleShowAddMemberForm={handleShowAddMemberForm}
+                                    setNotification={setNotification}
+                                    setSeverity={setSeverity}
+                                    setNotify={setNotify}
+                                    setOpenNotify={setOpenNotify}
                                 />
                             ) : null}
                             {!isCreateOpen && !isAddMemberOpen && isEditOpen ? (
-                                <EditHousehold household={household} handleShowEditForm={handleShowEditForm} />
+                                <EditHousehold
+                                    household={household}
+                                    handleShowEditForm={handleShowEditForm}
+                                    handleUpdateHousehold={handleUpdateHousehold}
+                                    setNotification={setNotification}
+                                    setSeverity={setSeverity}
+                                    setNotify={setNotify}
+                                    setOpenNotify={setOpenNotify}
+                                />
                             ) : null}
                         </div>
+                        {notify && (
+                            <Notification open={openNotify} setOpen={setOpenNotify} message={notification} severity={severity} />
+                        )}
                     </>
                 )}
                 <div className="details-speed-dial">

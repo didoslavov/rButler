@@ -4,16 +4,21 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { menuItemStyles, selectStyles } from '../../styles/muiStyles/muiStyles.js';
 import { createList } from '../../services/listsService.js';
-import { useNavigate } from 'react-router-dom';
-import Notification from '../Notification/Notification.jsx';
 
-const CreateListForm = ({ user, householdId, setIsCreateOpen, handleShowCreateForm, setLists, lists }) => {
+const CreateListForm = ({
+    user,
+    householdId,
+    setIsCreateOpen,
+    handleShowCreateForm,
+    setLists,
+    lists,
+    setNotification,
+    setSeverity,
+    setNotify,
+    setOpenNotify,
+}) => {
     const [listType, setListType] = useState('shopping');
     const { register, handleSubmit } = useForm();
-    const [notification, setNotification] = useState('');
-    const [severity, setSeverity] = useState('');
-    const [notify, setNotify] = useState(false);
-    const [open, setOpen] = useState(false);
 
     const onSelect = (e) => {
         setListType(e.target.value);
@@ -33,7 +38,7 @@ const CreateListForm = ({ user, householdId, setIsCreateOpen, handleShowCreateFo
         } catch (error) {
             setSeverity('error');
             setNotification(error);
-            setOpen(true);
+            setOpenNotify(true);
             setNotify(true);
         }
     };
@@ -70,7 +75,6 @@ const CreateListForm = ({ user, householdId, setIsCreateOpen, handleShowCreateFo
                 </Select>
                 <input type="submit" name="button" value="CREATE" className="create-button button-action" />
             </form>
-            {notify && <Notification open={open} setOpen={setOpen} message={notification} severity={severity} />}
         </>
     );
 };
