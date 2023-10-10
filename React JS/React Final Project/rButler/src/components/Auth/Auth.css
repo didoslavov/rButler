@@ -31,7 +31,7 @@ button {
     overflow: hidden;
     position: relative;
     width: 900px;
-    height: 550px;
+    height: 570px;
     margin: 100px auto 100px;
     background: var(--light-grey);
 }

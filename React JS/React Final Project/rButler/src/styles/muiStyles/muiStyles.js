@@ -144,3 +144,9 @@ export const chipStyles = {
 export const snackbarStyles = {
     textTransform: 'uppercase',
 };
+
+export const footerStyle = {
+    backgroundColor: '#ecebe9',
+    color: '#2d475a',
+    borderTop: '1px solid #2d475a',
+};

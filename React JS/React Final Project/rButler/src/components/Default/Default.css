@@ -3,7 +3,7 @@ a {
 }
 
 .center {
-    height: 100%;
+    min-height: 75.8vh;
     margin-top: 80px;
     display: flex;
     align-items: center;

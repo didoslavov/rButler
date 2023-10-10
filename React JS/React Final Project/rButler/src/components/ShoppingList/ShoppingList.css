@@ -1,7 +1,7 @@
 .shopping-list-container {
     display: flex;
     align-items: stretch;
-    height: 91.7vh;
+    height: 84.7vh;
 }
 
 .list-image {
@@ -96,6 +96,6 @@
 .icons {
     position: relative;
     right: 10px;
-    top: 760px;
+    top: 700px;
     max-height: 50px;
 }

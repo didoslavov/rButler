@@ -1,7 +1,7 @@
 .details-container {
     display: flex;
     align-items: stretch;
-    height: 91.7vh;
+    height: 84.5vh;
     position: relative;
 }
 
@@ -23,7 +23,7 @@
 }
 
 .details-header {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .details-text {

@@ -13,6 +13,7 @@ import ShoppingList from './components/ShoppingList/ShoppingList.jsx';
 import TodoList from './components/TodoList/TodoList.jsx';
 import AllHouseholds from './components/AllHouseholds/AllHouseholds.jsx';
 import { getUserData } from './utils/userData.js';
+import Footer from './components/Footer/Footer.jsx';
 
 function App() {
     const [user, setUser] = useState(getUserData());
@@ -46,6 +47,7 @@ function App() {
                 <Route path="/lists/todo/:listId" element={<TodoList user={user} />} />
                 <Route path="*" element={<Default />}></Route>
             </Routes>
+            <Footer />
         </>
     );
 }
