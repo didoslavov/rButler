@@ -97,7 +97,7 @@ export const confirmDialogStyles = {
     '& .MuiDialog-paper': {
         padding: '20px 20px',
         backgroundColor: 'var(--light-grey)',
-        borderRadius: '0',
+        borderRadius: '4px',
         color: 'var(--dark-blue)',
         border: '1px solid var(--dark-blue)',
         '& p': { color: 'var(--dark-blue)' },
