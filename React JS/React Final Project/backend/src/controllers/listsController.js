@@ -1,6 +1,7 @@
 const Household = require('../models/Household.js');
 const List = require('../models/List.js');
 const User = require('../models/User.js');
+const ResError = require('../utils/ResError.js');
 
 const asyncHandler = require('express-async-handler');
 
@@ -14,12 +15,24 @@ const getAllLists = asyncHandler(async (req, res) => {
         })
         .exec();
 
+    if (!lists) {
+        throw new ResError(404, 'No lists found!');
+    }
+
     res.status(200).json(lists);
 });
 
 const getListById = asyncHandler(async (req, res) => {
     const { listId } = req.params;
+
+    if (!listId) {
+        throw new ResError(400, 'List ID is required!');
+    }
     const list = await List.findById(listId);
+
+    if (!list) {
+        throw new ResError(404, 'List not found!');
+    }
 
     res.status(200).json(list);
 });
@@ -28,13 +41,7 @@ const createList = asyncHandler(async (req, res) => {
     const { title, items, household, createdBy, type } = req.body;
 
     if (!title || !household || !createdBy || !type) {
-        return res.status(400).json({ message: 'All fields are required!' });
-    }
-
-    const duplicate = await List.findOne({ title });
-
-    if (duplicate) {
-        return res.status(409).json({ message: 'Duplicate list title!' });
+        throw new ResError(400, 'All fields are required!');
     }
 
     const listObject = { title, items, household, createdBy, type };
@@ -50,13 +57,13 @@ const deleteList = asyncHandler(async (req, res) => {
     const { listId } = req.params;
 
     if (!listId) {
-        return res.status(400).json({ message: 'List id is required!' });
+        throw new ResError(400, 'List ID is required!');
     }
 
     const list = await List.findByIdAndDelete(listId);
 
     if (!list) {
-        return res.status(400).json({ message: 'List not found!' });
+        throw new ResError(404, 'List not found!');
     }
 
     await User.findOneAndUpdate({ _id: list.createdBy }, { $pull: { createdLists: listId } });
@@ -69,15 +76,19 @@ const addItem = asyncHandler(async (req, res) => {
     const { listId } = req.params;
     const { text, qty } = req.body;
 
+    if (!listId) {
+        throw new ResError(400, 'List ID is required!');
+    }
+
     const list = await List.findById(listId);
 
     if (!list) {
-        return res.status(400).json({ message: 'List not found!' });
+        throw new ResError(404, 'List not found!');
     }
 
     if (list.type === 'shopping') {
         if (!text || !qty) {
-            return res.status(400).json({ message: 'All fields are required!' });
+            throw new ResError(400, 'All fields are required!');
         }
 
         const existingItem = list.items.findIndex((item) => item.text.toLowerCase() === text.toLowerCase());
@@ -89,16 +100,16 @@ const addItem = asyncHandler(async (req, res) => {
         }
     } else if (list.type === 'todo') {
         if (!text) {
-            return res.status(400).json({ message: 'All fields are required!' });
+            throw new ResError(400, 'All fields are required!');
         }
 
         if (list.items.some((item) => item.text.toLowerCase() === text.toLowerCase())) {
-            return res.status(409).json({ message: 'The todo is already listed!' });
+            throw new ResError(409, 'Todo is already listed!');
         }
 
         list.items.push({ text });
     } else {
-        return res.status(400).json({ message: 'Invalid list type!' });
+        throw new ResError(400, 'Invalid list type!');
     }
 
     const updatedList = await list.save();
@@ -109,10 +120,14 @@ const addItem = asyncHandler(async (req, res) => {
 const deleteItem = asyncHandler(async (req, res) => {
     const { listId, itemId } = req.params;
 
+    if (!listId || itemId) {
+        throw new ResError(400, 'List and Item IDs are required!');
+    }
+
     const updatedList = await List.findOneAndUpdate({ _id: listId }, { $pull: { items: { _id: itemId } } }, { new: true });
 
     if (!updatedList) {
-        return res.status(400).json({ message: 'List not found' });
+        throw new ResError('List not found');
     }
 
     res.status(200).json(updatedList);

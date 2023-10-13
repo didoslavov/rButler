@@ -18,7 +18,7 @@ const Login = ({ setUser, setNotification, setSeverity, setOpen, setNotify }) =>
                 throw res.errors;
             }
 
-            setUser(res.userData);
+            setUser(res);
             navigate('/');
         } catch (error) {
             setSeverity('error');

@@ -3,23 +3,25 @@ import { clearUserData, setUserData } from '../utils/userData.js';
 import { authEndpoints } from '../api/endpoints.js';
 
 export async function login(credentials) {
-    const userData = await post(authEndpoints.login, credentials);
+    const res = await post(authEndpoints.login, credentials);
 
-    if (userData.success) {
-        setUserData(userData.userData);
+    if (res.userData) {
+        setUserData(res.userData);
+        return res.userData;
     }
 
-    return userData;
+    return res;
 }
 
 export const userRegister = async (credentials) => {
-    const userData = await post(authEndpoints.register, credentials);
+    const res = await post(authEndpoints.register, credentials);
 
-    if (userData.success) {
-        setUserData(userData.userData);
+    if (res.userData) {
+        setUserData(res.userData);
+        return res.userData;
     }
 
-    return userData;
+    return res;
 };
 
 export const logout = async () => {

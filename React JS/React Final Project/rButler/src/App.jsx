@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './components/Home/Home.jsx';
 import Navbar from './components/Navbar/Navbar.jsx';
@@ -17,36 +17,40 @@ import Footer from './components/Footer/Footer.jsx';
 
 function App() {
     const [user, setUser] = useState(getUserData());
-    const [token, setToken] = useState(user?.token);
 
     useEffect(() => {
         const localStorageUser = getUserData();
-        const localStorageToken = localStorageUser?.token;
 
-        setToken(localStorageToken);
-        setUser(localStorageUser);
+        if (localStorageUser) {
+            setUser(localStorageUser);
+        }
     }, []);
 
     const onLogout = () => {
         logout();
-        setToken('');
-        setUser('');
+        setUser(null);
     };
 
     return (
         <>
             <Navbar onLogout={onLogout} user={user} />
-            <Routes>
-                <Route path="/" element={<Home user={user} />} />
-                <Route path="/profile/auth" element={<Auth setUser={setUser} setToken={setToken} />} />
-                <Route path="/households" element={<AllHouseholds user={user} />} />
-                <Route path="/households/details/:householdId" element={<Details user={user} />} />
-                <Route path="/households/create" element={<CreateHouseholdForm user={user} />} />
-                <Route path="/households/:userId" element={<MyHouseholds user={user} />} />
-                <Route path="/lists/shopping/:listId" element={<ShoppingList user={user} />} />
-                <Route path="/lists/todo/:listId" element={<TodoList user={user} />} />
-                <Route path="*" element={<Default />}></Route>
-            </Routes>
+            {!user ? (
+                <Navigate to="/profile/auth" replace />
+            ) : (
+                <Routes>
+                    <Route path="/" element={<Home user={user} />} />
+                    <Route path="/profile/auth" element={<Auth setUser={setUser} />} />
+                    <>
+                        <Route path="/households" element={<AllHouseholds user={user} />} />
+                        <Route path="/households/details/:householdId" element={<Details user={user} />} />
+                        <Route path="/households/create" element={<CreateHouseholdForm user={user} />} />
+                        <Route path="/households/:userId" element={<MyHouseholds user={user} />} />
+                        <Route path="/lists/shopping/:listId" element={<ShoppingList user={user} />} />
+                        <Route path="/lists/todo/:listId" element={<TodoList user={user} />} />
+                    </>
+                    <Route path="*" element={<Default />}></Route>
+                </Routes>
+            )}
             <Footer />
         </>
     );
