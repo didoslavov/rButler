@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { getUserHouseholdById } from '../../services/householdsService.js';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { SpeedDial, SpeedDialAction } from '@mui/material';
 import { AddHomeSharp, ChecklistSharp, HomeSharp, ModeEditSharp, ShareRounded } from '@mui/icons-material';
 import { speedDialActionStyles, speedDialStyles } from '../../styles/muiStyles/muiStyles.js';
+
 import CreateListForm from '../CreateListForm/CreateListForm.jsx';
 import HouseholdUserForm from '../HouseholdUserForm/HouseholdUserForm.jsx';
 import EditHousehold from '../EditHousehold/EditHousehold.jsx';
 import Spinner from '../LoadingSpinner/Spinner.jsx';
 import Listings from '../Listings/Listings.jsx';
 import Notification from '../Notification/Notification.jsx';
-import { useSelector } from 'react-redux';
+import { setNotification } from '../../redux/actions/notificationActions.js';
 
 const Details = () => {
+    const dispatch = useDispatch();
+    const { notification, severity, open } = useSelector((state) => state.notification);
     const { user } = useSelector((state) => state.user);
     const navigate = useNavigate();
     const { householdId } = useParams();
@@ -23,14 +28,18 @@ const Details = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [lists, setLists] = useState(household.lists || []);
     const [users, setUsers] = useState(household.users || []);
-    const [notification, setNotification] = useState('');
-    const [severity, setSeverity] = useState('');
-    const [notify, setNotify] = useState(false);
-    const [openNotify, setOpenNotify] = useState(false);
 
     useEffect(() => {
         getUserHouseholdById(householdId).then((res) => {
             if (res.error) {
+                dispatch(
+                    setNotification({
+                        notification: 'Authentication Failed',
+                        severity: 'error',
+                        notify: true,
+                        open: true,
+                    })
+                );
                 navigate('/profile/auth');
             }
 
@@ -71,6 +80,10 @@ const Details = () => {
         }
     };
 
+    const handleSetNotification = (notificationData) => {
+        dispatch(setNotification(notificationData));
+    };
+
     return (
         <div className="details-container">
             <img className="details-image" src="/details-household.jpg" alt="detail-household" />
@@ -97,10 +110,6 @@ const Details = () => {
                                     setLists={setLists}
                                     setIsCreateOpen={setIsCreateOpen}
                                     handleShowCreateForm={handleShowCreateForm}
-                                    setNotification={setNotification}
-                                    setSeverity={setSeverity}
-                                    setNotify={setNotify}
-                                    setOpenNotify={setOpenNotify}
                                 />
                             ) : null}
                             {!isEditOpen && !isCreateOpen && isAddMemberOpen ? (
@@ -110,10 +119,6 @@ const Details = () => {
                                     setHousehold={setHousehold}
                                     users={users}
                                     handleShowAddMemberForm={handleShowAddMemberForm}
-                                    setNotification={setNotification}
-                                    setSeverity={setSeverity}
-                                    setNotify={setNotify}
-                                    setOpenNotify={setOpenNotify}
                                 />
                             ) : null}
                             {!isCreateOpen && !isAddMemberOpen && isEditOpen ? (
@@ -121,16 +126,10 @@ const Details = () => {
                                     household={household}
                                     handleShowEditForm={handleShowEditForm}
                                     handleUpdateHousehold={handleUpdateHousehold}
-                                    setNotification={setNotification}
-                                    setSeverity={setSeverity}
-                                    setNotify={setNotify}
-                                    setOpenNotify={setOpenNotify}
                                 />
                             ) : null}
                         </div>
-                        {notify && (
-                            <Notification open={openNotify} setOpen={setOpenNotify} message={notification} severity={severity} />
-                        )}
+                        {notification && <Notification open={open} message={notification} severity={severity} />}
                     </>
                 )}
                 <div className="details-speed-dial">
