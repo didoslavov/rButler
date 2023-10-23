@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createHousehold } from '../../services/householdsService.js';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Notification from '../Notification/Notification.jsx';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setNotification, setNotificationOpen } from '../../redux/actions/notificationActions.js';
 
 const CreateHouseholdForm = () => {
+    const dispatch = useDispatch();
+    const { notification, severity, open } = useSelector((state) => state.notification);
     const { user } = useSelector((state) => state.user);
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
-    const [notification, setNotification] = useState('');
-    const [severity, setSeverity] = useState('');
-    const [notify, setNotify] = useState(false);
-    const [open, setOpen] = useState(false);
 
     const onCreateHousehold = async ({ name, presentation }) => {
         try {
@@ -24,10 +23,13 @@ const CreateHouseholdForm = () => {
 
             navigate('/households/' + user.id);
         } catch (error) {
-            setSeverity('error');
-            setNotification(error);
-            setOpen(true);
-            setNotify(true);
+            dispatch(
+                setNotification({
+                    notification: error,
+                    severity: 'error',
+                    open: true,
+                })
+            );
         }
     };
 
@@ -52,7 +54,7 @@ const CreateHouseholdForm = () => {
                 </div>
                 <img src="/create-household.jpg" alt="landing image" className="household-image" />
             </div>
-            {notify && <Notification open={open} setOpen={setOpen} message={notification} severity={severity} />}
+            {notification && <Notification open={open} message={notification} severity={severity} />}
         </>
     );
 };
