@@ -4,19 +4,11 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { menuItemStyles, selectStyles } from '../../styles/muiStyles/muiStyles.js';
 import { createList } from '../../services/listsService.js';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setNotification } from '../../redux/actions/notificationActions.js';
 
-const CreateListForm = ({
-    householdId,
-    setIsCreateOpen,
-    handleShowCreateForm,
-    setLists,
-    lists,
-    setNotification,
-    setSeverity,
-    setNotify,
-    setOpenNotify,
-}) => {
+const CreateListForm = ({ householdId, setIsCreateOpen, handleShowCreateForm, setLists, lists }) => {
+    const dispatch = useDispatch();
     const { user } = useSelector((state) => state.user);
     const [listType, setListType] = useState('shopping');
     const { register, handleSubmit } = useForm();
@@ -37,10 +29,14 @@ const CreateListForm = ({
 
             setIsCreateOpen(false);
         } catch (error) {
-            setSeverity('error');
-            setNotification(error);
-            setOpenNotify(true);
-            setNotify(true);
+            dispatch(
+                setNotification({
+                    notification: error,
+                    severity: 'error',
+                    open: true,
+                    notify: true,
+                })
+            );
         }
     };
 
