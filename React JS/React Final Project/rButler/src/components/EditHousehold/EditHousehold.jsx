@@ -5,26 +5,21 @@ import { useNavigate } from 'react-router-dom';
 import AlertDialog from '../ConfirmModal/AlertDialog.jsx';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { useDispatch } from 'react-redux';
+import { setNotification } from '../../redux/actions/notificationActions.js';
 
-const EditHousehold = ({
-    household,
-    handleShowEditForm,
-    handleUpdateHousehold,
-    setNotification,
-    setSeverity,
-    setNotify,
-    setOpenNotify,
-}) => {
+const EditHousehold = ({ household, handleShowEditForm, handleUpdateHousehold }) => {
+    const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
-    const [open, setOpenDialog] = useState(false);
+    const [openAlertModal, setOpenAlertModal] = useState(false);
 
     const handleClickDelete = () => {
-        setOpenDialog(true);
+        setOpenAlertModal(true);
     };
 
     const handleClose = () => {
-        setOpenDialog(false);
+        setOpenAlertModal(false);
     };
 
     const handleDelete = async (e) => {
@@ -46,26 +41,34 @@ const EditHousehold = ({
                 throw [res.error];
             }
 
-            setSeverity('success');
-            setNotification([res.success]);
-            setOpenNotify(true);
-            setNotify(true);
+            dispatch(
+                setNotification({
+                    notification: [res.success],
+                    severity: 'success',
+                    notify: true,
+                    open: true,
+                })
+            );
 
             handleShowEditForm();
             handleUpdateHousehold();
         } catch (error) {
-            setSeverity('error');
-            setNotification(error);
-            setOpenNotify(true);
-            setNotify(true);
+            dispatch(
+                setNotification({
+                    notification: error,
+                    severity: 'error',
+                    notify: true,
+                    open: true,
+                })
+            );
         }
     };
 
     return (
         <>
-            {open && (
+            {openAlertModal && (
                 <AlertDialog
-                    open={open}
+                    open={openAlertModal}
                     handleClose={handleClose}
                     handleDelete={handleDelete}
                     message={'You are about to delete a household.'}
