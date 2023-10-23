@@ -2,14 +2,17 @@ import React from 'react';
 import { Alert, IconButton, Snackbar } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { snackbarStyles } from '../../styles/muiStyles/muiStyles.js';
+import { useDispatch } from 'react-redux';
+import { setNotificationOpen } from '../../redux/actions/notificationActions.js';
 
-const Notification = ({ open, setOpen, message, severity }) => {
+const Notification = ({ open, message, severity }) => {
+    const dispatch = useDispatch();
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
 
-        setOpen(false);
+        dispatch(setNotificationOpen(!open));
     };
 
     const action = (
@@ -25,7 +28,7 @@ const Notification = ({ open, setOpen, message, severity }) => {
             <Snackbar
                 sx={snackbarStyles}
                 open={open}
-                autoHideDuration={6000}
+                autoHideDuration={5000}
                 onClose={handleClose}
                 action={action}
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
