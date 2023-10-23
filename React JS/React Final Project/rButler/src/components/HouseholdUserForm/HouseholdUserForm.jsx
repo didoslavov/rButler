@@ -4,24 +4,18 @@ import { chipStyles, menuItemStyles, selectStyles } from '../../styles/muiStyles
 import { Chip, IconButton, MenuItem, Select } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { setNotification, setNotificationOpen } from '../../redux/actions/notificationActions.js';
 
-const AddUserForm = ({
-    setHousehold,
-    householdId,
-    users,
-    setUsers,
-    handleShowAddMemberForm,
-    setNotification,
-    setSeverity,
-    setNotify,
-    setOpenNotify,
-}) => {
+const AddUserForm = ({ setHousehold, householdId, users, setUsers, handleShowAddMemberForm }) => {
+    const dispatch = useDispatch();
     const { register, handleSubmit, reset } = useForm();
+
     const [role, setRole] = useState('Resident');
     const [userListName, setUserListName] = useState('');
 
     const handleClick = () => {
-        setOpenNotify(true);
+        dispatch(setNotificationOpen(true));
     };
 
     const onSelectRole = (e) => {
@@ -45,15 +39,27 @@ const AddUserForm = ({
             }
 
             reset();
-            setSeverity('success');
-            setNotification([username + ' added successfully to ' + res?.name]);
-            setNotify(true);
+
+            dispatch(
+                setNotification({
+                    notification: [username + ' added successfully to ' + res?.name],
+                    severity: 'success',
+                    notify: true,
+                    open: true,
+                })
+            );
+
             setUsers(res.users);
             setHousehold(res);
         } catch (error) {
-            setSeverity('error');
-            setNotification(error);
-            setNotify(true);
+            dispatch(
+                setNotification({
+                    notification: error,
+                    severity: 'error',
+                    notify: true,
+                    open: true,
+                })
+            );
         }
     };
 
@@ -69,15 +75,26 @@ const AddUserForm = ({
                 throw [res.error];
             }
 
-            setSeverity('success');
-            setNotification([username + ' removed successfully from ' + res?.name]);
-            setNotify(true);
+            dispatch(
+                setNotification({
+                    notification: [username + ' removed successfully from ' + res?.name],
+                    severity: 'success',
+                    notify: true,
+                    open: true,
+                })
+            );
+
             setUsers(users.filter((u) => u.user.username !== username));
             setUserListName('');
         } catch (error) {
-            setSeverity('error');
-            setNotification(error);
-            setNotify(true);
+            dispatch(
+                setNotification({
+                    notification: error,
+                    severity: 'error',
+                    notify: true,
+                    open: true,
+                })
+            );
         }
     };
 
