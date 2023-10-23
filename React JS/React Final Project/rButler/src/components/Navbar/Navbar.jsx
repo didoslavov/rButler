@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Search from '../Search/Search.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser } from '../../redux/actions.js';
+import { logoutUser } from '../../redux/actions/userActions.js';
 
 const Navbar = () => {
     const { user } = useSelector((state) => state.user);
