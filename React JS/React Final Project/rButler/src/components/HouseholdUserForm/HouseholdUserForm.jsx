@@ -40,13 +40,13 @@ const AddUserForm = ({
 
             const res = await addUserToHousehold({ username, role }, householdId);
 
-            if (res.error) {
-                throw [res.error];
+            if (res.errors) {
+                throw res.errors;
             }
 
             reset();
             setSeverity('success');
-            setNotification([username + ' added successfully to ' + res?.username]);
+            setNotification([username + ' added successfully to ' + res?.name]);
             setNotify(true);
             setUsers(res.users);
             setHousehold(res);
@@ -92,7 +92,13 @@ const AddUserForm = ({
                     <label className="member-label">
                         <span>Username</span>
                     </label>
-                    <input className="member-input" type="text" placeholder="Username to add?" {...register('user')} />
+                    <input
+                        className="member-input"
+                        type="text"
+                        placeholder="Username to add?"
+                        name="username"
+                        {...register('user')}
+                    />
                     <label className="member-label">
                         <span>Roles</span>
                     </label>

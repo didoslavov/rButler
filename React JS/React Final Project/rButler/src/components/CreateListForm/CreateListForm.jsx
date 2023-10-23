@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { menuItemStyles, selectStyles } from '../../styles/muiStyles/muiStyles.js';
 import { createList } from '../../services/listsService.js';
+import { useSelector } from 'react-redux';
 
 const CreateListForm = ({
-    user,
     householdId,
     setIsCreateOpen,
     handleShowCreateForm,
@@ -17,6 +17,7 @@ const CreateListForm = ({
     setNotify,
     setOpenNotify,
 }) => {
+    const { user } = useSelector((state) => state.user);
     const [listType, setListType] = useState('shopping');
     const { register, handleSubmit } = useForm();
 

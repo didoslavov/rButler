@@ -10,8 +10,10 @@ import EditHousehold from '../EditHousehold/EditHousehold.jsx';
 import Spinner from '../LoadingSpinner/Spinner.jsx';
 import Listings from '../Listings/Listings.jsx';
 import Notification from '../Notification/Notification.jsx';
+import { useSelector } from 'react-redux';
 
-const Details = ({ user }) => {
+const Details = () => {
+    const { user } = useSelector((state) => state.user);
     const navigate = useNavigate();
     const { householdId } = useParams();
     const [household, setHousehold] = useState({});
@@ -86,11 +88,10 @@ const Details = ({ user }) => {
 
                         <div className="listings-container">
                             {!isEditOpen && !isCreateOpen && !isAddMemberOpen ? (
-                                <Listings handleShowCreateForm={handleShowCreateForm} lists={lists} user={user} />
+                                <Listings handleShowCreateForm={handleShowCreateForm} lists={lists} />
                             ) : null}
                             {!isEditOpen && !isAddMemberOpen && isCreateOpen ? (
                                 <CreateListForm
-                                    user={user}
                                     householdId={householdId}
                                     lists={lists}
                                     setLists={setLists}

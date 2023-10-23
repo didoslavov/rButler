@@ -8,8 +8,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { addListItem, getListById, removeList, removeListItem } from '../../services/listsService.js';
 import Notification from '../Notification/Notification.jsx';
+import { useSelector } from 'react-redux';
 
-const TodoList = ({ user }) => {
+const TodoList = () => {
+    const { user } = useSelector((state) => state.user);
     const { listId } = useParams();
     const navigate = useNavigate();
     const [open, setOpenDialog] = useState(false);
@@ -47,6 +49,7 @@ const TodoList = ({ user }) => {
 
     const handleCheckItem = async (itemId) => {
         const list = await removeListItem(itemId, listId);
+
         setItems(list.items);
     };
 

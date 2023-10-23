@@ -2,9 +2,17 @@ import { Avatar } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Search from '../Search/Search.jsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../../redux/actions.js';
 
-const Navbar = ({ onLogout, user }) => {
+const Navbar = () => {
+    const { user } = useSelector((state) => state.user);
+    const dispatch = useDispatch();
     const userId = user?.id;
+
+    const onLogout = () => {
+        dispatch(logoutUser());
+    };
 
     return (
         <>

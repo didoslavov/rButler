@@ -2,8 +2,11 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../../services/authService.js';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../../redux/actions.js';
 
-const Login = ({ setUser, setNotification, setSeverity, setOpen, setNotify }) => {
+const Login = ({ setNotification, setSeverity, setOpen, setNotify }) => {
+    const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
 
@@ -18,7 +21,7 @@ const Login = ({ setUser, setNotification, setSeverity, setOpen, setNotify }) =>
                 throw res.errors;
             }
 
-            setUser(res);
+            dispatch(setUser(res));
             navigate('/');
         } catch (error) {
             setSeverity('error');

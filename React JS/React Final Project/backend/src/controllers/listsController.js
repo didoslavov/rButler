@@ -120,7 +120,7 @@ const addItem = asyncHandler(async (req, res) => {
 const deleteItem = asyncHandler(async (req, res) => {
     const { listId, itemId } = req.params;
 
-    if (!listId || itemId) {
+    if (!listId || !itemId) {
         throw new ResError(400, 'List and Item IDs are required!');
     }
 

@@ -3,8 +3,10 @@ import { createHousehold } from '../../services/householdsService.js';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Notification from '../Notification/Notification.jsx';
+import { useSelector } from 'react-redux';
 
-const CreateHouseholdForm = ({ user }) => {
+const CreateHouseholdForm = () => {
+    const { user } = useSelector((state) => state.user);
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
     const [notification, setNotification] = useState('');

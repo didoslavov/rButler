@@ -13,10 +13,6 @@ const getAllHouseholds = asyncHandler(async (req, res) => {
         },
     }).populate('users.user', '-password');
 
-    if (!households.length) {
-        throw new ResError(404, 'No households found!');
-    }
-
     res.status(200).json(households);
 });
 
@@ -105,7 +101,7 @@ const addHouseholdMember = asyncHandler(async (req, res) => {
     );
 
     if (!user) {
-        throw new ResError(409, `${username} is already a member of the household`);
+        throw new ResError(409, `${username} doesn't exists or is already a member of the household!`);
     }
 
     const household = await Household.findOneAndUpdate(

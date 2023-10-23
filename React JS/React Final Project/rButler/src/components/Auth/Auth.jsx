@@ -3,7 +3,7 @@ import Login from './Login/Login.jsx';
 import Register from './Register/Register.jsx';
 import Notification from '../Notification/Notification.jsx';
 
-const Auth = ({ setUser }) => {
+const Auth = () => {
     const [showLogin, setShowLogin] = useState(true);
     const [notification, setNotification] = useState('');
     const [severity, setSeverity] = useState('');
@@ -16,13 +16,7 @@ const Auth = ({ setUser }) => {
 
     return (
         <div className={`cont ${showLogin ? '' : 's--signup'}`}>
-            <Login
-                setUser={setUser}
-                setNotification={setNotification}
-                setSeverity={setSeverity}
-                setNotify={setNotify}
-                setOpen={setOpen}
-            />
+            <Login setNotification={setNotification} setSeverity={setSeverity} setNotify={setNotify} setOpen={setOpen} />
 
             <div className="sub-cont">
                 <div className="img">
@@ -43,13 +37,7 @@ const Auth = ({ setUser }) => {
                     </div>
                 </div>
 
-                <Register
-                    setUser={setUser}
-                    setNotification={setNotification}
-                    setSeverity={setSeverity}
-                    setNotify={setNotify}
-                    setOpen={setOpen}
-                />
+                <Register setNotification={setNotification} setSeverity={setSeverity} setNotify={setNotify} setOpen={setOpen} />
             </div>
             {notify && <Notification open={open} setOpen={setOpen} message={notification} severity={severity} />}
         </div>

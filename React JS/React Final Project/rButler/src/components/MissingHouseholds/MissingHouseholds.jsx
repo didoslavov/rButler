@@ -1,7 +1,10 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const MissingHouseholds = ({ user }) => {
+const MissingHouseholds = () => {
+    const { user } = useSelector((state) => state.user);
+
     return (
         <div className="missing-household">
             <p>

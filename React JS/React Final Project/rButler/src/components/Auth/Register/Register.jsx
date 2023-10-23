@@ -2,8 +2,11 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { userRegister } from '../../../services/authService.js';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../../redux/actions.js';
 
-const Register = ({ setUser, setNotification, setSeverity, setOpen, setNotify }) => {
+const Register = ({ setNotification, setSeverity, setOpen, setNotify }) => {
+    const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
 
@@ -23,7 +26,7 @@ const Register = ({ setUser, setNotification, setSeverity, setOpen, setNotify })
                 throw res.errors;
             }
 
-            setUser(res);
+            dispatch(setUser(res));
             navigate('/');
         } catch (error) {
             setSeverity('error');

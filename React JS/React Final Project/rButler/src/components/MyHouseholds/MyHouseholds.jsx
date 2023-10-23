@@ -5,8 +5,10 @@ import { getUserHouseholds } from '../../services/householdsService.js';
 import MissingHouseholds from '../MissingHouseholds/MissingHouseholds.jsx';
 import Spinner from '../LoadingSpinner/Spinner.jsx';
 import { chipStyles, paginationStyles } from '../../styles/muiStyles/muiStyles.js';
+import { useSelector } from 'react-redux';
 
-const MyHouseholds = ({ user }) => {
+const MyHouseholds = () => {
+    const { user } = useSelector((state) => state.user);
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);

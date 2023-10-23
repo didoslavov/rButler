@@ -1,6 +1,9 @@
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const Listings = ({ lists, handleShowCreateForm, user }) => {
+const Listings = ({ lists, handleShowCreateForm }) => {
+    const { user } = useSelector((state) => state.user);
+
     return (
         <div className="details-lists-container">
             <h5 className="details-lists-header">Lists</h5>
