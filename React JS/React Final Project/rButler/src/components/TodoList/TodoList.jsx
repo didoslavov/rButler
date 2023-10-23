@@ -8,26 +8,25 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { addListItem, getListById, removeList, removeListItem } from '../../services/listsService.js';
 import Notification from '../Notification/Notification.jsx';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setNotification } from '../../redux/actions/notificationActions.js';
 
 const TodoList = () => {
+    const dispatch = useDispatch();
+    const { notification, severity, open } = useSelector((state) => state.notification);
     const { user } = useSelector((state) => state.user);
     const { listId } = useParams();
     const navigate = useNavigate();
-    const [open, setOpenDialog] = useState(false);
+    const [openAlertModal, setOpenAlertModal] = useState(false);
     const [items, setItems] = useState([]);
     const { register, handleSubmit, reset } = useForm();
-    const [notification, setNotification] = useState('');
-    const [severity, setSeverity] = useState('');
-    const [notify, setNotify] = useState(false);
-    const [openNotify, setOpenNotify] = useState(false);
 
     const handleClickDelete = () => {
-        setOpenDialog(true);
+        setOpenAlertModal(true);
     };
 
     const handleClose = () => {
-        setOpenDialog(false);
+        setOpenAlertModal(false);
     };
 
     const onAddItem = async ({ text }) => {
@@ -40,10 +39,13 @@ const TodoList = () => {
             reset();
             setItems(list.items);
         } catch (error) {
-            setSeverity('error');
-            setNotification(error);
-            setOpenNotify(true);
-            setNotify(true);
+            dispatch(
+                setNotification({
+                    notification: error,
+                    severity: 'error',
+                    open: true,
+                })
+            );
         }
     };
 
@@ -68,11 +70,11 @@ const TodoList = () => {
 
     return (
         <>
-            {open && (
+            {openAlertModal && (
                 <AlertDialog
                     handleClose={handleClose}
                     handleDelete={handleDelete}
-                    open={open}
+                    open={openAlertModal}
                     message={'You are about to delete the list.'}
                 />
             )}
@@ -146,7 +148,7 @@ const TodoList = () => {
                     )}
                 </div>
             </div>
-            {notify && <Notification open={openNotify} setOpen={setOpenNotify} message={notification} severity={severity} />}
+            {notification && <Notification open={open} message={notification} severity={severity} />}
         </>
     );
 };
