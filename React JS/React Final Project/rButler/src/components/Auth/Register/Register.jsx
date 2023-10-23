@@ -3,9 +3,10 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { userRegister } from '../../../services/authService.js';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../../../redux/actions.js';
+import { setUser } from '../../../redux/actions/userActions.js';
+import { setNotification } from '../../../redux/actions/notificationActions.js';
 
-const Register = ({ setNotification, setSeverity, setOpen, setNotify }) => {
+const Register = () => {
     const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
@@ -29,10 +30,14 @@ const Register = ({ setNotification, setSeverity, setOpen, setNotify }) => {
             dispatch(setUser(res));
             navigate('/');
         } catch (error) {
-            setSeverity('error');
-            setNotification(error);
-            setOpen(true);
-            setNotify(true);
+            dispatch(
+                setNotification({
+                    notification: error,
+                    severity: 'error',
+                    open: true,
+                    notify: true,
+                })
+            );
         }
     };
 

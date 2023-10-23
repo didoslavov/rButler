@@ -2,21 +2,21 @@ import React, { useState } from 'react';
 import Login from './Login/Login.jsx';
 import Register from './Register/Register.jsx';
 import Notification from '../Notification/Notification.jsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { setNotification } from '../../redux/actions/notificationActions.js';
 
 const Auth = () => {
-    const [showLogin, setShowLogin] = useState(true);
-    const [notification, setNotification] = useState('');
-    const [severity, setSeverity] = useState('');
-    const [notify, setNotify] = useState(false);
-    const [open, setOpen] = useState(false);
+    const dispatch = useDispatch();
+    const { notification, severity, open } = useSelector((state) => state.notification);
+    const [isLoginFormVisible, setIsLoginFormVisible] = useState(true);
 
     const toggleFormsHandler = () => {
-        setShowLogin(!showLogin);
+        setIsLoginFormVisible(!isLoginFormVisible);
     };
 
     return (
-        <div className={`cont ${showLogin ? '' : 's--signup'}`}>
-            <Login setNotification={setNotification} setSeverity={setSeverity} setNotify={setNotify} setOpen={setOpen} />
+        <div className={`cont ${isLoginFormVisible ? '' : 's--signup'}`}>
+            <Login />
 
             <div className="sub-cont">
                 <div className="img">
@@ -37,9 +37,9 @@ const Auth = () => {
                     </div>
                 </div>
 
-                <Register setNotification={setNotification} setSeverity={setSeverity} setNotify={setNotify} setOpen={setOpen} />
+                <Register />
             </div>
-            {notify && <Notification open={open} setOpen={setOpen} message={notification} severity={severity} />}
+            {notification && <Notification open={open} message={notification} severity={severity} />}
         </div>
     );
 };
