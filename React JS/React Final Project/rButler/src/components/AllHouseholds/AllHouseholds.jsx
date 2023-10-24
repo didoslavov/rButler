@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
-import { Pagination } from '@mui/material';
-import { paginationStyles } from '../../styles/muiStyles/muiStyles.js';
+import { Chip, Pagination } from '@mui/material';
+import { chipStyles, paginationStyles } from '../../styles/muiStyles/muiStyles.js';
 
 import usePagination from '../../hooks/usePagination.js';
 import { useLoading } from '../../hooks/useLoading.js';
@@ -47,6 +47,9 @@ const AllHouseholds = () => {
                                     to={'/households/details/' + household._id}
                                     className="my-household-link">
                                     <li className="household">
+                                        <div className="chip-container">
+                                            <Chip sx={chipStyles} label={'Owner: ' + household.master.username} />
+                                        </div>
                                         <h4 className="household-header border-bottom">{household.name}</h4>
                                         <p>{household.presentation}</p>
                                     </li>

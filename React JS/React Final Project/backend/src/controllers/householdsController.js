@@ -11,7 +11,7 @@ const getAllHouseholds = asyncHandler(async (req, res) => {
             $regex: new RegExp(search),
             $options: 'i',
         },
-    }).populate('users.user', '-password');
+    }).populate('users.user master', '-password');
 
     res.status(200).json(households);
 });

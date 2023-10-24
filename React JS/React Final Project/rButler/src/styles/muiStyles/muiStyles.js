@@ -139,6 +139,7 @@ export const chipStyles = {
     color: 'var(--dark-blue)',
     border: '1px solid var(--dark-blue)',
     padding: '0',
+    textTransform: 'capitalize',
 };
 
 export const snackbarStyles = {
