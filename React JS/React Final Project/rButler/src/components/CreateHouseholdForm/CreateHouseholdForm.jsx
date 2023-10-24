@@ -1,10 +1,12 @@
 import React from 'react';
-import { createHousehold } from '../../services/householdsService.js';
-import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import Notification from '../Notification/Notification.jsx';
+import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+
+import Notification from '../Notification/Notification.jsx';
+
 import { setNotification } from '../../redux/slices/notificationSlice.js';
+import { createHousehold } from '../../services/householdsService.js';
 
 const CreateHouseholdForm = () => {
     const dispatch = useDispatch();

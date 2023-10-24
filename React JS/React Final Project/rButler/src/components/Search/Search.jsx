@@ -1,8 +1,9 @@
-import { SearchSharp } from '@mui/icons-material';
-import { IconButton } from '@mui/material';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+
+import { SearchSharp } from '@mui/icons-material';
+import { IconButton } from '@mui/material';
 
 const Search = () => {
     const [query, setQuery] = useState('');

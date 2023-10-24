@@ -15,6 +15,7 @@
 @import url(./components/ShoppingList/ShoppingList.css);
 @import url(./components/TodoList/TodoList.css);
 @import url(./components/Search/Search.css);
+@import url(./components/SpeedDial/SpeedDial.css);
 
 :root {
     --dark-pink: #f08a9d;

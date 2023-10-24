@@ -1,12 +1,16 @@
-import { Pagination } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { getAllHouseholds } from '../../services/householdsService.js';
-import MissingHouseholds from '../MissingHouseholds/MissingHouseholds.jsx';
-import Spinner from '../LoadingSpinner/Spinner.jsx';
+
+import { Pagination } from '@mui/material';
 import { paginationStyles } from '../../styles/muiStyles/muiStyles.js';
+
 import usePagination from '../../hooks/usePagination.js';
 import { useLoading } from '../../hooks/useLoading.js';
+
+import MissingHouseholds from '../MissingHouseholds/MissingHouseholds.jsx';
+import Spinner from '../LoadingSpinner/Spinner.jsx';
+
+import { getAllHouseholds } from '../../services/householdsService.js';
 
 const AllHouseholds = () => {
     const [households, setHouseholds] = useState([]);

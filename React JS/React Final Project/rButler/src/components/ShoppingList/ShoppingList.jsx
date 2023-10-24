@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { Divider, IconButton, Tooltip } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 import DeleteIcon from '@mui/icons-material/Delete';
-import AlertDialog from '../ConfirmModal/AlertDialog.jsx';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { addListItem, getListById, removeList, removeListItem } from '../../services/listsService.js';
+
+import AlertDialog from '../ConfirmModal/AlertDialog.jsx';
 import Notification from '../Notification/Notification.jsx';
-import { useDispatch, useSelector } from 'react-redux';
+
 import { setNotification } from '../../redux/slices/notificationSlice.js';
+
+import { addListItem, getListById, removeList, removeListItem } from '../../services/listsService.js';
 
 const ShoppingList = () => {
     const dispatch = useDispatch();

@@ -1,8 +1,11 @@
-import { Avatar } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Search from '../Search/Search.jsx';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { Avatar } from '@mui/material';
+
+import Search from '../Search/Search.jsx';
+
 import { logoutUser } from '../../redux/slices/userSlice.js';
 
 const Navbar = () => {

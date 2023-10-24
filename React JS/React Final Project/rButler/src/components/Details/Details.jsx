@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getUserHouseholdById } from '../../services/householdsService.js';
 import { useDispatch, useSelector } from 'react-redux';
 
 import CreateListForm from '../CreateListForm/CreateListForm.jsx';
@@ -9,9 +8,11 @@ import EditHousehold from '../EditHousehold/EditHousehold.jsx';
 import Spinner from '../LoadingSpinner/Spinner.jsx';
 import Listings from '../Listings/Listings.jsx';
 import Notification from '../Notification/Notification.jsx';
+import SpeedDialMenu from '../SpeedDial/SpeedDial.jsx';
+
+import { getUserHouseholdById } from '../../services/householdsService.js';
 import { setNotification } from '../../redux/slices/notificationSlice.js';
 import { useLoading } from '../../hooks/useLoading.js';
-import SpeedDialMenu from '../SpeedDial/SpeedDial.jsx';
 
 const Details = () => {
     const [household, setHousehold] = useState({});

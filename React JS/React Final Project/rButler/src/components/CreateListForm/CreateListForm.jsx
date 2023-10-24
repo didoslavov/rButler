@@ -1,12 +1,15 @@
-import CloseIcon from '@mui/icons-material/Close';
-import { IconButton, MenuItem, Select } from '@mui/material';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { menuItemStyles, selectStyles } from '../../styles/muiStyles/muiStyles.js';
-import { createList } from '../../services/listsService.js';
 import { useDispatch, useSelector } from 'react-redux';
+
+import CloseIcon from '@mui/icons-material/Close';
+import { IconButton, MenuItem, Select } from '@mui/material';
+import { menuItemStyles, selectStyles } from '../../styles/muiStyles/muiStyles.js';
+
 import { setNotification } from '../../redux/slices/notificationSlice.js';
 import { setFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
+
+import { createList } from '../../services/listsService.js';
 
 const CreateListForm = ({ householdId, setIsCreateOpen, setLists, lists }) => {
     const dispatch = useDispatch();

@@ -1,10 +1,12 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { userRegister } from '../../../services/authService.js';
 import { useDispatch } from 'react-redux';
+
 import { setUser } from '../../../redux/slices/userSlice.js';
 import { setNotification } from '../../../redux/slices/notificationSlice.js';
+
+import { userRegister } from '../../../services/authService.js';
 
 const Register = () => {
     const dispatch = useDispatch();

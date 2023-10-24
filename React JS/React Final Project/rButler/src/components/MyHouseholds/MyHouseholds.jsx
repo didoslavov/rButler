@@ -1,13 +1,17 @@
-import { Chip, Pagination } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { getUserHouseholds } from '../../services/householdsService.js';
-import MissingHouseholds from '../MissingHouseholds/MissingHouseholds.jsx';
-import Spinner from '../LoadingSpinner/Spinner.jsx';
-import { chipStyles, paginationStyles } from '../../styles/muiStyles/muiStyles.js';
 import { useSelector } from 'react-redux';
+
+import { Chip, Pagination } from '@mui/material';
+import { chipStyles, paginationStyles } from '../../styles/muiStyles/muiStyles.js';
+
+import Spinner from '../LoadingSpinner/Spinner.jsx';
+import MissingHouseholds from '../MissingHouseholds/MissingHouseholds.jsx';
+
 import usePagination from '../../hooks/usePagination.js';
 import { useLoading } from '../../hooks/useLoading.js';
+
+import { getUserHouseholds } from '../../services/householdsService.js';
 
 const MyHouseholds = () => {
     const [isLoading, handleLoading] = useLoading(true);

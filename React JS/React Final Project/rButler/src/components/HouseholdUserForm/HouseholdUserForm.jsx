@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { addUserToHousehold, removeUserFromHousehold } from '../../services/householdsService.js';
-import { chipStyles, menuItemStyles, selectStyles } from '../../styles/muiStyles/muiStyles.js';
-import { Chip, IconButton, MenuItem, Select } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { Chip, IconButton, MenuItem, Select } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import { chipStyles, menuItemStyles, selectStyles } from '../../styles/muiStyles/muiStyles.js';
+
 import { setNotification, setNotificationOpen } from '../../redux/slices/notificationSlice.js';
 import { setFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
+
+import { addUserToHousehold, removeUserFromHousehold } from '../../services/householdsService.js';
 
 const AddUserForm = ({ setHousehold, householdId, users, setUsers }) => {
     const dispatch = useDispatch();

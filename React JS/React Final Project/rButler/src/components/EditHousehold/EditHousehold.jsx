@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { deleteHousehold, updateHousehold } from '../../services/householdsService.js';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+
 import AlertDialog from '../ConfirmModal/AlertDialog.jsx';
+
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { useDispatch, useSelector } from 'react-redux';
+
 import { setNotification } from '../../redux/slices/notificationSlice.js';
 import { setFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
+
+import { deleteHousehold, updateHousehold } from '../../services/householdsService.js';
 
 const EditHousehold = ({ household, handleUpdateHousehold }) => {
     const dispatch = useDispatch();

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+
 import Login from './Login/Login.jsx';
 import Register from './Register/Register.jsx';
 import Notification from '../Notification/Notification.jsx';
-import { useSelector } from 'react-redux';
 
 const Auth = () => {
     const { notification, severity, open } = useSelector((state) => state.notification);
