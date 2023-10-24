@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import Login from './Login/Login.jsx';
 import Register from './Register/Register.jsx';
 import Notification from '../Notification/Notification.jsx';
-import { useDispatch, useSelector } from 'react-redux';
-import { setNotification } from '../../redux/actions/notificationActions.js';
+import { useSelector } from 'react-redux';
 
 const Auth = () => {
-    const dispatch = useDispatch();
     const { notification, severity, open } = useSelector((state) => state.notification);
     const [isLoginFormVisible, setIsLoginFormVisible] = useState(true);
 

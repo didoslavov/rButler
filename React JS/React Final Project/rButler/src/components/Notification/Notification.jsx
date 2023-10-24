@@ -3,7 +3,7 @@ import { Alert, IconButton, Snackbar } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { snackbarStyles } from '../../styles/muiStyles/muiStyles.js';
 import { useDispatch } from 'react-redux';
-import { setNotificationOpen } from '../../redux/actions/notificationActions.js';
+import { setNotificationOpen } from '../../redux/slices/notificationSlice.js';
 
 const Notification = ({ open, message, severity }) => {
     const dispatch = useDispatch();

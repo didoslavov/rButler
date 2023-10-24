@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import { addListItem, getListById, removeList, removeListItem } from '../../services/listsService.js';
 import Notification from '../Notification/Notification.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { setNotification } from '../../redux/actions/notificationActions.js';
+import { setNotification } from '../../redux/slices/notificationSlice.js';
 
 const ShoppingList = () => {
     const dispatch = useDispatch();

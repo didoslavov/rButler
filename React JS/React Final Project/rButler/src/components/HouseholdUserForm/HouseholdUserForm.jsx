@@ -5,7 +5,7 @@ import { Chip, IconButton, MenuItem, Select } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { setNotification, setNotificationOpen } from '../../redux/actions/notificationActions.js';
+import { setNotification, setNotificationOpen } from '../../redux/slices/notificationSlice.js';
 
 const AddUserForm = ({ setHousehold, householdId, users, setUsers, handleShowAddMemberForm }) => {
     const dispatch = useDispatch();

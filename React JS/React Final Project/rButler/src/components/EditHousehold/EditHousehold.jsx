@@ -6,7 +6,7 @@ import AlertDialog from '../ConfirmModal/AlertDialog.jsx';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch } from 'react-redux';
-import { setNotification } from '../../redux/actions/notificationActions.js';
+import { setNotification } from '../../redux/slices/notificationSlice.js';
 
 const EditHousehold = ({ household, handleShowEditForm, handleUpdateHousehold }) => {
     const dispatch = useDispatch();

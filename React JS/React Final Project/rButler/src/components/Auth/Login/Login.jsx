@@ -3,8 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../../services/authService.js';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../../../redux/actions/userActions.js';
-import { setNotification } from '../../../redux/actions/notificationActions.js';
+import { setUser } from '../../../redux/slices/userSlice.js';
+import { setNotification } from '../../../redux/slices/notificationSlice.js';
 
 const Login = () => {
     const dispatch = useDispatch();

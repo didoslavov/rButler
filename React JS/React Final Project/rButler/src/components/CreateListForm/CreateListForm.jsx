@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { menuItemStyles, selectStyles } from '../../styles/muiStyles/muiStyles.js';
 import { createList } from '../../services/listsService.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { setNotification } from '../../redux/actions/notificationActions.js';
+import { setNotification } from '../../redux/slices/notificationSlice.js';
 
 const CreateListForm = ({ householdId, setIsCreateOpen, handleShowCreateForm, setLists, lists }) => {
     const dispatch = useDispatch();

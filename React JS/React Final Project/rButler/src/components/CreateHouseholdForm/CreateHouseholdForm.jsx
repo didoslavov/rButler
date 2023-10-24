@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Notification from '../Notification/Notification.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { setNotification, setNotificationOpen } from '../../redux/actions/notificationActions.js';
+import { setNotification } from '../../redux/slices/notificationSlice.js';
 
 const CreateHouseholdForm = () => {
     const dispatch = useDispatch();

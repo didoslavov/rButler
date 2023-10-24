@@ -13,7 +13,7 @@ import EditHousehold from '../EditHousehold/EditHousehold.jsx';
 import Spinner from '../LoadingSpinner/Spinner.jsx';
 import Listings from '../Listings/Listings.jsx';
 import Notification from '../Notification/Notification.jsx';
-import { setNotification } from '../../redux/actions/notificationActions.js';
+import { setNotification } from '../../redux/slices/notificationSlice.js';
 
 const Details = () => {
     const dispatch = useDispatch();
@@ -78,10 +78,6 @@ const Details = () => {
             setLists(updatedHousehold.lists);
             setUsers(updatedHousehold.users);
         }
-    };
-
-    const handleSetNotification = (notificationData) => {
-        dispatch(setNotification(notificationData));
     };
 
     return (
