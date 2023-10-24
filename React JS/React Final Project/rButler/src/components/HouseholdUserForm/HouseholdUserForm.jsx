@@ -4,15 +4,16 @@ import { chipStyles, menuItemStyles, selectStyles } from '../../styles/muiStyles
 import { Chip, IconButton, MenuItem, Select } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setNotification, setNotificationOpen } from '../../redux/slices/notificationSlice.js';
+import { setFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
 
-const AddUserForm = ({ setHousehold, householdId, users, setUsers, handleShowAddMemberForm }) => {
+const AddUserForm = ({ setHousehold, householdId, users, setUsers }) => {
     const dispatch = useDispatch();
-    const { register, handleSubmit, reset } = useForm();
-
     const [role, setRole] = useState('Resident');
     const [userListName, setUserListName] = useState('');
+    const { isAddMemberOpen } = useSelector((state) => state.formVisibility);
+    const { register, handleSubmit, reset } = useForm();
 
     const handleClick = () => {
         dispatch(setNotificationOpen(true));
@@ -24,6 +25,12 @@ const AddUserForm = ({ setHousehold, householdId, users, setUsers, handleShowAdd
 
     const onSelectUser = (e) => {
         setUserListName(e.target.value);
+    };
+
+    const handleShowAddMemberForm = () => {
+        dispatch(setFormVisibility({ formType: 'isAddMemberOpen', value: !isAddMemberOpen }));
+        dispatch(setFormVisibility({ formType: 'isCreateOpen', value: false }));
+        dispatch(setFormVisibility({ formType: 'isEditOpen', value: false }));
     };
 
     const onAddUser = async ({ user: username, role }) => {

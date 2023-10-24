@@ -6,15 +6,23 @@ import { menuItemStyles, selectStyles } from '../../styles/muiStyles/muiStyles.j
 import { createList } from '../../services/listsService.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNotification } from '../../redux/slices/notificationSlice.js';
+import { setFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
 
-const CreateListForm = ({ householdId, setIsCreateOpen, handleShowCreateForm, setLists, lists }) => {
+const CreateListForm = ({ householdId, setIsCreateOpen, setLists, lists }) => {
     const dispatch = useDispatch();
+    const { isCreateOpen } = useSelector((state) => state.formVisibility);
     const { user } = useSelector((state) => state.user);
     const [listType, setListType] = useState('shopping');
     const { register, handleSubmit } = useForm();
 
     const onSelect = (e) => {
         setListType(e.target.value);
+    };
+
+    const handleShowCreateForm = () => {
+        dispatch(setFormVisibility({ formType: 'isCreateOpen', value: !isCreateOpen }));
+        dispatch(setFormVisibility({ formType: 'isEditOpen', value: false }));
+        dispatch(setFormVisibility({ formType: 'isAddMemberOpen', value: false }));
     };
 
     const onCreateList = async ({ title, type }) => {

@@ -5,11 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import AlertDialog from '../ConfirmModal/AlertDialog.jsx';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setNotification } from '../../redux/slices/notificationSlice.js';
+import { setFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
 
-const EditHousehold = ({ household, handleShowEditForm, handleUpdateHousehold }) => {
+const EditHousehold = ({ household, handleUpdateHousehold }) => {
     const dispatch = useDispatch();
+    const { isEditOpen } = useSelector((state) => state.formVisibility);
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
     const [openAlertModal, setOpenAlertModal] = useState(false);
@@ -20,6 +22,12 @@ const EditHousehold = ({ household, handleShowEditForm, handleUpdateHousehold })
 
     const handleClose = () => {
         setOpenAlertModal(false);
+    };
+
+    const handleShowEditForm = () => {
+        dispatch(setFormVisibility({ formType: 'isEditOpen', value: !isEditOpen }));
+        dispatch(setFormVisibility({ formType: 'isCreateOpen', value: false }));
+        dispatch(setFormVisibility({ formType: 'isAddMemberOpen', value: false }));
     };
 
     const handleDelete = async (e) => {
