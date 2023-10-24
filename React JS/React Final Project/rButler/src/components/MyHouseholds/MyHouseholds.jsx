@@ -6,13 +6,14 @@ import MissingHouseholds from '../MissingHouseholds/MissingHouseholds.jsx';
 import Spinner from '../LoadingSpinner/Spinner.jsx';
 import { chipStyles, paginationStyles } from '../../styles/muiStyles/muiStyles.js';
 import { useSelector } from 'react-redux';
+import usePagination from '../../hooks/usePagination.js';
 
 const MyHouseholds = () => {
+    const [isLoading, setIsLoading] = useState(true);
+    const [households, setHouseholds] = useState([]);
+    const { itemsForDisplay, totalPages, paginationHandler } = usePagination(households);
     const { user } = useSelector((state) => state.user);
     const navigate = useNavigate();
-    const [isLoading, setIsLoading] = useState(true);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [households, setHouseholds] = useState([]);
     const userId = user?.id;
     const token = user?.token;
 
@@ -27,17 +28,6 @@ const MyHouseholds = () => {
         });
     }, [userId, token]);
 
-    const itemsPerPage = 3;
-    const totalPages = Math.ceil(households?.length / itemsPerPage);
-
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-
-    const itemsForDisplay = households?.slice(startIndex, endIndex);
-
-    const paginationHandler = (page) => {
-        setCurrentPage(page);
-    };
     return (
         <div className="my-households-container">
             <img src="/my-households.jpg" alt="my-households" />

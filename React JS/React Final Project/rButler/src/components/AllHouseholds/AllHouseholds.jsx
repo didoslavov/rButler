@@ -5,11 +5,12 @@ import { getAllHouseholds } from '../../services/householdsService.js';
 import MissingHouseholds from '../MissingHouseholds/MissingHouseholds.jsx';
 import Spinner from '../LoadingSpinner/Spinner.jsx';
 import { paginationStyles } from '../../styles/muiStyles/muiStyles.js';
+import usePagination from '../../hooks/usePagination.js';
 
 const AllHouseholds = () => {
     const [isLoading, setIsLoading] = useState(true);
-    const [currentPage, setCurrentPage] = useState(1);
     const [households, setHouseholds] = useState([]);
+    const { itemsForDisplay, totalPages, paginationHandler } = usePagination(households);
     const [query] = useSearchParams();
 
     const search = query.get('query') || '';
@@ -24,17 +25,6 @@ const AllHouseholds = () => {
             setIsLoading(false);
         });
     }, [search]);
-
-    const itemsPerPage = 4;
-    const totalPages = Math.ceil(households?.length / itemsPerPage);
-
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const itemsForDisplay = households?.slice(startIndex, endIndex);
-
-    const paginationHandler = (page) => {
-        setCurrentPage(page);
-    };
 
     return (
         <div className="my-households-container">
