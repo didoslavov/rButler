@@ -45,7 +45,6 @@ const EditHousehold = ({ household, handleShowEditForm, handleUpdateHousehold })
                 setNotification({
                     notification: [res.success],
                     severity: 'success',
-                    notify: true,
                     open: true,
                 })
             );
@@ -57,7 +56,6 @@ const EditHousehold = ({ household, handleShowEditForm, handleUpdateHousehold })
                 setNotification({
                     notification: error,
                     severity: 'error',
-                    notify: true,
                     open: true,
                 })
             );

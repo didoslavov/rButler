@@ -34,7 +34,6 @@ const CreateListForm = ({ householdId, setIsCreateOpen, handleShowCreateForm, se
                     notification: error,
                     severity: 'error',
                     open: true,
-                    notify: true,
                 })
             );
         }

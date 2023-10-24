@@ -36,7 +36,6 @@ const Details = () => {
                     setNotification({
                         notification: 'Authentication Failed',
                         severity: 'error',
-                        notify: true,
                         open: true,
                     })
                 );

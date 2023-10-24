@@ -35,7 +35,6 @@ const Register = () => {
                     notification: error,
                     severity: 'error',
                     open: true,
-                    notify: true,
                 })
             );
         }

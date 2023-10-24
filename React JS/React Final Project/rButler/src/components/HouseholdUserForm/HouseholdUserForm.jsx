@@ -44,7 +44,6 @@ const AddUserForm = ({ setHousehold, householdId, users, setUsers, handleShowAdd
                 setNotification({
                     notification: [username + ' added successfully to ' + res?.name],
                     severity: 'success',
-                    notify: true,
                     open: true,
                 })
             );
@@ -56,7 +55,6 @@ const AddUserForm = ({ setHousehold, householdId, users, setUsers, handleShowAdd
                 setNotification({
                     notification: error,
                     severity: 'error',
-                    notify: true,
                     open: true,
                 })
             );
@@ -79,7 +77,6 @@ const AddUserForm = ({ setHousehold, householdId, users, setUsers, handleShowAdd
                 setNotification({
                     notification: [username + ' removed successfully from ' + res?.name],
                     severity: 'success',
-                    notify: true,
                     open: true,
                 })
             );
@@ -91,7 +88,6 @@ const AddUserForm = ({ setHousehold, householdId, users, setUsers, handleShowAdd
                 setNotification({
                     notification: error,
                     severity: 'error',
-                    notify: true,
                     open: true,
                 })
             );
