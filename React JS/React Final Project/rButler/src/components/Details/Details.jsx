@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getUserHouseholdById } from '../../services/householdsService.js';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { SpeedDial, SpeedDialAction } from '@mui/material';
-import { AddHomeSharp, ChecklistSharp, HomeSharp, ModeEditSharp, ShareRounded } from '@mui/icons-material';
-import { speedDialActionStyles, speedDialStyles } from '../../styles/muiStyles/muiStyles.js';
 
 import CreateListForm from '../CreateListForm/CreateListForm.jsx';
 import HouseholdUserForm from '../HouseholdUserForm/HouseholdUserForm.jsx';
@@ -15,20 +11,19 @@ import Listings from '../Listings/Listings.jsx';
 import Notification from '../Notification/Notification.jsx';
 import { setNotification } from '../../redux/slices/notificationSlice.js';
 import { useLoading } from '../../hooks/useLoading.js';
+import SpeedDialMenu from '../SpeedDial/SpeedDial.jsx';
 
 const Details = () => {
-    const dispatch = useDispatch();
-    const { notification, severity, open } = useSelector((state) => state.notification);
-    const { user } = useSelector((state) => state.user);
-    const navigate = useNavigate();
-    const { householdId } = useParams();
     const [household, setHousehold] = useState({});
-    const [isEditOpen, setIsEditOpen] = useState(false);
-    const [isCreateOpen, setIsCreateOpen] = useState(false);
-    const [isAddMemberOpen, setIsAddMemberOpen] = useState(false);
-    const [isLoading, handleLoading] = useLoading(true);
     const [lists, setLists] = useState(household.lists || []);
     const [users, setUsers] = useState(household.users || []);
+    const { householdId } = useParams();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { isEditOpen, isCreateOpen, isAddMemberOpen } = useSelector((state) => state.formVisibility);
+    const { notification, severity, open } = useSelector((state) => state.notification);
+    const { user } = useSelector((state) => state.user);
+    const [isLoading, handleLoading] = useLoading(true);
 
     useEffect(() => {
         handleLoading(async () => {
@@ -50,24 +45,6 @@ const Details = () => {
             setUsers(res.users);
         });
     }, [householdId]);
-
-    const handleShowEditForm = () => {
-        setIsEditOpen(!isEditOpen);
-        setIsCreateOpen(false);
-        setIsAddMemberOpen(false);
-    };
-
-    const handleShowCreateForm = () => {
-        setIsCreateOpen(!isCreateOpen);
-        setIsEditOpen(false);
-        setIsAddMemberOpen(false);
-    };
-
-    const handleShowAddMemberForm = () => {
-        setIsAddMemberOpen(!isAddMemberOpen);
-        setIsCreateOpen(false);
-        setIsEditOpen(false);
-    };
 
     const handleUpdateHousehold = async () => {
         const updatedHousehold = await getUserHouseholdById(householdId);
@@ -97,17 +74,9 @@ const Details = () => {
                         </p>
 
                         <div className="listings-container">
-                            {!isEditOpen && !isCreateOpen && !isAddMemberOpen ? (
-                                <Listings handleShowCreateForm={handleShowCreateForm} lists={lists} />
-                            ) : null}
+                            {!isEditOpen && !isCreateOpen && !isAddMemberOpen ? <Listings lists={lists} /> : null}
                             {!isEditOpen && !isAddMemberOpen && isCreateOpen ? (
-                                <CreateListForm
-                                    householdId={householdId}
-                                    lists={lists}
-                                    setLists={setLists}
-                                    setIsCreateOpen={setIsCreateOpen}
-                                    handleShowCreateForm={handleShowCreateForm}
-                                />
+                                <CreateListForm householdId={householdId} lists={lists} setLists={setLists} />
                             ) : null}
                             {!isEditOpen && !isCreateOpen && isAddMemberOpen ? (
                                 <HouseholdUserForm
@@ -115,70 +84,16 @@ const Details = () => {
                                     setUsers={setUsers}
                                     setHousehold={setHousehold}
                                     users={users}
-                                    handleShowAddMemberForm={handleShowAddMemberForm}
                                 />
                             ) : null}
                             {!isCreateOpen && !isAddMemberOpen && isEditOpen ? (
-                                <EditHousehold
-                                    household={household}
-                                    handleShowEditForm={handleShowEditForm}
-                                    handleUpdateHousehold={handleUpdateHousehold}
-                                />
+                                <EditHousehold household={household} handleUpdateHousehold={handleUpdateHousehold} />
                             ) : null}
                         </div>
                         {notification && <Notification open={open} message={notification} severity={severity} />}
                     </>
                 )}
-                <div className="details-speed-dial">
-                    {user && (
-                        <SpeedDial sx={speedDialStyles} ariaLabel="Household Controls" direction="right" icon={<HomeSharp />}>
-                            {user.id === household.master && [
-                                <SpeedDialAction
-                                    sx={speedDialActionStyles}
-                                    key={'Add Household Member'}
-                                    icon={
-                                        <Link className="details-speed-dial-link" onClick={handleShowAddMemberForm}>
-                                            <AddHomeSharp />
-                                        </Link>
-                                    }
-                                    tooltipTitle={'Add Household Member'}
-                                />,
-                                <SpeedDialAction
-                                    onClick={handleShowEditForm}
-                                    sx={speedDialActionStyles}
-                                    key={'Edit Household'}
-                                    icon={
-                                        <Link className="details-speed-dial-link">
-                                            <ModeEditSharp />
-                                        </Link>
-                                    }
-                                    tooltipTitle={'Edit Household'}
-                                />,
-                            ]}
-                            <SpeedDialAction
-                                onClick={handleShowCreateForm}
-                                sx={speedDialActionStyles}
-                                key={'Create List'}
-                                icon={
-                                    <Link className="details-speed-dial-link">
-                                        <ChecklistSharp />
-                                    </Link>
-                                }
-                                tooltipTitle={'Create List'}
-                            />
-                            <SpeedDialAction
-                                sx={speedDialActionStyles}
-                                key={'Share Household'}
-                                icon={
-                                    <Link className="details-speed-dial-link">
-                                        <ShareRounded />
-                                    </Link>
-                                }
-                                tooltipTitle={'Share Household'}
-                            />
-                        </SpeedDial>
-                    )}
-                </div>
+                <div className="details-speed-dial">{user && <SpeedDialMenu household={household} />}</div>
             </div>
         </div>
     );
