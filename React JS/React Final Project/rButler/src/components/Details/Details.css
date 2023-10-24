@@ -35,27 +35,6 @@
     margin-top: 24px;
 }
 
-.details-speed-dial {
-    position: absolute;
-    bottom: 16px;
-    left: 51%;
-}
-
-.details-speed-dial-link {
-    color: var(--light-grey);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.details-speed-dial-link:hover {
-    border: 1px solid var(--dark-blue);
-    color: var(--dark-blue);
-    border-radius: 100%;
-}
-
 .MuiList-root {
     background-color: var(--light-grey);
     color: var(--dark-blue);
