@@ -4,6 +4,7 @@ const initialState = {
     isEditOpen: false,
     isCreateOpen: false,
     isAddMemberOpen: false,
+    isShareOpen: false,
 };
 
 const formVisibilitySlice = createSlice({

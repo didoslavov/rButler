@@ -11,17 +11,19 @@ import { setFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
 const SpeedDialMenu = ({ household }) => {
     const { user } = useSelector((state) => state.user);
     const dispatch = useDispatch();
-    const { isEditOpen, isCreateOpen, isAddMemberOpen } = useSelector((state) => state.formVisibility);
+    const { isEditOpen, isCreateOpen, isAddMemberOpen, isShareOpen } = useSelector((state) => state.formVisibility);
 
     const handleShowEditForm = () => {
         dispatch(setFormVisibility({ formType: 'isEditOpen', value: !isEditOpen }));
         dispatch(setFormVisibility({ formType: 'isCreateOpen', value: false }));
+        dispatch(setFormVisibility({ formType: 'isShareOpen', value: false }));
         dispatch(setFormVisibility({ formType: 'isAddMemberOpen', value: false }));
     };
 
     const handleShowCreateForm = () => {
         dispatch(setFormVisibility({ formType: 'isCreateOpen', value: !isCreateOpen }));
         dispatch(setFormVisibility({ formType: 'isEditOpen', value: false }));
+        dispatch(setFormVisibility({ formType: 'isShareOpen', value: false }));
         dispatch(setFormVisibility({ formType: 'isAddMemberOpen', value: false }));
     };
 
@@ -29,6 +31,14 @@ const SpeedDialMenu = ({ household }) => {
         dispatch(setFormVisibility({ formType: 'isAddMemberOpen', value: !isAddMemberOpen }));
         dispatch(setFormVisibility({ formType: 'isCreateOpen', value: false }));
         dispatch(setFormVisibility({ formType: 'isEditOpen', value: false }));
+        dispatch(setFormVisibility({ formType: 'isShareOpen', value: false }));
+    };
+
+    const handleShowShare = () => {
+        dispatch(setFormVisibility({ formType: 'isShareOpen', value: !isShareOpen }));
+        dispatch(setFormVisibility({ formType: 'isCreateOpen', value: false }));
+        dispatch(setFormVisibility({ formType: 'isEditOpen', value: false }));
+        dispatch(setFormVisibility({ formType: 'isAddMemberOpen', value: false }));
     };
 
     return (
@@ -69,6 +79,7 @@ const SpeedDialMenu = ({ household }) => {
                     tooltipTitle={'Create List'}
                 />
                 <SpeedDialAction
+                    onClick={handleShowShare}
                     sx={speedDialActionStyles}
                     key={'Share Household'}
                     icon={

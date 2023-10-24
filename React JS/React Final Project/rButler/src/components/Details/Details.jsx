@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import CreateListForm from '../CreateListForm/CreateListForm.jsx';
@@ -13,6 +13,7 @@ import SpeedDialMenu from '../SpeedDial/SpeedDial.jsx';
 import { getUserHouseholdById } from '../../services/householdsService.js';
 import { setNotification } from '../../redux/slices/notificationSlice.js';
 import { useLoading } from '../../hooks/useLoading.js';
+import ShareComponent from '../Share/Share.jsx';
 
 const Details = () => {
     const [household, setHousehold] = useState({});
@@ -21,10 +22,12 @@ const Details = () => {
     const { householdId } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { isEditOpen, isCreateOpen, isAddMemberOpen } = useSelector((state) => state.formVisibility);
+    const { isEditOpen, isCreateOpen, isAddMemberOpen, isShareOpen } = useSelector((state) => state.formVisibility);
     const { notification, severity, open } = useSelector((state) => state.notification);
     const { user } = useSelector((state) => state.user);
     const [isLoading, handleLoading] = useLoading(true);
+
+    const url = window.location.href;
 
     useEffect(() => {
         handleLoading(async () => {
@@ -75,7 +78,7 @@ const Details = () => {
                         </p>
 
                         <div className="listings-container">
-                            {!isEditOpen && !isCreateOpen && !isAddMemberOpen ? <Listings lists={lists} /> : null}
+                            {!isEditOpen && !isCreateOpen && !isAddMemberOpen && !isShareOpen ? <Listings lists={lists} /> : null}
                             {!isEditOpen && !isAddMemberOpen && isCreateOpen ? (
                                 <CreateListForm householdId={householdId} lists={lists} setLists={setLists} />
                             ) : null}
@@ -89,6 +92,9 @@ const Details = () => {
                             ) : null}
                             {!isCreateOpen && !isAddMemberOpen && isEditOpen ? (
                                 <EditHousehold household={household} handleUpdateHousehold={handleUpdateHousehold} />
+                            ) : null}
+                            {!isCreateOpen && !isAddMemberOpen && !isEditOpen && isShareOpen ? (
+                                <ShareComponent url={url} />
                             ) : null}
                         </div>
                         {notification && <Notification open={open} message={notification} severity={severity} />}
