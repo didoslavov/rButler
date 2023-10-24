@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import './App.css';
+
 import Home from './components/Home/Home.jsx';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Default from './components/Default/Default.jsx';
@@ -11,6 +11,8 @@ import ShoppingList from './components/ShoppingList/ShoppingList.jsx';
 import TodoList from './components/TodoList/TodoList.jsx';
 import AllHouseholds from './components/AllHouseholds/AllHouseholds.jsx';
 import Footer from './components/Footer/Footer.jsx';
+
+import './App.css';
 
 function App() {
     return (
