@@ -14,6 +14,7 @@ import Spinner from '../LoadingSpinner/Spinner.jsx';
 import Listings from '../Listings/Listings.jsx';
 import Notification from '../Notification/Notification.jsx';
 import { setNotification } from '../../redux/slices/notificationSlice.js';
+import { useLoading } from '../../hooks/useLoading.js';
 
 const Details = () => {
     const dispatch = useDispatch();
@@ -25,12 +26,14 @@ const Details = () => {
     const [isEditOpen, setIsEditOpen] = useState(false);
     const [isCreateOpen, setIsCreateOpen] = useState(false);
     const [isAddMemberOpen, setIsAddMemberOpen] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, handleLoading] = useLoading(true);
     const [lists, setLists] = useState(household.lists || []);
     const [users, setUsers] = useState(household.users || []);
 
     useEffect(() => {
-        getUserHouseholdById(householdId).then((res) => {
+        handleLoading(async () => {
+            const res = await getUserHouseholdById(householdId);
+
             if (res.error) {
                 dispatch(
                     setNotification({
@@ -45,7 +48,6 @@ const Details = () => {
             setHousehold(res);
             setLists(res.lists);
             setUsers(res.users);
-            setIsLoading(false);
         });
     }, [householdId]);
 

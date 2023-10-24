@@ -7,9 +7,10 @@ import Spinner from '../LoadingSpinner/Spinner.jsx';
 import { chipStyles, paginationStyles } from '../../styles/muiStyles/muiStyles.js';
 import { useSelector } from 'react-redux';
 import usePagination from '../../hooks/usePagination.js';
+import { useLoading } from '../../hooks/useLoading.js';
 
 const MyHouseholds = () => {
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, handleLoading] = useLoading(true);
     const [households, setHouseholds] = useState([]);
     const { itemsForDisplay, totalPages, paginationHandler } = usePagination(households);
     const { user } = useSelector((state) => state.user);
@@ -18,13 +19,21 @@ const MyHouseholds = () => {
     const token = user?.token;
 
     useEffect(() => {
-        getUserHouseholds(userId, token).then((res) => {
+        handleLoading(async () => {
+            const res = await getUserHouseholds(userId, token);
+
             if (res.error) {
+                dispatch(
+                    setNotification({
+                        notification: 'Authentication Failed',
+                        severity: 'error',
+                        open: true,
+                    })
+                );
                 navigate('/profile/auth');
             }
 
             setHouseholds(res);
-            setIsLoading(false);
         });
     }, [userId, token]);
 

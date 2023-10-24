@@ -6,23 +6,25 @@ import MissingHouseholds from '../MissingHouseholds/MissingHouseholds.jsx';
 import Spinner from '../LoadingSpinner/Spinner.jsx';
 import { paginationStyles } from '../../styles/muiStyles/muiStyles.js';
 import usePagination from '../../hooks/usePagination.js';
+import { useLoading } from '../../hooks/useLoading.js';
 
 const AllHouseholds = () => {
-    const [isLoading, setIsLoading] = useState(true);
     const [households, setHouseholds] = useState([]);
+    const [isLoading, handleLoading] = useLoading(true);
     const { itemsForDisplay, totalPages, paginationHandler } = usePagination(households);
     const [query] = useSearchParams();
 
     const search = query.get('query') || '';
 
     useEffect(() => {
-        getAllHouseholds(search).then((res) => {
+        handleLoading(async () => {
+            const res = await getAllHouseholds(search);
+
             if (!res.length) {
                 return setHouseholds([{ _id: 1, name: 'Sorry', presentation: 'No households found!' }]);
             }
 
             setHouseholds(res);
-            setIsLoading(false);
         });
     }, [search]);
 
