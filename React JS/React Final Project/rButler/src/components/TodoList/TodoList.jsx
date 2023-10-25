@@ -36,6 +36,11 @@ const TodoList = () => {
             }
 
             const list = await addListItem(listId, { text });
+
+            if (list.errors) {
+                throw list.errors;
+            }
+
             reset();
             setItems(list.items);
         } catch (error) {
@@ -66,7 +71,7 @@ const TodoList = () => {
 
     useEffect(() => {
         getListById(listId).then((list) => setItems(list?.items));
-    }, []);
+    }, [listId]);
 
     return (
         <>

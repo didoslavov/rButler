@@ -27,6 +27,7 @@ async function request(method, url, data) {
             }
 
             const error = await response.json();
+
             return error;
         }
 
