@@ -1,5 +1,5 @@
 import { post } from '../api/requester.js';
-import { clearUserData, setUserData } from '../utils/userData.js';
+import { clearUserData } from '../utils/userData.js';
 import { authEndpoints } from '../api/endpoints.js';
 
 export async function login(credentials) {
