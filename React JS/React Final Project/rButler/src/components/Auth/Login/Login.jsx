@@ -53,9 +53,6 @@ const Login = () => {
                     <p className="forgot-pass">Forgot password?</p>
                 </Link>
                 <input type="submit" className="submit button" value={'Sign In'} />
-                <button type="button" className="fb-btn button">
-                    Connect with <span>facebook</span>
-                </button>
             </form>
         </div>
     );
