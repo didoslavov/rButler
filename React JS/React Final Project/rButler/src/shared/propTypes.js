@@ -36,3 +36,7 @@ export const NotificationTypes = {
     message: PropTypes.string.isRequired,
     severity: PropTypes.string.isRequired,
 };
+
+export const ShareTypes = {
+    url: PropTypes.string.isRequired,
+};

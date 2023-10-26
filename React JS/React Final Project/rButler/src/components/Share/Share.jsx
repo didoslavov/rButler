@@ -7,6 +7,7 @@ import { IconButton } from '@mui/material';
 import { FacebookShareButton, TelegramShareButton, EmailShareButton } from 'react-share';
 
 import { setFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
+import { ShareTypes } from '../../shared/propTypes.js';
 
 const ShareComponent = ({ url }) => {
     const dispatch = useDispatch();
@@ -44,5 +45,7 @@ const ShareComponent = ({ url }) => {
         </>
     );
 };
+
+ShareComponent.propTypes = ShareTypes;
 
 export default ShareComponent;
