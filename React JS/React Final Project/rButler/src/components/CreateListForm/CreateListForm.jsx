@@ -12,7 +12,7 @@ import { setFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
 import { createList } from '../../services/listsService.js';
 import { CreateListFormTypes } from '../../shared/propTypes.js';
 
-const CreateListForm = ({ householdId, setIsCreateOpen, setLists, lists }) => {
+const CreateListForm = ({ householdId, setLists, lists }) => {
     const dispatch = useDispatch();
     const { isCreateOpen } = useSelector((state) => state.formVisibility);
     const { user } = useSelector((state) => state.user);
@@ -39,7 +39,7 @@ const CreateListForm = ({ householdId, setIsCreateOpen, setLists, lists }) => {
 
             setLists([...lists, res]);
 
-            setIsCreateOpen(false);
+            dispatch(setFormVisibility({ formType: 'isCreateOpen', value: !isCreateOpen }));
         } catch (error) {
             dispatch(
                 setNotification({
