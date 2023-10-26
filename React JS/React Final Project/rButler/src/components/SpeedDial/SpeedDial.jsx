@@ -6,6 +6,7 @@ import { AddHomeSharp, ChecklistSharp, HomeSharp, ModeEditSharp, ShareRounded } 
 import { speedDialActionStyles, speedDialStyles } from '../../styles/muiStyles/muiStyles.js';
 
 import { setFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
+import { SpeedDialTypes } from '../../shared/propTypes.js';
 
 const SpeedDialMenu = ({ household }) => {
     const { user } = useSelector((state) => state.user);
@@ -92,5 +93,7 @@ const SpeedDialMenu = ({ household }) => {
         </div>
     );
 };
+
+SpeedDialMenu.propTypes = SpeedDialTypes;
 
 export default SpeedDialMenu;

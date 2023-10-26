@@ -1,42 +1,46 @@
-import PropTypes from 'prop-types';
+import { bool, func, string, array, object } from 'prop-types';
 
 export const AlertDialogPropTypes = {
-    open: PropTypes.bool.isRequired,
-    handleClose: PropTypes.func.isRequired,
-    handleDelete: PropTypes.func.isRequired,
-    message: PropTypes.string.isRequired,
+    open: bool.isRequired,
+    handleClose: func.isRequired,
+    handleDelete: func.isRequired,
+    message: string.isRequired,
 };
 
 export const CreateListFormTypes = {
-    householdId: PropTypes.string.isRequired,
-    setIsCreateOpen: PropTypes.func.isRequired,
-    setLists: PropTypes.func.isRequired,
-    lists: PropTypes.array.isRequired,
+    householdId: string.isRequired,
+    setIsCreateOpen: func.isRequired,
+    setLists: func.isRequired,
+    lists: array.isRequired,
 };
 
 export const EditHouseholdTypes = {
-    household: PropTypes.object.isRequired,
-    handleUpdateHousehold: PropTypes.func.isRequired,
+    household: object.isRequired,
+    handleUpdateHousehold: func.isRequired,
 };
 
 export const HouseholdUserFormTypes = {
-    setHousehold: PropTypes.func.isRequired,
-    householdId: PropTypes.string.isRequired,
-    users: PropTypes.array.isRequired,
-    setUsers: PropTypes.func.isRequired,
+    setHousehold: func.isRequired,
+    householdId: string.isRequired,
+    users: array.isRequired,
+    setUsers: func.isRequired,
 };
 
 export const ListingsTypes = {
-    lists: PropTypes.array.isRequired,
-    handleShowCreateForm: PropTypes.func.isRequired,
+    lists: array.isRequired,
+    handleShowCreateForm: func.isRequired,
 };
 
 export const NotificationTypes = {
-    open: PropTypes.bool.isRequired,
-    message: PropTypes.string.isRequired,
-    severity: PropTypes.string.isRequired,
+    open: bool.isRequired,
+    message: string.isRequired,
+    severity: string.isRequired,
 };
 
 export const ShareTypes = {
-    url: PropTypes.string.isRequired,
+    url: string.isRequired,
+};
+
+export const SpeedDialTypes = {
+    household: object.isRequired,
 };
