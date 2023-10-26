@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { Alert, IconButton, Snackbar } from '@mui/material';

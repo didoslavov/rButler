@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { AppBar, Container, Toolbar, Typography, IconButton, Tooltip } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
