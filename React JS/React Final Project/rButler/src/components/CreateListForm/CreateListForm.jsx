@@ -10,6 +10,7 @@ import { setNotification } from '../../redux/slices/notificationSlice.js';
 import { setFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
 
 import { createList } from '../../services/listsService.js';
+import { CreateListFormTypes } from '../../shared/propTypes.js';
 
 const CreateListForm = ({ householdId, setIsCreateOpen, setLists, lists }) => {
     const dispatch = useDispatch();
@@ -85,5 +86,7 @@ const CreateListForm = ({ householdId, setIsCreateOpen, setLists, lists }) => {
         </>
     );
 };
+
+CreateListForm.propTypes = CreateListFormTypes;
 
 export default CreateListForm;

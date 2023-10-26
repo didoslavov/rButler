@@ -6,6 +6,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { confirmDialogStyles } from '../../styles/muiStyles/muiStyles.js';
 
+import { AlertDialogPropTypes } from '../../shared/propTypes.js';
+
 const AlertDialog = ({ open, handleClose, handleDelete, message }) => {
     return (
         <Dialog
@@ -25,5 +27,7 @@ const AlertDialog = ({ open, handleClose, handleDelete, message }) => {
         </Dialog>
     );
 };
+
+AlertDialog.propTypes = AlertDialogPropTypes;
 
 export default AlertDialog;
