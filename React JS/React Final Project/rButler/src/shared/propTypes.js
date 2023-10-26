@@ -25,3 +25,8 @@ export const HouseholdUserFormTypes = {
     users: PropTypes.array.isRequired,
     setUsers: PropTypes.func.isRequired,
 };
+
+export const ListingsTypes = {
+    lists: PropTypes.array.isRequired,
+    handleShowCreateForm: PropTypes.func.isRequired,
+};

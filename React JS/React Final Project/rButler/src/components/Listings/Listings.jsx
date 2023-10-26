@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { ListingsTypes } from '../../shared/propTypes.js';
 
 const Listings = ({ lists, handleShowCreateForm }) => {
     const { user } = useSelector((state) => state.user);
@@ -34,5 +35,7 @@ const Listings = ({ lists, handleShowCreateForm }) => {
         </div>
     );
 };
+
+Listings.propTypes = ListingsTypes;
 
 export default Listings;
