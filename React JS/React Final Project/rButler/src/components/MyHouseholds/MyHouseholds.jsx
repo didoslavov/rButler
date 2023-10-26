@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Chip, Pagination } from '@mui/material';
 import { chipStyles, paginationStyles } from '../../styles/muiStyles/muiStyles.js';
@@ -12,8 +12,10 @@ import usePagination from '../../hooks/usePagination.js';
 import { useLoading } from '../../hooks/useLoading.js';
 
 import { getUserHouseholds } from '../../services/householdsService.js';
+import { setNotification } from '../../redux/slices/notificationSlice.js';
 
 const MyHouseholds = () => {
+    const dispatch = useDispatch();
     const [isLoading, handleLoading] = useLoading(true);
     const [households, setHouseholds] = useState([]);
     const { itemsForDisplay, totalPages, paginationHandler } = usePagination(households);
@@ -39,7 +41,7 @@ const MyHouseholds = () => {
 
             setHouseholds(res);
         });
-    }, [userId, token]);
+    }, [userId, token, navigate, handleLoading]);
 
     return (
         <div className="my-households-container">
