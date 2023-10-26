@@ -1,88 +1,14 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-
 import { Divider, IconButton, Tooltip } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useSelector } from 'react-redux';
 
-import AlertDialog from '../ConfirmModal/AlertDialog.jsx';
-import Notification from '../Notification/Notification.jsx';
-
-import { setNotification } from '../../redux/slices/notificationSlice.js';
-
-import { addListItem, getListById, removeList, removeListItem } from '../../services/listsService.js';
-
-const ShoppingList = () => {
-    const dispatch = useDispatch();
-    const { notification, severity, open } = useSelector((state) => state.notification);
+const ShoppingList = ({ handleSubmit, register, onAddItem, items, handleGoBack, handleClickDelete, handleCheckItem }) => {
     const { user } = useSelector((state) => state.user);
-    const { listId } = useParams();
-    const navigate = useNavigate();
-    const [openAlertModal, setOpenAlertModal] = useState(false);
-    const [items, setItems] = useState([]);
-    const { register, handleSubmit, reset } = useForm();
-
-    const handleClickDelete = () => {
-        setOpenAlertModal(true);
-    };
-
-    const handleClose = () => {
-        setOpenAlertModal(false);
-    };
-
-    const onAddItem = async ({ text, qty }) => {
-        try {
-            if (!text || !qty) {
-                throw ['All fields are required!'];
-            }
-
-            const list = await addListItem(listId, { text, qty });
-            reset();
-            setItems(list.items);
-        } catch (error) {
-            dispatch(
-                setNotification({
-                    notification: error,
-                    severity: 'error',
-                    open: true,
-                })
-            );
-        }
-    };
-
-    const handleCheckItem = async (itemId) => {
-        const list = await removeListItem(itemId, listId);
-        setItems(list.items);
-    };
-
-    const handleDelete = async () => {
-        await removeList(listId);
-        navigate(-1);
-    };
-
-    const handleGoBack = () => {
-        navigate(-1);
-    };
-
-    useEffect(() => {
-        getListById(listId).then((list) => {
-            setItems(list?.items);
-        });
-    }, [listId]);
 
     return (
         <>
-            {open && (
-                <AlertDialog
-                    handleClose={handleClose}
-                    handleDelete={handleDelete}
-                    open={openAlertModal}
-                    message={'You are about to delete the list.'}
-                />
-            )}
             <div className="shopping-list-container">
                 <div className="list-container">
                     <h2 className="welcome-list">Shopping List</h2>
@@ -158,7 +84,6 @@ const ShoppingList = () => {
                 </div>
                 <img src="/shopping-list.jpg" alt="list image" className="list-image" />
             </div>
-            {notification && <Notification open={open} message={notification} severity={severity} />}
         </>
     );
 };
