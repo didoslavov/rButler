@@ -30,3 +30,9 @@ export const ListingsTypes = {
     lists: PropTypes.array.isRequired,
     handleShowCreateForm: PropTypes.func.isRequired,
 };
+
+export const NotificationTypes = {
+    open: PropTypes.bool.isRequired,
+    message: PropTypes.string.isRequired,
+    severity: PropTypes.string.isRequired,
+};

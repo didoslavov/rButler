@@ -5,6 +5,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { snackbarStyles } from '../../styles/muiStyles/muiStyles.js';
 
 import { setNotificationOpen } from '../../redux/slices/notificationSlice.js';
+import { NotificationTypes } from '../../shared/propTypes.js';
 
 const Notification = ({ open, message, severity }) => {
     const dispatch = useDispatch();
@@ -42,5 +43,7 @@ const Notification = ({ open, message, severity }) => {
         </div>
     );
 };
+
+Notification.propTypes = NotificationTypes;
 
 export default Notification;
