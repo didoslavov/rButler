@@ -18,3 +18,10 @@ export const EditHouseholdTypes = {
     household: PropTypes.object.isRequired,
     handleUpdateHousehold: PropTypes.func.isRequired,
 };
+
+export const HouseholdUserFormTypes = {
+    setHousehold: PropTypes.func.isRequired,
+    householdId: PropTypes.string.isRequired,
+    users: PropTypes.array.isRequired,
+    setUsers: PropTypes.func.isRequired,
+};
