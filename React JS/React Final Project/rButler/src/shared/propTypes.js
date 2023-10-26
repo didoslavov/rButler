@@ -13,3 +13,8 @@ export const CreateListFormTypes = {
     setLists: PropTypes.func.isRequired,
     lists: PropTypes.array.isRequired,
 };
+
+export const EditHouseholdTypes = {
+    household: PropTypes.object.isRequired,
+    handleUpdateHousehold: PropTypes.func.isRequired,
+};

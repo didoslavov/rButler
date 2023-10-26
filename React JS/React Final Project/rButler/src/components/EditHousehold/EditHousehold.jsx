@@ -12,6 +12,7 @@ import { setNotification } from '../../redux/slices/notificationSlice.js';
 import { setFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
 
 import { deleteHousehold, updateHousehold } from '../../services/householdsService.js';
+import { EditHouseholdTypes } from '../../shared/propTypes.js';
 
 const EditHousehold = ({ household, handleUpdateHousehold }) => {
     const dispatch = useDispatch();
@@ -114,5 +115,7 @@ const EditHousehold = ({ household, handleUpdateHousehold }) => {
         </>
     );
 };
+
+EditHousehold.propTypes = EditHouseholdTypes;
 
 export default EditHousehold;
