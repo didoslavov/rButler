@@ -6,14 +6,19 @@ import { Avatar } from '@mui/material';
 import Search from '../Search/Search.jsx';
 
 import { logoutUser } from '../../redux/slices/userSlice.js';
+import { logout } from '../../services/authService.js';
 
 const Navbar = () => {
     const { user } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const userId = user?.id;
 
-    const onLogout = () => {
-        dispatch(logoutUser());
+    const onLogout = async () => {
+        const { success } = await logout();
+
+        if (success) {
+            dispatch(logoutUser());
+        }
     };
 
     return (

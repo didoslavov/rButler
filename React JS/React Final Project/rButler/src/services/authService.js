@@ -23,9 +23,5 @@ export const userRegister = async (credentials) => {
 };
 
 export const logout = async () => {
-    const userData = await post(authEndpoints.logout);
-
-    if (userData.success) {
-        clearUserData();
-    }
+    return post(authEndpoints.logout);
 };
