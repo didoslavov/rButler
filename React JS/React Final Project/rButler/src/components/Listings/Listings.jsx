@@ -1,9 +1,15 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ListingsTypes } from '../../shared/propTypes.js';
+import { setFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
 
-const Listings = ({ lists, handleShowCreateForm }) => {
+const Listings = ({ lists }) => {
     const { user } = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+
+    const handleShowCreateForm = () => {
+        dispatch(setFormVisibility({ formType: 'isCreateOpen', value: true }));
+    };
 
     return (
         <div className="details-lists-container">
