@@ -48,7 +48,7 @@ const Details = () => {
             setLists(res.lists);
             setUsers(res.users);
         });
-    }, [householdId]);
+    }, [householdId, handleLoading, dispatch, navigate]);
 
     const handleUpdateHousehold = async () => {
         const updatedHousehold = await getUserHouseholdById(householdId);

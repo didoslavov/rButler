@@ -41,7 +41,7 @@ const MyHouseholds = () => {
 
             setHouseholds(res);
         });
-    }, [userId, token, navigate, handleLoading]);
+    }, [userId, token, navigate, dispatch, handleLoading]);
 
     return (
         <div className="my-households-container">

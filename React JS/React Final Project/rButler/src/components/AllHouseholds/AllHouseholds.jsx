@@ -30,7 +30,7 @@ const AllHouseholds = () => {
 
             setHouseholds(res);
         });
-    }, [search]);
+    }, [search, handleLoading]);
 
     return (
         <div className="my-households-container">
