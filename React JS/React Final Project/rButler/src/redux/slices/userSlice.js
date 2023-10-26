@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { logout } from '../../services/authService.js';
 
 const storedUser = localStorage.getItem('userData');
 const initialState = {

@@ -9,7 +9,6 @@ export const AlertDialogPropTypes = {
 
 export const CreateListFormTypes = {
     householdId: string.isRequired,
-    setIsCreateOpen: func.isRequired,
     setLists: func.isRequired,
     lists: array.isRequired,
 };
@@ -28,12 +27,11 @@ export const HouseholdUserFormTypes = {
 
 export const ListingsTypes = {
     lists: array.isRequired,
-    handleShowCreateForm: func.isRequired,
 };
 
 export const NotificationTypes = {
     open: bool.isRequired,
-    message: string.isRequired,
+    message: array.isRequired,
     severity: string.isRequired,
 };
 
