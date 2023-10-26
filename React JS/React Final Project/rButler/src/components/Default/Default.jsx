@@ -27,7 +27,7 @@ const Default = () => {
 
                 <div className="default-text">
                     <h4 className="default-text-header border-bottom">
-                        Ah, it appears you've taken a detour into uncharted territory.
+                        Ah, it appears you&apos;ve taken a detour into uncharted territory.
                     </h4>
                     <p className="default-text-message">
                         Fear not, dear guest, for even in the land of <span className="default-text-404">404</span> your digital
