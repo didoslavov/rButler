@@ -1,15 +1,37 @@
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import Notification from '../Notification/Notification.jsx';
+
+import { setNotification } from '../../redux/slices/notificationSlice.js';
 
 const Home = () => {
+    const location = useLocation();
+    const dispatch = useDispatch();
+    const { notification, severity, open } = useSelector((state) => state.notification);
     const { user } = useSelector((state) => state.user);
     const navigate = useNavigate();
+
+    const { redirectError } = location.state || '';
 
     const handleInfoNavigate = () => {
         navigate('/more-info');
     };
 
     const handleMyHouseholdsNavigate = () => (user ? navigate('/households/' + user.id) : navigate('/profile/auth'));
+
+    useEffect(() => {
+        if (redirectError) {
+            dispatch(
+                setNotification({
+                    notification: [redirectError],
+                    severity: 'error',
+                    open: true,
+                })
+            );
+        }
+    }, [redirectError, dispatch, setNotification]);
 
     return (
         <div className="landing-container">
@@ -39,6 +61,7 @@ const Home = () => {
                 <div className="air air3"></div>
                 <div className="air air4"></div>
             </div>
+            {notification && <Notification open={open} message={notification} severity={severity} />}
         </div>
     );
 };
