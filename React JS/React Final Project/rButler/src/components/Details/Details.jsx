@@ -14,6 +14,7 @@ import ShareComponent from '../Share/Share.jsx';
 import { getUserHouseholdById } from '../../services/householdsService.js';
 import { setNotification } from '../../redux/slices/notificationSlice.js';
 import { useLoading } from '../../hooks/useLoading.js';
+import { clearFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
 
 const Details = () => {
     const { householdId } = useParams();
@@ -27,12 +28,17 @@ const Details = () => {
     const [household, setHousehold] = useState({});
     const [lists, setLists] = useState(household.lists || []);
     const [users, setUsers] = useState(household.users || []);
+    const [isHouseholdOwner, setIsHouseholdOwner] = useState(false);
 
     const url = window.location.href;
 
     useEffect(() => {
         handleLoading(async () => {
             const res = await getUserHouseholdById(householdId);
+
+            if (!user) {
+                dispatch(clearFormVisibility());
+            }
 
             if (res.error) {
                 dispatch(
@@ -48,6 +54,7 @@ const Details = () => {
             setHousehold(res);
             setLists(res.lists);
             setUsers(res.users);
+            setIsHouseholdOwner(res.users.some((m) => m.role === 'Master' && m.user?._id === user?.id));
         });
     }, [householdId, handleLoading, dispatch, navigate]);
 
@@ -79,7 +86,9 @@ const Details = () => {
                         </p>
 
                         <div className="listings-container">
-                            {!isEditOpen && !isCreateOpen && !isAddMemberOpen && !isShareOpen && <Listings lists={lists} />}
+                            {!isEditOpen && !isCreateOpen && !isAddMemberOpen && !isShareOpen && (
+                                <Listings lists={lists} isHouseholdOwner={isHouseholdOwner} />
+                            )}
                             {!isEditOpen && !isAddMemberOpen && isCreateOpen && (
                                 <CreateListForm householdId={householdId} lists={lists} setLists={setLists} />
                             )}
@@ -99,7 +108,7 @@ const Details = () => {
                         {notification && <Notification open={open} message={notification} severity={severity} />}
                     </>
                 )}
-                <div className="details-speed-dial">{user && <SpeedDialMenu household={household} />}</div>
+                <div className="details-speed-dial">{user && <SpeedDialMenu isHouseholdOwner={isHouseholdOwner} />}</div>
             </div>
         </div>
     );

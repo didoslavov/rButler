@@ -15,8 +15,9 @@ const formVisibilitySlice = createSlice({
             const { formType, value } = action.payload;
             state[formType] = value;
         },
+        clearFormVisibility: () => initialState,
     },
 });
 
-export const { setFormVisibility } = formVisibilitySlice.actions;
+export const { setFormVisibility, clearFormVisibility } = formVisibilitySlice.actions;
 export default formVisibilitySlice.reducer;
