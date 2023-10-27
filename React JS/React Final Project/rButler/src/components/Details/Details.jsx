@@ -54,9 +54,9 @@ const Details = () => {
             setHousehold(res);
             setLists(res.lists);
             setUsers(res.users);
-            setIsHouseholdOwner(res.users.some((m) => m.role === 'Master' && m.user?._id === user?.id));
+            setIsHouseholdOwner(res.users.some((u) => u.role === 'Master' && u.user?._id === user?.id));
         });
-    }, [householdId, handleLoading, dispatch, navigate]);
+    }, [householdId, handleLoading, dispatch, navigate, user]);
 
     const handleUpdateHousehold = async () => {
         const updatedHousehold = await getUserHouseholdById(householdId);

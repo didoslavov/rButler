@@ -1,6 +1,7 @@
 import { IconButton, Tooltip } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { ListActionIconsTypes } from '../../shared/propTypes.js';
 
 const ListActionIcons = ({ handleGoBack, handleClickDelete, user }) => {
     return (
@@ -32,5 +33,7 @@ const ListActionIcons = ({ handleGoBack, handleClickDelete, user }) => {
         </div>
     );
 };
+
+ListActionIcons.propTypes = ListActionIconsTypes;
 
 export default ListActionIcons;

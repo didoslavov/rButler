@@ -40,5 +40,30 @@ export const ShareTypes = {
 };
 
 export const SpeedDialTypes = {
-    household: object.isRequired,
+    isHouseholdOwner: bool.isRequired,
+};
+
+export const ListTypes = {
+    type: string.isRequired,
+};
+
+export const ListsTypes = {
+    handleSubmit: func.isRequired,
+    register: func.isRequired,
+    onAddItem: func.isRequired,
+    items: array.isRequired,
+    handleGoBack: func.isRequired,
+    handleClickDelete: func.isRequired,
+    handleCheckItem: func.isRequired,
+};
+
+export const ListActionIconsTypes = {
+    handleGoBack: func.isRequired,
+    handleClickDelete: func.isRequired,
+    user: object.isRequired,
+};
+
+export const ListItemAttributesTypes = {
+    itemId: string.isRequired,
+    handleCheckItem: func.isRequired,
 };

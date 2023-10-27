@@ -10,6 +10,7 @@ import { addListItem, getListById, removeList, removeListItem } from '../../serv
 import { setNotification } from '../../redux/slices/notificationSlice.js';
 import ShoppingList from '../ShoppingList/ShoppingList.jsx';
 import TodoList from '../TodoList/TodoList.jsx';
+import { ListTypes } from '../../shared/propTypes.js';
 
 const List = ({ type }) => {
     const { listId } = useParams();
@@ -112,5 +113,7 @@ const List = ({ type }) => {
         </>
     );
 };
+
+List.propTypes = ListTypes;
 
 export default List;

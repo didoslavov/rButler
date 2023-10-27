@@ -1,5 +1,6 @@
 import CheckIcon from '@mui/icons-material/Check';
 import { Divider, IconButton } from '@mui/material';
+import { ListItemAttributesTypes } from '../../shared/propTypes.js';
 
 const ListItemAttributes = ({ itemId, handleCheckItem }) => {
     return (
@@ -11,5 +12,7 @@ const ListItemAttributes = ({ itemId, handleCheckItem }) => {
         </>
     );
 };
+
+ListItemAttributes.propTypes = ListItemAttributesTypes;
 
 export default ListItemAttributes;

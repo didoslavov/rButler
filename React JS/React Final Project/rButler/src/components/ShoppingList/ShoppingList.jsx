@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import ListItemAttributes from '../ListItemAttributes/ListItemAttributes.jsx';
 import ListActionIcons from '../ListActionIcons/ListActionIcons.jsx';
+import { ListsTypes } from '../../shared/propTypes.js';
 
 const ShoppingList = ({ handleSubmit, register, onAddItem, items, handleGoBack, handleClickDelete, handleCheckItem }) => {
     const { user } = useSelector((state) => state.user);
@@ -46,5 +47,7 @@ const ShoppingList = ({ handleSubmit, register, onAddItem, items, handleGoBack, 
         </>
     );
 };
+
+ShoppingList.propTypes = ListsTypes;
 
 export default ShoppingList;
