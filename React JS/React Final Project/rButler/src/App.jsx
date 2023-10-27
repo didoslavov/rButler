@@ -12,6 +12,7 @@ import Footer from './components/Footer/Footer.jsx';
 import Default from './components/Default/Default.jsx';
 
 import './App.css';
+import ProtectedRoute from './routes/ProtectedRoute.jsx';
 
 function App() {
     return (
@@ -23,10 +24,18 @@ function App() {
                 <>
                     <Route path="/households" element={<AllHouseholds />} />
                     <Route path="/households/details/:householdId" element={<Details />} />
-                    <Route path="/households/create" element={<CreateHouseholdForm />} />
-                    <Route path="/households/:userId" element={<MyHouseholds />} />
-                    <Route path="/lists/shopping/:listId" element={<List type={'shopping'} />} />
-                    <Route path="/lists/todo/:listId" element={<List type={'todo'} />} />
+                    <Route path="/households/create" element={<ProtectedRoute />}>
+                        <Route path="/households/create" element={<CreateHouseholdForm />} />
+                    </Route>
+                    <Route path="/households/:userId" element={<ProtectedRoute />}>
+                        <Route path="/households/:userId" element={<MyHouseholds />} />
+                    </Route>
+                    <Route path="/lists/shopping/:listId" element={<ProtectedRoute />}>
+                        <Route path="/lists/shopping/:listId" element={<List type={'shopping'} />} />
+                    </Route>
+                    <Route path="/lists/todo/:listId" element={<ProtectedRoute />}>
+                        <Route path="/lists/todo/:listId" element={<List type={'todo'} />} />
+                    </Route>
                 </>
                 <Route path="*" element={<Default />}></Route>
             </Routes>
