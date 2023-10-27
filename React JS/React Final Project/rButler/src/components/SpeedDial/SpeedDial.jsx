@@ -8,8 +8,7 @@ import { speedDialActionStyles, speedDialStyles } from '../../styles/muiStyles/m
 import { setFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
 import { SpeedDialTypes } from '../../shared/propTypes.js';
 
-const SpeedDialMenu = ({ household }) => {
-    const { user } = useSelector((state) => state.user);
+const SpeedDialMenu = ({ isHouseholdOwner }) => {
     const dispatch = useDispatch();
     const { isEditOpen, isCreateOpen, isAddMemberOpen, isShareOpen } = useSelector((state) => state.formVisibility);
 
@@ -44,7 +43,7 @@ const SpeedDialMenu = ({ household }) => {
     return (
         <div className="details-speed-dial">
             <SpeedDial sx={speedDialStyles} ariaLabel="Household Controls" direction="right" icon={<HomeSharp />}>
-                {user.id === household.master && [
+                {isHouseholdOwner && [
                     <SpeedDialAction
                         sx={speedDialActionStyles}
                         key={'Add Household Member'}
@@ -66,18 +65,18 @@ const SpeedDialMenu = ({ household }) => {
                         }
                         tooltipTitle={'Edit Household'}
                     />,
+                    <SpeedDialAction
+                        onClick={handleShowCreateForm}
+                        sx={speedDialActionStyles}
+                        key={'Create List'}
+                        icon={
+                            <Link className="details-speed-dial-link">
+                                <ChecklistSharp />
+                            </Link>
+                        }
+                        tooltipTitle={'Create List'}
+                    />,
                 ]}
-                <SpeedDialAction
-                    onClick={handleShowCreateForm}
-                    sx={speedDialActionStyles}
-                    key={'Create List'}
-                    icon={
-                        <Link className="details-speed-dial-link">
-                            <ChecklistSharp />
-                        </Link>
-                    }
-                    tooltipTitle={'Create List'}
-                />
                 <SpeedDialAction
                     onClick={handleShowShare}
                     sx={speedDialActionStyles}

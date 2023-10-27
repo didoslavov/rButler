@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ListingsTypes } from '../../shared/propTypes.js';
 import { setFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
 
-const Listings = ({ lists }) => {
+const Listings = ({ lists, isHouseholdOwner }) => {
     const { user } = useSelector((state) => state.user);
     const dispatch = useDispatch();
 
@@ -27,9 +27,11 @@ const Listings = ({ lists }) => {
                     <div className="no-lists">
                         No new lists
                         {user ? (
-                            <button className="button-action" onClick={handleShowCreateForm}>
-                                Create List
-                            </button>
+                            isHouseholdOwner && (
+                                <button className="button-action" onClick={handleShowCreateForm}>
+                                    Create List
+                                </button>
+                            )
                         ) : (
                             <Link to="/profile/auth" className="button-action">
                                 Sign in to create a list
