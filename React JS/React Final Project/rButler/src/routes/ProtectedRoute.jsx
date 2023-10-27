@@ -7,7 +7,7 @@ const ProtectedRoute = () => {
     return isAuthenticated ? (
         <Outlet />
     ) : (
-        <Navigate to="/profile/auth" state={{ redirectError: 'Please sign in to see the list.' }} />
+        <Navigate to="/profile/auth" state={{ redirectError: 'Please sign in order to access this recourse!' }} />
     );
 };
 
