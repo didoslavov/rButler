@@ -14,7 +14,7 @@ const Login = () => {
     const navigate = useNavigate();
     const { register, handleSubmit } = useForm();
 
-    const { redirectError } = location.state;
+    const { redirectError } = location.state || '';
 
     const onLogin = async ({ username, password }) => {
         try {
