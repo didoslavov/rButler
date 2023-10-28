@@ -1,4 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 
@@ -8,9 +9,12 @@ import { setNotification } from '../../../redux/slices/notificationSlice.js';
 import { login } from '../../../services/authService.js';
 
 const Login = () => {
+    const location = useLocation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { register, handleSubmit } = useForm();
+
+    const { redirectError } = location.state || '';
 
     const onLogin = async ({ username, password }) => {
         try {
@@ -36,6 +40,18 @@ const Login = () => {
             );
         }
     };
+
+    useEffect(() => {
+        if (redirectError) {
+            dispatch(
+                setNotification({
+                    notification: [redirectError],
+                    severity: 'error',
+                    open: true,
+                })
+            );
+        }
+    }, [redirectError]);
 
     return (
         <div className="form sign-in">
