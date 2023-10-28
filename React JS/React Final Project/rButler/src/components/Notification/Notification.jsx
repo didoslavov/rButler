@@ -4,8 +4,8 @@ import { Alert, IconButton, Snackbar } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { snackbarStyles } from '../../styles/muiStyles/muiStyles.js';
 
-import { setNotificationOpen } from '../../redux/slices/notificationSlice.js';
 import { NotificationTypes } from '../../shared/propTypes.js';
+import { clearNotification } from '../../redux/slices/notificationSlice.js';
 
 const Notification = ({ open, message, severity }) => {
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const Notification = ({ open, message, severity }) => {
             return;
         }
 
-        dispatch(setNotificationOpen(!open));
+        dispatch(clearNotification());
     };
 
     const action = (

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 const PublicRoute = () => {
     const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
-    return isAuthenticated ? <Navigate to="/" state={{ redirectError: "You're already signed in!" }} /> : <Outlet />;
+    return isAuthenticated ? <Navigate to="/" /> : <Outlet />;
 };
 
 export default PublicRoute;
