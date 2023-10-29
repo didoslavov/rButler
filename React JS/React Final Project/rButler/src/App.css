@@ -17,6 +17,7 @@
 @import url(./components/Search/Search.css);
 @import url(./components/SpeedDial/SpeedDial.css);
 @import url(./components/Share/Share.css);
+@import url(./components/Profile/Profile.css);
 
 :root {
     --dark-pink: #f08a9d;

@@ -10,6 +10,7 @@ import MyHouseholds from './components/MyHouseholds/MyHouseholds.jsx';
 import CreateHouseholdForm from './components/CreateHouseholdForm/CreateHouseholdForm.jsx';
 import Details from './components/Details/Details.jsx';
 import List from './components/List/List.jsx';
+import Profile from './components/Profile/Profile.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import Default from './components/Default/Default.jsx';
 
@@ -25,6 +26,9 @@ function App() {
                     <Route path="/profile/auth" element={<Auth />} />
                 </Route>
                 <>
+                    <Route path="/profile" element={<PrivateRoute />}>
+                        <Route path="/profile" element={<Profile />} />
+                    </Route>
                     <Route path="/households" element={<AllHouseholds />} />
                     <Route path="/households/details/:householdId" element={<Details />} />
                     <Route path="/households/create" element={<PrivateRoute />}>
