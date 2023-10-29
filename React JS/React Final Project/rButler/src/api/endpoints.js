@@ -17,8 +17,9 @@ export const listsEndpoints = {
     removeListItem: (listId) => `/lists/${listId}/delete-item/`,
 };
 
-export const authEndpoints = {
+export const userEndpoints = {
     login: '/users/login',
     register: '/users/register',
+    update: (userId) => `/users/${userId}/update`,
     logout: '/users/logout',
 };
