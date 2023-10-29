@@ -6,7 +6,7 @@ import { Avatar } from '@mui/material';
 import Search from '../Search/Search.jsx';
 
 import { logoutUser } from '../../redux/slices/userSlice.js';
-import { logout } from '../../services/authService.js';
+import { logout } from '../../services/userService.js';
 
 const Navbar = () => {
     const { user } = useSelector((state) => state.user);
@@ -49,8 +49,8 @@ const Navbar = () => {
                             </li>
                             <div className="avatar-container">
                                 <span className="navbar-username">{user.username}</span>
-                                <Link to={`/households/${userId}`}>
-                                    <Avatar alt="user avatar" src="/nav-user-avatar.jpg" />
+                                <Link to={`/profile`}>
+                                    <Avatar alt="user avatar" src={user.avatar} />
                                 </Link>
                             </div>
                         </>
