@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../../../redux/slices/userSlice.js';
 import { setNotification } from '../../../redux/slices/notificationSlice.js';
 
-import { userRegister } from '../../../services/authService.js';
+import { userRegister } from '../../../services/userService.js';
 
 const Register = () => {
     const dispatch = useDispatch();

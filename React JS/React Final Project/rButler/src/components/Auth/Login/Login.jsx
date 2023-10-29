@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../../../redux/slices/userSlice.js';
 import { setNotification } from '../../../redux/slices/notificationSlice.js';
 
-import { login } from '../../../services/authService.js';
+import { login } from '../../../services/userService.js';
 
 const Login = () => {
     const location = useLocation();
@@ -30,7 +30,6 @@ const Login = () => {
             dispatch(setUser(res));
             navigate('/');
         } catch (error) {
-            console.log(error);
             dispatch(
                 setNotification({
                     notification: error,
