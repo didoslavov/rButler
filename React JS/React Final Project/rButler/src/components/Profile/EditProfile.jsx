@@ -41,11 +41,14 @@ const EditProfile = () => {
             if (password !== repass) {
                 throw ["Passwords don't match!"];
             }
+
             const res = await editUser({ username, email, password, avatar: avatarResponse.secure_url }, user._id);
 
             if (res.errors) {
                 throw res.errors;
             }
+
+            //TODO FIX SETTING THE CORRECT USERDATA TO USER STATE
 
             dispatch(setUser(res.userData));
             dispatch(
