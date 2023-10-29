@@ -42,7 +42,7 @@ const login = asyncHandler(async (req, res) => {
     }
 
     const token = createToken(user);
-    const userData = { username: user.username, email: user.email, id: user._id, token };
+    const userData = { username: user.username, email: user.email, id: user._id, avatar: user.avatar, token };
 
     // res.cookie('Auth', token, { httpOnly: false, secure: false, sameSite: 'lax' });
 
@@ -51,6 +51,7 @@ const login = asyncHandler(async (req, res) => {
 
 const register = asyncHandler(async (req, res) => {
     const { username, email, password } = req.body;
+    const file = req.file;
 
     const { errors } = validationResult(req);
 
@@ -68,6 +69,10 @@ const register = asyncHandler(async (req, res) => {
 
     const userObject = { username, email, password: hashedPassword };
 
+    if (file) {
+        userObject.avatar = file;
+    }
+
     const user = await User.create(userObject);
 
     if (!user) {
@@ -75,7 +80,7 @@ const register = asyncHandler(async (req, res) => {
     }
 
     const token = createToken(user);
-    const userData = { username: user.username, email: user.email, id: user._id, token };
+    const userData = { username: user.username, email: user.email, id: user._id, avatar: user.avatar, token };
 
     // res.cookie('token', token, { httpOnly: true, secure: false });
 
@@ -89,13 +94,19 @@ const logout = (req, res) => {
 };
 
 const updateUser = asyncHandler(async (req, res) => {
-    const { id, username, email } = req.body;
+    const { userId } = req.params;
+    const { username, email, avatar } = req.body;
+    console.log(avatar);
 
-    if (!id || !username || !email) {
+    if (!userId) {
+        throw new Error('User id is required!');
+    }
+
+    if (!username || !email) {
         throw new Error(400, 'All fields are required!');
     }
 
-    const user = await User.findById(id).exec();
+    const user = await User.findById(userId);
 
     if (!user) {
         throw new ResError(400, 'User not found!');
@@ -103,23 +114,27 @@ const updateUser = asyncHandler(async (req, res) => {
 
     const duplicatedUser = await User.findOne({ username }).lean().exec();
 
-    if (duplicatedUser && duplicatedUser?._id.toString() !== id) {
+    if (duplicatedUser && duplicatedUser?._id.toString() !== userId) {
         throw new ResError(409, 'Username already in use!');
     }
 
     user.username = username;
     user.email = email;
 
-    const updatedUser = await user.save();
+    if (avatar) {
+        user.avatar = avatar;
+    }
 
-    res.json({ success: updatedUser.username + ' updated successfully!' });
+    const userData = await user.save();
+
+    res.json(200, { success: userData.username + ' updated successfully!', userData });
 });
 
 const deleteUser = asyncHandler(async (req, res) => {
     const { id } = req.body;
 
     if (!id) {
-        throw new ResError('User ID required!');
+        throw new ResError('User ID is required!');
     }
 
     const households = await Household.findOne({ master: id }).lean().exec();

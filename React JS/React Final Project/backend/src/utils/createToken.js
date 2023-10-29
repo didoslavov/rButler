@@ -5,6 +5,7 @@ module.exports = (user) => {
     const payload = {
         id: user._id,
         username: user.username,
+        avatar: user.avatar,
         roles: user.roles,
     };
 
