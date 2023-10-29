@@ -1,0 +1,86 @@
+.profile-container {
+    display: flex;
+    margin: auto;
+    height: 84.5vh;
+}
+
+.avatar {
+    border-radius: 100%;
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
+}
+
+.edit-profile-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.file-input-container {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.file-input-label {
+    display: inline-block;
+    cursor: pointer;
+    background-color: var(--dark-blue);
+    color: var(--light-grey);
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.file-input {
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+.profile-header {
+    font-weight: bold;
+    margin-bottom: 20px;
+    width: auto;
+    text-align: center;
+    border-bottom: 1px solid var(--dark-pink);
+}
+
+.sidebar {
+    width: 200px;
+    height: 100%;
+    position: fixed;
+    top: 10;
+    left: 0;
+    background-color: var(--light-grey);
+    border: 1px solid var(--dark-blue);
+    padding: 20px;
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: var(--dark-blue);
+    color: var(--light-grey);
+    padding: 8px;
+}
+
+.sidebar-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.sidebar-list li {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.sidebar-list li:hover {
+    color: var(--dark-pink); /* Change the color on hover as desired */
+}
