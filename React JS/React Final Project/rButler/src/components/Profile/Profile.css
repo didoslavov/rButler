@@ -35,6 +35,17 @@
     border-radius: 5px;
 }
 
+.label-file-name {
+    position: relative;
+    margin-top: 10px;
+    max-width: 280px;
+    padding: 8px 14px 14px 8px;
+    border: 1px solid var(--dark-blue);
+    border-radius: 4px;
+    text-overflow: ellipsis;
+    overflow: auto;
+}
+
 .file-input {
     opacity: 0;
     width: 0.1px;
@@ -82,5 +93,5 @@
 }
 
 .sidebar-list li:hover {
-    color: var(--dark-pink); /* Change the color on hover as desired */
+    color: var(--dark-pink);
 }
