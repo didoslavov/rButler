@@ -86,6 +86,7 @@ button {
     width: 260px;
     height: 100%;
     padding-top: 360px;
+    border-radius: 4px;
 }
 
 .img:before {
@@ -282,8 +283,9 @@ label span {
 }
 
 .sign-up {
+    overflow: auto;
     padding-top: 20px;
-    transform: translate3d(-900px, 0, 0);
+    transform: translate3d(-1000px, 0, 0);
 }
 
 .cont.s--signup .sign-up {
@@ -312,6 +314,20 @@ label span {
     left: 50%;
     bottom: 0;
     transform: translateX(-50%);
+}
+
+.form-signup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.file-input-label {
+    cursor: pointer;
+    background-color: var(--dark-blue);
+    color: var(--light-grey);
+    padding: 10px 15px;
+    border-radius: 5px;
 }
 
 /* TODO RESPONSIVE DESIGN */
