@@ -50,7 +50,7 @@ const login = asyncHandler(async (req, res) => {
 });
 
 const register = asyncHandler(async (req, res) => {
-    const { username, email, password } = req.body;
+    const { username, email, password, avatar } = req.body;
     const file = req.file;
 
     const { errors } = validationResult(req);
@@ -67,7 +67,7 @@ const register = asyncHandler(async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const userObject = { username, email, password: hashedPassword };
+    const userObject = { username, email, password: hashedPassword, avatar };
 
     if (file) {
         userObject.avatar = file;
@@ -96,14 +96,13 @@ const logout = (req, res) => {
 const updateUser = asyncHandler(async (req, res) => {
     const { userId } = req.params;
     const { username, email, avatar } = req.body;
-    console.log(avatar);
 
     if (!userId) {
-        throw new Error('User id is required!');
+        throw new ResError('User id is required!');
     }
 
     if (!username || !email) {
-        throw new Error(400, 'All fields are required!');
+        throw new ResError(400, 'All fields are required!');
     }
 
     const user = await User.findById(userId);
@@ -125,7 +124,16 @@ const updateUser = asyncHandler(async (req, res) => {
         user.avatar = avatar;
     }
 
-    const userData = await user.save();
+    const updatedUser = await user.save();
+    const token = createToken(updatedUser);
+
+    const userData = {
+        username: updatedUser.username,
+        email: updatedUser.email,
+        id: updatedUser._id,
+        avatar: updatedUser.avatar,
+        token,
+    };
 
     res.json(200, { success: userData.username + ' updated successfully!', userData });
 });
