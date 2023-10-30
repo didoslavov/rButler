@@ -11,7 +11,6 @@ const userSchema = new Schema({
     password: { type: String, required: true },
     avatar: {
         type: String,
-        default: 'https://www.pngitem.com/pimgs/m/287-2876223_no-profile-picture-available-hd-png-download.png',
     },
     roles: [{ type: String, default: 'Resident' }],
     households: [
