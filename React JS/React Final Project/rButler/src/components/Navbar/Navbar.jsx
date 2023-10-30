@@ -50,7 +50,12 @@ const Navbar = () => {
                             <div className="avatar-container">
                                 <span className="navbar-username">{user.username}</span>
                                 <Link to={`/profile`}>
-                                    <Avatar alt="user avatar" src={user.avatar} />
+                                    <Avatar
+                                        src={user.avatar}
+                                        alt="user avatar"
+                                        sx={{ bgcolor: 'var(--dark-blue)', color: 'var(--light-grey)' }}
+                                        children={user.username[0]}
+                                    />
                                 </Link>
                             </div>
                         </>
