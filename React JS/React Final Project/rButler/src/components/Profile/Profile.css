@@ -11,7 +11,7 @@
     margin-bottom: 20px;
 }
 
-.edit-profile-container {
+.profile-container {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -37,6 +37,8 @@
 
 .label-file-name {
     position: relative;
+    display: flex;
+    align-items: center;
     margin-top: 10px;
     max-width: 280px;
     padding: 8px 14px 14px 8px;
@@ -44,6 +46,15 @@
     border-radius: 4px;
     text-overflow: ellipsis;
     overflow: auto;
+}
+
+.label-text {
+    flex: 1;
+}
+
+.label-icon {
+    margin-left: 6px;
+    color: var(--dark-blue);
 }
 
 .file-input {
