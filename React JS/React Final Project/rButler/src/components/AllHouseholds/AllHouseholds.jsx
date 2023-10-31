@@ -24,10 +24,6 @@ const AllHouseholds = () => {
         handleLoading(async () => {
             const res = await getAllHouseholds(search);
 
-            if (!res.length) {
-                return setHouseholds([{ _id: 1, name: 'Sorry', presentation: 'No households found!' }]);
-            }
-
             setHouseholds(res);
         });
     }, [search, handleLoading]);
@@ -48,7 +44,7 @@ const AllHouseholds = () => {
                                     className="my-household-link">
                                     <li className="household">
                                         <div className="chip-container">
-                                            <Chip sx={chipStyles} label={'Owner: ' + household.master.username} />
+                                            {<Chip sx={chipStyles} label={'Owner: ' + household.master.username} />}
                                         </div>
                                         <h4 className="household-header border-bottom">{household.name}</h4>
                                         <p>{household.presentation}</p>
