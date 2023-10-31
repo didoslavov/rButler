@@ -1,11 +1,16 @@
+import { Link } from 'react-router-dom';
+
 const Sidebar = () => {
     return (
         <div className="sidebar">
             <h4 className="sidebar-header">User Profile</h4>
             <ul className="sidebar-list">
-                <li>Menu Item 2</li>
-                <li>Menu Item 3</li>
-                <li>Edit Profile</li>
+                <li>
+                    <Link to="edit">Edit Profile</Link>
+                </li>
+                <li>
+                    <Link to="reset-password">Reset Password</Link>
+                </li>
             </ul>
         </div>
     );

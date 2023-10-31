@@ -15,6 +15,8 @@ import Footer from './components/Footer/Footer.jsx';
 import Default from './components/Default/Default.jsx';
 
 import './App.css';
+import EditProfile from './components/Profile/EditProfile.jsx';
+import ResetPassword from './components/Profile/ResetPassword.jsx';
 
 function App() {
     return (
@@ -26,8 +28,11 @@ function App() {
                     <Route path="/profile/auth" element={<Auth />} />
                 </Route>
                 <>
-                    <Route path="/profile" element={<PrivateRoute />}>
-                        <Route path="/profile" element={<Profile />} />
+                    <Route path="/profile/*" element={<PrivateRoute />}>
+                        <Route path="/profile/*" element={<Profile />}>
+                            <Route path="edit" element={<EditProfile />} />
+                            <Route path="reset-password" element={<ResetPassword />} />
+                        </Route>
                     </Route>
                     <Route path="/households" element={<AllHouseholds />} />
                     <Route path="/households/details/:householdId" element={<Details />} />
