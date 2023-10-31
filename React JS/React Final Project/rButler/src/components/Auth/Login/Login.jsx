@@ -54,7 +54,7 @@ const Login = () => {
                 })
             );
         }
-    }, [redirectError]);
+    }, [redirectError, dispatch]);
 
     return (
         <div className="form sign-in">
