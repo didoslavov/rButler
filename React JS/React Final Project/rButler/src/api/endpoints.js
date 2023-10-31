@@ -21,5 +21,6 @@ export const userEndpoints = {
     login: '/users/login',
     register: '/users/register',
     update: (userId) => `/users/${userId}/update`,
+    passwordReset: (userId) => `/users/${userId}/password-reset`,
     logout: '/users/logout',
 };
