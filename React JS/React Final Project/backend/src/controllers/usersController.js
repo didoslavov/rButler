@@ -138,6 +138,33 @@ const updateUser = asyncHandler(async (req, res) => {
     res.json(200, { success: userData.username + ' updated successfully!', userData });
 });
 
+const resetPassword = asyncHandler(async (req, res) => {
+    const { userId } = req.params;
+    const { oldPass, newPass } = req.body;
+
+    const user = await User.findOne({ _id: userId });
+
+    if (!user) {
+        throw new ResError(401, "Username or password don't match!");
+    }
+
+    const isPasswordValid = await bcrypt.compare(oldPass, user.password);
+
+    if (!isPasswordValid) {
+        throw new ResError(401, 'Wrong password!');
+    }
+
+    const hashedPassword = await bcrypt.hash(newPass, 10);
+
+    user.password = hashedPassword;
+    await user.save();
+
+    const token = createToken(user);
+    const userData = { username: user.username, email: user.email, id: user._id, avatar: user.avatar, token };
+
+    res.status(200).json({ success: userData.username + ' updated successfully!', userData });
+});
+
 const deleteUser = asyncHandler(async (req, res) => {
     const { id } = req.body;
 
@@ -168,5 +195,6 @@ module.exports = {
     register,
     logout,
     updateUser,
+    resetPassword,
     deleteUser,
 };
