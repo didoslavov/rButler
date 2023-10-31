@@ -7,28 +7,32 @@ import { setUser } from '../../../redux/slices/userSlice.js';
 import { setNotification } from '../../../redux/slices/notificationSlice.js';
 
 import { login } from '../../../services/userService.js';
+import { useLoading } from '../../../hooks/useLoading.js';
 
 const Login = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [isLoading, handleLoading] = useLoading(false);
     const { register, handleSubmit } = useForm();
 
     const { redirectError } = location.state || '';
 
     const onLogin = async ({ username, password }) => {
         try {
-            if (!username || !password) {
-                throw ['All fields are required!'];
-            }
-            const res = await login({ username, password });
+            handleLoading(async () => {
+                if (!username || !password) {
+                    throw ['All fields are required!'];
+                }
+                const res = await login({ username, password });
 
-            if (res.errors) {
-                throw res.errors;
-            }
+                if (res.errors) {
+                    throw res.errors;
+                }
 
-            dispatch(setUser(res));
-            navigate('/');
+                dispatch(setUser(res));
+                navigate('/');
+            });
         } catch (error) {
             dispatch(
                 setNotification({
@@ -67,7 +71,7 @@ const Login = () => {
                 <Link to="/password-reset">
                     <p className="forgot-pass">Forgot password?</p>
                 </Link>
-                <input type="submit" className="submit button" value={'Sign In'} />
+                <input disabled={isLoading} type="submit" className="submit button" value={'Sign In'} />
             </form>
         </div>
     );

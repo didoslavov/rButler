@@ -11,6 +11,7 @@ import { setNotification } from '../../../redux/slices/notificationSlice.js';
 
 import { userRegister } from '../../../services/userService.js';
 import useSupabase from '../../../hooks/useSupabase.js';
+import { useLoading } from '../../../hooks/useLoading.js';
 
 const Register = () => {
     const { uploadAvatar } = useSupabase();
@@ -18,6 +19,7 @@ const Register = () => {
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
     const [fileName, setFileName] = useState(null);
+    const [isLoading, handleLoading] = useLoading(false);
 
     const onChangeFile = (e) => setFileName(e.target.files[0].name);
     const handleClearFile = () => setFileName(null);
@@ -26,31 +28,33 @@ const Register = () => {
         let publicURL = '';
 
         try {
-            if (!username || !email || !password || !repass) {
-                throw ['All fields are required!'];
-            }
+            await handleLoading(async () => {
+                if (!username || !email || !password || !repass) {
+                    throw ['All fields are required!'];
+                }
 
-            if (password.length < 6) {
-                throw ['Password must be at least 6 characters long!'];
-            }
+                if (password.length < 6) {
+                    throw ['Password must be at least 6 characters long!'];
+                }
 
-            if (password !== repass) {
-                throw ["Passwords don't match!"];
-            }
+                if (password !== repass) {
+                    throw ["Passwords don't match!"];
+                }
 
-            if (avatar.length) {
-                const file = avatar[0];
-                publicURL = await uploadAvatar(file);
-            }
+                if (avatar.length) {
+                    const file = avatar[0];
+                    publicURL = await uploadAvatar(file);
+                }
 
-            const res = await userRegister({ username, email, password, avatar: publicURL });
+                const res = await userRegister({ username, email, password, avatar: publicURL });
 
-            if (res.errors) {
-                throw res.errors;
-            }
+                if (res.errors) {
+                    throw res.errors;
+                }
 
-            dispatch(setUser(res));
-            navigate('/');
+                dispatch(setUser(res));
+                navigate('/');
+            });
         } catch (error) {
             dispatch(
                 setNotification({
@@ -96,7 +100,7 @@ const Register = () => {
                         </p>
                     </div>
                 )}
-                <input type="submit" className="submit button" value={'Sign Up'} />
+                <input disabled={isLoading} type="submit" className="submit button" value={'Sign Up'} />
             </form>
         </div>
     );

@@ -12,6 +12,7 @@ import { setUser } from '../../redux/slices/userSlice.js';
 
 import { useState } from 'react';
 import useSupabase from '../../hooks/useSupabase.js';
+import { useLoading } from '../../hooks/useLoading.js';
 
 const EditProfile = () => {
     const { uploadAvatar } = useSupabase();
@@ -21,6 +22,7 @@ const EditProfile = () => {
     const { user } = useSelector((state) => state.user);
     const { notification, open, severity } = useSelector((state) => state.notification);
     const [fileName, setFileName] = useState(null);
+    const [isLoading, handleLoading] = useLoading(false);
 
     const onChangeFile = (e) => setFileName(e.target.files[0].name);
     const handleClearFile = () => setFileName(null);
@@ -29,31 +31,34 @@ const EditProfile = () => {
         let publicURL = '';
 
         try {
-            if (!username || !email) {
-                throw ['All fields are required!'];
-            }
+            await handleLoading(async () => {
+                if (!username || !email) {
+                    throw ['All fields are required!'];
+                }
 
-            if (avatar.length) {
-                const file = avatar[0];
-                publicURL = uploadAvatar(file);
-            }
+                if (avatar.length) {
+                    const file = avatar[0];
+                    publicURL = await uploadAvatar(file);
+                }
 
-            const res = await editUser({ username, email, avatar: publicURL }, user.id);
+                const res = await editUser({ username, email, avatar: publicURL }, user.id);
 
-            if (res.errors) {
-                throw res.errors;
-            }
+                if (res.errors) {
+                    throw res.errors;
+                }
 
-            dispatch(setUser(res.userData));
-            dispatch(
-                setNotification({
-                    notification: [res.success],
-                    severity: 'success',
-                    open: true,
-                })
-            );
-            navigate('/profile');
+                dispatch(setUser(res.userData));
+                dispatch(
+                    setNotification({
+                        notification: [res.success],
+                        severity: 'success',
+                        open: true,
+                    })
+                );
+                navigate('/profile/edit');
+            });
         } catch (error) {
+            console.log(error);
             dispatch(
                 setNotification({
                     notification: error,
@@ -63,6 +68,7 @@ const EditProfile = () => {
             );
         }
     };
+
     return (
         <>
             <div className="profile-container">
@@ -91,7 +97,7 @@ const EditProfile = () => {
                             </p>
                         </div>
                     )}
-                    <input type="submit" className="submit button" value={'Edit'} />
+                    <input disabled={isLoading} type="submit" className="submit button" value={'Edit'} />
                 </form>
             </div>
             {notification && <Notification open={open} message={notification} severity={severity} />}

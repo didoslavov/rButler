@@ -253,6 +253,11 @@ label span {
     text-transform: uppercase;
 }
 
+.submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 .submit:hover {
     background: var(--dark-pink);
     color: var(--dark-blue);
