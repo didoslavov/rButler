@@ -10,15 +10,10 @@ import { setUser } from '../../../redux/slices/userSlice.js';
 import { setNotification } from '../../../redux/slices/notificationSlice.js';
 
 import { userRegister } from '../../../services/userService.js';
-import { createClient } from '@supabase/supabase-js';
-
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_API_KEY = import.meta.env.VITE_SUPABASE_API_KEY;
-const SUPABASE_BUCKET = import.meta.env.VITE_SUPABASE_BUCKET;
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_API_KEY);
+import useSupabase from '../../../hooks/useSupabase.js';
 
 const Register = () => {
+    const { uploadAvatar } = useSupabase();
     const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
@@ -45,16 +40,7 @@ const Register = () => {
 
             if (avatar.length) {
                 const file = avatar[0];
-                const { data, error } = await supabase.storage.from('avatars').upload(`/${file.name}`, file, {
-                    cacheControl: '3600',
-                    upsert: false,
-                });
-
-                if (error) {
-                    throw [error.message];
-                }
-
-                publicURL = SUPABASE_URL + SUPABASE_BUCKET + data.path;
+                publicURL = await uploadAvatar(file);
             }
 
             const res = await userRegister({ username, email, password, avatar: publicURL });
@@ -103,14 +89,10 @@ const Register = () => {
                 {fileName && (
                     <div className="file">
                         <p className="label-file-name">
-                            <IconButton
-                                aria-label="close"
-                                style={{ position: 'absolute', top: 0, right: 0, color: 'var(--dark-blue)' }}
-                                size="small"
-                                onClick={handleClearFile}>
+                            <span className="label-text">{fileName}</span>
+                            <IconButton className="label-icon" aria-label="close" size="small" onClick={handleClearFile}>
                                 <CloseIcon />
                             </IconButton>
-                            {fileName}
                         </p>
                     </div>
                 )}
