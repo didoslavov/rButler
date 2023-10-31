@@ -25,6 +25,10 @@ export const editUser = async (userData, userId) => {
     return await patch(userEndpoints.update(userId), userData);
 };
 
+export const resetPassword = async (userData, userId) => {
+    return await patch(userEndpoints.passwordReset(userId), userData);
+};
+
 export const logout = async () => {
     return post(userEndpoints.logout);
 };
