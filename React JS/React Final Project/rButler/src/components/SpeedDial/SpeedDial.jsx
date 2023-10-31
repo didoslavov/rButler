@@ -6,10 +6,10 @@ import { AddHomeSharp, ChecklistSharp, HomeSharp, ModeEditSharp, ShareRounded } 
 import { speedDialActionStyles, speedDialStyles } from '../../styles/muiStyles/muiStyles.js';
 
 import { setFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
-import { SpeedDialTypes } from '../../shared/propTypes.js';
 
-const SpeedDialMenu = ({ isHouseholdOwner }) => {
+const SpeedDialMenu = () => {
     const dispatch = useDispatch();
+    const { isHouseholdOwner } = useSelector((state) => state.household);
     const { isEditOpen, isCreateOpen, isAddMemberOpen, isShareOpen } = useSelector((state) => state.formVisibility);
 
     const handleShowEditForm = () => {
@@ -92,7 +92,5 @@ const SpeedDialMenu = ({ isHouseholdOwner }) => {
         </div>
     );
 };
-
-SpeedDialMenu.propTypes = SpeedDialTypes;
 
 export default SpeedDialMenu;

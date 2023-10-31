@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { ListingsTypes } from '../../shared/propTypes.js';
 import { setFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
 
-const Listings = ({ lists, isHouseholdOwner }) => {
+const Listings = ({ lists }) => {
+    const { isHouseholdOwner } = useSelector((state) => state.household);
     const { user } = useSelector((state) => state.user);
     const dispatch = useDispatch();
 

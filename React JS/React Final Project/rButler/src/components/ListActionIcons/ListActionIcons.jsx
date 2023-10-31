@@ -2,8 +2,11 @@ import { IconButton, Tooltip } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { ListActionIconsTypes } from '../../shared/propTypes.js';
+import { useSelector } from 'react-redux';
 
-const ListActionIcons = ({ handleGoBack, handleClickDelete, user }) => {
+const ListActionIcons = ({ handleGoBack, handleClickDelete }) => {
+    const { isHouseholdOwner } = useSelector((state) => state.household);
+
     return (
         <div className="icons">
             <Tooltip
@@ -14,7 +17,7 @@ const ListActionIcons = ({ handleGoBack, handleClickDelete, user }) => {
                     <ArrowBackIcon fontSize="inherit" />
                 </IconButton>
             </Tooltip>
-            {user && (
+            {isHouseholdOwner && (
                 <>
                     <Tooltip
                         title="Delete List"

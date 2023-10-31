@@ -5,14 +5,15 @@ import ListActionIcons from '../ListActionIcons/ListActionIcons.jsx';
 import { ListsTypes } from '../../shared/propTypes.js';
 
 const TodoList = ({ handleSubmit, register, onAddItem, items, handleGoBack, handleClickDelete, handleCheckItem }) => {
-    const { user } = useSelector((state) => state.user);
+    const { isHouseholdOwner } = useSelector((state) => state.household);
+
     return (
         <div className="todo-list-container">
             <img src="/todo-list.jpg" alt="list image" className="list-image" />
             <div className="list-container">
                 <h2 className="welcome-list">TODO List</h2>
                 <div className="form-container">
-                    {user && (
+                    {isHouseholdOwner && (
                         <form className="todo-form-list" onSubmit={handleSubmit(onAddItem)}>
                             <label className="list-form-label">
                                 <span>Todo</span>
@@ -27,7 +28,9 @@ const TodoList = ({ handleSubmit, register, onAddItem, items, handleGoBack, hand
                             items.map((item) => (
                                 <li className="list" key={item._id}>
                                     <span className="list-span-name">{item.text}</span>
-                                    {user && <ListItemAttributes handleCheckItem={handleCheckItem} itemId={item._id} />}
+                                    {isHouseholdOwner && (
+                                        <ListItemAttributes handleCheckItem={handleCheckItem} itemId={item._id} />
+                                    )}
                                 </li>
                             ))
                         ) : (
@@ -36,7 +39,7 @@ const TodoList = ({ handleSubmit, register, onAddItem, items, handleGoBack, hand
                     </ul>
                 </div>
             </div>
-            <ListActionIcons handleGoBack={handleGoBack} handleClickDelete={handleClickDelete} user={user} />
+            <ListActionIcons handleGoBack={handleGoBack} handleClickDelete={handleClickDelete} />
         </div>
     );
 };

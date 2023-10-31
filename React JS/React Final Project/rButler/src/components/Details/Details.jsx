@@ -15,12 +15,14 @@ import { getUserHouseholdById } from '../../services/householdsService.js';
 import { setNotification } from '../../redux/slices/notificationSlice.js';
 import { useLoading } from '../../hooks/useLoading.js';
 import { clearFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
+import { setIsHouseholdOwner } from '../../redux/slices/householdSlice.js';
 
 const Details = () => {
-    const { householdId } = useParams();
     const navigate = useNavigate();
+    const { householdId } = useParams();
     const dispatch = useDispatch();
     const { isEditOpen, isCreateOpen, isAddMemberOpen, isShareOpen } = useSelector((state) => state.formVisibility);
+    const { isHouseholdOwner } = useSelector((state) => state.household);
     const { notification, severity, open } = useSelector((state) => state.notification);
     const { user } = useSelector((state) => state.user);
     const [isLoading, handleLoading] = useLoading(true);
@@ -28,7 +30,6 @@ const Details = () => {
     const [household, setHousehold] = useState({});
     const [lists, setLists] = useState(household.lists || []);
     const [users, setUsers] = useState(household.users || []);
-    const [isHouseholdOwner, setIsHouseholdOwner] = useState(false);
 
     const url = window.location.href;
 
@@ -54,7 +55,7 @@ const Details = () => {
             setHousehold(res);
             setLists(res.lists);
             setUsers(res.users);
-            setIsHouseholdOwner(res.users.some((u) => u.role === 'Master' && u.user?._id === user?.id));
+            dispatch(setIsHouseholdOwner(res.users.some((u) => u.role === 'Master' && u.user?._id === user?.id)));
         });
     }, [householdId, handleLoading, dispatch, navigate, user]);
 
