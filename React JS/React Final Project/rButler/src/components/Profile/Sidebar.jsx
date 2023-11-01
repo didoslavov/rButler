@@ -9,7 +9,7 @@ const Sidebar = () => {
                     <Link to="edit">Edit Profile</Link>
                 </li>
                 <li>
-                    <Link to="reset-password">Reset Password</Link>
+                    <Link to="reset-password">Change Password</Link>
                 </li>
             </ul>
         </div>

@@ -7,7 +7,7 @@ import { setUser } from '../../redux/slices/userSlice.js';
 import { useNavigate } from 'react-router-dom';
 import Notification from '../Notification/Notification.jsx';
 
-const ResetPassword = () => {
+const ChangePassword = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [isLoading, handleLoading] = useLoading(false);
@@ -54,28 +54,27 @@ const ResetPassword = () => {
     };
 
     return (
-        <>
-            <div className="profile-container">
-                <h2 className="profile-header">Reset Password</h2>
-                <form className="form-household" onSubmit={handleSubmit(onResetPassword)}>
-                    <label>
-                        <span>Old Password</span>
-                        <input type="password" className="input" {...register('oldPass')} />
-                    </label>
-                    <label>
-                        <span>New Password</span>
-                        <input type="password" className="input" {...register('newPass')} />
-                    </label>
-                    <label>
-                        <span>Repeat Password</span>
-                        <input type="password" className="input" {...register('rePass')} />
-                    </label>
-                    <input disabled={isLoading} type="submit" className="submit button" value={'Edit'} />
-                </form>
-            </div>
+        <div className="reset-password-profile-container">
+            <h2 className="profile-header">Reset Password</h2>
+            <form className="form-household" onSubmit={handleSubmit(onResetPassword)}>
+                <label>
+                    <span>Old Password</span>
+                    <input type="password" className="input" {...register('oldPass')} />
+                </label>
+                <label>
+                    <span>New Password</span>
+                    <input type="password" className="input" {...register('newPass')} />
+                </label>
+                <label>
+                    <span>Repeat Password</span>
+                    <input type="password" className="input" {...register('rePass')} />
+                </label>
+                <input disabled={isLoading} type="submit" className="submit button" value={'Edit'} />
+            </form>
+
             {notification && <Notification open={open} message={notification} severity={severity} />}
-        </>
+        </div>
     );
 };
 
-export default ResetPassword;
+export default ChangePassword;
