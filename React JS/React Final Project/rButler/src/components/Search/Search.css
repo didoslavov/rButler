@@ -15,3 +15,30 @@
 .search-form::selection {
     background-color: var(--light-pink);
 }
+
+.suggestions {
+    position: absolute;
+    margin-left: 150px;
+    top: 62px;
+    left: 0;
+    width: 100%;
+    background-color: var(--light-grey);
+    color: var(--dark-blue);
+    border: 1px solid var(--dark-blue);
+    border-radius: 4px;
+    max-height: auto;
+    max-width: 190px;
+    overflow: auto;
+}
+
+.suggestion {
+    text-align: center;
+    padding: 8px;
+    cursor: pointer;
+    max-width: auto;
+}
+
+.suggestion:hover {
+    background-color: var(--light-blue);
+    color: var(--light-grey);
+}
