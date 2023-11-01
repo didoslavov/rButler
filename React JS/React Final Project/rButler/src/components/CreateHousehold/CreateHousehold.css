@@ -28,8 +28,10 @@
     text-transform: uppercase;
 }
 
+.form-household-container {
+    box-shadow: 5px 5px 10px 5px rgba(45, 71, 90, 0.5);
+}
+
 .form-household {
-    border: 1px solid var(--dark-blue);
-    border-radius: 4px;
     padding: 20px 100px;
 }

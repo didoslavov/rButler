@@ -41,17 +41,19 @@ const CreateHousehold = () => {
                     <h2 className="welcome welcome-household">
                         Welcome, esteemed guest, to the creation of your digital household.
                     </h2>
-                    <form className="form-household" onSubmit={handleSubmit(onCreateHousehold)}>
-                        <label>
-                            <span>Household name</span>
-                            <input type="text" className="input" {...register('name')} />
-                        </label>
-                        <label>
-                            <span>Presentation</span>
-                            <input type="text" className="input" {...register('presentation')} />
-                        </label>
-                        <input type="submit" className="submit button" value={'Create Household'} />
-                    </form>
+                    <div className="form-household-container">
+                        <form className="form-household" onSubmit={handleSubmit(onCreateHousehold)}>
+                            <label>
+                                <span>Household name</span>
+                                <input type="text" className="input" {...register('name')} />
+                            </label>
+                            <label>
+                                <span>Presentation</span>
+                                <input type="text" className="input" {...register('presentation')} />
+                            </label>
+                            <input type="submit" className="submit button" value={'Create Household'} />
+                        </form>
+                    </div>
                 </div>
                 <img src="/create-household.jpg" alt="landing image" className="household-image" />
             </div>
