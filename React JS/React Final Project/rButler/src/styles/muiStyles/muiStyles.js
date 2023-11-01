@@ -149,5 +149,5 @@ export const snackbarStyles = {
 export const footerStyle = {
     backgroundColor: '#ecebe9',
     color: '#2d475a',
-    borderTop: '1px solid #2d475a',
+    'box-shadow': '0px -10px 10px -10px rgba(45, 71, 90, 0.5)',
 };
