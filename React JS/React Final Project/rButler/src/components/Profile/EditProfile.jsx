@@ -21,11 +21,15 @@ const EditProfile = () => {
     const { register, handleSubmit } = useForm();
     const { user } = useSelector((state) => state.user);
     const { notification, open, severity } = useSelector((state) => state.notification);
-    const [fileName, setFileName] = useState(null);
+    const [file, setFile] = useState(null);
     const [isLoading, handleLoading] = useLoading(false);
+    const [fileUrl, setFileUrl] = useState('');
 
-    const onChangeFile = (e) => setFileName(e.target.files[0].name);
-    const handleClearFile = () => setFileName(null);
+    const onChangeFile = (e) => {
+        setFile(e.target.files[0]);
+        setFileUrl(URL.createObjectURL(e.target.files[0]));
+    };
+    const handleClearFile = () => setFile(null);
 
     const onEditUser = async ({ username, email, avatar }) => {
         let publicURL = '';
@@ -72,7 +76,11 @@ const EditProfile = () => {
     return (
         <div className="edit-profile-container">
             <h2 className="profile-header">Edit Profile</h2>
-            {user.avatar && <img src={user.avatar} alt="user avatar" className="avatar" />}
+            {file ? (
+                <img src={fileUrl} alt="selected avatar" className="avatar" />
+            ) : (
+                user.avatar && <img src={user.avatar} alt="user avatar" className="avatar" />
+            )}
             <form className="form-household profile-form" onSubmit={handleSubmit(onEditUser)}>
                 <label>
                     <span>Name</span>
@@ -86,10 +94,10 @@ const EditProfile = () => {
                     <span>Upload Avatar</span>
                     <input type="file" id="avatar" className="file-input" {...register('avatar')} onChange={onChangeFile} />
                 </label>
-                {fileName && (
+                {file && (
                     <div>
-                        <p className="label-file-name">
-                            <span className="label-text">{fileName}</span>
+                        <p>
+                            <span>{file.name}</span>
                             <IconButton className="label-icon" aria-label="close" size="small" onClick={handleClearFile}>
                                 <CloseIcon />
                             </IconButton>

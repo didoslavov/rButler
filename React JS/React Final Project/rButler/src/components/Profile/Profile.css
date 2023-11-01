@@ -23,13 +23,14 @@
 }
 
 .avatar {
-    border-radius: 8px;
+    border-radius: 100%;
     width: 200px;
     height: 200px;
     margin-bottom: 20px;
 }
 
 .profile-form {
+    padding: 0 100px;
     border: 1px solid var(--dark-blue);
     border-radius: 4px;
 }
@@ -46,23 +47,6 @@
     color: var(--light-grey);
     padding: 10px 15px;
     border-radius: 5px;
-}
-
-.label-file-name {
-    position: relative;
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    max-width: 280px;
-    padding: 8px 14px 14px 8px;
-    border: 1px solid var(--dark-blue);
-    border-radius: 4px;
-    text-overflow: ellipsis;
-    overflow: auto;
-}
-
-.label-text {
-    flex: 1;
 }
 
 .label-icon {
