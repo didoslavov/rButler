@@ -26,9 +26,13 @@ const EditProfile = () => {
     const [fileUrl, setFileUrl] = useState('');
 
     const onChangeFile = (e) => {
-        setFile(e.target.files[0]);
-        setFileUrl(URL.createObjectURL(e.target.files[0]));
+        const currentFile = e.target.files[0];
+        const blob = URL.createObjectURL(e.target.files[0]);
+
+        setFile(currentFile);
+        setFileUrl(blob);
     };
+
     const handleClearFile = () => setFile(null);
 
     const onEditUser = async ({ username, email, avatar }) => {
