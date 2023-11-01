@@ -16,21 +16,31 @@ const useSupabase = () => {
     }, []);
 
     const uploadAvatar = async (file) => {
-        if (!supabaseInstance) {
-            throw new Error('Supabase client not initialized');
+        try {
+            if (!supabaseInstance) {
+                throw new Error('Supabase client not initialized');
+            }
+
+            const { data: existingAvatar, error: existingError } = await supabase.storage.from('avatars').list(file.name);
+
+            if (existingError) {
+                console.log(existingError);
+            }
+
+            const { data, error } = await supabaseInstance.storage.from('avatars').upload(`/${file.name}`, file, {
+                cacheControl: '3600',
+                upsert: false,
+            });
+
+            if (error) {
+                throw new Error(error.message);
+            }
+
+            const avatarURL = `${import.meta.env.VITE_SUPABASE_URL}${import.meta.env.VITE_SUPABASE_BUCKET}${data.path}`;
+            return avatarURL;
+        } catch (error) {
+            console.log(error);
         }
-
-        const { data, error } = await supabaseInstance.storage.from('avatars').upload(`/${file.name}`, file, {
-            cacheControl: '3600',
-            upsert: false,
-        });
-
-        if (error) {
-            throw new Error(error.message);
-        }
-
-        const avatarURL = `${import.meta.env.VITE_SUPABASE_URL}${import.meta.env.VITE_SUPABASE_BUCKET}${data.path}`;
-        return avatarURL;
     };
 
     return { supabase, uploadAvatar };

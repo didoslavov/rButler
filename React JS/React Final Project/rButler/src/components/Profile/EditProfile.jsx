@@ -21,13 +21,13 @@ const EditProfile = () => {
     const { register, handleSubmit } = useForm();
     const { user } = useSelector((state) => state.user);
     const { notification, open, severity } = useSelector((state) => state.notification);
-    const [file, setFile] = useState(null);
     const [isLoading, handleLoading] = useLoading(false);
+    const [file, setFile] = useState(null);
     const [fileUrl, setFileUrl] = useState('');
 
     const onChangeFile = (e) => {
         const currentFile = e.target.files[0];
-        const blob = URL.createObjectURL(e.target.files[0]);
+        const blob = URL.createObjectURL(currentFile);
 
         setFile(currentFile);
         setFileUrl(blob);
@@ -35,7 +35,7 @@ const EditProfile = () => {
 
     const handleClearFile = () => setFile(null);
 
-    const onEditUser = async ({ username, email, avatar }) => {
+    const onEditUser = async ({ username, email }) => {
         let publicURL = '';
 
         try {
@@ -44,9 +44,14 @@ const EditProfile = () => {
                     throw ['All fields are required!'];
                 }
 
-                if (avatar.length) {
-                    const file = avatar[0];
+                if (file) {
                     publicURL = await uploadAvatar(file);
+
+                    if (!publicURL) {
+                        throw ['Avatar with this name already exists in the database!'];
+
+                        setFile(null);
+                    }
                 }
 
                 const res = await editUser({ username, email, avatar: publicURL }, user.id);
@@ -55,6 +60,7 @@ const EditProfile = () => {
                     throw res.errors;
                 }
 
+                setFile(null);
                 dispatch(setUser(res.userData));
                 dispatch(
                     setNotification({
@@ -66,7 +72,6 @@ const EditProfile = () => {
                 navigate('/profile/edit');
             });
         } catch (error) {
-            console.log(error);
             dispatch(
                 setNotification({
                     notification: error,
@@ -96,7 +101,7 @@ const EditProfile = () => {
                 </label>
                 <label htmlFor="avatar" className="file-input-label">
                     <span>Upload Avatar</span>
-                    <input type="file" id="avatar" className="file-input" {...register('avatar')} onChange={onChangeFile} />
+                    <input type="file" id="avatar" className="file-input" onChange={onChangeFile} />
                 </label>
                 {file && (
                     <div>
