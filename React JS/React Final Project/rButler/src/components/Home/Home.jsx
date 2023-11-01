@@ -1,6 +1,8 @@
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import LandingWaves from './LandingWaves.jsx';
+
 const Home = () => {
     const { user } = useSelector((state) => state.user);
     const navigate = useNavigate();
@@ -34,10 +36,7 @@ const Home = () => {
                         </button>
                     )}
                 </div>
-                <div className="air air1"></div>
-                <div className="air air2"></div>
-                <div className="air air3"></div>
-                <div className="air air4"></div>
+                <LandingWaves />
             </div>
         </div>
     );
