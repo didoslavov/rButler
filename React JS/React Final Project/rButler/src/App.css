@@ -7,7 +7,7 @@
 @import url(./components/AllHouseholds/AllHouseholds.css);
 @import url(./components/MissingHouseholds/MissingHouseholds.css);
 @import url(./components/Details/Details.css);
-@import url(./components/CreateListForm/CreateListForm.css);
+@import url(./components/CreateList/CreateList.css);
 @import url(./components/EditHousehold/EditHousehold.css);
 @import url(./components/LoadingSpinner/Spinner.css);
 @import url(./components/Listings/Listings.css);

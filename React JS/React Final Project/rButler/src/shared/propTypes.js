@@ -7,7 +7,7 @@ export const AlertDialogPropTypes = {
     message: string.isRequired,
 };
 
-export const CreateListFormTypes = {
+export const CreateListTypes = {
     householdId: string.isRequired,
     setLists: func.isRequired,
     lists: array.isRequired,

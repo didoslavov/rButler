@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import CreateListForm from '../CreateListForm/CreateListForm.jsx';
+import CreateList from '../CreateList/CreateList.jsx';
 import HouseholdUserForm from '../HouseholdUserForm/HouseholdUserForm.jsx';
 import EditHousehold from '../EditHousehold/EditHousehold.jsx';
 import Spinner from '../LoadingSpinner/Spinner.jsx';
@@ -91,7 +91,7 @@ const Details = () => {
                                 <Listings lists={lists} isHouseholdOwner={isHouseholdOwner} />
                             )}
                             {!isEditOpen && !isAddMemberOpen && isCreateOpen && (
-                                <CreateListForm householdId={householdId} lists={lists} setLists={setLists} />
+                                <CreateList householdId={householdId} lists={lists} setLists={setLists} />
                             )}
                             {!isEditOpen && !isCreateOpen && isAddMemberOpen && (
                                 <HouseholdUserForm
