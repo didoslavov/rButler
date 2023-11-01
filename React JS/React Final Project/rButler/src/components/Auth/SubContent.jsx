@@ -1,3 +1,5 @@
+import { subContentTypes } from '../../shared/propTypes.js';
+
 const SubContent = ({ toggleFormsHandler }) => {
     return (
         <div className="img">
@@ -19,5 +21,7 @@ const SubContent = ({ toggleFormsHandler }) => {
         </div>
     );
 };
+
+SubContent.propTypes = subContentTypes;
 
 export default SubContent;

@@ -29,6 +29,10 @@ export const ListingsTypes = {
     lists: array.isRequired,
 };
 
+export const subContentTypes = {
+    toggleFormsHandler: func.isRequired,
+};
+
 export const NotificationTypes = {
     open: bool.isRequired,
     message: array.isRequired,
