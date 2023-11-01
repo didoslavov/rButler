@@ -27,6 +27,10 @@
     margin-bottom: 20px;
 }
 
+.profile-form {
+    border: 1px solid var(--dark-blue);
+}
+
 .file-input-container {
     width: 100%;
     margin-bottom: 20px;
