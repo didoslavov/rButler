@@ -12,16 +12,18 @@
     margin: auto;
     padding: 64px;
     box-shadow: 5px 5px 10px 5px rgba(45, 71, 90, 0.5);
+    border-radius: 4px;
 }
 
 .edit-profile-container {
     margin: auto;
     padding: 32px;
     box-shadow: 5px 5px 10px 5px rgba(45, 71, 90, 0.5);
+    border-radius: 4px;
 }
 
 .avatar {
-    border-radius: 100%;
+    border-radius: 8px;
     width: 200px;
     height: 200px;
     margin-bottom: 20px;
@@ -29,6 +31,7 @@
 
 .profile-form {
     border: 1px solid var(--dark-blue);
+    border-radius: 4px;
 }
 
 .file-input-container {
@@ -96,6 +99,7 @@
     margin-top: 20px;
     margin-bottom: 40px;
     background-color: var(--dark-blue);
+    border-radius: 4px;
     color: var(--light-grey);
     padding: 8px;
 }

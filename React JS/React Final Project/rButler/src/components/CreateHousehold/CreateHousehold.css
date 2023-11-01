@@ -30,6 +30,7 @@
 
 .form-household-container {
     box-shadow: 5px 5px 10px 5px rgba(45, 71, 90, 0.5);
+    border-radius: 4px;
 }
 
 .form-household {
