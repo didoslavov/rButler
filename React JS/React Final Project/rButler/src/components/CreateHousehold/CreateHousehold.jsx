@@ -7,7 +7,7 @@ import Notification from '../Notification/Notification.jsx';
 import { setNotification } from '../../redux/slices/notificationSlice.js';
 import { createHousehold } from '../../services/householdsService.js';
 
-const CreateHouseholdForm = () => {
+const CreateHousehold = () => {
     const dispatch = useDispatch();
     const { notification, severity, open } = useSelector((state) => state.notification);
     const { user } = useSelector((state) => state.user);
@@ -60,4 +60,4 @@ const CreateHouseholdForm = () => {
     );
 };
 
-export default CreateHouseholdForm;
+export default CreateHousehold;

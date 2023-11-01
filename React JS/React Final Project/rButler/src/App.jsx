@@ -7,7 +7,7 @@ import Navbar from './components/Navbar/Navbar.jsx';
 import Home from './components/Home/Home.jsx';
 import AllHouseholds from './components/AllHouseholds/AllHouseholds.jsx';
 import MyHouseholds from './components/MyHouseholds/MyHouseholds.jsx';
-import CreateHouseholdForm from './components/CreateHouseholdForm/CreateHouseholdForm.jsx';
+import CreateHousehold from './components/CreateHousehold/CreateHousehold.jsx';
 import Details from './components/Details/Details.jsx';
 import List from './components/List/List.jsx';
 import Profile from './components/Profile/Profile.jsx';
@@ -37,7 +37,7 @@ function App() {
                     <Route path="/households" element={<AllHouseholds />} />
                     <Route path="/households/details/:householdId" element={<Details />} />
                     <Route path="/households/create" element={<PrivateRoute />}>
-                        <Route path="/households/create" element={<CreateHouseholdForm />} />
+                        <Route path="/households/create" element={<CreateHousehold />} />
                     </Route>
                     <Route path="/households/:userId" element={<PrivateRoute />}>
                         <Route path="/households/:userId" element={<MyHouseholds />} />
