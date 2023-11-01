@@ -52,7 +52,7 @@ const SpeedDialMenu = () => {
                                 <AddHomeSharp />
                             </Link>
                         }
-                        tooltipTitle={'Add Household Member'}
+                        tooltipTitle={'Manage Household Members'}
                     />,
                     <SpeedDialAction
                         onClick={handleShowEditForm}
