@@ -56,7 +56,7 @@ const ChangePassword = () => {
     return (
         <div className="reset-password-profile-container">
             <h2 className="profile-header">Reset Password</h2>
-            <form className="form-household" onSubmit={handleSubmit(onResetPassword)}>
+            <form className="form-household profile-form" onSubmit={handleSubmit(onResetPassword)}>
                 <label>
                     <span>Old Password</span>
                     <input type="password" className="input" {...register('oldPass')} />

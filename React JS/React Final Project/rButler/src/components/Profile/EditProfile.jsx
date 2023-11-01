@@ -73,7 +73,7 @@ const EditProfile = () => {
         <div className="edit-profile-container">
             <h2 className="profile-header">Edit Profile</h2>
             {user.avatar && <img src={user.avatar} alt="user avatar" className="avatar" />}
-            <form className="form-household" onSubmit={handleSubmit(onEditUser)}>
+            <form className="form-household profile-form" onSubmit={handleSubmit(onEditUser)}>
                 <label>
                     <span>Name</span>
                     <input type="text" className="input" {...register('username')} defaultValue={user.username} />
