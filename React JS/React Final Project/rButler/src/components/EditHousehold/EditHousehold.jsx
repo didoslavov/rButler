@@ -89,7 +89,7 @@ const EditHousehold = ({ household, handleUpdateHousehold }) => {
                 <IconButton aria-label="close" onClick={handleShowEditForm}>
                     <CloseIcon />
                 </IconButton>
-                <form className="form-household edit-form" onSubmit={handleSubmit(handleUpdate)}>
+                <form className="edit-form" onSubmit={handleSubmit(handleUpdate)}>
                     <h5 className="edit-form-header border-bottom">Edit Household</h5>
                     <label className="edit-household-form-label">
                         <span>Household name</span>
