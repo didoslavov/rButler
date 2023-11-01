@@ -70,38 +70,36 @@ const EditProfile = () => {
     };
 
     return (
-        <>
-            <div className="profile-container">
-                <h2 className="profile-header">Edit Profile</h2>
-                {user.avatar && <img src={user.avatar} alt="user avatar" className="avatar" />}
-                <form className="form-household" onSubmit={handleSubmit(onEditUser)}>
-                    <label>
-                        <span>Name</span>
-                        <input type="text" className="input" {...register('username')} defaultValue={user.username} />
-                    </label>
-                    <label>
-                        <span>Email</span>
-                        <input type="email" className="input" {...register('email')} defaultValue={user.email} />
-                    </label>
-                    <label htmlFor="avatar" className="file-input-label">
-                        <span>Upload Avatar</span>
-                        <input type="file" id="avatar" className="file-input" {...register('avatar')} onChange={onChangeFile} />
-                    </label>
-                    {fileName && (
-                        <div>
-                            <p className="label-file-name">
-                                <span className="label-text">{fileName}</span>
-                                <IconButton className="label-icon" aria-label="close" size="small" onClick={handleClearFile}>
-                                    <CloseIcon />
-                                </IconButton>
-                            </p>
-                        </div>
-                    )}
-                    <input disabled={isLoading} type="submit" className="submit button" value={'Edit'} />
-                </form>
-            </div>
+        <div className="edit-profile-container">
+            <h2 className="profile-header">Edit Profile</h2>
+            {user.avatar && <img src={user.avatar} alt="user avatar" className="avatar" />}
+            <form className="form-household" onSubmit={handleSubmit(onEditUser)}>
+                <label>
+                    <span>Name</span>
+                    <input type="text" className="input" {...register('username')} defaultValue={user.username} />
+                </label>
+                <label>
+                    <span>Email</span>
+                    <input type="email" className="input" {...register('email')} defaultValue={user.email} />
+                </label>
+                <label htmlFor="avatar" className="file-input-label">
+                    <span>Upload Avatar</span>
+                    <input type="file" id="avatar" className="file-input" {...register('avatar')} onChange={onChangeFile} />
+                </label>
+                {fileName && (
+                    <div>
+                        <p className="label-file-name">
+                            <span className="label-text">{fileName}</span>
+                            <IconButton className="label-icon" aria-label="close" size="small" onClick={handleClearFile}>
+                                <CloseIcon />
+                            </IconButton>
+                        </p>
+                    </div>
+                )}
+                <input disabled={isLoading} type="submit" className="submit button" value={'Edit'} />
+            </form>
             {notification && <Notification open={open} message={notification} severity={severity} />}
-        </>
+        </div>
     );
 };
 
