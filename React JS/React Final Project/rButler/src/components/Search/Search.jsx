@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,6 +13,9 @@ const Search = () => {
     const [query, setQuery] = useState('');
     const [households, setHouseholds] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
+    const searchRef = useRef(null);
+
+    const filteredSuggestions = households.filter((h) => h.name.toLowerCase().includes(query.trim().toLowerCase()));
 
     const handleQuery = (e) => {
         const inputValue = e.target.value;
@@ -20,7 +23,7 @@ const Search = () => {
         setShowSuggestions(inputValue.length > 0);
     };
 
-    const onSearch = ({ query }) => {
+    const onSearch = () => {
         navigate({ pathname: '/households', search: query && `?query=${query}` });
         setQuery('');
         setShowSuggestions(false);
@@ -29,10 +32,11 @@ const Search = () => {
     const onSuggestionClick = (value) => {
         setQuery(value);
         setShowSuggestions(false);
-        onSearch({ query: value });
-    };
 
-    const filteredSuggestions = households.filter((h) => h.name.toLowerCase().includes(query.trim().toLowerCase()));
+        if (searchRef.current) {
+            searchRef.current.focus();
+        }
+    };
 
     useEffect(() => {
         getAllHouseholds().then((data) => setHouseholds(data));
@@ -48,8 +52,9 @@ const Search = () => {
                 value={query}
                 autoComplete="off"
                 onChange={handleQuery}
+                ref={searchRef}
             />
-            {showSuggestions > 0 && (
+            {showSuggestions > 0 && filteredSuggestions.length > 0 && (
                 <div className="suggestions">
                     {filteredSuggestions.map((suggestion) => (
                         <div className="suggestion" key={suggestion._id} onClick={() => onSuggestionClick(suggestion.name)}>
