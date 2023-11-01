@@ -10,9 +10,9 @@ import { setNotification, setNotificationOpen } from '../../redux/slices/notific
 import { setFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
 
 import { addUserToHousehold, removeUserFromHousehold } from '../../services/householdsService.js';
-import { HouseholdUserFormTypes } from '../../shared/propTypes.js';
+import { HouseholdUserTypes } from '../../shared/propTypes.js';
 
-const AddUserForm = ({ setHousehold, householdId, users, setUsers }) => {
+const AddUser = ({ setHousehold, householdId, users, setUsers }) => {
     const dispatch = useDispatch();
     const [role, setRole] = useState('Resident');
     const [userListName, setUserListName] = useState('');
@@ -185,6 +185,6 @@ const AddUserForm = ({ setHousehold, householdId, users, setUsers }) => {
     );
 };
 
-AddUserForm.propTypes = HouseholdUserFormTypes;
+AddUser.propTypes = HouseholdUserTypes;
 
-export default AddUserForm;
+export default AddUser;

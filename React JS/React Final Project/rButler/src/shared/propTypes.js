@@ -18,7 +18,7 @@ export const EditHouseholdTypes = {
     handleUpdateHousehold: func.isRequired,
 };
 
-export const HouseholdUserFormTypes = {
+export const HouseholdUserTypes = {
     setHousehold: func.isRequired,
     householdId: string.isRequired,
     users: array.isRequired,

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import CreateList from '../CreateList/CreateList.jsx';
-import HouseholdUserForm from '../HouseholdUserForm/HouseholdUserForm.jsx';
+import HouseholdUser from '../HouseholdUser/HouseholdUser.jsx';
 import EditHousehold from '../EditHousehold/EditHousehold.jsx';
 import Spinner from '../LoadingSpinner/Spinner.jsx';
 import Listings from '../Listings/Listings.jsx';
@@ -94,7 +94,7 @@ const Details = () => {
                                 <CreateList householdId={householdId} lists={lists} setLists={setLists} />
                             )}
                             {!isEditOpen && !isCreateOpen && isAddMemberOpen && (
-                                <HouseholdUserForm
+                                <HouseholdUser
                                     householdId={householdId}
                                     setUsers={setUsers}
                                     setHousehold={setHousehold}
