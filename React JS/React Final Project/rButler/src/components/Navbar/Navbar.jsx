@@ -53,7 +53,11 @@ const Navbar = () => {
                                     <Avatar
                                         src={user.avatar}
                                         alt="user avatar"
-                                        sx={{ bgcolor: 'var(--dark-blue)', color: 'var(--light-grey)' }}>
+                                        sx={{
+                                            bgcolor: 'var(--dark-blue)',
+                                            color: 'var(--light-grey)',
+                                            '&& .MuiAvatar-img': { objectFit: 'fill' },
+                                        }}>
                                         {!user.avatar && user.username[0]}
                                     </Avatar>
                                 </Link>
