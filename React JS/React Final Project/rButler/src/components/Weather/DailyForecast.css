@@ -1,0 +1,48 @@
+.DailyForecast {
+    text-align: center;
+    color: var(--dark-blue);
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+.col {
+    padding: 10px;
+    box-shadow: 1px 1px 10px 1px rgba(45, 71, 90, 0.5);
+}
+
+.DailyForecast-temp-min {
+    opacity: 0.6;
+    margin-left: 6px;
+}
+
+.DailyForecast-temps {
+    margin-top: 14px;
+}
+
+.DailyForecast-day {
+    margin-bottom: 8px;
+}
+
+.DailyForecast canvas {
+    position: relative;
+    left: 11px;
+}
+
+.PollutionForecast .link {
+    font-size: 11px;
+    color: #dce2cb;
+}
+
+.PollutionForecast p {
+    margin-bottom: 0;
+}
+
+.PollutionForecast h3 {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
