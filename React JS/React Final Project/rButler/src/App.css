@@ -20,6 +20,9 @@
 @import url(./components/Profile/Profile.css);
 @import url(@fontsource/roboto/900.css);
 
+@import url(./components/Weather/Weather.css);
+@import url(./components/Weather/DailyForecast.css);
+
 :root {
     --dark-pink: #f08a9d;
     --dark-pink-opacity: #f08a9d55;
