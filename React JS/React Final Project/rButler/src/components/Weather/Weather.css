@@ -1,0 +1,95 @@
+.Weather {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    box-shadow: 5px 5px 10px 5px rgba(45, 71, 90, 0.5);
+    padding: 44px;
+}
+
+.search-bar {
+    margin-bottom: 30px;
+}
+
+.search-location {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+}
+
+.search-bar input {
+    border: 1px solid var(--dark-blue);
+    border-radius: 4px;
+    padding: 8px;
+}
+
+.search-bar input[type='submit'] {
+    background-color: var(--dark-blue);
+    color: var(--light-grey);
+}
+
+.location-button {
+    display: inline-block;
+    padding: 10px;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 1px;
+    text-decoration: underline;
+    color: white;
+    max-width: 150px;
+}
+
+.col {
+    text-align: center;
+    padding: 2px;
+}
+
+.weather-forecast {
+    margin: 30px 20px;
+    color: var(--dark-blue);
+    text-align: center;
+}
+
+.weather-forecast-date {
+    font-size: 15px;
+    opacity: 0.9;
+}
+
+.weather-forecast-temperature-max {
+    font-weight: 600;
+}
+
+.weather-forecast-temperature-min {
+    opacity: 0.7;
+}
+
+.Weather .AnimatedIcons {
+    max-width: 120px;
+    display: inline;
+    position: relative;
+    top: 5px;
+    right: 12px;
+}
+
+.temperatures-display {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.WeatherInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 28px;
+    color: var(--dark-blue);
+}
+
+.temperatures-info {
+    display: inherit;
+}
+
+.humidityWind {
+    color: var(--dark-blue);
+    opacity: 0.9;
+}
