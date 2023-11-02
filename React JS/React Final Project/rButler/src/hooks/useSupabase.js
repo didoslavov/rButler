@@ -21,13 +21,7 @@ const useSupabase = () => {
                 throw new Error('Supabase client not initialized');
             }
 
-            const { data: existingAvatar, error: existingError } = await supabase.storage.from('avatars').list(file.name);
-
-            if (existingError) {
-                console.log(existingError);
-            }
-
-            const { data, error } = await supabaseInstance.storage.from('avatars').upload(`/${file.name}`, file, {
+            const { data, error } = await supabaseInstance.storage.from('avatars').upload(`/${Date.now()}_${file.name}`, file, {
                 cacheControl: '3600',
                 upsert: false,
             });

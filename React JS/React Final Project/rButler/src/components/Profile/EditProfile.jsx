@@ -46,12 +46,6 @@ const EditProfile = () => {
 
                 if (file) {
                     publicURL = await uploadAvatar(file);
-
-                    if (!publicURL) {
-                        throw ['Avatar with this name already exists in the database!'];
-
-                        setFile(null);
-                    }
                 }
 
                 const res = await editUser({ username, email, avatar: publicURL }, user.id);
