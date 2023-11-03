@@ -3,6 +3,7 @@ import userSlice from './slices/userSlice';
 import notificationSlice from './slices/notificationSlice';
 import formVisibilitySlice from './slices/formVisibilitySlice.js';
 import householdSlice from './slices/householdSlice.js';
+import weatherSlice from './slices/weatherSlice.js';
 
 const store = configureStore({
     reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
         notification: notificationSlice,
         formVisibility: formVisibilitySlice,
         household: householdSlice,
+        weather: weatherSlice,
     },
 });
 
