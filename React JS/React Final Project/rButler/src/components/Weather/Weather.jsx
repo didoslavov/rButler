@@ -14,10 +14,12 @@ export default function Weather() {
                 <Spinner />
             ) : (
                 weather.city && (
-                    <div className="Weather">
-                        <form className="search-bar" onSubmit={handleSubmit(handleSearch)}>
+                    <div className="weather">
+                        <WeatherInfo info={weather} />
+                        <form className="weather-search-form" onSubmit={handleSubmit(handleSearch)}>
                             <div className="search-location">
                                 <input
+                                    className="search-form"
                                     type="text"
                                     autoComplete="off"
                                     spellCheck="false"
@@ -25,11 +27,10 @@ export default function Weather() {
                                     {...register('location')}
                                 />
                                 <span />
-                                <input type="submit" value="Go" id="go" />
+                                <input type="submit" value="Search" className="search-button" />
                             </div>
                         </form>
 
-                        <WeatherInfo info={weather} />
                         <DailyForecast fiveDaysForecast={fiveDays} />
                     </div>
                 )

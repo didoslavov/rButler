@@ -24,7 +24,7 @@ export default function AnimatedIcons(props) {
     };
 
     return (
-        <div className="AnimatedIcons">
+        <div className="animated-icons">
             <ReactSkycon icon={codeMapping[props.code]} color="#2d475a" size={props.size} animate={true} resizeClear={true} />
         </div>
     );

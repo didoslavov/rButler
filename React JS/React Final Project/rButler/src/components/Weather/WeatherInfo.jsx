@@ -1,9 +1,11 @@
 import React from 'react';
 import AnimatedIcons from './AnimatedIcon.jsx';
+import AirSharpIcon from '@mui/icons-material/AirSharp';
+import WaterDropSharpIcon from '@mui/icons-material/WaterDropSharp';
 
 export default function WeatherInfo(props) {
     return (
-        <div className="WeatherInfo">
+        <div className="weather-info">
             <h2>{props.info.city}</h2>
 
             <div className="temperatures-display">
@@ -14,13 +16,15 @@ export default function WeatherInfo(props) {
                     <p className="units">°C</p>
                 </div>
             </div>
-            <h3>{props.info.description}</h3>
-            <div className="humidityWind">
-                <div>
-                    <i></i> Humidity: {props.info.humidity}%
+            <h3 className="temperatures-display-weather">{props.info.description}</h3>
+            <div className="humidity-wind">
+                <div className="temperatures-display-info">
+                    <WaterDropSharpIcon fontSize="small" />
+                    Humidity: {props.info.humidity}%
                 </div>
-                <div>
-                    <i></i> Wind: {props.info.wind}km/h
+                <div className="temperatures-display-info">
+                    <AirSharpIcon fontSize="small" />
+                    Wind: {props.info.wind} km/h
                 </div>
             </div>
         </div>
