@@ -5,8 +5,10 @@ import { searchByCoord, searchLocation } from '../../services/weatherService.js'
 import { useForm } from 'react-hook-form';
 import { useLoading } from '../../hooks/useLoading.js';
 import Spinner from '../LoadingSpinner/Spinner.jsx';
+import { useDispatch } from 'react-redux';
 
 export default function Weather() {
+    const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
     const [weather, setWeather] = useState({ loaded: false });
     const [fiveDays, setFiveDaysForecast] = useState([]);
@@ -55,7 +57,7 @@ export default function Weather() {
     useEffect(() => {
         if (position.latitude && position.longitude) {
             handleLoading(() => {
-                searchByCoord(position.latitude, position.longitude)
+                searchByCoord(position.latitude, position.longitude, dispatch)
                     .then(({ baseForecast, fiveDaysForecast }) => {
                         if (baseForecast.cod !== 429 && fiveDaysForecast.cod !== 429) {
                             setWeather({
@@ -76,36 +78,33 @@ export default function Weather() {
                     });
             });
         }
-    }, [position]);
+    }, [position, dispatch]);
 
     return (
         <>
             {isLoading ? (
                 <Spinner />
             ) : (
-                <div className="Weather">
-                    <form className="search-bar" onSubmit={handleSubmit(search)}>
-                        <div className="search-location">
-                            <input
-                                type="text"
-                                autoComplete="off"
-                                spellCheck="false"
-                                placeholder="Search a city"
-                                {...register('location')}
-                            />
-                            <span />
-                            <input type="submit" value="Go" id="go" />
-                        </div>
-                        <div className="my-location">
-                            <button className="location-button" coordinates="">
-                                My Location
-                            </button>
-                        </div>
-                    </form>
+                weather.city && (
+                    <div className="Weather">
+                        <form className="search-bar" onSubmit={handleSubmit(search)}>
+                            <div className="search-location">
+                                <input
+                                    type="text"
+                                    autoComplete="off"
+                                    spellCheck="false"
+                                    placeholder="Search a city"
+                                    {...register('location')}
+                                />
+                                <span />
+                                <input type="submit" value="Go" id="go" />
+                            </div>
+                        </form>
 
-                    <WeatherInfo info={weather} />
-                    <DailyForecast fiveDaysForecast={fiveDays} />
-                </div>
+                        <WeatherInfo info={weather} />
+                        <DailyForecast fiveDaysForecast={fiveDays} />
+                    </div>
+                )
             )}
         </>
     );
