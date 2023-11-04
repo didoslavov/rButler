@@ -6,7 +6,7 @@ import { useForecast } from '../../hooks/useForecast.js';
 
 export default function Weather() {
     const { weather, fiveDays, handleSearch, isLoading } = useForecast();
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
 
     return (
         <>
@@ -16,7 +16,7 @@ export default function Weather() {
                 weather.city && (
                     <div className="weather">
                         <WeatherInfo info={weather} />
-                        <form className="weather-search-form" onSubmit={handleSubmit(handleSearch)}>
+                        <form className="weather-search-form" onSubmit={handleSubmit((search) => handleSearch(search, reset))}>
                             <div className="search-location">
                                 <input
                                     className="search-form"

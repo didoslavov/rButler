@@ -32,12 +32,14 @@ export const useForecast = () => {
         }
     };
 
-    const handleSearch = async ({ location }) => {
+    const handleSearch = async ({ location }, reset) => {
         try {
             if (!location) {
                 throw ['Location is required!'];
             }
             const { baseForecast, fiveDaysForecast } = await searchLocation(location);
+
+            reset();
 
             setWeather({
                 city: baseForecast.name,
