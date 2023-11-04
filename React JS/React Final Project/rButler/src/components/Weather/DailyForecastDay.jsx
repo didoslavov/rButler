@@ -6,11 +6,6 @@ export default function DailyForecastDay({ forecast }) {
         return `${temperature}`;
     }
 
-    function minTemp() {
-        const temperature = Math.round(forecast.main['temp_min']);
-        return `${temperature}`;
-    }
-
     function day() {
         const date = new Date(forecast.dt * 1000);
         const day = date.getDay();
@@ -21,11 +16,10 @@ export default function DailyForecastDay({ forecast }) {
 
     return (
         <div>
-            <div className="DailyForecast-day">{day()}</div>
+            <div className="daily-forecast-day">{day()}</div>
             <AnimatedIcons size={30} code={forecast.weather[0].icon} />
-            <div className="DailyForecast-temps">
-                <span className="DailyForecast-temp-max">{maxTemp()}°</span>
-                <span className="DailyForecast-temp-min">{minTemp()}°</span>
+            <div className="daily-forecast-temps">
+                <span className="daily-forecast-temp-max">{maxTemp()}°</span>
             </div>
         </div>
     );
