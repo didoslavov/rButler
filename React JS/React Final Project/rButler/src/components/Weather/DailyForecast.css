@@ -1,4 +1,4 @@
-.DailyForecast {
+.daily-forecast {
     text-align: center;
     color: var(--dark-blue);
     font-size: 15px;
@@ -12,24 +12,24 @@
 
 .col {
     border-radius: 4px;
-    padding: 20px;
+    padding: 10px 28px;
     box-shadow: 3px 3px 10px 3px rgba(45, 71, 90, 0.5);
 }
 
-.DailyForecast-temp-min {
+.daily-forecast-temp-min {
     opacity: 0.6;
     margin-left: 6px;
 }
 
-.DailyForecast-temps {
+.daily-forecast-temps {
     margin-top: 14px;
 }
 
-.DailyForecast-day {
-    margin-bottom: 8px;
+.daily-forecast-day {
+    margin-bottom: 10px;
 }
 
-.DailyForecast canvas {
+.daily-forecast canvas {
     position: relative;
     left: 11px;
 }
