@@ -5,10 +5,11 @@ export default function DailyForecast({ fiveDaysForecast }) {
     if (!fiveDaysForecast) {
         return;
     }
+
     return (
         <div className="DailyForecast">
             <div className="row">
-                {fiveDaysForecast.map(function (forecast, index) {
+                {fiveDaysForecast.map((forecast, index) => {
                     return (
                         <div className="col" key={index}>
                             <DailyForecastDay forecast={forecast} />
