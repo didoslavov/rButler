@@ -13,6 +13,7 @@ export const useForecast = () => {
     const fetchWeatherData = async (latitude, longitude) => {
         try {
             const { baseForecast, fiveDaysForecast } = await searchByCoord(latitude, longitude, dispatch);
+
             if (baseForecast.cod !== 429 && fiveDaysForecast.cod !== 429) {
                 setWeather({
                     city: baseForecast.name,
@@ -25,7 +26,7 @@ export const useForecast = () => {
                     icon: baseForecast.weather[0].icon,
                 });
             }
-            setFiveDaysForecast(fiveDaysForecast.list);
+            setFiveDaysForecast(fiveDaysForecast);
         } catch (error) {
             console.error(error);
         }
@@ -48,7 +49,7 @@ export const useForecast = () => {
                 description: baseForecast.weather[0].description,
                 icon: baseForecast.weather[0].icon,
             });
-            setFiveDaysForecast(fiveDaysForecast.list);
+            setFiveDaysForecast(fiveDaysForecast);
         } catch (error) {
             console.error(error);
         }
