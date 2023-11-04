@@ -30,6 +30,5 @@ export const updateHousehold = async (household, householdId) => {
 };
 
 export const deleteHousehold = async (householdId) => {
-    //TODO: You can try implement Redis DB. You can get deleted household in the request and store it in Redis DB for if user decides to undo deletion
     return await del(householdEndpoints.deleteHousehold(householdId));
 };
