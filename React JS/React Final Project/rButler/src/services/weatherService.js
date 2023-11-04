@@ -73,6 +73,8 @@ async function getFiveDaysForecast(lat, lon) {
     const res = await fetch(`${baseUrl}/forecast?lat=${lat}&lon=${lon}&cnt=40&appid=${apiKey}&units=metric`);
     const data = await res.json();
 
+    const fiveDays = [];
+
     for (let i = 0; i < data.list.length; i += 8) {
         fiveDays.push(data.list[i]);
     }
