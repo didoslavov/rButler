@@ -35,7 +35,7 @@ export const searchByCoord = async (lat, lon, dispatch) => {
 
         return {
             baseForecast: cachedWeatherData.data,
-            fiveDaysForecast: { list: cachedWeatherData.fiveDaysForecast },
+            fiveDaysForecast: cachedWeatherData.fiveDaysForecast,
         };
     } else {
         try {
@@ -48,7 +48,7 @@ export const searchByCoord = async (lat, lon, dispatch) => {
                 [lon]: {
                     data: baseForecast,
                     timestamp: currentTime,
-                    fiveDaysForecast: fiveDaysForecast.list,
+                    fiveDaysForecast: fiveDaysForecast,
                 },
             };
 
@@ -58,7 +58,7 @@ export const searchByCoord = async (lat, lon, dispatch) => {
                     lon,
                     weatherData: baseForecast,
                     timestamp: currentTime,
-                    fiveDaysForecast: fiveDaysForecast.list,
+                    fiveDaysForecast: fiveDaysForecast,
                 })
             );
 
@@ -70,6 +70,12 @@ export const searchByCoord = async (lat, lon, dispatch) => {
 };
 
 async function getFiveDaysForecast(lat, lon) {
-    const res = await fetch(`${baseUrl}/forecast?lat=${lat}&lon=${lon}&cnt=5&appid=${apiKey}&units=metric`);
-    return await res.json();
+    const res = await fetch(`${baseUrl}/forecast?lat=${lat}&lon=${lon}&cnt=40&appid=${apiKey}&units=metric`);
+    const data = await res.json();
+
+    for (let i = 0; i < data.list.length; i += 8) {
+        fiveDays.push(data.list[i]);
+    }
+
+    return fiveDays;
 }
