@@ -1,3 +1,11 @@
+**Frontend Stack**
+
+![Node.js](https://img.shields.io/badge/Node.js-✓-green) ![Express.js](https://img.shields.io/badge/Express.js-✓-lightgrey) ![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-4DB33D) ![Mongoose](https://img.shields.io/badge/Mongoose-5.13.2-orange) ![JWT](https://img.shields.io/badge/JWT-✓-blue) ![Bcrypt](https://img.shields.io/badge/Bcrypt-✓-blueviolet) ![Express Validator](https://img.shields.io/badge/Express_Validator-✓-yellow)
+
+**Backend Stack**
+
+![React](https://img.shields.io/badge/React-✓-blue) ![Material-UI](https://img.shields.io/badge/Material--UI-✓-important) ![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-✓-9cf) ![Supabase](https://img.shields.io/badge/Supabase-✓-yellowgreen) ![React Router DOM](https://img.shields.io/badge/React_Router_DOM-✓-brightgreen) ![React Share](https://img.shields.io/badge/React_Share-✓-ff69b4)
+
 # rButler
 
 **rButler** project is a comprehensive online
