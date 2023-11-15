@@ -117,9 +117,9 @@ Provide instructions on how to start the backend and frontend components of your
     -   _Request_:
         ```json
         {
-          "master": "string",
-          "name": "string",
-          "presentation": string
+            "master": "string",
+            "name": "string",
+            "presentation": "string"
         }
         ```
     -   _Response_:
@@ -136,12 +136,12 @@ Provide instructions on how to start the backend and frontend components of your
     -   _Response_:
         ```json
         {
-          "householdId": "unique_id_here",
-          "master": "unique_owner_id",
-          "name": "string",
-          "presentation": "string",
-          "users": ["username1", "username2", ...],
-          "lists": ["shopping", "todo", ...]
+            "householdId": "unique_id_here",
+            "master": "unique_owner_id",
+            "name": "string",
+            "presentation": "string",
+            "users": ["username1", "username2", "..."],
+            "lists": ["shopping", "todo", "..."]
         }
         ```
 
