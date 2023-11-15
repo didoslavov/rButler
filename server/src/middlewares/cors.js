@@ -1,5 +1,5 @@
 module.exports = () => (req, res, next) => {
-    const allowedOrigins = ['http://localhost:5173', 'https://reactbutler.netlify.app'];
+    const allowedOrigins = ['http://localhost:5173', 'https://rbutler.onrender.com'];
 
     const origin = req.headers.origin;
     if (allowedOrigins.includes(origin)) {
