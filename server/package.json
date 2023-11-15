@@ -4,7 +4,8 @@
     "description": "API to be consumed by rButler frontend project.",
     "main": "src/index.js",
     "scripts": {
-        "dev": "nodemon index.js"
+        "dev": "nodemon index.js",
+        "build": "npm i"
     },
     "keywords": [
         "rbutler"
