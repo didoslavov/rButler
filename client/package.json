@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
     "@fontsource/roboto": "^5.0.8",
     "@mui/icons-material": "^5.14.9",
     "@mui/material": "^5.14.9",
+    "@mui/styled-engine": "^5.14.18",
     "@reduxjs/toolkit": "^1.9.7",
     "@supabase/supabase-js": "^2.38.4",
     "prop-types": "^15.8.1",
