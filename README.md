@@ -9,13 +9,13 @@ simplify day-to-day tasks and enhance communication within households.
 
 ## Table of Contents
 
--   [Project Overview](##project-overview)
--   [Key Features](##key-features)
--   [How It Works](##how-it-works)
--   [Project Structure](##project-structure)
--   [Running the Application](##running-the-application)
--   [API Endpoints](##api-endpoints)
--   [License](##license)
+-   [Project Overview](#project-overview)
+-   [Key Features](#key-features)
+-   [How It Works](#how-it-works)
+-   [Project Structure](#project-structure)
+-   [Running the Application](#running-the-application)
+-   [API Endpoints](#api-endpoints)
+-   [License](#license)
 
 ## Project Overview
 
