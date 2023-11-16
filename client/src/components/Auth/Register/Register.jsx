@@ -71,7 +71,7 @@ const Register = () => {
             <h2 className="welcome-sign-up">Step inside, dear newcomer!</h2>
             <form className="form-signup" action="post" onSubmit={handleSubmit(onRegister)}>
                 <label>
-                    <span>Name</span>
+                    <span>Username</span>
                     <input type="text" className="input" {...register('username')} />
                 </label>
                 <label>
