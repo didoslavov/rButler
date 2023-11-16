@@ -18,6 +18,7 @@ simplify day-to-day tasks and enhance communication within households.
 ## Table of Contents
 
 -   [Project Overview](#project-overview)
+-   [Warnings](#warnings)
 -   [Key Features](#key-features)
 -   [How It Works](#how-it-works)
 -   [Project Structure](#project-structure)
@@ -28,6 +29,12 @@ simplify day-to-day tasks and enhance communication within households.
 ## Project Overview
 
 **rButler** project aims to enhance household organization, fostering better communication and cooperation among its users. Whether it's planning a shopping trip or coordinating daily tasks, this platform simplifies the management of household responsibilities in the digital age.
+
+## Warnings
+
+1. Best to be used on desctop with resolution 1920x1080
+2. Developed on Mozilla Firefox (latest version)
+3. Tested on Chrome (latest version)
 
 ## Key Features
 
