@@ -73,7 +73,7 @@ const Details = () => {
 
     return (
         <div className="details-container">
-            <img className="details-image" src="/details-household.jpg" alt="detail-household" />
+            <img className="details-image" src="/details-household.webp" alt="detail-household" />
             <div className="details-content">
                 {isLoading ? (
                     <Spinner />

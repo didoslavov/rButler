@@ -55,7 +55,7 @@ const CreateHousehold = () => {
                         </form>
                     </div>
                 </div>
-                <img src="/create-household.jpg" alt="landing image" className="household-image" />
+                <img src="/create-household.webp" alt="landing image" className="household-image" />
             </div>
             {notification && <Notification open={open} message={notification} severity={severity} />}
         </>

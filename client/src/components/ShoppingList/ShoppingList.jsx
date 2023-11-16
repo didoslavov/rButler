@@ -44,7 +44,7 @@ const ShoppingList = ({ handleSubmit, register, onAddItem, items, handleGoBack, 
                     </div>
                 </div>
                 <ListActionIcons handleGoBack={handleGoBack} handleClickDelete={handleClickDelete} />
-                <img src="/shopping-list.jpg" alt="list image" className="list-image" />
+                <img src="/shopping-list.webp" alt="list image" className="list-image" />
             </div>
         </>
     );

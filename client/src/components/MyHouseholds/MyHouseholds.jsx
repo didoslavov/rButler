@@ -45,7 +45,7 @@ const MyHouseholds = () => {
 
     return (
         <div className="my-households-container">
-            <img src="/my-households.jpg" alt="my-households" />
+            <img src="/my-households.webp" alt="my-households" />
             <div className="households">
                 <h3 className="my-households-header border-bottom">My Households</h3>
                 {isLoading ? (

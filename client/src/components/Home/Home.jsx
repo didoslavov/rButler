@@ -15,7 +15,7 @@ const Home = () => {
 
     return (
         <div className="landing-container">
-            <img src="/landing-page.avif" alt="landing image" className="landing-image" />
+            <img src="/landing-page.webp" alt="landing image" className="landing-image" />
             <div className="landing-content">
                 <h1 className="landing-title">Welcome home!</h1>
                 <p className="landing-text">

@@ -9,7 +9,7 @@ const TodoList = ({ handleSubmit, register, onAddItem, items, handleGoBack, hand
 
     return (
         <div className="todo-list-container">
-            <img src="/todo-list.jpg" alt="list image" className="list-image" />
+            <img src="/todo-list.webp" alt="list image" className="list-image" />
             <div className="list-container">
                 <h2 className="welcome-list">TODO List</h2>
                 <div className="form-container">
