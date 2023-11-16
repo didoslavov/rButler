@@ -1,0 +1,34 @@
+.learn-more-container {
+    display: flex;
+    flex-direction: column;
+    gap: 38px;
+    align-items: center;
+    justify-content: center;
+    min-height: 84.5vh;
+}
+
+.learn-more-section {
+    text-align: center;
+}
+
+.overview-container {
+    display: flex;
+    padding: 28px;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    gap: 8px;
+}
+
+.overview-paragraph {
+    width: 840px;
+}
+
+.learn-more-headings {
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.learn-more-links {
+    color: var(--dark-pink);
+}

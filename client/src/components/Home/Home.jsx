@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import LandingWaves from './LandingWaves.jsx';
 
@@ -27,9 +27,9 @@ const Home = () => {
                     ready to assist in your noble quests.
                 </p>
                 <div className="landing-buttons">
-                    <button className="button-action" onClick={handleInfoNavigate}>
+                    <Link className="button-action" to="/learn-more">
                         Learn More
-                    </button>
+                    </Link>
                     {user && (
                         <button className="button-action" onClick={handleMyHouseholdsNavigate}>
                             My households

@@ -17,6 +17,7 @@ import Default from './components/Default/Default.jsx';
 import './App.css';
 import EditProfile from './components/Profile/EditProfile.jsx';
 import ChangePassword from './components/Profile/ChangePassword.jsx';
+import LearnMore from './components/LearnMore/LearnMore.jsx';
 
 function App() {
     return (
@@ -49,6 +50,7 @@ function App() {
                         <Route path="/lists/todo/:listId" element={<List type={'todo'} />} />
                     </Route>
                 </>
+                <Route path="/learn-more" element={<LearnMore />} />
                 <Route path="*" element={<Default />}></Route>
             </Routes>
             <Footer />

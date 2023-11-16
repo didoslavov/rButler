@@ -18,6 +18,7 @@
 @import url(./components/SpeedDial/SpeedDial.css);
 @import url(./components/Share/Share.css);
 @import url(./components/Profile/Profile.css);
+@import url(./components/LearnMore/LearnMore.css);
 @import url(@fontsource/roboto/900.css);
 
 @import url(./components/Weather/Weather.css);
