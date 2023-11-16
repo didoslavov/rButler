@@ -17,7 +17,7 @@ const Footer = () => {
                             <IconButton
                                 color="inherit"
                                 aria-label="GitHub"
-                                href="https://github.com/didoslavov/SoftUni-Progress/tree/main/React%20JS/React%20Final%20Project"
+                                href="https://github.com/didoslavov/rButler"
                                 target="_blank">
                                 <GitHubIcon />
                             </IconButton>
