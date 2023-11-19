@@ -13,7 +13,7 @@ import { useLoading } from '../../hooks/useLoading.js';
 
 import { getUserHouseholds } from '../../services/householdsService.js';
 import { setNotification } from '../../redux/slices/notificationSlice.js';
-import HouseholdList from './HouseholdList.jsx';
+import HouseholdList from '../HouseholdList/HouseholdList.jsx';
 
 const MyHouseholds = () => {
     const dispatch = useDispatch();
