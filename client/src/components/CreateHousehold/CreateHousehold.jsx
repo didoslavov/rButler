@@ -17,7 +17,7 @@ const CreateHousehold = () => {
     const onCreateHousehold = async ({ name, presentation }) => {
         try {
             if (!name || !presentation) {
-                throw ['All fields are required!'];
+                throw new Error('All fields are required!');
             }
 
             await createHousehold({ name, presentation, master: user.id });
@@ -26,7 +26,7 @@ const CreateHousehold = () => {
         } catch (error) {
             dispatch(
                 setNotification({
-                    notification: error,
+                    notification: [error.message],
                     severity: 'error',
                     open: true,
                 })
@@ -55,7 +55,7 @@ const CreateHousehold = () => {
                         </form>
                     </div>
                 </div>
-                <img src="/create-household.webp" alt="landing image" className="household-image" />
+                <img src="/create-household.webp" alt="Create Household" className="household-image" />
             </div>
             {notification && <Notification open={open} message={notification} severity={severity} />}
         </>
