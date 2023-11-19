@@ -16,23 +16,16 @@ import { EditHouseholdTypes } from '../../shared/propTypes.js';
 
 const EditHousehold = ({ household, handleUpdateHousehold }) => {
     const dispatch = useDispatch();
-    const { isEditOpen } = useSelector((state) => state.formVisibility);
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
     const [openAlertModal, setOpenAlertModal] = useState(false);
 
-    const handleClickDelete = () => {
-        setOpenAlertModal(true);
+    const handleAlertModal = () => {
+        setOpenAlertModal(!openAlertModal);
     };
 
-    const handleClose = () => {
-        setOpenAlertModal(false);
-    };
-
-    const handleShowEditForm = () => {
-        dispatch(setFormVisibility({ formType: 'isEditOpen', value: !isEditOpen }));
-        dispatch(setFormVisibility({ formType: 'isCreateOpen', value: false }));
-        dispatch(setFormVisibility({ formType: 'isAddMemberOpen', value: false }));
+    const handleCloseEditForm = () => {
+        dispatch(setFormVisibility({ formType: 'isEditOpen', value: false }));
     };
 
     const handleDelete = async (e) => {
@@ -45,13 +38,13 @@ const EditHousehold = ({ household, handleUpdateHousehold }) => {
     const handleUpdate = async ({ name, presentation }) => {
         try {
             if (!name || !presentation) {
-                throw ['All fields are required!'];
+                throw new Error('All fields are required!');
             }
 
             const res = await updateHousehold({ name, presentation }, household._id);
 
             if (res.error) {
-                throw [res.error];
+                throw new Error(res.error);
             }
 
             dispatch(
@@ -62,12 +55,12 @@ const EditHousehold = ({ household, handleUpdateHousehold }) => {
                 })
             );
 
-            handleShowEditForm();
+            handleCloseEditForm();
             handleUpdateHousehold();
         } catch (error) {
             dispatch(
                 setNotification({
-                    notification: error,
+                    notification: [error.message],
                     severity: 'error',
                     open: true,
                 })
@@ -80,13 +73,13 @@ const EditHousehold = ({ household, handleUpdateHousehold }) => {
             {openAlertModal && (
                 <AlertDialog
                     open={openAlertModal}
-                    handleClose={handleClose}
+                    handleClose={handleAlertModal}
                     handleDelete={handleDelete}
                     message={'You are about to delete a household.'}
                 />
             )}
             <div className="edit-household-container">
-                <IconButton aria-label="close" onClick={handleShowEditForm}>
+                <IconButton aria-label="close" onClick={handleCloseEditForm}>
                     <CloseIcon />
                 </IconButton>
                 <form className="edit-form" onSubmit={handleSubmit(handleUpdate)}>
@@ -106,7 +99,7 @@ const EditHousehold = ({ household, handleUpdateHousehold }) => {
                     />
                     <div className="buttons-form">
                         <input type="submit" className="button-action edit-button" value={'Edit Household'} />
-                        <button type="button" className="button-action delete-button" onClick={handleClickDelete}>
+                        <button type="button" className="button-action delete-button" onClick={handleAlertModal}>
                             Delete
                         </button>
                     </div>
