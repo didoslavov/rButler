@@ -16,28 +16,6 @@
     width: 100%;
 }
 
-.households-list {
-    display: flex;
-    list-style: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-    width: 70%;
-}
-
-.household:hover {
-    background-color: var(--dark-blue);
-    color: var(--light-grey);
-}
-
-.chip-container {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 1;
-}
-
 .my-missing-household {
     display: flex;
     flex-wrap: wrap;

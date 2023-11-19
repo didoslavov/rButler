@@ -7,7 +7,7 @@ const HouseholdItem = ({ household }) => {
             <div className="chip-container">
                 <Chip sx={chipStyles} label={'Owner: ' + household.master.username} />
             </div>
-            <h4 className="household-header border-bottom">{household.name}</h4>
+            <h4 className="border-bottom">{household.name}</h4>
             <p>{household.presentation}</p>
         </li>
     );
