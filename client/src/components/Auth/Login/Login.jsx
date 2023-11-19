@@ -22,12 +22,13 @@ const Login = () => {
         try {
             await handleLoading(async () => {
                 if (!username || !password) {
-                    throw ['All fields are required!'];
+                    throw new Error('All fields are required!');
                 }
+
                 const res = await login({ username, password });
 
                 if (res.errors) {
-                    throw res.errors;
+                    throw new Error(res.errors);
                 }
 
                 dispatch(setUser(res));
@@ -36,7 +37,7 @@ const Login = () => {
         } catch (error) {
             dispatch(
                 setNotification({
-                    notification: error,
+                    notification: [error.message],
                     severity: 'error',
                     open: true,
                 })
