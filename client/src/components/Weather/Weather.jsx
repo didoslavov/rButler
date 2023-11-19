@@ -1,7 +1,7 @@
 import WeatherInfo from './WeatherInfo';
 import DailyForecast from './DailyForecast';
 import { useForm } from 'react-hook-form';
-import Spinner from '../LoadingSpinner/Spinner.jsx';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.jsx';
 import { useForecast } from '../../hooks/useForecast.js';
 
 export default function Weather() {
@@ -11,7 +11,7 @@ export default function Weather() {
     return (
         <>
             {isLoading ? (
-                <Spinner />
+                <LoadingSpinner />
             ) : (
                 weather.city && (
                     <div className="weather">

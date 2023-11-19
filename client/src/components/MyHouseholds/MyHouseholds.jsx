@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Pagination } from '@mui/material';
 import { paginationStyles } from '../../styles/muiStyles/muiStyles.js';
 
-import Spinner from '../LoadingSpinner/Spinner.jsx';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.jsx';
 import MissingHouseholds from '../MissingHouseholds/MissingHouseholds.jsx';
 
 import usePagination from '../../hooks/usePagination.js';
@@ -50,7 +50,7 @@ const MyHouseholds = () => {
             <div className="households">
                 <h3 className="my-households-header border-bottom">My Households</h3>
                 {isLoading ? (
-                    <Spinner />
+                    <LoadingSpinner />
                 ) : households?.length ? (
                     <>
                         <HouseholdList households={itemsForDisplay} />

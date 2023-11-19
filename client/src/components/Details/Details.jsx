@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import CreateList from '../CreateList/CreateList.jsx';
 import HouseholdUser from '../HouseholdUser/HouseholdUser.jsx';
 import EditHousehold from '../EditHousehold/EditHousehold.jsx';
-import Spinner from '../LoadingSpinner/Spinner.jsx';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.jsx';
 import Listings from '../Listings/Listings.jsx';
 import Notification from '../Notification/Notification.jsx';
 import SpeedDialMenu from '../SpeedDial/SpeedDial.jsx';
@@ -38,13 +38,12 @@ const Details = () => {
             try {
                 const res = await getUserHouseholdById(householdId);
 
-                if (!user) {
-                    dispatch(clearFormVisibility());
-                }
+                dispatch(clearFormVisibility());
 
                 setHousehold(res);
                 setLists(res.lists);
                 setUsers(res.users);
+
                 dispatch(setIsHouseholdOwner(res.users.some((u) => u.role === 'Master' && u.user?._id === user?.id)));
             } catch (error) {
                 dispatch(
@@ -76,7 +75,7 @@ const Details = () => {
             <img className="details-image" src="/details-household.webp" alt="detail-household" />
             <div className="details-content">
                 {isLoading ? (
-                    <Spinner />
+                    <LoadingSpinner />
                 ) : (
                     <>
                         <h4 className="details-header border-bottom">{household.name}</h4>

@@ -8,7 +8,7 @@ import usePagination from '../../hooks/usePagination.js';
 import { useLoading } from '../../hooks/useLoading.js';
 
 import MissingHouseholds from '../MissingHouseholds/MissingHouseholds.jsx';
-import Spinner from '../LoadingSpinner/Spinner.jsx';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.jsx';
 
 import { getAllHouseholds } from '../../services/householdsService.js';
 import HouseholdList from '../HouseholdList/HouseholdList.jsx';
@@ -34,7 +34,7 @@ const AllHouseholds = () => {
             <div className="households">
                 <h3 className="my-households-header border-bottom">{!search ? 'All Households' : 'Search households'}</h3>
                 {isLoading ? (
-                    <Spinner />
+                    <LoadingSpinner />
                 ) : households?.length ? (
                     <>
                         <HouseholdList households={itemsForDisplay} />
