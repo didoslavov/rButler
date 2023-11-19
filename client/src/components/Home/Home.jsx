@@ -1,21 +1,14 @@
 import { useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import LandingWaves from './LandingWaves.jsx';
 
 const Home = () => {
     const { user } = useSelector((state) => state.user);
-    const navigate = useNavigate();
-
-    const handleInfoNavigate = () => {
-        navigate('/more-info');
-    };
-
-    const handleMyHouseholdsNavigate = () => (user ? navigate('/households/' + user.id) : navigate('/profile/auth'));
 
     return (
         <div className="landing-container">
-            <img src="/landing-page.webp" alt="landing image" className="landing-image" />
+            <img src="/landing-page.webp" alt="Welcome Home - rButler" className="landing-image" />
             <div className="landing-content">
                 <h1 className="landing-title">Welcome home!</h1>
                 <p className="landing-text">
@@ -31,9 +24,9 @@ const Home = () => {
                         Learn More
                     </Link>
                     {user && (
-                        <button className="button-action" onClick={handleMyHouseholdsNavigate}>
+                        <Link className="button-action" to="/households/:userId">
                             My households
-                        </button>
+                        </Link>
                     )}
                 </div>
                 <LandingWaves />
