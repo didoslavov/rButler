@@ -14,7 +14,6 @@ import { CreateListTypes } from '../../shared/propTypes.js';
 
 const CreateList = ({ householdId, setLists, lists }) => {
     const dispatch = useDispatch();
-    const { isCreateOpen } = useSelector((state) => state.formVisibility);
     const { user } = useSelector((state) => state.user);
     const [listType, setListType] = useState('shopping');
     const { register, handleSubmit } = useForm();
@@ -23,27 +22,25 @@ const CreateList = ({ householdId, setLists, lists }) => {
         setListType(e.target.value);
     };
 
-    const handleShowCreateForm = () => {
-        dispatch(setFormVisibility({ formType: 'isCreateOpen', value: !isCreateOpen }));
-        dispatch(setFormVisibility({ formType: 'isEditOpen', value: false }));
-        dispatch(setFormVisibility({ formType: 'isAddMemberOpen', value: false }));
+    const handleCloseCreateForm = () => {
+        dispatch(setFormVisibility({ formType: 'isCreateOpen', value: false }));
     };
 
     const onCreateList = async ({ title, type }) => {
         try {
             if (!title || !type) {
-                throw ['All fields are required!'];
+                throw new Error('All fields are required!');
             }
 
             const res = await createList({ title, type, createdBy: user.id, household: householdId });
 
             setLists([...lists, res]);
 
-            dispatch(setFormVisibility({ formType: 'isCreateOpen', value: !isCreateOpen }));
+            handleCloseCreateForm();
         } catch (error) {
             dispatch(
                 setNotification({
-                    notification: error,
+                    notification: [error.message],
                     severity: 'error',
                     open: true,
                 })
@@ -54,7 +51,7 @@ const CreateList = ({ householdId, setLists, lists }) => {
     return (
         <>
             <form className="create-list-form" onSubmit={handleSubmit(onCreateList)}>
-                <IconButton aria-label="close" onClick={handleShowCreateForm}>
+                <IconButton aria-label="close" onClick={handleCloseCreateForm}>
                     <CloseIcon />
                 </IconButton>
                 <h5 className="create-form-header border-bottom">Create List</h5>
