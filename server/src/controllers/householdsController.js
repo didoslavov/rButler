@@ -40,7 +40,7 @@ const getUserHouseholds = asyncHandler(async (req, res) => {
 
     const userHouseholds = await Household.find({
         'users.user': userId,
-    });
+    }).populate('users.user master', '-password');
 
     if (!userHouseholds) {
         throw new ResError(404, 'No household found!');
