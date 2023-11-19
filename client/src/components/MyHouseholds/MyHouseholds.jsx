@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Chip, Pagination } from '@mui/material';
-import { chipStyles, paginationStyles } from '../../styles/muiStyles/muiStyles.js';
+import { Pagination } from '@mui/material';
+import { paginationStyles } from '../../styles/muiStyles/muiStyles.js';
 
 import Spinner from '../LoadingSpinner/Spinner.jsx';
 import MissingHouseholds from '../MissingHouseholds/MissingHouseholds.jsx';
@@ -13,6 +13,7 @@ import { useLoading } from '../../hooks/useLoading.js';
 
 import { getUserHouseholds } from '../../services/householdsService.js';
 import { setNotification } from '../../redux/slices/notificationSlice.js';
+import HouseholdList from './HouseholdList.jsx';
 
 const MyHouseholds = () => {
     const dispatch = useDispatch();
@@ -26,9 +27,11 @@ const MyHouseholds = () => {
 
     useEffect(() => {
         handleLoading(async () => {
-            const res = await getUserHouseholds(userId, token);
+            try {
+                const res = await getUserHouseholds(userId, token);
 
-            if (res.error) {
+                setHouseholds(res);
+            } catch (error) {
                 dispatch(
                     setNotification({
                         notification: 'Authentication Failed',
@@ -38,36 +41,19 @@ const MyHouseholds = () => {
                 );
                 navigate('/profile/auth');
             }
-
-            setHouseholds(res);
         });
     }, [userId, token, navigate, dispatch, handleLoading]);
 
     return (
         <div className="my-households-container">
-            <img src="/my-households.webp" alt="my-households" />
+            <img src="/my-households.webp" alt="My Households" />
             <div className="households">
                 <h3 className="my-households-header border-bottom">My Households</h3>
                 {isLoading ? (
                     <Spinner />
                 ) : households?.length ? (
                     <>
-                        <ul className="households-list">
-                            {itemsForDisplay.map((household) => (
-                                <Link
-                                    key={household._id}
-                                    to={'/households/details/' + household._id}
-                                    className="my-household-link">
-                                    <li className="household">
-                                        <div className="chip-container">
-                                            <Chip sx={chipStyles} label={userId === household.master ? 'master' : 'resident'} />
-                                        </div>
-                                        <h4 className="household-header border-bottom">{household.name}</h4>
-                                        <p>{household.presentation}</p>
-                                    </li>
-                                </Link>
-                            ))}
-                        </ul>
+                        <HouseholdList households={itemsForDisplay} />
                         <div>
                             <Pagination
                                 shape="rounded"
