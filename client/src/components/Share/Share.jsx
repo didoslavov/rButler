@@ -11,13 +11,9 @@ import { ShareTypes } from '../../shared/propTypes.js';
 
 const ShareComponent = ({ url }) => {
     const dispatch = useDispatch();
-    const { isShareOpen } = useSelector((state) => state.formVisibility);
 
     const handleShowShare = () => {
-        dispatch(setFormVisibility({ formType: 'isShareOpen', value: !isShareOpen }));
-        dispatch(setFormVisibility({ formType: 'isCreateOpen', value: false }));
-        dispatch(setFormVisibility({ formType: 'isAddMemberOpen', value: false }));
-        dispatch(setFormVisibility({ formType: 'isEditOpen', value: false }));
+        dispatch(setFormVisibility({ formType: 'isShareOpen', value: false }));
     };
 
     return (
