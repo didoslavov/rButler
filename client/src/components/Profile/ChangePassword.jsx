@@ -19,20 +19,21 @@ const ChangePassword = () => {
         try {
             await handleLoading(async () => {
                 if (!oldPass || !newPass || !rePass) {
-                    throw ['All fields are required!'];
+                    throw new Error('All fields are required!');
                 }
 
                 if (newPass !== rePass) {
-                    throw ["Passwords don't match!"];
+                    throw new Error("Passwords don't match!");
                 }
 
                 const res = await resetPassword({ oldPass, newPass }, user.id);
 
                 if (res.errors) {
-                    throw res.errors;
+                    throw new Error(res.errors);
                 }
 
                 dispatch(setUser(res.userData));
+
                 dispatch(
                     setNotification({
                         notification: [res.success],
@@ -45,7 +46,7 @@ const ChangePassword = () => {
         } catch (error) {
             dispatch(
                 setNotification({
-                    notification: error,
+                    notification: [error.message],
                     severity: 'error',
                     open: true,
                 })
