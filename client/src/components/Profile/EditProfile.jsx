@@ -41,7 +41,7 @@ const EditProfile = () => {
         try {
             await handleLoading(async () => {
                 if (!username || !email) {
-                    throw ['All fields are required!'];
+                    throw new Error('All fields are required!');
                 }
 
                 if (file) {
@@ -51,11 +51,13 @@ const EditProfile = () => {
                 const res = await editUser({ username, email, avatar: publicURL }, user.id);
 
                 if (res.errors) {
-                    throw res.errors;
+                    throw new Error(res.errors);
                 }
 
                 setFile(null);
+
                 dispatch(setUser(res.userData));
+
                 dispatch(
                     setNotification({
                         notification: [res.success],
@@ -63,12 +65,13 @@ const EditProfile = () => {
                         open: true,
                     })
                 );
+
                 navigate('/profile/edit');
             });
         } catch (error) {
             dispatch(
                 setNotification({
-                    notification: error,
+                    notification: [error.message],
                     severity: 'error',
                     open: true,
                 })
