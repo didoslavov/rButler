@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { SpeedDial, SpeedDialAction } from '@mui/material';
@@ -10,81 +9,62 @@ import { setFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
 const SpeedDialMenu = () => {
     const dispatch = useDispatch();
     const { isHouseholdOwner } = useSelector((state) => state.household);
-    const { isEditOpen, isCreateOpen, isAddMemberOpen, isShareOpen } = useSelector((state) => state.formVisibility);
+    const formVisibility = useSelector((state) => state.formVisibility);
 
-    const handleShowEditForm = () => {
-        dispatch(setFormVisibility({ formType: 'isEditOpen', value: !isEditOpen }));
-        dispatch(setFormVisibility({ formType: 'isCreateOpen', value: false }));
-        dispatch(setFormVisibility({ formType: 'isShareOpen', value: false }));
-        dispatch(setFormVisibility({ formType: 'isAddMemberOpen', value: false }));
-    };
+    const handleShowForm = (formType) => {
+        const formTypes = ['isEditOpen', 'isCreateOpen', 'isAddMemberOpen', 'isShareOpen'];
+        formTypes.forEach((type) => {
+            dispatch(setFormVisibility({ formType: type, value: false }));
+        });
 
-    const handleShowCreateForm = () => {
-        dispatch(setFormVisibility({ formType: 'isCreateOpen', value: !isCreateOpen }));
-        dispatch(setFormVisibility({ formType: 'isEditOpen', value: false }));
-        dispatch(setFormVisibility({ formType: 'isShareOpen', value: false }));
-        dispatch(setFormVisibility({ formType: 'isAddMemberOpen', value: false }));
-    };
-
-    const handleShowAddMemberForm = () => {
-        dispatch(setFormVisibility({ formType: 'isAddMemberOpen', value: !isAddMemberOpen }));
-        dispatch(setFormVisibility({ formType: 'isCreateOpen', value: false }));
-        dispatch(setFormVisibility({ formType: 'isEditOpen', value: false }));
-        dispatch(setFormVisibility({ formType: 'isShareOpen', value: false }));
-    };
-
-    const handleShowShare = () => {
-        dispatch(setFormVisibility({ formType: 'isShareOpen', value: !isShareOpen }));
-        dispatch(setFormVisibility({ formType: 'isCreateOpen', value: false }));
-        dispatch(setFormVisibility({ formType: 'isEditOpen', value: false }));
-        dispatch(setFormVisibility({ formType: 'isAddMemberOpen', value: false }));
+        dispatch(setFormVisibility({ formType, value: !formVisibility[formType] }));
     };
 
     return (
         <div className="details-speed-dial">
-            <SpeedDial sx={speedDialStyles} ariaLabel="Household Controls" direction="right" icon={<HomeSharp />}>
+            <SpeedDial sx={speedDialStyles} ariaLabel="Household Controls" direction="up" icon={<HomeSharp />}>
                 {isHouseholdOwner && [
                     <SpeedDialAction
                         sx={speedDialActionStyles}
                         key={'Add Household Member'}
                         icon={
-                            <Link className="details-speed-dial-link" onClick={handleShowAddMemberForm}>
+                            <div className="details-speed-dial-link" onClick={() => handleShowForm('isAddMemberOpen')}>
                                 <AddHomeSharp />
-                            </Link>
+                            </div>
                         }
                         tooltipTitle={'Manage Household Members'}
                     />,
                     <SpeedDialAction
-                        onClick={handleShowEditForm}
+                        onClick={() => handleShowForm('isEditOpen')}
                         sx={speedDialActionStyles}
                         key={'Edit Household'}
                         icon={
-                            <Link className="details-speed-dial-link">
+                            <div className="details-speed-dial-link">
                                 <ModeEditSharp />
-                            </Link>
+                            </div>
                         }
                         tooltipTitle={'Edit Household'}
                     />,
                     <SpeedDialAction
-                        onClick={handleShowCreateForm}
+                        onClick={() => handleShowForm('isCreateOpen')}
                         sx={speedDialActionStyles}
                         key={'Create List'}
                         icon={
-                            <Link className="details-speed-dial-link">
+                            <div className="details-speed-dial-link">
                                 <ChecklistSharp />
-                            </Link>
+                            </div>
                         }
                         tooltipTitle={'Create List'}
                     />,
                 ]}
                 <SpeedDialAction
-                    onClick={handleShowShare}
+                    onClick={() => handleShowForm('isShareOpen')}
                     sx={speedDialActionStyles}
                     key={'Share Household'}
                     icon={
-                        <Link className="details-speed-dial-link">
+                        <div className="details-speed-dial-link">
                             <ShareRounded />
-                        </Link>
+                        </div>
                     }
                     tooltipTitle={'Share Household'}
                 />
