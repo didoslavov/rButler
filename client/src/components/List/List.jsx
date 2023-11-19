@@ -22,28 +22,24 @@ const List = ({ type }) => {
     const [openAlertModal, setOpenAlertModal] = useState(false);
     const [items, setItems] = useState([]);
 
-    const handleClickDelete = () => {
-        setOpenAlertModal(true);
-    };
-
-    const handleCloseAlertModal = () => {
-        setOpenAlertModal(false);
+    const handleAlertModal = () => {
+        setOpenAlertModal(!openAlertModal);
     };
 
     const onAddItem = async ({ text, qty }) => {
         try {
             if (!text || (!qty && type === 'shopping')) {
-                throw ['All fields are required!'];
+                throw new Error('All fields are required!');
             }
 
             if (!text && type === 'todo') {
-                throw ['All fields are required!'];
+                throw new Error('All fields are required!');
             }
 
             const list = await addListItem(listId, { text, qty });
 
             if (list.errors) {
-                throw list.errors;
+                throw new Error(list.errors);
             }
 
             reset();
@@ -51,7 +47,7 @@ const List = ({ type }) => {
         } catch (error) {
             dispatch(
                 setNotification({
-                    notification: error,
+                    notification: [error.message],
                     severity: 'error',
                     open: true,
                 })
@@ -65,13 +61,13 @@ const List = ({ type }) => {
         setItems(list.items);
     };
 
-    const handleDeleteList = async () => {
-        await removeList(listId);
+    const handleGoBack = () => {
         navigate(-1);
     };
 
-    const handleGoBack = () => {
-        navigate(-1);
+    const handleDeleteList = async () => {
+        await removeList(listId);
+        handleGoBack();
     };
 
     useEffect(() => {
@@ -82,7 +78,7 @@ const List = ({ type }) => {
         <>
             {openAlertModal && (
                 <AlertDialog
-                    handleClose={handleCloseAlertModal}
+                    handleClose={handleAlertModal}
                     handleDelete={handleDeleteList}
                     open={openAlertModal}
                     message={'You are about to delete the list.'}
@@ -95,7 +91,7 @@ const List = ({ type }) => {
                     register={register}
                     items={items}
                     handleGoBack={handleGoBack}
-                    handleClickDelete={handleClickDelete}
+                    handleClickDelete={handleAlertModal}
                     handleCheckItem={handleCheckItem}
                 />
             ) : type === 'todo' ? (
@@ -105,7 +101,7 @@ const List = ({ type }) => {
                     register={register}
                     items={items}
                     handleGoBack={handleGoBack}
-                    handleClickDelete={handleClickDelete}
+                    handleClickDelete={handleAlertModal}
                     handleCheckItem={handleCheckItem}
                 />
             ) : null}
