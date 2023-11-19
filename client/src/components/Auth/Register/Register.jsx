@@ -30,15 +30,15 @@ const Register = () => {
         try {
             await handleLoading(async () => {
                 if (!username || !email || !password || !repass) {
-                    throw ['All fields are required!'];
+                    throw new Error('All fields are required!');
                 }
 
                 if (password.length < 6) {
-                    throw ['Password must be at least 6 characters long!'];
+                    throw new Error('Password must be at least 6 characters long!');
                 }
 
                 if (password !== repass) {
-                    throw ["Passwords don't match!"];
+                    throw new Error("Passwords don't match!");
                 }
 
                 if (avatar.length) {
@@ -49,7 +49,7 @@ const Register = () => {
                 const res = await userRegister({ username, email, password, avatar: publicURL });
 
                 if (res.errors) {
-                    throw res.errors;
+                    throw new Error(res.errors);
                 }
 
                 dispatch(setUser(res));
@@ -58,7 +58,7 @@ const Register = () => {
         } catch (error) {
             dispatch(
                 setNotification({
-                    notification: error,
+                    notification: [error.message],
                     severity: 'error',
                     open: true,
                 })
@@ -87,7 +87,7 @@ const Register = () => {
                     <input type="password" className="input" {...register('repass')} />
                 </label>
                 <label htmlFor="avatar" className="file-input-label">
-                    <span>Upload Avatar</span>
+                    <span>Choose Avatar</span>
                     <input type="file" id="avatar" className="file-input" {...register('avatar')} onChange={onChangeFile} />
                 </label>
                 {fileName && (
