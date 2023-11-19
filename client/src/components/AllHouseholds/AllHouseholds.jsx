@@ -11,6 +11,7 @@ import MissingHouseholds from '../MissingHouseholds/MissingHouseholds.jsx';
 import Spinner from '../LoadingSpinner/Spinner.jsx';
 
 import { getAllHouseholds } from '../../services/householdsService.js';
+import HouseholdList from '../HouseholdList/HouseholdList.jsx';
 
 const AllHouseholds = () => {
     const [households, setHouseholds] = useState([]);
@@ -36,22 +37,7 @@ const AllHouseholds = () => {
                     <Spinner />
                 ) : households?.length ? (
                     <>
-                        <ul className="households-list">
-                            {itemsForDisplay.map((household) => (
-                                <Link
-                                    key={household._id}
-                                    to={'/households/details/' + household._id}
-                                    className="my-household-link">
-                                    <li className="household">
-                                        <div className="chip-container">
-                                            {<Chip sx={chipStyles} label={'Owner: ' + household.master.username} />}
-                                        </div>
-                                        <h4 className="household-header border-bottom">{household.name}</h4>
-                                        <p>{household.presentation}</p>
-                                    </li>
-                                </Link>
-                            ))}
-                        </ul>
+                        <HouseholdList households={itemsForDisplay} />
                         <div>
                             <Pagination
                                 shape="rounded"
