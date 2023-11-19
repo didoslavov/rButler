@@ -24,6 +24,8 @@ async function request(method, url, data) {
         if (!response.ok) {
             if (response.status === 403) {
                 clearUserData();
+
+                throw new Error('Access denied, please sign in!');
             }
 
             const error = await response.json();
