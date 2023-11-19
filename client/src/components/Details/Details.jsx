@@ -35,39 +35,39 @@ const Details = () => {
 
     useEffect(() => {
         handleLoading(async () => {
-            const res = await getUserHouseholdById(householdId);
+            try {
+                const res = await getUserHouseholdById(householdId);
 
-            if (!user) {
-                dispatch(clearFormVisibility());
-            }
+                if (!user) {
+                    dispatch(clearFormVisibility());
+                }
 
-            if (res.error) {
+                setHousehold(res);
+                setLists(res.lists);
+                setUsers(res.users);
+                dispatch(setIsHouseholdOwner(res.users.some((u) => u.role === 'Master' && u.user?._id === user?.id)));
+            } catch (error) {
                 dispatch(
                     setNotification({
-                        notification: 'Authentication Failed',
+                        notification: [error.message],
                         severity: 'error',
                         open: true,
                     })
                 );
                 navigate('/profile/auth');
             }
-
-            setHousehold(res);
-            setLists(res.lists);
-            setUsers(res.users);
-            dispatch(setIsHouseholdOwner(res.users.some((u) => u.role === 'Master' && u.user?._id === user?.id)));
         });
     }, [householdId, handleLoading, dispatch, navigate, user]);
 
     const handleUpdateHousehold = async () => {
-        const updatedHousehold = await getUserHouseholdById(householdId);
+        try {
+            const res = await getUserHouseholdById(householdId);
 
-        if (updatedHousehold.error) {
+            setHousehold(res);
+            setLists(res.lists);
+            setUsers(res.users);
+        } catch (error) {
             navigate('/profile/auth');
-        } else {
-            setHousehold(updatedHousehold);
-            setLists(updatedHousehold.lists);
-            setUsers(updatedHousehold.users);
         }
     };
 
@@ -90,10 +90,8 @@ const Details = () => {
                             {!isEditOpen && !isCreateOpen && !isAddMemberOpen && !isShareOpen && (
                                 <Listings lists={lists} isHouseholdOwner={isHouseholdOwner} />
                             )}
-                            {!isEditOpen && !isAddMemberOpen && isCreateOpen && (
-                                <CreateList householdId={householdId} lists={lists} setLists={setLists} />
-                            )}
-                            {!isEditOpen && !isCreateOpen && isAddMemberOpen && (
+                            {isCreateOpen && <CreateList householdId={householdId} lists={lists} setLists={setLists} />}
+                            {isAddMemberOpen && (
                                 <HouseholdUser
                                     householdId={householdId}
                                     setUsers={setUsers}
@@ -101,10 +99,8 @@ const Details = () => {
                                     users={users}
                                 />
                             )}
-                            {!isCreateOpen && !isAddMemberOpen && isEditOpen && (
-                                <EditHousehold household={household} handleUpdateHousehold={handleUpdateHousehold} />
-                            )}
-                            {!isCreateOpen && !isAddMemberOpen && !isEditOpen && isShareOpen && <ShareComponent url={url} />}
+                            {isEditOpen && <EditHousehold household={household} handleUpdateHousehold={handleUpdateHousehold} />}
+                            {isShareOpen && <ShareComponent url={url} />}
                         </div>
                         {notification && <Notification open={open} message={notification} severity={severity} />}
                     </>
