@@ -2,7 +2,12 @@ import AnimatedIcons from './AnimatedIcon';
 
 export default function DailyForecastDay({ forecast }) {
     function maxTemp() {
-        const temperature = Math.round(forecast.main['temp_max']);
+        const temperature = Math.round(forecast.maxTemp);
+        return `${temperature}`;
+    }
+
+    function minTemp() {
+        const temperature = Math.round(forecast.minTemp);
         return `${temperature}`;
     }
 
@@ -17,8 +22,10 @@ export default function DailyForecastDay({ forecast }) {
     return (
         <div>
             <div className="daily-forecast-day">{day()}</div>
-            <AnimatedIcons size={30} code={forecast.weather[0].icon} />
+            <p className="dayli-forecast-date">{forecast.date.split('-').join(' ')}</p>
+            <AnimatedIcons size={30} code={forecast.icon} />
             <div className="daily-forecast-temps">
+                <span className="daily-forecast-temp-min">{minTemp()}°</span>
                 <span className="daily-forecast-temp-max">{maxTemp()}°</span>
             </div>
         </div>

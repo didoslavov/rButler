@@ -18,7 +18,11 @@
 
 .daily-forecast-temp-min {
     opacity: 0.6;
-    margin-left: 6px;
+    margin-right: 8px;
+}
+
+.dayli-forecast-date {
+    margin-bottom: 8px;
 }
 
 .daily-forecast-temps {

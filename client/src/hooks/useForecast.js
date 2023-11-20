@@ -68,7 +68,8 @@ export const useForecast = () => {
                 },
                 (error) => {
                     console.error(error);
-                }
+                },
+                { enableHighAccuracy: true }
             );
         }
     }, []);

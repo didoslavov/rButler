@@ -15,7 +15,7 @@ const Search = () => {
     const [showSuggestions, setShowSuggestions] = useState(false);
     const searchRef = useRef(null);
 
-    const filteredSuggestions = households.filter((h) => h.name.toLowerCase().includes(query.trim().toLowerCase()));
+    const filteredSuggestions = households?.filter((h) => h.name.toLowerCase().includes(query.trim().toLowerCase()));
 
     const handleQuery = (e) => {
         const inputValue = e.target.value;

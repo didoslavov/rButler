@@ -73,11 +73,29 @@ async function getFiveDaysForecast(lat, lon) {
     const res = await fetch(`${baseUrl}/forecast?lat=${lat}&lon=${lon}&cnt=40&appid=${apiKey}&units=metric`);
     const data = await res.json();
 
-    const fiveDays = [];
+    const dailyData = [];
 
-    for (let i = 0; i < data.list.length; i += 8) {
-        fiveDays.push(data.list[i]);
+    for (let i = 0; i < 5; i++) {
+        const dayForecasts = data.list.slice(i * 8, (i + 1) * 8);
+
+        const allMinTempValues = dayForecasts.map((forecast) => forecast.main.temp_min);
+        const allMaxTempValues = dayForecasts.map((forecast) => forecast.main.temp_max);
+
+        const minTemp = Math.min(...allMinTempValues);
+        const maxTemp = Math.max(...allMaxTempValues);
+
+        const icon = dayForecasts[0].weather[0].icon;
+
+        const date = new Date(dayForecasts[0].dt * 1000);
+        const dayKey = date.toLocaleString('en-US', { weekday: 'short' });
+
+        dailyData.push({
+            date: dayKey,
+            minTemp: minTemp,
+            maxTemp: maxTemp,
+            icon: icon,
+        });
     }
 
-    return fiveDays;
+    return dailyData;
 }
