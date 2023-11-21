@@ -24,8 +24,6 @@ async function request(method, url, data) {
         if (!response.ok) {
             if (response.status === 403) {
                 clearUserData();
-
-                throw new Error('Access denied, please sign in!');
             }
 
             const error = await response.json();
@@ -36,7 +34,7 @@ async function request(method, url, data) {
         const result = await response.json();
         return result;
     } catch (error) {
-        console.error(error);
+        console.log(error);
     }
 }
 

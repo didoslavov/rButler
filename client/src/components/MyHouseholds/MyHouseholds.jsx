@@ -14,6 +14,7 @@ import { useLoading } from '../../hooks/useLoading.js';
 import { getUserHouseholds } from '../../services/householdsService.js';
 import { setNotification } from '../../redux/slices/notificationSlice.js';
 import HouseholdList from '../HouseholdList/HouseholdList.jsx';
+import { logoutUser } from '../../redux/slices/userSlice.js';
 
 const MyHouseholds = () => {
     const dispatch = useDispatch();
@@ -30,16 +31,21 @@ const MyHouseholds = () => {
             try {
                 const res = await getUserHouseholds(userId, token);
 
+                if (res.message) {
+                    dispatch(logoutUser());
+                    navigate('/profile/auth');
+                    throw new Error(res.message);
+                }
+
                 setHouseholds(res);
             } catch (error) {
                 dispatch(
                     setNotification({
-                        notification: 'Authentication Failed',
+                        notification: [error.message],
                         severity: 'error',
                         open: true,
                     })
                 );
-                navigate('/profile/auth');
             }
         });
     }, [userId, token, navigate, dispatch, handleLoading]);

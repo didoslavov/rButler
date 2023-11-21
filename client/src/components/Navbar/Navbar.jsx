@@ -14,10 +14,14 @@ const Navbar = () => {
     const userId = user?.id;
 
     const onLogout = async () => {
-        const { success } = await logout();
+        try {
+            const { success } = await logout();
 
-        if (success) {
-            dispatch(logoutUser());
+            if (success) {
+                dispatch(logoutUser());
+            }
+        } catch (error) {
+            console.error(error.message);
         }
     };
 

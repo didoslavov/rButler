@@ -8,6 +8,8 @@ export const useLoading = (initialState) => {
         try {
             const result = await callBack();
             return result;
+        } catch (error) {
+            console.log(error.message);
         } finally {
             setIsLoading(false);
         }
