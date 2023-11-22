@@ -8,7 +8,7 @@ import { setFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
 
 const SpeedDialMenu = () => {
     const dispatch = useDispatch();
-    const { isHouseholdOwner } = useSelector((state) => state.household);
+    const { isHouseholdOwner, isMemberInHousehold } = useSelector((state) => state.household);
     const formVisibility = useSelector((state) => state.formVisibility);
 
     const handleShowForm = (formType) => {
@@ -45,6 +45,8 @@ const SpeedDialMenu = () => {
                         }
                         tooltipTitle={'Edit Household'}
                     />,
+                ]}
+                {isMemberInHousehold && (
                     <SpeedDialAction
                         onClick={() => handleShowForm('isCreateOpen')}
                         sx={speedDialActionStyles}
@@ -55,8 +57,8 @@ const SpeedDialMenu = () => {
                             </div>
                         }
                         tooltipTitle={'Create List'}
-                    />,
-                ]}
+                    />
+                )}
                 <SpeedDialAction
                     onClick={() => handleShowForm('isShareOpen')}
                     sx={speedDialActionStyles}
