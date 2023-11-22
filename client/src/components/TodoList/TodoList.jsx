@@ -5,7 +5,7 @@ import ListActionIcons from '../ListActionIcons/ListActionIcons.jsx';
 import { ListsTypes } from '../../shared/propTypes.js';
 
 const TodoList = ({ handleSubmit, register, onAddItem, items, handleGoBack, handleClickDelete, handleCheckItem }) => {
-    const { isHouseholdOwner } = useSelector((state) => state.household);
+    const { isHouseholdOwner, isMemberInHousehold } = useSelector((state) => state.household);
 
     return (
         <div className="todo-list-container">
@@ -13,15 +13,16 @@ const TodoList = ({ handleSubmit, register, onAddItem, items, handleGoBack, hand
             <div className="list-container">
                 <h2 className="welcome-list">TODO List</h2>
                 <div className="form-container">
-                    {isHouseholdOwner && (
-                        <form className="todo-form-list" onSubmit={handleSubmit(onAddItem)}>
-                            <label className="list-form-label">
-                                <span>Todo</span>
-                            </label>
-                            <input type="text" className="input todo-item-input" {...register('text')} />
-                            <input type="submit" className="submit button list-submit" value={'Add todo'} />
-                        </form>
-                    )}
+                    {isHouseholdOwner ||
+                        (isMemberInHousehold && (
+                            <form className="todo-form-list" onSubmit={handleSubmit(onAddItem)}>
+                                <label className="list-form-label">
+                                    <span>Todo</span>
+                                </label>
+                                <input type="text" className="input todo-item-input" {...register('text')} />
+                                <input type="submit" className="submit button list-submit" value={'Add todo'} />
+                            </form>
+                        ))}
                     <h4>Items</h4>
                     <ul className="lists">
                         {items.length ? (
