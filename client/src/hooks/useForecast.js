@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react';
 import { searchByCoord, searchLocation } from '../services/weatherService.js';
 import { useDispatch } from 'react-redux';
 import { useLoading } from './useLoading.js';
+import { useGeolocation } from './useGeolocation.js';
 
 export const useForecast = () => {
     const dispatch = useDispatch();
     const [weather, setWeather] = useState({ loaded: false });
     const [fiveDays, setFiveDaysForecast] = useState([]);
-    const [position, setPosition] = useState({});
     const [isLoading, handleLoading] = useLoading(true);
+    const { position, error } = useGeolocation();
 
     const fetchWeatherData = async (latitude, longitude) => {
         try {
@@ -35,7 +36,7 @@ export const useForecast = () => {
     const handleSearch = async ({ location }, reset) => {
         try {
             if (!location) {
-                throw ['Location is required!'];
+                throw new Error('Location is required!');
             }
             const { baseForecast, fiveDaysForecast } = await searchLocation(location);
 
@@ -53,32 +54,17 @@ export const useForecast = () => {
             });
             setFiveDaysForecast(fiveDaysForecast);
         } catch (error) {
-            console.error(error);
+            console.error(error.message);
         }
     };
 
     useEffect(() => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    setPosition({
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude,
-                    });
-                },
-                (error) => {
-                    console.error(error);
-                },
-                { enableHighAccuracy: true }
-            );
-        }
-    }, []);
-
-    useEffect(() => {
-        if (position.latitude && position.longitude) {
+        if (position && position.latitude && position.longitude) {
             handleLoading(() => fetchWeatherData(position.latitude, position.longitude));
+        } else if (error) {
+            console.error(error);
         }
-    }, [position, dispatch]);
+    }, [position, error, dispatch]);
 
     return { weather, fiveDays, handleSearch, isLoading };
 };
