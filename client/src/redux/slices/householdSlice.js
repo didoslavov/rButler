@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     isHouseholdOwner: false,
+    isMemberInHousehold: false,
 };
 
 const householdSlice = createSlice({
@@ -11,8 +12,11 @@ const householdSlice = createSlice({
         setIsHouseholdOwner(state, action) {
             state.isHouseholdOwner = action.payload;
         },
+        setIsMemberInHousehold(state, action) {
+            state.isMemberInHousehold = action.payload;
+        },
     },
 });
 
-export const { setIsHouseholdOwner } = householdSlice.actions;
+export const { setIsHouseholdOwner, setIsMemberInHousehold } = householdSlice.actions;
 export default householdSlice.reducer;
