@@ -4,7 +4,7 @@ import ListActionIcons from '../ListActionIcons/ListActionIcons.jsx';
 import { ListsTypes } from '../../shared/propTypes.js';
 
 const ShoppingList = ({ handleSubmit, register, onAddItem, items, handleGoBack, handleClickDelete, handleCheckItem }) => {
-    const { isHouseholdOwner } = useSelector((state) => state.household);
+    const { isHouseholdOwner, isMemberInHousehold } = useSelector((state) => state.household);
 
     return (
         <>
@@ -12,19 +12,20 @@ const ShoppingList = ({ handleSubmit, register, onAddItem, items, handleGoBack, 
                 <div className="list-container">
                     <h2 className="welcome-list">Shopping List</h2>
                     <div className="form-container">
-                        {isHouseholdOwner && (
-                            <form className="form-list" onSubmit={handleSubmit(onAddItem)}>
-                                <label className="list-form-label">
-                                    <span>Item</span>
-                                </label>
-                                <input type="text" className="input item-input" {...register('text')} />
-                                <label className="list-form-label">
-                                    <span>Qty.</span>
-                                </label>
-                                <input type="number" className="input qty-input" {...register('qty')} />
-                                <input type="submit" className="submit button list-submit" value={'Add item'} />
-                            </form>
-                        )}
+                        {isHouseholdOwner ||
+                            (isMemberInHousehold && (
+                                <form className="form-list" onSubmit={handleSubmit(onAddItem)}>
+                                    <label className="list-form-label">
+                                        <span>Item</span>
+                                    </label>
+                                    <input type="text" className="input item-input" {...register('text')} />
+                                    <label className="list-form-label">
+                                        <span>Qty.</span>
+                                    </label>
+                                    <input type="number" className="input qty-input" {...register('qty')} />
+                                    <input type="submit" className="submit button list-submit" value={'Add item'} />
+                                </form>
+                            ))}
                         <h4>Items</h4>
                         <ul className="lists">
                             {items.length ? (
