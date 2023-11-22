@@ -15,14 +15,14 @@ import { getUserHouseholdById } from '../../services/householdsService.js';
 import { setNotification } from '../../redux/slices/notificationSlice.js';
 import { useLoading } from '../../hooks/useLoading.js';
 import { clearFormVisibility } from '../../redux/slices/formVisibilitySlice.js';
-import { setIsHouseholdOwner } from '../../redux/slices/householdSlice.js';
+import { setIsHouseholdOwner, setIsMemberInHousehold } from '../../redux/slices/householdSlice.js';
 
 const Details = () => {
     const navigate = useNavigate();
     const { householdId } = useParams();
     const dispatch = useDispatch();
     const { isEditOpen, isCreateOpen, isAddMemberOpen, isShareOpen } = useSelector((state) => state.formVisibility);
-    const { isHouseholdOwner } = useSelector((state) => state.household);
+    const { isHouseholdOwner, isMemberInHoushold } = useSelector((state) => state.household);
     const { notification, severity, open } = useSelector((state) => state.notification);
     const { user } = useSelector((state) => state.user);
     const [isLoading, handleLoading] = useLoading(true);
@@ -45,6 +45,7 @@ const Details = () => {
                 setUsers(res.users);
 
                 dispatch(setIsHouseholdOwner(res.users.some((u) => u.role === 'Master' && u.user?._id === user?.id)));
+                dispatch(setIsMemberInHousehold(res.users.some((u) => u.role === 'Resident' && u.user?._id === user?.id)));
             } catch (error) {
                 dispatch(
                     setNotification({
@@ -86,9 +87,7 @@ const Details = () => {
                         </p>
 
                         <div className="listings-container">
-                            {!isEditOpen && !isCreateOpen && !isAddMemberOpen && !isShareOpen && (
-                                <Listings lists={lists} isHouseholdOwner={isHouseholdOwner} />
-                            )}
+                            {!isEditOpen && !isCreateOpen && !isAddMemberOpen && !isShareOpen && <Listings lists={lists} />}
                             {isCreateOpen && <CreateList householdId={householdId} lists={lists} setLists={setLists} />}
                             {isAddMemberOpen && (
                                 <HouseholdUser
@@ -104,7 +103,7 @@ const Details = () => {
                         {notification && <Notification open={open} message={notification} severity={severity} />}
                     </>
                 )}
-                <div className="details-speed-dial">{user && <SpeedDialMenu isHouseholdOwner={isHouseholdOwner} />}</div>
+                <div className="details-speed-dial">{user && <SpeedDialMenu />}</div>
             </div>
         </div>
     );
