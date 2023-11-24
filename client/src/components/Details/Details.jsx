@@ -22,7 +22,6 @@ const Details = () => {
     const { householdId } = useParams();
     const dispatch = useDispatch();
     const { isEditOpen, isCreateOpen, isAddMemberOpen, isShareOpen } = useSelector((state) => state.formVisibility);
-    const { isHouseholdOwner, isMemberInHoushold } = useSelector((state) => state.household);
     const { notification, severity, open } = useSelector((state) => state.notification);
     const { user } = useSelector((state) => state.user);
     const [isLoading, handleLoading] = useLoading(true);
@@ -45,7 +44,11 @@ const Details = () => {
                 setUsers(res.users);
 
                 dispatch(setIsHouseholdOwner(res.users.some((u) => u.role === 'Master' && u.user?._id === user?.id)));
-                dispatch(setIsMemberInHousehold(res.users.some((u) => u.role === 'Resident' && u.user?._id === user?.id)));
+                dispatch(
+                    setIsMemberInHousehold(
+                        res.users.some((u) => (u.role === 'Resident' || u.role === 'Master') && u.user?._id === user?.id)
+                    )
+                );
             } catch (error) {
                 dispatch(
                     setNotification({
