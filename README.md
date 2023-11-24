@@ -83,7 +83,70 @@ Feel free to explore each directory for more detailed information on their conte
 
 ## Running the Application
 
-Provide instructions on how to start the backend and frontend components of your application.
+### Clone the Repository
+
+```bash
+git clone https://github.com/didoslavov/rButler.git
+cd rbutler
+```
+
+### Set Up Environment Variables
+
+```bash
+./setup.sh
+```
+
+This script will create .env files in both the client and server directories.
+
+### Run the Application
+
+#### Server
+
+Open a new terminal window/tab in the root directory of your project.
+
+Navigate to the server directory:
+
+```bash
+cd server
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the server in development mode:
+
+```bash
+npm run dev
+```
+
+The server will be running at http://localhost:3000.
+
+#### Client
+
+Open a new terminal window/tab in the root directory of your project.
+
+Navigate to the client directory:
+
+```bash
+cd client
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the client in development mode:
+
+```bash
+npm run dev
+```
+
+The client will be accessible at http://localhost:5173.
 
 ## API Endpoints
 
