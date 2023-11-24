@@ -32,7 +32,7 @@ simplify day-to-day tasks and enhance communication within households.
 
 ## Warnings
 
-1. Best to be used on desctop with resolution 1920x1080
+1. Best to be used on desktop with resolution 1920x1080
 2. Developed on Mozilla Firefox (latest version)
 3. Tested on Chrome (latest version)
 
