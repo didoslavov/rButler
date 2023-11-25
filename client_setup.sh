@@ -10,7 +10,7 @@ inject_env_variables() {
 
 echo "Setting up client environment variables..."
 inject_env_variables client/.env \
-  "VITE_BASE_URL=https://rbutler-api.onrender.com" \
+  "VITE_BASE_URL=http://localhost:3000" \
   "VITE_SUPABASE_URL=https://cxswmrfheqrkzrsexvrl.supabase.co" \
   "VITE_SUPABASE_BUCKET=/storage/v1/object/public/avatars/" \
   "VITE_SUPABASE_API_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4c3dtcmZoZXFya3pyc2V4dnJsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTg2NDg0MDUsImV4cCI6MjAxNDIyNDQwNX0.NBQTc_i5rHnRdDvFAvVTVFE7pjV69KGFfihG0Ths9QQ" \
