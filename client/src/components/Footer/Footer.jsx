@@ -5,7 +5,7 @@ import { footerStyle } from '../../styles/muiStyles/muiStyles.js';
 
 const Footer = () => {
     return (
-        <AppBar position="relative" style={footerStyle} className="footer">
+        <AppBar position="relative" style={footerStyle} className="footer" data-testid="footer">
             <Container>
                 <Toolbar>
                     <Typography variant="inherit">&copy; {new Date().getFullYear()} Deyan Slavov</Typography>
@@ -18,7 +18,8 @@ const Footer = () => {
                                 color="inherit"
                                 aria-label="GitHub"
                                 href="https://github.com/didoslavov/rButler"
-                                target="_blank">
+                                target="_blank"
+                                role="github-button">
                                 <GitHubIcon />
                             </IconButton>
                         </Tooltip>
@@ -30,7 +31,8 @@ const Footer = () => {
                                 color="inherit"
                                 aria-label="LinkedIn"
                                 href="https://www.linkedin.com/in/deyan-slavov-14648a207/"
-                                target="_blank">
+                                target="_blank"
+                                role="linkedin-button">
                                 <LinkedInIcon />
                             </IconButton>
                         </Tooltip>
