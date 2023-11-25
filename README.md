@@ -94,12 +94,6 @@ cd rbutler
 
 Open a new terminal window/tab in the root directory of your project.
 
-Navigate to the server directory:
-
-```bash
-cd server
-```
-
 To set up the server, run the following commands:
 
 ```bash
@@ -115,12 +109,6 @@ This script will:
 #### Client Setup
 
 Open a new terminal window/tab in the root directory of your project.
-
-Navigate to the client directory:
-
-```bash
-cd client
-```
 
 ```bash
 ./client_setup.sh
