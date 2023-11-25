@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Script to set up environment variables in the server directory
-
-# Function to inject environment variables into a given .env file
 inject_env_variables() {
   local env_file="$1"
   shift
@@ -11,7 +8,6 @@ inject_env_variables() {
   done
 }
 
-# Server Setup
 echo "Setting up server environment variables..."
 inject_env_variables server/.env \
   "PORT=3000" \

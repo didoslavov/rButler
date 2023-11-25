@@ -90,17 +90,7 @@ git clone https://github.com/didoslavov/rButler.git
 cd rbutler
 ```
 
-### Set Up Environment Variables
-
-```bash
-./setup.sh
-```
-
-This script will create .env files in both the client and server directories.
-
-### Run the Application
-
-#### Server
+#### Server Setup
 
 Open a new terminal window/tab in the root directory of your project.
 
@@ -110,21 +100,19 @@ Navigate to the server directory:
 cd server
 ```
 
-Install dependencies:
+To set up the server, run the following commands:
 
 ```bash
-npm install
+./server_setup.sh
 ```
 
-Start the server in development mode:
+This script will:
 
-```bash
-npm run dev
-```
+    1. Set up environment variables for the server.
+    2. Install server dependencies.
+    3. Start the server in development mode.
 
-The server will be running at http://localhost:3000.
-
-#### Client
+#### Client Setup
 
 Open a new terminal window/tab in the root directory of your project.
 
@@ -134,19 +122,15 @@ Navigate to the client directory:
 cd client
 ```
 
-Install dependencies:
-
 ```bash
-npm install
+./client_setup.sh
 ```
 
-Start the client in development mode:
+This script will:
 
-```bash
-npm run dev
-```
-
-The client will be accessible at http://localhost:5173.
+    1. Set up environment variables for the client.
+    2. Install client dependencies.
+    3. Start the client in development mode.
 
 ## API Endpoints
 

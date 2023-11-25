@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Script to set up environment variables in the client directory
-
-# Function to inject environment variables into a given .env file
 inject_env_variables() {
   local env_file="$1"
   shift
@@ -11,7 +8,6 @@ inject_env_variables() {
   done
 }
 
-# Client Setup
 echo "Setting up client environment variables..."
 inject_env_variables client/.env \
   "VITE_BASE_URL=https://rbutler-api.onrender.com" \
@@ -29,3 +25,5 @@ npm install || { echo "Failed to install client dependencies"; exit 1; }
 echo "Starting the client in development mode..."
 npm run dev || { echo "Failed to start the client"; exit 1; }
 
+echo "Client setup complete! Open the following link in your web browser:"
+echo "http://localhost:5173"
