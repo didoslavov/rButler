@@ -22,6 +22,21 @@ setup_server() {
 
   echo "Starting the server in development mode..."
   npm run dev || { echo "Failed to start the server"; exit 1; }
+
+  # Open a new terminal window
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    open -a Terminal .
+  elif [[ "$OSTYPE" == "msys"* ]]; then
+    start cmd /K "echo Opening new Command Prompt window; sleep 2;"
+  elif command -v gnome-terminal &> /dev/null; then
+    gnome-terminal --working-directory=. &
+  elif command -v konsole &> /dev/null; then
+    konsole --workdir . &
+  elif command -v xterm &> /dev/null; then
+    xterm -e "echo Opening new terminal; sleep 2;" &
+  else
+    echo "Unsupported terminal for opening new window"
+  fi
 }
 
 setup_client() {
@@ -49,10 +64,14 @@ setup_client() {
     open http://localhost:5173
   elif [[ "$OSTYPE" == "msys"* ]]; then
     start http://localhost:5173
-  elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  elif command -v xdg-open &> /dev/null; then
     xdg-open http://localhost:5173
+  elif command -v open &> /dev/null; then
+    open http://localhost:5173
+  elif command -v start &> /dev/null; then
+    start http://localhost:5173
   else
-    echo "Unsupported operating system"
+    echo "Unsupported operating system for opening browser"
   fi
 }
 
