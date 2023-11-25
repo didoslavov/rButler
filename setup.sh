@@ -15,13 +15,13 @@ setup_server() {
     "DB_URI=mongodb+srv://didoslavov:FYe72ng2bCQQijst@rbutler.dqs4ylm.mongodb.net/rButler" \
     "JWT_SECRET=WhispersInSilkGlovesAndTails"
 
-  cd server || exit
+  cd server || { echo "Failed to change to server directory"; exit 1; }
 
   echo "Installing server dependencies..."
-  npm install
+  npm install || { echo "Failed to install server dependencies"; exit 1; }
 
   echo "Starting the server in development mode..."
-  npm run dev
+  npm run dev || { echo "Failed to start the server"; exit 1; }
 }
 
 setup_client() {
@@ -34,16 +34,28 @@ setup_client() {
     "VITE_OPENWEATHER_API_KEY=65c8bce3c3835f283c727ae2bbd5cf75" \
     "VITE_OPENWEATHER_BASE_URL=https://api.openweathermap.org/data/2.5"
 
-  cd client || exit
+  cd client || { echo "Failed to change to client directory"; exit 1; }
 
   echo "Installing client dependencies..."
-  npm install
+  npm install || { echo "Failed to install client dependencies"; exit 1; }
 
   echo "Starting the client in development mode..."
-  npm run dev
+  npm run dev || { echo "Failed to start the client"; exit 1; }
 
   echo "Opening the client in the default web browser..."
-  xdg-open http://localhost:5173
+
+  # Check the operating system and open the default browser accordingly
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    open http://localhost:5173
+  elif [[ "$OSTYPE" == "msys"* ]]; then
+    start http://localhost:5173
+  elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    xdg-open http://localhost:5173
+  else
+    echo "Unsupported operating system"
+  fi
 }
 
 echo "Setting up environment variables..."
+setup_server
+setup_client
