@@ -5,7 +5,7 @@ import { Avatar } from '@mui/material';
 
 import Search from '../Search/Search.jsx';
 
-import { logoutUser } from '../../redux/slices/userSlice.js';
+import { clearUser } from '../../redux/slices/userSlice.js';
 import { logout } from '../../services/userService.js';
 
 const Navbar = () => {
@@ -18,7 +18,7 @@ const Navbar = () => {
             const { success } = await logout();
 
             if (success) {
-                dispatch(logoutUser());
+                dispatch(clearUser());
             }
         } catch (error) {
             console.error(error.message);

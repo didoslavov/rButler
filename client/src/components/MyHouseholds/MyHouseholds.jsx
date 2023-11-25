@@ -14,7 +14,7 @@ import { useLoading } from '../../hooks/useLoading.js';
 import { getUserHouseholds } from '../../services/householdsService.js';
 import { setNotification } from '../../redux/slices/notificationSlice.js';
 import HouseholdList from '../HouseholdList/HouseholdList.jsx';
-import { logoutUser } from '../../redux/slices/userSlice.js';
+import { clearUser } from '../../redux/slices/userSlice.js';
 
 const MyHouseholds = () => {
     const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const MyHouseholds = () => {
                 const res = await getUserHouseholds(userId, token);
 
                 if (res.message) {
-                    dispatch(logoutUser());
+                    dispatch(clearUser());
                     navigate('/profile/auth');
                     throw new Error(res.message);
                 }
