@@ -1,10 +1,10 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, cleanup } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import Auth from './Auth';
 import store from '../../redux/store';
-import { vi } from 'vitest';
+import { afterEach, vi } from 'vitest';
 import { createMemoryHistory } from 'history';
 import * as userService from '../../services/userService.js';
 
@@ -24,13 +24,13 @@ describe('Auth Component', () => {
             </Provider>
         );
 
-        waitFor(() => {
-            expect(screen.getByText('Your return is a delight!')).toBeInTheDocument();
-            expect(screen.getByLabelText('Username')).toBeInTheDocument();
-            expect(screen.getByLabelText('Password')).toBeInTheDocument();
-            expect(screen.getByText('Forgot password?')).toBeInTheDocument();
-            expect(screen.getByRole('button', { name: 'Sign In' })).toBeInTheDocument();
+        expect(screen.getByText('Your return is a delight!')).toBeInTheDocument();
+        expect(screen.getAllByText('Username')[0]).toBeInTheDocument();
+        expect(screen.getAllByText('Password')[0]).toBeInTheDocument();
+        expect(screen.getByText('Forgot password?')).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: 'Sign In' })).toBeInTheDocument();
 
+        waitFor(() => {
             expect(screen.queryByText('Step inside, dear newcomer!')).toBeNull();
         });
     });
@@ -44,17 +44,17 @@ describe('Auth Component', () => {
             </Provider>
         );
 
+        fireEvent.click(screen.getAllByText('Sign Up')[0]);
+
+        expect(screen.getByText('Step inside, dear newcomer!')).toBeInTheDocument();
+        expect(screen.getAllByText('Username')[0]).toBeInTheDocument();
+        expect(screen.getByLabelText('Email')).toBeInTheDocument();
+        expect(screen.getAllByText('Password')[0]).toBeInTheDocument();
+        expect(screen.getByLabelText('Repeat Password')).toBeInTheDocument();
+        expect(screen.getByLabelText('Choose Avatar')).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: 'Sign Up' })).toBeInTheDocument();
+
         waitFor(() => {
-            fireEvent.click(screen.getByText('Sign Up'));
-
-            expect(screen.getByText('Step inside, dear newcomer!')).toBeInTheDocument();
-            expect(screen.getByLabelText('Username')).toBeInTheDocument();
-            expect(screen.getByLabelText('Email')).toBeInTheDocument();
-            expect(screen.getByLabelText('Password')).toBeInTheDocument();
-            expect(screen.getByLabelText('Repeat Password')).toBeInTheDocument();
-            expect(screen.getByLabelText('Choose Avatar')).toBeInTheDocument();
-            expect(screen.getByRole('button', { name: 'Sign Up' })).toBeInTheDocument();
-
             expect(screen.queryByText('Your return is a delight!')).toBeNull();
         });
     });
@@ -68,17 +68,17 @@ describe('Auth Component', () => {
             </Provider>
         );
 
+        fireEvent.click(screen.getAllByText('Sign Up')[0]);
+
+        fireEvent.click(screen.getAllByText('Sign In')[0]);
+
+        expect(screen.getByText('Your return is a delight!')).toBeInTheDocument();
+        expect(screen.getAllByText('Username')[0]).toBeInTheDocument();
+        expect(screen.getAllByText('Password')[0]).toBeInTheDocument();
+        expect(screen.getByText('Forgot password?')).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: 'Sign In' })).toBeInTheDocument();
+
         waitFor(() => {
-            fireEvent.click(screen.getByText('Sign Up'));
-
-            fireEvent.click(screen.getByText('Sign In'));
-
-            expect(screen.getByText('Your return is a delight!')).toBeInTheDocument();
-            expect(screen.getByLabelText('Username')).toBeInTheDocument();
-            expect(screen.getByLabelText('Password')).toBeInTheDocument();
-            expect(screen.getByText('Forgot password?')).toBeInTheDocument();
-            expect(screen.getByRole('button', { name: 'Sign In' })).toBeInTheDocument();
-
             expect(screen.queryByText('Step inside, dear newcomer!')).toBeNull();
         });
     });
@@ -94,12 +94,12 @@ describe('Auth Component', () => {
             </Provider>
         );
 
+        fireEvent.change(screen.getAllByText('Username')[0], { value: 'testuser' });
+        fireEvent.change(screen.getAllByText('Password')[0], { value: 'testpassword' });
+
+        fireEvent.click(screen.getByRole('button', { name: 'Sign In' }));
+
         waitFor(() => {
-            fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'testuser' } });
-            fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'testpassword' } });
-
-            fireEvent.click(screen.getByRole('button', { name: 'Sign In' }));
-
             expect(userService.login).toHaveBeenCalledWith({
                 username: 'testuser',
                 password: 'testpassword',
@@ -118,16 +118,15 @@ describe('Auth Component', () => {
             </Provider>
         );
 
+        fireEvent.change(screen.getAllByText('Username')[0], { value: 'testuser' });
+        fireEvent.change(screen.getByLabelText('Email'), { value: 'test@email.com' });
+        fireEvent.change(screen.getAllByText('Password')[0], { value: 'testpassword' });
+        fireEvent.change(screen.getByLabelText('Repeat Password'), { value: 'testpassword' });
+
+        fireEvent.click(screen.getByRole('button', { name: 'Sign Up' }));
+        fireEvent.click(screen.getAllByText('Sign Up')[0]);
+
         waitFor(() => {
-            fireEvent.click(screen.getByText('Sign Up'));
-
-            fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'testuser' } });
-            fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'test@email.com' } });
-            fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'testpassword' } });
-            fireEvent.change(screen.getByLabelText('Repeat Password'), { target: { value: 'testpassword' } });
-
-            fireEvent.click(screen.getByRole('button', { name: 'Sign Up' }));
-
             expect(userService.userRegister).toHaveBeenCalledWith({
                 username: 'testuser',
                 email: 'test@email.com',
