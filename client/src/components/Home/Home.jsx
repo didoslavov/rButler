@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import LandingWaves from './LandingWaves.jsx';
+import LandingWaves from './LandingWaves/LandingWaves.jsx';
 
 const Home = () => {
     const { user } = useSelector((state) => state.user);
