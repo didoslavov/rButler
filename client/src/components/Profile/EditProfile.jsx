@@ -47,7 +47,7 @@ const EditProfile = () => {
                 if (file) {
                     publicURL = await uploadAvatar(file);
                 }
-
+                console.log(publicURL);
                 const res = await editUser({ username, email, avatar: publicURL }, user.id);
 
                 if (res.errors) {
