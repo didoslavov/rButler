@@ -44,6 +44,7 @@ const AllHouseholds = () => {
                                 sx={paginationStyles}
                                 count={totalPages}
                                 onChange={(e, page) => paginationHandler(page)}
+                                role="pagination"
                             />
                         </div>
                     </>
