@@ -41,12 +41,12 @@ describe('Login Component', () => {
             </Provider>
         );
 
-        fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'testuser' } });
-        fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'testpassword' } });
+        fireEvent.change(screen.getByLabelText('Username'), { value: 'testuser' });
+        fireEvent.change(screen.getByLabelText('Password'), { value: 'testpassword' });
 
         fireEvent.click(screen.getByRole('button', { name: 'Sign In' }));
 
-        await waitFor(() => {
+        waitFor(() => {
             expect(userService.login).toHaveBeenCalledWith({
                 username: 'testuser',
                 password: 'testpassword',
@@ -63,9 +63,9 @@ describe('Login Component', () => {
             </Provider>
         );
 
-        waitFor(() => {
-            fireEvent.click(screen.getByRole('button', { name: 'Sign In' }));
+        fireEvent.click(screen.getByRole('button', { name: 'Sign In' }));
 
+        waitFor(() => {
             expect(screen.getByText('All fields are required!')).toBeInTheDocument();
         });
     });
@@ -81,12 +81,12 @@ describe('Login Component', () => {
             </Provider>
         );
 
+        fireEvent.change(screen.getByLabelText('Username'), { value: 'testuser' });
+        fireEvent.change(screen.getByLabelText('Password'), { value: 'testpassword' });
+
+        fireEvent.click(screen.getByRole('button', { name: 'Sign In' }));
+
         waitFor(() => {
-            fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'testuser' } });
-            fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'testpassword' } });
-
-            fireEvent.click(screen.getByRole('button', { name: 'Sign In' }));
-
             expect(screen.getByText('Login failed')).toBeInTheDocument();
         });
     });
@@ -102,12 +102,12 @@ describe('Login Component', () => {
             </Provider>
         );
 
+        fireEvent.change(screen.getByLabelText('Username'), { value: 'testuser' });
+        fireEvent.change(screen.getByLabelText('Password'), { value: 'testpassword' });
+
+        fireEvent.click(screen.getByRole('button', { name: 'Sign In' }));
+
         waitFor(() => {
-            fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'testuser' } });
-            fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'testpassword' } });
-
-            fireEvent.click(screen.getByRole('button', { name: 'Sign In' }));
-
             expect(screen.getByText('Welcome, testuser!')).toBeInTheDocument();
         });
     });
