@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import AlertDialog from '../ConfirmModal/AlertDialog.jsx';
+import AlertDialog from '../AlertDialog/AlertDialog.jsx';
 
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';

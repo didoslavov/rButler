@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
-import AlertDialog from '../ConfirmModal/AlertDialog.jsx';
+import AlertDialog from '../AlertDialog/AlertDialog.jsx';
 import Notification from '../Notification/Notification.jsx';
 
 import { addListItem, getListById, removeList, removeListItem } from '../../services/listsService.js';
