@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import Login from './Login/Login.jsx';
-import SubContent from './SubContent.jsx';
+import SubContent from './SubContent/SubContent.jsx';
 import Register from './Register/Register.jsx';
 import Notification from '../Notification/Notification.jsx';
 

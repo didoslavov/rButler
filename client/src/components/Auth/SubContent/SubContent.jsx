@@ -1,4 +1,4 @@
-import { subContentTypes } from '../../shared/propTypes.js';
+import { subContentTypes } from '../../../shared/propTypes.js';
 
 const SubContent = ({ toggleFormsHandler }) => {
     return (
