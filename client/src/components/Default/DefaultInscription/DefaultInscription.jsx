@@ -1,6 +1,6 @@
 const DefaultInscription = () => {
     return (
-        <div className="error">
+        <div className="error" data-testid="default-inscription">
             <div className="number">4</div>
             <div className="illustration">
                 <div className="circle"></div>

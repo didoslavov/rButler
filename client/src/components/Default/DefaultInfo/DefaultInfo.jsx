@@ -1,6 +1,6 @@
 const DefaultInfo = () => {
     return (
-        <div className="default-text">
+        <div className="default-text" data-testid="default-info">
             <h4 className="default-text-header border-bottom">
                 Ah, it appears you&apos;ve taken a detour into uncharted territory.
             </h4>

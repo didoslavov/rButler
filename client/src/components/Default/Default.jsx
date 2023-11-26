@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
-import DefaultInscription from './DefaultInscription.jsx';
-import DefaultInfo from './DefaultInfo.jsx';
+import DefaultInscription from './DefaultInscription/DefaultInscription.jsx';
+import DefaultInfo from './DefaultInfo/DefaultInfo.jsx';
 
 const Default = () => {
     return (
