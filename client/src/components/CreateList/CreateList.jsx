@@ -58,8 +58,14 @@ const CreateList = ({ householdId, setLists, lists }) => {
                 <label htmlFor="listName" className="create-list-form-label">
                     <span>List Name</span>
                 </label>
-                <input className="create-list-input" type="text" placeholder="List name to add?" {...register('title')} />
-                <label htmlFor="type" className="form-label">
+                <input
+                    id="listName"
+                    className="create-list-input"
+                    type="text"
+                    placeholder="List name to add?"
+                    {...register('title')}
+                />
+                <label htmlFor="type-select" className="form-label">
                     <span>List Type</span>
                 </label>
                 <Select
@@ -70,7 +76,7 @@ const CreateList = ({ householdId, setLists, lists }) => {
                     labelId="type-select"
                     id="type-select"
                     value={listType}
-                    label="type">
+                    aria-label="List Type">
                     <MenuItem sx={menuItemStyles} value={'shopping'}>
                         Shopping List
                     </MenuItem>
