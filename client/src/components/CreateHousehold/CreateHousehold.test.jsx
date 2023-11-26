@@ -38,12 +38,12 @@ describe('CreateHousehold Component', () => {
             </Provider>
         );
 
+        fireEvent.change(screen.getByLabelText('Household name'), { target: { value: 'Test Household' } });
+        fireEvent.change(screen.getByLabelText('Presentation'), { target: { value: 'Test Presentation' } });
+
+        fireEvent.click(screen.getByRole('button', { name: 'Create Household' }));
+
         waitFor(() => {
-            fireEvent.change(screen.getByLabelText('Household name'), { target: { value: 'Test Household' } });
-            fireEvent.change(screen.getByLabelText('Presentation'), { target: { value: 'Test Presentation' } });
-
-            fireEvent.click(screen.getByRole('button', { name: 'Create Household' }));
-
             expect(householdsService.createHousehold).toHaveBeenCalledWith({
                 name: 'Test Household',
                 presentation: 'Test Presentation',
@@ -61,9 +61,9 @@ describe('CreateHousehold Component', () => {
             </Provider>
         );
 
-        waitFor(() => {
-            fireEvent.click(screen.getByRole('button', { name: 'Create Household' }));
+        fireEvent.click(screen.getByRole('button', { name: 'Create Household' }));
 
+        waitFor(() => {
             expect(screen.getByText('All fields are required!')).toBeInTheDocument();
         });
     });
@@ -79,12 +79,12 @@ describe('CreateHousehold Component', () => {
             </Provider>
         );
 
+        fireEvent.change(screen.getByLabelText('Household name'), { target: { value: 'Test Household' } });
+        fireEvent.change(screen.getByLabelText('Presentation'), { target: { value: 'Test Presentation' } });
+
+        fireEvent.click(screen.getByRole('button', { name: 'Create Household' }));
+
         waitFor(() => {
-            fireEvent.change(screen.getByLabelText('Household name'), { target: { value: 'Test Household' } });
-            fireEvent.change(screen.getByLabelText('Presentation'), { target: { value: 'Test Presentation' } });
-
-            fireEvent.click(screen.getByRole('button', { name: 'Create Household' }));
-
             expect(screen.getByText('Household creation failed')).toBeInTheDocument();
         });
     });
@@ -98,12 +98,12 @@ describe('CreateHousehold Component', () => {
             </Provider>
         );
 
+        fireEvent.change(screen.getByLabelText('Household name'), { target: { value: 'Test Household' } });
+        fireEvent.change(screen.getByLabelText('Presentation'), { target: { value: 'Test Presentation' } });
+
+        fireEvent.click(screen.getByRole('button', { name: 'Create Household' }));
+
         waitFor(() => {
-            fireEvent.change(screen.getByLabelText('Household name'), { target: { value: 'Test Household' } });
-            fireEvent.change(screen.getByLabelText('Presentation'), { target: { value: 'Test Presentation' } });
-
-            fireEvent.click(screen.getByRole('button', { name: 'Create Household' }));
-
             expect(screen.getByText('Welcome to Test Household!')).toBeInTheDocument();
         });
     });
@@ -117,12 +117,11 @@ describe('CreateHousehold Component', () => {
             </Provider>
         );
 
+        fireEvent.change(screen.getByLabelText('Household name'), { target: { value: 'Test Household' } });
+        fireEvent.change(screen.getByLabelText('Presentation'), { target: { value: 'Test Presentation' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Create Household' }));
+
         waitFor(() => {
-            fireEvent.change(screen.getByLabelText('Household name'), { target: { value: 'Test Household' } });
-            fireEvent.change(screen.getByLabelText('Presentation'), { target: { value: 'Test Presentation' } });
-
-            fireEvent.click(screen.getByRole('button', { name: 'Create Household' }));
-
             expect(screen.getByText('Household created successfully!')).toBeInTheDocument();
         });
     });
@@ -136,9 +135,9 @@ describe('CreateHousehold Component', () => {
             </Provider>
         );
 
-        waitFor(() => {
-            fireEvent.click(screen.getByRole('button', { name: 'Create Household' }));
+        fireEvent.click(screen.getByRole('button', { name: 'Create Household' }));
 
+        waitFor(() => {
             expect(screen.getByText('All fields are required!')).toBeInTheDocument();
         });
     });
@@ -152,10 +151,10 @@ describe('CreateHousehold Component', () => {
             </Provider>
         );
 
-        waitFor(() => {
-            fireEvent.change(screen.getByLabelText('Household name'), { target: { value: 'ab' } });
-            fireEvent.click(screen.getByRole('button', { name: 'Create Household' }));
+        fireEvent.change(screen.getByLabelText('Household name'), { target: { value: 'ab' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Create Household' }));
 
+        waitFor(() => {
             expect(screen.getByText('Household name must be at least 3 characters long!')).toBeInTheDocument();
         });
     });
@@ -169,10 +168,10 @@ describe('CreateHousehold Component', () => {
             </Provider>
         );
 
-        waitFor(() => {
-            fireEvent.change(screen.getByLabelText('Presentation'), { target: { value: 'abcd' } });
-            fireEvent.click(screen.getByRole('button', { name: 'Create Household' }));
+        fireEvent.change(screen.getByLabelText('Presentation'), { target: { value: 'abcd' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Create Household' }));
 
+        waitFor(() => {
             expect(screen.getByText('Presentation must be at least 5 characters long!')).toBeInTheDocument();
         });
     });
@@ -189,11 +188,11 @@ describe('CreateHousehold Component', () => {
             </Provider>
         );
 
-        waitFor(() => {
-            fireEvent.change(screen.getByLabelText('Household name'), { target: { value: 'Test Household' } });
-            fireEvent.change(screen.getByLabelText('Presentation'), { target: { value: 'Test Presentation' } });
-            fireEvent.click(screen.getByRole('button', { name: 'Create Household' }));
+        fireEvent.change(screen.getByLabelText('Household name'), { target: { value: 'Test Household' } });
+        fireEvent.change(screen.getByLabelText('Presentation'), { target: { value: 'Test Presentation' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Create Household' }));
 
+        waitFor(() => {
             expect(screen.getByText(errorMessage)).toBeInTheDocument();
         });
     });
