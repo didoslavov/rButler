@@ -7,6 +7,7 @@ import Search from '../Search/Search.jsx';
 
 import { clearUser } from '../../redux/slices/userSlice.js';
 import { logout } from '../../services/userService.js';
+import { setNotification } from '../../redux/slices/notificationSlice.js';
 
 const Navbar = () => {
     const { user } = useSelector((state) => state.user);
@@ -17,11 +18,17 @@ const Navbar = () => {
         try {
             const { success } = await logout();
 
-            if (success) {
-                dispatch(clearUser());
+            if (!success) {
+                throw new Error('Failed to log out. Please try again.');
             }
+
+            dispatch(clearUser());
         } catch (error) {
-            console.error(error.message);
+            setNotification({
+                notification: [error.message],
+                severity: 'error',
+                open: true,
+            });
         }
     };
 
@@ -53,7 +60,7 @@ const Navbar = () => {
                             </li>
                             <div className="avatar-container">
                                 <span className="navbar-username">{user.username}</span>
-                                <Link to={`/profile`}>
+                                <Link to={`/profile`} role="avatar">
                                     <Avatar
                                         src={user.avatar}
                                         alt="user avatar"
@@ -62,7 +69,7 @@ const Navbar = () => {
                                             color: 'var(--light-grey)',
                                             '&& .MuiAvatar-img': { objectFit: 'fill' },
                                         }}>
-                                        {!user.avatar && user.username[0]}
+                                        {!user.avatar && user?.username}
                                     </Avatar>
                                 </Link>
                             </div>

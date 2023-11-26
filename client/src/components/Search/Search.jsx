@@ -43,7 +43,7 @@ const Search = () => {
     }, []);
 
     return (
-        <form onSubmit={handleSubmit(onSearch)}>
+        <form onSubmit={handleSubmit(onSearch)} data-testid="search-component">
             <input
                 type="text"
                 {...register('query')}
