@@ -275,10 +275,10 @@ describe('AllHouseholds Component', () => {
             expect(screen.getByText('Household Name 2')).toBeInTheDocument();
         });
 
-        waitFor(() => {
-            const searchInput = screen.getByTestId('search-component');
-            fireEvent.change(searchInput, { value: 'Household Name 1' });
+        const searchInput = screen.getByTestId('search-component');
+        fireEvent.change(searchInput, { value: 'Household Name 1' });
 
+        waitFor(() => {
             expect(screen.getByText('Household Name 1')).toBeInTheDocument();
             expect(screen.queryByText('Household Name 2')).not.toBeInTheDocument();
         });
