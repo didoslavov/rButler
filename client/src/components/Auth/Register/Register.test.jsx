@@ -43,13 +43,14 @@ describe('Register Component', () => {
             </Provider>
         );
 
-        waitFor(() => {
-            fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'testuser' } });
-            fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'testemail@example.com' } });
-            fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'testpassword' } });
-            fireEvent.change(screen.getByLabelText('Repeat Password'), { target: { value: 'testpassword' } });
+        fireEvent.change(screen.getByLabelText('Username'), { value: 'testuser' });
+        fireEvent.change(screen.getByLabelText('Email'), { value: 'testemail@example.com' });
+        fireEvent.change(screen.getByLabelText('Password'), { value: 'testpassword' });
+        fireEvent.change(screen.getByLabelText('Repeat Password'), { value: 'testpassword' });
 
-            fireEvent.click(screen.getByRole('button', { name: 'Sign Up' }));
+        fireEvent.click(screen.getByRole('button', { name: 'Sign Up' }));
+
+        waitFor(() => {
             expect(userService.userRegister).toHaveBeenCalledWith({
                 username: 'testuser',
                 email: 'testemail@example.com',
@@ -69,9 +70,9 @@ describe('Register Component', () => {
             </Provider>
         );
 
-        waitFor(() => {
-            fireEvent.click(screen.getByRole('button', { name: 'Sign Up' }));
+        fireEvent.click(screen.getByRole('button', { name: 'Sign Up' }));
 
+        waitFor(() => {
             expect(screen.getByText('All fields are required!')).toBeInTheDocument();
         });
     });
@@ -87,14 +88,14 @@ describe('Register Component', () => {
             </Provider>
         );
 
+        fireEvent.change(screen.getByLabelText('Username'), { value: 'testuser' });
+        fireEvent.change(screen.getByLabelText('Email'), { value: 'testemail@example.com' });
+        fireEvent.change(screen.getByLabelText('Password'), { value: 'testpassword' });
+        fireEvent.change(screen.getByLabelText('Repeat Password'), { value: 'testpassword' });
+
+        fireEvent.click(screen.getByRole('button', { name: 'Sign Up' }));
+
         waitFor(() => {
-            fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'testuser' } });
-            fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'testemail@example.com' } });
-            fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'testpassword' } });
-            fireEvent.change(screen.getByLabelText('Repeat Password'), { target: { value: 'testpassword' } });
-
-            fireEvent.click(screen.getByRole('button', { name: 'Sign Up' }));
-
             expect(screen.getByText('Registration failed')).toBeInTheDocument();
         });
     });
@@ -110,14 +111,14 @@ describe('Register Component', () => {
             </Provider>
         );
 
+        fireEvent.change(screen.getByLabelText('Username'), { value: 'testuser' });
+        fireEvent.change(screen.getByLabelText('Email'), { value: 'testemail@example.com' });
+        fireEvent.change(screen.getByLabelText('Password'), { value: 'testpassword' });
+        fireEvent.change(screen.getByLabelText('Repeat Password'), { value: 'testpassword' });
+
+        fireEvent.click(screen.getByRole('button', { name: 'Sign Up' }));
+
         waitFor(() => {
-            fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'testuser' } });
-            fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'testemail@example.com' } });
-            fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'testpassword' } });
-            fireEvent.change(screen.getByLabelText('Repeat Password'), { target: { value: 'testpassword' } });
-
-            fireEvent.click(screen.getByRole('button', { name: 'Sign Up' }));
-
             expect(screen.getByText('Welcome, testuser!')).toBeInTheDocument();
         });
     });
