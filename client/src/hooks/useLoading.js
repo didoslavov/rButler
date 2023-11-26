@@ -9,7 +9,7 @@ export const useLoading = (initialState) => {
             const result = await callBack();
             return result;
         } catch (error) {
-            console.log(error.message);
+            throw error;
         } finally {
             setIsLoading(false);
         }
