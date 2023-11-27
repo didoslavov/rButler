@@ -1,0 +1,31 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`HouseholdItem Component > matches snapshot 1`] = `
+<DocumentFragment>
+  <li
+    class="household"
+  >
+    <div
+      class="chip-container"
+    >
+      <div
+        class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-s8zvmw-MuiChip-root"
+      >
+        <span
+          class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
+        >
+          Owner: testuser
+        </span>
+      </div>
+    </div>
+    <h4
+      class="border-bottom"
+    >
+      Test Household
+    </h4>
+    <p>
+      A wonderful place
+    </p>
+  </li>
+</DocumentFragment>
+`;
