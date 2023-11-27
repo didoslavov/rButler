@@ -48,7 +48,9 @@ describe('Details Component', () => {
             </BrowserRouter>
         );
 
-        screen.findByText('Welcome back to the sanctuary of your residence.');
+        act(async () => {
+            await screen.findByText('Welcome back to the sanctuary of your residence.');
+        });
 
         waitFor(() => {
             expect(screen.getByText('Welcome back to the sanctuary of your residence.')).toBeInTheDocument();
@@ -71,7 +73,7 @@ describe('Details Component', () => {
             </BrowserRouter>
         );
 
-        await waitFor(() => {
+        waitFor(() => {
             expect(screen.queryByTestId('loading-spinner')).toBeNull();
         });
 

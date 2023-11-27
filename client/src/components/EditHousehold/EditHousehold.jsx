@@ -84,15 +84,16 @@ const EditHousehold = ({ household, handleUpdateHousehold }) => {
                 </IconButton>
                 <form className="edit-form" onSubmit={handleSubmit(handleUpdate)}>
                     <h5 className="edit-form-header border-bottom">Edit Household</h5>
-                    <label className="edit-household-form-label">
+                    <label className="edit-household-form-label" htmlFor="name">
                         <span>Household name</span>
                     </label>
-                    <input type="text" className="edit-input" defaultValue={household.name} {...register('name')} />
-                    <label className="edit-household-form-label">
+                    <input type="text" className="edit-input" defaultValue={household.name} id="name" {...register('name')} />
+                    <label className="edit-household-form-label" htmlFor="present">
                         <span>Presentation</span>
                     </label>
                     <input
                         type="text"
+                        id="present"
                         className="edit-input"
                         defaultValue={household.presentation}
                         {...register('presentation')}
