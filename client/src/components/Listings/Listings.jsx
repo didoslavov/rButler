@@ -28,12 +28,11 @@ const Listings = ({ lists }) => {
                     <div className="no-lists">
                         No new lists
                         {user ? (
-                            isHouseholdOwner ||
-                            (isMemberInHousehold && (
+                            (isHouseholdOwner || isMemberInHousehold) && (
                                 <button className="button-action" onClick={handleShowCreateForm}>
                                     Create List
                                 </button>
-                            ))
+                            )
                         ) : (
                             <Link to="/profile/auth" className="button-action">
                                 Sign in to create a list
