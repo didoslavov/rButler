@@ -1,4 +1,4 @@
-import Sidebar from './Sidebar.jsx';
+import Sidebar from './Sidebar/Sidebar.jsx';
 import EditProfile from './EditProfile.jsx';
 import { Route, Routes } from 'react-router-dom';
 import ChangePassword from './ChangePassword.jsx';

@@ -1,11 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { setNotification } from '../../redux/slices/notificationSlice.js';
-import { useLoading } from '../../hooks/useLoading.js';
-import { resetPassword } from '../../services/userService.js';
-import { setUser } from '../../redux/slices/userSlice.js';
+import { setNotification } from '../../../redux/slices/notificationSlice.js';
+import { useLoading } from '../../../hooks/useLoading.js';
+import { resetPassword } from '../../../services/userService.js';
+import { setUser } from '../../../redux/slices/userSlice.js';
 import { useNavigate } from 'react-router-dom';
-import Notification from '../Notification/Notification.jsx';
+import Notification from '../../Notification/Notification.jsx';
 
 const ChangePassword = () => {
     const dispatch = useDispatch();
@@ -70,7 +70,7 @@ const ChangePassword = () => {
                     <span>Repeat Password</span>
                     <input type="password" className="input" {...register('rePass')} />
                 </label>
-                <input disabled={isLoading} type="submit" className="submit button" value={'Edit'} />
+                <input disabled={isLoading} type="submit" className="submit button" value={'Edit'} role="button" />
             </form>
 
             {notification && <Notification open={open} message={notification} severity={severity} />}

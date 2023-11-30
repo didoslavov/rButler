@@ -4,15 +4,15 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import CloseIcon from '@mui/icons-material/Close';
 import { IconButton } from '@mui/material';
-import Notification from '../Notification/Notification.jsx';
+import Notification from '../../Notification/Notification.jsx';
 
-import { editUser } from '../../services/userService.js';
-import { setNotification } from '../../redux/slices/notificationSlice.js';
-import { setUser } from '../../redux/slices/userSlice.js';
+import { editUser } from '../../../services/userService.js';
+import { setNotification } from '../../../redux/slices/notificationSlice.js';
+import { setUser } from '../../../redux/slices/userSlice.js';
 
 import { useState } from 'react';
-import useSupabase from '../../hooks/useSupabase.js';
-import { useLoading } from '../../hooks/useLoading.js';
+import useSupabase from '../../../hooks/useSupabase.js';
+import { useLoading } from '../../../hooks/useLoading.js';
 
 const EditProfile = () => {
     const { uploadAvatar } = useSupabase();
