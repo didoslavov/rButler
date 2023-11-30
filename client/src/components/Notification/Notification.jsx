@@ -7,7 +7,7 @@ import { snackbarStyles } from '../../styles/muiStyles/muiStyles.js';
 import { NotificationTypes } from '../../shared/propTypes.js';
 import { clearNotification } from '../../redux/slices/notificationSlice.js';
 
-const Notification = ({ open, message, severity }) => {
+const Notification = ({ open, message = [], severity }) => {
     const dispatch = useDispatch();
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
