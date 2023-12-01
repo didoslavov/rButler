@@ -88,7 +88,6 @@ Feel free to explore each directory for more detailed information on their conte
 
 ```bash
 git clone https://github.com/didoslavov/rButler.git
-cd rbutler
 ```
 
 ### Unix based OS
@@ -96,6 +95,10 @@ cd rbutler
 #### Server Setup
 
 Open a new terminal window/tab in the root directory of your project.
+
+```bash
+cd server
+```
 
 To set up the server, run the following command:
 
@@ -112,6 +115,10 @@ This script will:
 #### Client Setup
 
 Open a new terminal window/tab in the root directory of your project.
+
+```bash
+cd client
+```
 
 To set up the client, run the following command:
 
@@ -131,6 +138,10 @@ This script will:
 
 Open a new terminal window/tab in the root directory of your project.
 
+```powershell && commandpromt
+cd server
+```
+
 To set up the server, run the following command:
 
 ```powershell
@@ -146,6 +157,10 @@ This script will:
 #### Client Setup
 
 Open a new terminal window/tab in the root directory of your project.
+
+```powershell && commandpromt
+cd client
+```
 
 To set up the client, run the following command:
 
