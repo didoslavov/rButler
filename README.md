@@ -95,6 +95,7 @@ git clone https://github.com/didoslavov/rButler.git
 #### Server Setup
 
 Open a new terminal window/tab in the root directory of your project.
+Navigate to `server` directory:
 
 ```bash
 cd server
@@ -115,12 +116,13 @@ This script will:
 #### Client Setup
 
 Open a new terminal window/tab in the root directory of your project.
+Navigate to client directory:
 
 ```bash
 cd client
 ```
 
-To set up the client, run the following command:
+To set up the `client`, run the following command:
 
 ```bash
 ./client_setup.sh
@@ -137,6 +139,7 @@ This script will:
 #### Server Setup
 
 Open a new terminal window/tab in the root directory of your project.
+Navigate to `server` directory:
 
 ```powershell && commandpromt
 cd server
@@ -157,6 +160,7 @@ This script will:
 #### Client Setup
 
 Open a new terminal window/tab in the root directory of your project.
+Navigate to `client` directory:
 
 ```powershell && commandpromt
 cd client
