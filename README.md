@@ -23,6 +23,7 @@ simplify day-to-day tasks and enhance communication within households.
 -   [How It Works](#how-it-works)
 -   [Project Structure](#project-structure)
 -   [Running the Application](#running-the-application)
+-   [Running tests](#running-tests)
 -   [API Endpoints](#api-endpoints)
 -   [License](#license)
 
@@ -90,11 +91,13 @@ git clone https://github.com/didoslavov/rButler.git
 cd rbutler
 ```
 
+### Unix based OS
+
 #### Server Setup
 
 Open a new terminal window/tab in the root directory of your project.
 
-To set up the server, run the following commands:
+To set up the server, run the following command:
 
 ```bash
 ./server_setup.sh
@@ -110,6 +113,8 @@ This script will:
 
 Open a new terminal window/tab in the root directory of your project.
 
+To set up the client, run the following command:
+
 ```bash
 ./client_setup.sh
 ```
@@ -119,6 +124,146 @@ This script will:
     1. Set up environment variables for the client.
     2. Install client dependencies.
     3. Start the client in development mode.
+
+### Windows OS
+
+#### Server Setup
+
+Open a new terminal window/tab in the root directory of your project.
+
+To set up the server, run the following command:
+
+```powershell
+.\windows_server_setup.bat
+```
+
+This script will:
+
+    1. Set up environment variables for the server.
+    2. Install server dependencies.
+    3. Start the server in development mode.
+
+#### Client Setup
+
+Open a new terminal window/tab in the root directory of your project.
+
+To set up the client, run the following command:
+
+```powershell
+.\windows_client_setup.bat
+```
+
+This script will:
+
+    1. Set up environment variables for the client.
+    2. Install client dependencies.
+    3. Start the client in development mode.
+
+### Manual setup
+
+#### Server Setup
+
+1. Open a new Command Prompt or PowerShell window in the root directory of your project.
+
+2. Navigate to the `server` directory:
+
+    ```bash
+    cd server
+    ```
+
+3. Create a new `.env` file in the `server` directory with the following content:
+
+    ```plaintext
+    PORT=3000
+    DB_URI=mongodb+srv://didoslavov:FYe72ng2bCQQijst@rbutler.dqs4ylm.mongodb.net/rButler
+    JWT_SECRET=WhispersInSilkGlovesAndTails
+    ```
+
+4. Install server dependencies:
+
+    ```bash
+    npm install
+    ```
+
+5. Start the server in development mode:
+
+    ```bash
+    npm run dev
+    ```
+
+#### Client Setup
+
+1. Open a new Command Prompt or PowerShell window in the root directory of your project.
+
+2. Navigate to the `client` directory:
+
+    ```bash
+    cd client
+    ```
+
+3. Create a new `.env` file in the `client` directory with the following content:
+
+    ```plaintext
+    VITE_BASE_URL=http://localhost:3000
+    VITE_SUPABASE_URL=https://cxswmrfheqrkzrsexvrl.supabase.co
+    VITE_SUPABASE_BUCKET=/storage/v1/object/public/avatars/
+    VITE_SUPABASE_API_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4c3dtcmZoZXFya3pyc2V4dnJsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTg2NDg0MDUsImV4cCI6MjAxNDIyNDQwNX0.NBQTc_i5rHnRdDvFAvVTVFE7pjV69KGFfihG0Ths9QQ
+    VITE_OPENWEATHER_API_KEY=65c8bce3c3835f283c727ae2bbd5cf75
+    VITE_OPENWEATHER_BASE_URL=https://api.openweathermap.org/data/2.5
+    ```
+
+4. Install client dependencies:
+
+    ```bash
+    npm install
+    ```
+
+5. Start the client in development mode:
+
+    ```bash
+    npm run dev
+    ```
+
+6. Client setup complete! Open the following link in your web browser:
+   http://localhost:5173
+
+### Frontend Tests
+
+# Tests Overview
+
+## Frontend Tests
+
+The frontend tests in rButler are designed to ensure the reliability and functionality of the user interface. We use Vitest, a lightweight and flexible testing library, in combination with @vitest/ui for a seamless testing experience.
+
+### Unit Tests
+
+-   **@testing-library/react:** Unit tests are implemented using @testing-library/react to test individual React components in isolation. This ensures that each component behaves as expected and can be easily maintained.
+
+-   **@testing-library/jest-dom:** Jest-DOM is utilized for extending Jest's functionality, providing a set of custom Jest matchers for asserting on the state of the DOM elements. This enhances the precision of our component tests.
+
+### Integration Tests
+
+-   **Vitest:** Integration tests are conducted using Vitest to validate the interactions and collaborations between various components. Vitest provides a clear and concise syntax for writing integration tests, making it easier to understand and maintain the test suite.
+
+-   **@vitest/ui:** UI tests are executed using @vitest/ui to create a visual representation of the test results in a browser tab. This allows for a more comprehensive analysis of the frontend behavior, facilitating quick identification of any issues or regressions.
+
+### Redux Tests
+
+-   **redux-mock-store:** For testing Redux state management, we utilize redux-mock-store. This library enables us to create a mock Redux store, allowing us to simulate actions and state changes, ensuring that the application state is correctly managed.
+
+These testing tools collectively contribute to a robust testing suite that covers different aspects of the frontend, including individual component behavior, component interactions, and the overall user interface. Running both unit and UI tests ensures a comprehensive evaluation of the frontend functionality, providing confidence in the stability of the rButler application.
+
+## Running Tests
+
+```bash
+npm run test
+```
+
+To run the frontend tests in a browser tab with a detailed report, you can use the following command:
+
+```bash
+npm run test:ui
+```
 
 ## API Endpoints
 
