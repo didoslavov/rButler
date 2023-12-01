@@ -15,8 +15,8 @@ import Footer from './components/Footer/Footer.jsx';
 import Default from './components/Default/Default.jsx';
 
 import './App.css';
-import EditProfile from './components/Profile/EditProfile.jsx';
-import ChangePassword from './components/Profile/ChangePassword.jsx';
+import EditProfile from './components/Profile/EditProfile/EditProfile.jsx';
+import ChangePassword from './components/Profile/ChangePassword/ChangePassword.jsx';
 import LearnMore from './components/LearnMore/LearnMore.jsx';
 
 function App() {

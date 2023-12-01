@@ -1,7 +1,7 @@
 import Sidebar from './Sidebar/Sidebar.jsx';
-import EditProfile from './EditProfile.jsx';
+import EditProfile from './EditProfile/EditProfile.jsx';
 import { Route, Routes } from 'react-router-dom';
-import ChangePassword from './ChangePassword.jsx';
+import ChangePassword from './ChangePassword/ChangePassword.jsx';
 import Weather from '../Weather/Weather.jsx';
 
 const Profile = () => {
