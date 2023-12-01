@@ -95,6 +95,7 @@ git clone https://github.com/didoslavov/rButler.git
 #### Server Setup
 
 Open a new terminal window/tab in the root directory of your project.
+
 Navigate to `server` directory:
 
 ```bash
@@ -116,6 +117,7 @@ This script will:
 #### Client Setup
 
 Open a new terminal window/tab in the root directory of your project.
+
 Navigate to client directory:
 
 ```bash
@@ -139,6 +141,7 @@ This script will:
 #### Server Setup
 
 Open a new terminal window/tab in the root directory of your project.
+
 Navigate to `server` directory:
 
 ```powershell && commandpromt
@@ -160,6 +163,7 @@ This script will:
 #### Client Setup
 
 Open a new terminal window/tab in the root directory of your project.
+
 Navigate to `client` directory:
 
 ```powershell && commandpromt
