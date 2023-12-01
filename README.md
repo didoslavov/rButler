@@ -18,6 +18,7 @@ simplify day-to-day tasks and enhance communication within households.
 ## Table of Contents
 
 -   [Project Overview](#project-overview)
+-   [Project Deployment](#deployed-project-showcase)
 -   [Warnings](#warnings)
 -   [Key Features](#key-features)
 -   [How It Works](#how-it-works)
@@ -30,6 +31,19 @@ simplify day-to-day tasks and enhance communication within households.
 ## Project Overview
 
 **rButler** project aims to enhance household organization, fostering better communication and cooperation among its users. Whether it's planning a shopping trip or coordinating daily tasks, this platform simplifies the management of household responsibilities in the digital age.
+
+## Deployed Project Showcase
+
+**rButler** is deployed on a free hosting service [render](https://render.com/), providing you with the opportunity to experience its features firsthand. To access the live version, simply visit [rButler Live](https://rbutler.onrender.com/).
+
+### Note
+
+-   The deployed version may be subject to periodic updates and maintenance.
+-   For the best user experience, we recommend using the latest version of Mozilla Firefox or Chrome, with a desktop resolution of 1920x1080.
+
+Feel free to explore and test the various functionalities of **rButler** in this live environment. If you encounter any issues or have feedback, please let us know through our [GitHub Issues](https://github.com/didoslavov/rButler/issues) page.
+
+Enjoy using **rButler** for seamless household organization!
 
 ## Warnings
 
