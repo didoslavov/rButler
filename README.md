@@ -158,7 +158,7 @@ Open a new terminal window/tab in the root directory of your project.
 
 Navigate to `server` directory:
 
-```powershell && commandpromt
+```powershell
 cd server
 ```
 
@@ -180,7 +180,7 @@ Open a new terminal window/tab in the root directory of your project.
 
 Navigate to `client` directory:
 
-```powershell && commandpromt
+```powershell
 cd client
 ```
 
@@ -201,7 +201,6 @@ This script will:
 #### Server Setup
 
 1. Open a new Command Prompt or PowerShell window in the root directory of your project.
-
 2. Navigate to the `server` directory:
 
     ```bash
@@ -231,7 +230,6 @@ This script will:
 #### Client Setup
 
 1. Open a new Command Prompt or PowerShell window in the root directory of your project.
-
 2. Navigate to the `client` directory:
 
     ```bash
@@ -275,13 +273,11 @@ The frontend tests in rButler are designed to ensure the reliability and functio
 ### Unit Tests
 
 -   **@testing-library/react:** Unit tests are implemented using @testing-library/react to test individual React components in isolation. This ensures that each component behaves as expected and can be easily maintained.
-
 -   **@testing-library/jest-dom:** Jest-DOM is utilized for extending Jest's functionality, providing a set of custom Jest matchers for asserting on the state of the DOM elements. This enhances the precision of our component tests.
 
 ### Integration Tests
 
 -   **Vitest:** Integration tests are conducted using Vitest to validate the interactions and collaborations between various components. Vitest provides a clear and concise syntax for writing integration tests, making it easier to understand and maintain the test suite.
-
 -   **@vitest/ui:** UI tests are executed using @vitest/ui to create a visual representation of the test results in a browser tab. This allows for a more comprehensive analysis of the frontend behavior, facilitating quick identification of any issues or regressions.
 
 ### Redux Tests
@@ -409,3 +405,7 @@ npm run test:ui
     ## License
 
     This project is licensed under the MIT License - see the [LICENSE](https://opensource.org/license/mit/) file for details.
+
+    ## Credits
+
+    This documentation is writen with the help of [ChatGPT](https://chatgpt.openai.com)
