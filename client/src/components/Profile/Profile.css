@@ -88,6 +88,10 @@
     padding: 8px;
 }
 
+.sidebar-header a {
+    color: var(--light-grey);
+}
+
 .sidebar-list {
     list-style-type: none;
     padding: 0;

@@ -3,8 +3,12 @@ import { Link } from 'react-router-dom';
 const Sidebar = () => {
     return (
         <div className="sidebar">
-            <h4 className="sidebar-header">User Profile</h4>
             <ul className="sidebar-list">
+                <li className="sidebar-header">
+                    <Link to="/profile" className="sidebar-header-link">
+                        User Profile
+                    </Link>
+                </li>
                 <li>
                     <Link to="edit">Edit Profile</Link>
                 </li>
