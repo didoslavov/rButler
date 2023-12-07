@@ -28,7 +28,7 @@ const TodoList = ({ handleSubmit, register, onAddItem, items, handleGoBack, hand
                             items.map((item) => (
                                 <li className="list" key={item._id}>
                                     <span className="list-span-name">{item.text}</span>
-                                    {isHouseholdOwner && (
+                                    {(isHouseholdOwner || isMemberInHousehold) && (
                                         <ListItemAttributes handleCheckItem={handleCheckItem} itemId={item._id} />
                                     )}
                                 </li>

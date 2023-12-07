@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 const ListActionIcons = ({ handleGoBack, handleClickDelete }) => {
     const { isHouseholdOwner, isMemberInHousehold } = useSelector((state) => state.household);
-
+    console.log(isHouseholdOwner || isMemberInHousehold);
     return (
         <div className="icons">
             <Tooltip
@@ -18,20 +18,14 @@ const ListActionIcons = ({ handleGoBack, handleClickDelete }) => {
                 </IconButton>
             </Tooltip>
             {(isHouseholdOwner || isMemberInHousehold) && (
-                <>
-                    <Tooltip
-                        title="Delete List"
-                        placement="top"
-                        sx={{ color: 'var(--dark-blue)', backgroundColor: 'var(--light-grey)' }}>
-                        <IconButton
-                            aria-label="delete"
-                            size="large"
-                            sx={{ color: 'var(--dark-pink)' }}
-                            onClick={handleClickDelete}>
-                            <DeleteIcon fontSize="inherit" />
-                        </IconButton>
-                    </Tooltip>
-                </>
+                <Tooltip
+                    title="Delete List"
+                    placement="top"
+                    sx={{ color: 'var(--dark-blue)', backgroundColor: 'var(--light-grey)' }}>
+                    <IconButton aria-label="delete" size="large" sx={{ color: 'var(--dark-pink)' }} onClick={handleClickDelete}>
+                        <DeleteIcon fontSize="inherit" />
+                    </IconButton>
+                </Tooltip>
             )}
         </div>
     );
