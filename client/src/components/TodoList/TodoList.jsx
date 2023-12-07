@@ -13,16 +13,15 @@ const TodoList = ({ handleSubmit, register, onAddItem, items, handleGoBack, hand
             <div className="list-container">
                 <h2 className="welcome-list">TODO List</h2>
                 <div className="form-container">
-                    {isHouseholdOwner ||
-                        (isMemberInHousehold && (
-                            <form className="todo-form-list" onSubmit={handleSubmit(onAddItem)}>
-                                <label className="list-form-label">
-                                    <span>Todo</span>
-                                </label>
-                                <input type="text" className="input todo-item-input" {...register('text')} />
-                                <input type="submit" className="submit button list-submit" value={'Add todo'} />
-                            </form>
-                        ))}
+                    {(isHouseholdOwner || isMemberInHousehold) && (
+                        <form className="todo-form-list" onSubmit={handleSubmit(onAddItem)}>
+                            <label className="list-form-label">
+                                <span>Todo</span>
+                            </label>
+                            <input type="text" className="input todo-item-input" {...register('text')} />
+                            <input type="submit" className="submit button list-submit" value={'Add todo'} />
+                        </form>
+                    )}
                     <h4>Items</h4>
                     <ul className="lists">
                         {items.length ? (
