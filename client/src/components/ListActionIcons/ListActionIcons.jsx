@@ -5,7 +5,7 @@ import { ListActionIconsTypes } from '../../shared/propTypes.js';
 import { useSelector } from 'react-redux';
 
 const ListActionIcons = ({ handleGoBack, handleClickDelete }) => {
-    const { isHouseholdOwner } = useSelector((state) => state.household);
+    const { isHouseholdOwner, isMemberInHousehold } = useSelector((state) => state.household);
 
     return (
         <div className="icons">
@@ -17,7 +17,7 @@ const ListActionIcons = ({ handleGoBack, handleClickDelete }) => {
                     <ArrowBackIcon fontSize="inherit" />
                 </IconButton>
             </Tooltip>
-            {isHouseholdOwner && (
+            {(isHouseholdOwner || isMemberInHousehold) && (
                 <>
                     <Tooltip
                         title="Delete List"

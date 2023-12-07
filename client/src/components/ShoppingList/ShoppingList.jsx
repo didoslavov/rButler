@@ -5,27 +5,25 @@ import { ListsTypes } from '../../shared/propTypes.js';
 
 const ShoppingList = ({ handleSubmit, register, onAddItem, items, handleGoBack, handleClickDelete, handleCheckItem }) => {
     const { isHouseholdOwner, isMemberInHousehold } = useSelector((state) => state.household);
-
     return (
         <>
             <div className="shopping-list-container">
                 <div className="list-container">
                     <h2 className="welcome-list">Shopping List</h2>
                     <div className="form-container">
-                        {isHouseholdOwner ||
-                            (isMemberInHousehold && (
-                                <form className="form-list" onSubmit={handleSubmit(onAddItem)}>
-                                    <label className="list-form-label">
-                                        <span>Item</span>
-                                    </label>
-                                    <input type="text" className="input item-input" {...register('text')} />
-                                    <label className="list-form-label">
-                                        <span>Qty.</span>
-                                    </label>
-                                    <input type="number" className="input qty-input" {...register('qty')} />
-                                    <input type="submit" className="submit button list-submit" value={'Add item'} />
-                                </form>
-                            ))}
+                        {(isHouseholdOwner || isMemberInHousehold) && (
+                            <form className="form-list" onSubmit={handleSubmit(onAddItem)}>
+                                <label className="list-form-label">
+                                    <span>Item</span>
+                                </label>
+                                <input type="text" className="input item-input" {...register('text')} />
+                                <label className="list-form-label">
+                                    <span>Qty.</span>
+                                </label>
+                                <input type="number" className="input qty-input" {...register('qty')} />
+                                <input type="submit" className="submit button list-submit" value={'Add item'} />
+                            </form>
+                        )}
                         <h4>Items</h4>
                         <ul className="lists">
                             {items.length ? (
@@ -33,7 +31,7 @@ const ShoppingList = ({ handleSubmit, register, onAddItem, items, handleGoBack, 
                                     <li className="list" key={item._id}>
                                         <span className="list-span-name">{item.text}</span>
                                         <span className="list-span-qty">{item.qty}</span>
-                                        {isHouseholdOwner && (
+                                        {(isHouseholdOwner || isMemberInHousehold) && (
                                             <ListItemAttributes handleCheckItem={handleCheckItem} itemId={item._id} />
                                         )}
                                     </li>

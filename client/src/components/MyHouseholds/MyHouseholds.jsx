@@ -66,7 +66,7 @@ const MyHouseholds = () => {
                                 sx={paginationStyles}
                                 count={totalPages}
                                 onChange={(e, page) => paginationHandler(page)}
-                                data-testId="pagination-component"
+                                data-testid="pagination-component"
                             />
                         </div>
                     </>
