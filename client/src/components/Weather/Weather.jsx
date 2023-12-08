@@ -10,6 +10,7 @@ export default function Weather() {
 
     return (
         <>
+            <h2 className="forecast-heading border-bottom">Forecast</h2>
             {isLoading ? (
                 <LoadingSpinner />
             ) : (

@@ -24,7 +24,6 @@ const AllHouseholds = () => {
     useEffect(() => {
         handleLoading(async () => {
             const res = await getAllHouseholds(search);
-
             setHouseholds(res);
         });
     }, [search, handleLoading]);
