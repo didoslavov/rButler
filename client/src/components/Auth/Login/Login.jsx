@@ -69,9 +69,6 @@ const Login = () => {
                     <span>Password</span>
                     <input type="password" className="input" {...register('password')} />
                 </label>
-                <Link to="/password-reset">
-                    <p className="forgot-pass">Forgot password?</p>
-                </Link>
                 <input disabled={isLoading} type="submit" className="submit button" value={'Sign In'} />
             </form>
         </div>
