@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { supabaseUpload } from '../services/supabaseService.js';
 
