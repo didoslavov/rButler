@@ -17,7 +17,6 @@ const AddUser = ({ setHousehold, householdId, users, setUsers }) => {
     const [role, setRole] = useState('Resident');
     const [userListName, setUserListName] = useState('');
     const { isAddMemberOpen } = useSelector((state) => state.formVisibility);
-    const { user } = useSelector((state) => state.user);
     const { register, handleSubmit, reset } = useForm();
 
     const handleClick = () => {

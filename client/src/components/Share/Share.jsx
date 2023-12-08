@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { EmailSharp, FacebookSharp, Telegram } from '@mui/icons-material';
 import CloseIcon from '@mui/icons-material/Close';

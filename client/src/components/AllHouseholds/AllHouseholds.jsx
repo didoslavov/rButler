@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
-import { Chip, Pagination } from '@mui/material';
-import { chipStyles, paginationStyles } from '../../styles/muiStyles/muiStyles.js';
+import { Pagination } from '@mui/material';
+import { paginationStyles } from '../../styles/muiStyles/muiStyles.js';
 
 import usePagination from '../../hooks/usePagination.js';
 import { useLoading } from '../../hooks/useLoading.js';
