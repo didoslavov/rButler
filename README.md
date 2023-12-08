@@ -31,6 +31,7 @@ simplify day-to-day tasks and enhance communication within households.
 ## Project Overview
 
 **rButler** project aims to enhance household organization, fostering better communication and cooperation among its users. Whether it's planning a shopping trip or coordinating daily tasks, this platform simplifies the management of household responsibilities in the digital age.
+![alt text](/client/public/preview.png)
 
 ## Deployed Project Showcase
 
