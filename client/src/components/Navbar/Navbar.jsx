@@ -24,11 +24,13 @@ const Navbar = () => {
 
             dispatch(clearUser());
         } catch (error) {
-            setNotification({
-                notification: [error.message],
-                severity: 'error',
-                open: true,
-            });
+            dispatch(
+                setNotification({
+                    notification: [error.message],
+                    severity: 'error',
+                    open: true,
+                })
+            );
         }
     };
 
