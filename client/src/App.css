@@ -22,10 +22,10 @@
 @import url(./components/Share/Share.css);
 @import url(./components/Profile/Profile.css);
 @import url(./components/LearnMore/LearnMore.css);
-@import url(@fontsource/roboto/900.css);
-
 @import url(./components/Weather/Weather.css);
 @import url(./components/Weather/DailyForecast.css);
+
+@import url(@fontsource/roboto/900.css);
 
 :root {
     --dark-pink: #f08a9d;
