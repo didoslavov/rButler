@@ -1,7 +1,10 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 const LearnMore = () => {
+    const { user } = useSelector((state) => state.user);
+
     return (
         <div className="learn-more-container">
             <div className="overview-container">
@@ -27,27 +30,29 @@ const LearnMore = () => {
                 </p>
             </div>
 
-            <section className="learn-more-section">
-                <h3 className="border-bottom learn-more-headings">User Registration and Login</h3>
-                <p>
-                    To get started,{' '}
-                    <NavLink to="/profile/auth" className="learn-more-links">
-                        create an account or log in
-                    </NavLink>{' '}
-                    to manage your digital households and lists efficiently.
-                </p>
-            </section>
-
-            <section className="learn-more-section">
-                <h3 className="border-bottom learn-more-headings">Creating a Digital Household</h3>
-                <p>
-                    Easily{' '}
-                    <NavLink to="/households/create" className="learn-more-links">
-                        create
-                    </NavLink>{' '}
-                    and organize your digital households to categorize and manage your various lists.
-                </p>
-            </section>
+            {!user ? (
+                <section className="learn-more-section">
+                    <h3 className="border-bottom learn-more-headings">User Registration and Login</h3>
+                    <p>
+                        To get started,{' '}
+                        <NavLink to="/profile/auth" className="learn-more-links">
+                            create an account or log in
+                        </NavLink>{' '}
+                        to manage your digital households and lists efficiently.
+                    </p>
+                </section>
+            ) : (
+                <section className="learn-more-section">
+                    <h3 className="border-bottom learn-more-headings">Creating a Digital Household</h3>
+                    <p>
+                        Easily{' '}
+                        <NavLink to="/households/create" className="learn-more-links">
+                            create
+                        </NavLink>{' '}
+                        and organize your digital households to categorize and manage your various lists.
+                    </p>
+                </section>
+            )}
 
             <section className="learn-more-section">
                 <h3 className="border-bottom learn-more-headings">Managing Digital Households</h3>
