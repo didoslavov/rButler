@@ -11,13 +11,13 @@ import CreateHousehold from './components/CreateHousehold/CreateHousehold.jsx';
 import Details from './components/Details/Details.jsx';
 import List from './components/List/List.jsx';
 import Profile from './components/Profile/Profile.jsx';
+import EditProfile from './components/Profile/EditProfile/EditProfile.jsx';
+import ChangePassword from './components/Profile/ChangePassword/ChangePassword.jsx';
+import LearnMore from './components/LearnMore/LearnMore.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import Default from './components/Default/Default.jsx';
 
 import './App.css';
-import EditProfile from './components/Profile/EditProfile/EditProfile.jsx';
-import ChangePassword from './components/Profile/ChangePassword/ChangePassword.jsx';
-import LearnMore from './components/LearnMore/LearnMore.jsx';
 
 function App() {
     return (
