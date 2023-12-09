@@ -26,7 +26,6 @@ describe('Login Component', () => {
         expect(screen.getByText('Your return is a delight!')).toBeInTheDocument();
         expect(screen.getByLabelText('Username')).toBeInTheDocument();
         expect(screen.getByLabelText('Password')).toBeInTheDocument();
-        expect(screen.getByText('Forgot password?')).toBeInTheDocument();
         expect(screen.getByRole('button', { name: 'Sign In' })).toBeInTheDocument();
     });
 

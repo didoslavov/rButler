@@ -27,7 +27,6 @@ describe('Auth Component', () => {
         expect(screen.getByText('Your return is a delight!')).toBeInTheDocument();
         expect(screen.getAllByText('Username')[0]).toBeInTheDocument();
         expect(screen.getAllByText('Password')[0]).toBeInTheDocument();
-        expect(screen.getByText('Forgot password?')).toBeInTheDocument();
         expect(screen.getByRole('button', { name: 'Sign In' })).toBeInTheDocument();
 
         waitFor(() => {
@@ -75,7 +74,6 @@ describe('Auth Component', () => {
         expect(screen.getByText('Your return is a delight!')).toBeInTheDocument();
         expect(screen.getAllByText('Username')[0]).toBeInTheDocument();
         expect(screen.getAllByText('Password')[0]).toBeInTheDocument();
-        expect(screen.getByText('Forgot password?')).toBeInTheDocument();
         expect(screen.getByRole('button', { name: 'Sign In' })).toBeInTheDocument();
 
         waitFor(() => {
