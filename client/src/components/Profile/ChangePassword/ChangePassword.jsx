@@ -18,11 +18,11 @@ const ChangePassword = () => {
     const onResetPassword = async ({ oldPass, newPass, rePass }) => {
         try {
             await handleLoading(async () => {
-                if (!oldPass || !newPass || !rePass) {
+                if (!oldPass.trim() || !newPass.trim() || !rePass.trim()) {
                     throw new Error('All fields are required!');
                 }
 
-                if (newPass !== rePass) {
+                if (newPass.trim() !== rePass.trim()) {
                     throw new Error("Passwords don't match!");
                 }
 

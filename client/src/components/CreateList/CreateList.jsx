@@ -28,7 +28,7 @@ const CreateList = ({ householdId, setLists, lists }) => {
 
     const onCreateList = async ({ title, type }) => {
         try {
-            if (!title || !type) {
+            if (!title.trim() || !type.trim()) {
                 throw new Error('All fields are required!');
             }
 

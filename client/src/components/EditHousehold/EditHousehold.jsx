@@ -37,7 +37,7 @@ const EditHousehold = ({ household, handleUpdateHousehold }) => {
 
     const handleUpdate = async ({ name, presentation }) => {
         try {
-            if (!name || !presentation) {
+            if (!name.trim() || !presentation.trim()) {
                 throw new Error('All fields are required!');
             }
 

@@ -28,11 +28,11 @@ const List = ({ type }) => {
 
     const onAddItem = async ({ text, qty }) => {
         try {
-            if (!text || (!qty && type === 'shopping')) {
+            if (!text.trim() || (!qty.trim() && type === 'shopping')) {
                 throw new Error('All fields are required!');
             }
 
-            if (!text && type === 'todo') {
+            if (!text.trim() && type === 'todo') {
                 throw new Error('All fields are required!');
             }
 

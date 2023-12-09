@@ -29,15 +29,15 @@ const Register = () => {
 
         try {
             await handleLoading(async () => {
-                if (!username || !email || !password || !repass) {
+                if (!username.trim() || !email.trim() || !password.trim() || !repass.trim()) {
                     throw new Error('All fields are required!');
                 }
 
-                if (password.length < 6) {
+                if (password.trim().length < 6) {
                     throw new Error('Password must be at least 6 characters long!');
                 }
 
-                if (password !== repass) {
+                if (password.trim() !== repass.trim()) {
                     throw new Error("Passwords don't match!");
                 }
 

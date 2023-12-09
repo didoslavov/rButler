@@ -40,14 +40,14 @@ const EditProfile = () => {
 
         try {
             await handleLoading(async () => {
-                if (!username || !email) {
+                if (!username.trim() || !email.trim()) {
                     throw new Error('All fields are required!');
                 }
 
                 if (file) {
                     publicURL = await uploadAvatar(file);
                 }
-                console.log(publicURL);
+
                 const res = await editUser({ username, email, avatar: publicURL }, user.id);
 
                 if (res.errors) {

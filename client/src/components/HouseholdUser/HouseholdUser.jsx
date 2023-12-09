@@ -39,7 +39,7 @@ const AddUser = ({ setHousehold, householdId, users, setUsers }) => {
 
     const onAddUser = async ({ user: username, role }) => {
         try {
-            if (!username || !role) {
+            if (!username.trim() || !role.trim()) {
                 throw ['All fields are required!'];
             }
 

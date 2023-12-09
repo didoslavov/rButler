@@ -21,7 +21,7 @@ const Login = () => {
     const onLogin = async ({ username, password }) => {
         try {
             await handleLoading(async () => {
-                if (!username || !password) {
+                if (!username.trim() || !password.trim()) {
                     throw new Error('All fields are required!');
                 }
 
