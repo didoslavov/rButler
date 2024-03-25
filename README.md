@@ -125,7 +125,7 @@ To set up the server, run the following command:
 
 This script will:
 
-    1. Set up environment variables for the server.
+    1. Set up environment variables for the server. Navigate to server/.env and fill your sensitive information.
     2. Install server dependencies.
     3. Start the server in development mode.
 
@@ -147,7 +147,7 @@ To set up the `client`, run the following command:
 
 This script will:
 
-    1. Set up environment variables for the client.
+    1. Set up environment variables for the client. Navigate to client/.env and fill your sensitive information.
     2. Install client dependencies.
     3. Start the client in development mode.
 
@@ -171,7 +171,7 @@ To set up the server, run the following command:
 
 This script will:
 
-    1. Set up environment variables for the server.
+    1. Set up environment variables for the server. Navigate to server/.env and fill your sensitive information.
     2. Install server dependencies.
     3. Start the server in development mode.
 
@@ -193,7 +193,7 @@ To set up the client, run the following command:
 
 This script will:
 
-    1. Set up environment variables for the client.
+    1. Set up environment variables for the client. Navigate to client/.env and fill your sensitive information.
     2. Install client dependencies.
     3. Start the client in development mode.
 
@@ -212,8 +212,8 @@ This script will:
 
     ```plaintext
     PORT=3000
-    DB_URI=mongodb+srv://didoslavov:FYe72ng2bCQQijst@rbutler.dqs4ylm.mongodb.net/rButler
-    JWT_SECRET=WhispersInSilkGlovesAndTails
+    DB_URI=mongodb+srv://<USER NAME>:<DB PASSWORD>@<DB NAME>.dqs4ylm.mongodb.net/<PROJECT NAME>
+    JWT_SECRET=<JWT SECRET>
     ```
 
 4. Install server dependencies:
@@ -241,10 +241,10 @@ This script will:
 
     ```plaintext
     VITE_BASE_URL=http://localhost:3000
-    VITE_SUPABASE_URL=https://cxswmrfheqrkzrsexvrl.supabase.co
-    VITE_SUPABASE_BUCKET=/storage/v1/object/public/avatars/
-    VITE_SUPABASE_API_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4c3dtcmZoZXFya3pyc2V4dnJsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTg2NDg0MDUsImV4cCI6MjAxNDIyNDQwNX0.NBQTc_i5rHnRdDvFAvVTVFE7pjV69KGFfihG0Ths9QQ
-    VITE_OPENWEATHER_API_KEY=65c8bce3c3835f283c727ae2bbd5cf75
+    VITE_SUPABASE_URL=<SUPABASE URL>
+    VITE_SUPABASE_BUCKET=/storage/v1/object/public/<BUCKET NAME>/
+    VITE_SUPABASE_API_KEY=<SUPABASE API KEY>
+    VITE_OPENWEATHER_API_KEY=<OPENWEATHER API KEY>
     VITE_OPENWEATHER_BASE_URL=https://api.openweathermap.org/data/2.5
     ```
 
@@ -407,6 +407,3 @@ npm run test:ui
 
     This project is licensed under the MIT License - see the [LICENSE](https://opensource.org/license/mit/) file for details.
 
-    ## Credits
-
-    This documentation is writen with the help of [ChatGPT](https://chatgpt.openai.com)

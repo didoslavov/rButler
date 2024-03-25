@@ -4,8 +4,8 @@ echo Setting up server environment variables...
 
 (
   echo PORT=3000
-  echo DB_URI=mongodb+srv://didoslavov:FYe72ng2bCQQijst@rbutler.dqs4ylm.mongodb.net/rButler
-  echo JWT_SECRET=WhispersInSilkGlovesAndTails
+  echo DB_URI=mongodb+srv://<USER NAME>:<DB PASSWORD>@<DB NAME>.dqs4ylm.mongodb.net/<PROJECT NAME>
+  echo JWT_SECRET=<JWT SECRET>
 ) > server\.env
 
 cd server || (
